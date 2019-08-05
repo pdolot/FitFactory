@@ -1,7 +1,8 @@
-package com.example.fitfactory
+package com.example.fitfactory.presentation
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.example.fitfactory.R
 
 class MainActivity : AppCompatActivity() {
 
