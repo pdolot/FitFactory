@@ -4,12 +4,11 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".presentation.fragments.signInFragment.SignInFragment">
+        tools:context=".presentation.fragments.SignUpFragment.SignUpFragment">
 
     <TextView
-            android:id="@+id/hello"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:text="signin"/>
+            android:text="Zarejestruj"/>
 
 </FrameLayout>

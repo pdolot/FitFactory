@@ -4,6 +4,10 @@ import com.example.fitfactory.di.modules.AppModule
 import com.example.fitfactory.di.modules.DbModule
 import com.example.fitfactory.di.modules.RestModule
 import com.example.fitfactory.presentation.activities.MainActivity
+import com.example.fitfactory.presentation.fragments.mainFragment.MainFragment
+import com.example.fitfactory.presentation.fragments.mainFragment.MainViewModel
+import com.example.fitfactory.presentation.fragments.signInFragment.SignInFragment
+import com.example.fitfactory.presentation.fragments.signInFragment.SignInViewModel
 import dagger.Component
 import javax.inject.Singleton
 
@@ -17,4 +21,12 @@ import javax.inject.Singleton
 )
 interface AppComponent {
     fun inject(into: MainActivity)
+
+    // Fragments
+    fun inject(into: MainFragment)
+    fun inject(into: SignInFragment)
+
+    // ViewModels
+    fun inject(into: MainViewModel)
+    fun inject(into: SignInViewModel)
 }

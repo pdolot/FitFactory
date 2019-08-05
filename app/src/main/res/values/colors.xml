@@ -3,4 +3,19 @@
     <color name="colorPrimary">#008577</color>
     <color name="colorPrimaryDark">#00574B</color>
     <color name="colorAccent">#D81B60</color>
+    <color name="primaryLight">#4fb3bf</color>
+    <color name="primaryMedium">#00838f</color>
+    <color name="primaryDark">#005662</color>
+    <color name="secondaryLight">#FFEE58</color>
+    <color name="secondaryMedium">#FDD835</color>
+    <color name="secondaryDark">#F9A825</color>
+    <color name="silverLight">#f9f9f9</color>
+    <color name="silverMedium">#eeeeee</color>
+    <color name="silverDark">#e6e6e6</color>
+    <color name="black90">#1A1A1A</color>
+    <color name="black85">#272727</color>
+    <color name="black80">#333333</color>
+    <color name="black70">#4D4D4D</color>
+    <color name="black65">#5A5A5A</color>
+    <color name="black20">#CCCCCC</color>
 </resources>
