@@ -1,19 +1,22 @@
 package com.example.fitfactory.presentation.fragments.signInFragment
 
-import androidx.lifecycle.ViewModelProviders
+import android.graphics.drawable.AnimatedVectorDrawable
+import android.graphics.drawable.Drawable
+import android.os.Build
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.navigation.fragment.findNavController
-
+import android.widget.ImageView
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProviders
 import com.example.fitfactory.R
 import kotlinx.android.synthetic.main.sign_in_fragment.*
 
 class SignInFragment : Fragment() {
 
     private lateinit var viewModel: SignInViewModel
+    private var animateList = ArrayList<AnimatedVectorDrawable>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,9 +32,54 @@ class SignInFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        hello.setOnClickListener {
-            findNavController().navigate(R.id.signUpFragment)
+        setListeners()
+    }
+
+    private fun setListeners() {
+        signInFragment_facebookSignIn.setOnClickListener { v ->
+            animateView(signInFragment_logo.drawable)
+            animateView((v as ImageView).background)
+            signInFragment_googleSignIn.visibility = View.GONE
+            signInFragment_signIn.visibility = View.GONE
+        }
+        signInFragment_googleSignIn.setOnClickListener { v ->
+            animateView(signInFragment_logo.drawable)
+            animateView((v as ImageView).background)
+            signInFragment_facebookSignIn.visibility = View.GONE
+            signInFragment_signIn.visibility = View.GONE
+        }
+        signInFragment_signIn.setOnClickListener { v ->
+            animateView(signInFragment_logo.drawable)
+            animateView((v as ImageView).background)
+            signInFragment_googleSignIn.visibility = View.GONE
+            signInFragment_facebookSignIn.visibility = View.GONE
         }
     }
 
+    private fun animateView(drawable: Drawable) {
+        (drawable as? AnimatedVectorDrawable)?.let {
+            it.start()
+            animateList.add(it)
+        }
+    }
+
+    private fun resetAnimations() {
+        animateList.forEach { drawable ->
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                drawable.reset()
+            }else{
+                drawable.stop()
+            }
+        }
+        animateList.clear()
+
+        signInFragment_googleSignIn.visibility = View.VISIBLE
+        signInFragment_facebookSignIn.visibility = View.VISIBLE
+        signInFragment_signIn.visibility = View.VISIBLE
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        resetAnimations()
+    }
 }
