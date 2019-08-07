@@ -27,7 +27,7 @@
         <item name="android:background">@android:color/transparent</item>
         <item name="android:textCursorDrawable">@null</item>
         <item name="android:importantForAutofill" tools:targetApi="o">no</item>
-        <item name="android:textSize">15sp</item>
+        <item name="android:textSize">16sp</item>
     </style>
 
 </resources>

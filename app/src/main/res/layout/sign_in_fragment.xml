@@ -45,7 +45,7 @@
         <com.example.fitfactory.presentation.components.FancyEditText
                 android:id="@+id/signInFragment_userName"
                 android:layout_width="match_parent"
-                android:layout_height="48dp"
+                android:layout_height="wrap_content"
                 android:fontFamily="sans-serif"
                 android:hint="@string/user_name"
                 android:inputType="text"
@@ -65,7 +65,7 @@
         <com.example.fitfactory.presentation.components.FancyEditText
                 android:id="@+id/signInFragment_userPassword"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/edit_text_size"
+                android:layout_height="wrap_content"
                 android:fontFamily="sans-serif"
                 android:hint="@string/password"
                 android:inputType="textPassword"

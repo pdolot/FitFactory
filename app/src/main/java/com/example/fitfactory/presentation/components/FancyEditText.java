@@ -53,9 +53,11 @@ public class FancyEditText extends AppCompatEditText implements View.OnTouchList
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
-
         width = getDefaultSize(getSuggestedMinimumWidth(), widthMeasureSpec);
-        height = getDefaultSize(getSuggestedMinimumHeight(), heightMeasureSpec);
+        height = (int) (getTextSize() * 3);
+        if (height % 2 != 0) {
+            height += 1;
+        }
     }
 
     @Override
@@ -70,9 +72,9 @@ public class FancyEditText extends AppCompatEditText implements View.OnTouchList
         Canvas mCanvas = new Canvas(bitmap);
 
         // outline
-        if (hasFocus()){
+        if (hasFocus()) {
             mCanvas.drawRoundRect(0, 0, width, height, height / 2, height / 2, iconBackgroundPaint);
-        }else{
+        } else {
             mCanvas.drawRoundRect(0, 0, width, height, height / 2, height / 2, outlineBackgroundPaint);
         }
 
@@ -168,7 +170,7 @@ public class FancyEditText extends AppCompatEditText implements View.OnTouchList
         setOnTouchListener(this);
         initPaint();
     }
-    
+
     @Override
     public boolean onTouch(View v, MotionEvent event) {
         switch (event.getAction()) {

@@ -45,7 +45,7 @@
         <com.example.fitfactory.presentation.components.FancyEditText
                 android:id="@+id/signUpFragment_userEmail"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/edit_text_size"
+                android:layout_height="wrap_content"
                 android:fontFamily="sans-serif"
                 android:hint="@string/email_address"
                 android:inputType="textEmailAddress"
@@ -65,7 +65,7 @@
         <com.example.fitfactory.presentation.components.FancyEditText
                 android:id="@+id/signUpFragment_userName"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/edit_text_size"
+                android:layout_height="wrap_content"
                 android:fontFamily="sans-serif"
                 android:hint="@string/user_name"
                 android:inputType="text"
@@ -85,7 +85,7 @@
         <com.example.fitfactory.presentation.components.FancyEditText
                 android:id="@+id/signUpFragment_userPassword"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/edit_text_size"
+                android:layout_height="wrap_content"
                 android:fontFamily="sans-serif"
                 android:hint="@string/password"
                 android:inputType="textPassword"
@@ -105,7 +105,7 @@
         <com.example.fitfactory.presentation.components.FancyEditText
                 android:id="@+id/signUpFragment_userConfirmPassword"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/edit_text_size"
+                android:layout_height="wrap_content"
                 android:fontFamily="sans-serif"
                 android:hint="@string/confirm_password"
                 android:inputType="textPassword"
