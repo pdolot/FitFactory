@@ -4,4 +4,7 @@
     <string name="signUp">Nie masz konta? <b><u>Dołącz do nas!</u></b></string>
     <string name="user_name">Nazwa użytkownika</string>
     <string name="password">Hasło</string>
+    <string name="confirm_password">Potwierdź hasło</string>
+    <string name="email_address">Adres email</string>
+    <string name="regulations">Oświadczam, że zapoznałem(am) się z treścią <b><u>Regulaminu</u></b> oraz oświadczam, że akceptuję jego postanowienia</string>
 </resources>

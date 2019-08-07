@@ -16,7 +16,8 @@
     <fragment android:id="@+id/signInFragment"
               android:name="com.example.fitfactory.presentation.fragments.signInFragment.SignInFragment"
               android:label="sign_in_fragment" tools:layout="@layout/sign_in_fragment"/>
+
     <fragment android:id="@+id/signUpFragment"
-              android:name="com.example.fitfactory.presentation.fragments.SignUpFragment.SignUpFragment"
+              android:name="com.example.fitfactory.presentation.fragments.signUpFragment.SignUpFragment"
               android:label="sign_up_fragment" tools:layout="@layout/sign_up_fragment"/>
 </navigation>

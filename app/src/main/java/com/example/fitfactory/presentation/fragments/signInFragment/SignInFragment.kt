@@ -10,6 +10,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
+import androidx.navigation.fragment.findNavController
 import com.example.fitfactory.R
 import kotlinx.android.synthetic.main.sign_in_fragment.*
 
@@ -54,6 +55,8 @@ class SignInFragment : Fragment() {
             signInFragment_googleSignIn.visibility = View.GONE
             signInFragment_facebookSignIn.visibility = View.GONE
         }
+
+        signInFragment_signUp.setOnClickListener { findNavController().navigate(R.id.signUpFragment) }
     }
 
     private fun animateView(drawable: Drawable) {
@@ -79,7 +82,7 @@ class SignInFragment : Fragment() {
     }
 
     override fun onDestroyView() {
-        super.onDestroyView()
         resetAnimations()
+        super.onDestroyView()
     }
 }

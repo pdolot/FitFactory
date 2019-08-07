@@ -9,6 +9,7 @@
     <color name="secondaryLight">#FFEE58</color>
     <color name="secondaryMedium">#FDD835</color>
     <color name="secondaryDark">#F9A825</color>
+    <color name="secondaryVeryDark">#4b2c20</color>
     <color name="silverLight">#f9f9f9</color>
     <color name="silverMedium">#eeeeee</color>
     <color name="silverDark">#e6e6e6</color>

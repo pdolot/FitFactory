@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
 
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
@@ -14,9 +14,20 @@
         <item name="android:fontFamily">sans-serif-light</item>
         <item name="android:textSize">14sp</item>
     </style>
-    
-    <style name="FancyEditText">
+
+    <style name="ButtonLabel">
+        <item name="android:textColor">@color/secondaryVeryDark</item>
+        <item name="android:fontFamily">sans-serif-light</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">18sp</item>
+    </style>
+
+    <style name="FancyEditText" parent="Widget.AppCompat.EditText">
         <item name="android:colorControlActivated">@color/primaryMedium</item>
+        <item name="android:background">@android:color/transparent</item>
+        <item name="android:textCursorDrawable">@null</item>
+        <item name="android:importantForAutofill" tools:targetApi="o">no</item>
+        <item name="android:textSize">15sp</item>
     </style>
 
 </resources>
