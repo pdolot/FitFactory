@@ -20,4 +20,7 @@
     <fragment android:id="@+id/signUpFragment"
               android:name="com.example.fitfactory.presentation.fragments.signUpFragment.SignUpFragment"
               android:label="sign_up_fragment" tools:layout="@layout/sign_up_fragment"/>
+    <fragment android:id="@+id/rememberPasswordFragment"
+              android:name="com.example.fitfactory.presentation.fragments.rememberPasswordFragment.RememberPasswordFragment"
+              android:label="remember_password_fragment" tools:layout="@layout/remember_password_fragment"/>
 </navigation>

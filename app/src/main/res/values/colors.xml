@@ -10,6 +10,12 @@
     <color name="secondaryMedium">#FDD835</color>
     <color name="secondaryDark">#F9A825</color>
     <color name="secondaryVeryDark">#4b2c20</color>
+    <color name="positiveLight">#66BB6A</color>
+    <color name="positiveMedium">#43A047</color>
+    <color name="positiveDark">#2E7D32</color>
+    <color name="negativeLight">#EF5350</color>
+    <color name="negativeMedium">#E53935</color>
+    <color name="negativeDark">#C62828</color>
     <color name="silverLight">#f9f9f9</color>
     <color name="silverMedium">#eeeeee</color>
     <color name="silverDark">#e6e6e6</color>

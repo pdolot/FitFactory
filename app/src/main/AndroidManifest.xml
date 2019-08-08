@@ -12,6 +12,9 @@
             android:supportsRtl="true"
             android:theme="@style/AppTheme"
             android:name=".app.App">
+        <meta-data
+                android:name="com.google.android.geo.API_KEY"
+                android:value="@string/GOOGLE_MAPS_API_KEY"/>
         <activity android:name=".presentation.activities.MainActivity"
                   android:screenOrientation="portrait">
             <intent-filter>

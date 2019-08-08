@@ -57,6 +57,7 @@ class SignInFragment : Fragment() {
         }
 
         signInFragment_signUp.setOnClickListener { findNavController().navigate(R.id.signUpFragment) }
+        signInFragment_forgotPassword.setOnClickListener { findNavController().navigate(R.id.rememberPasswordFragment) }
     }
 
     private fun animateView(drawable: Drawable) {
