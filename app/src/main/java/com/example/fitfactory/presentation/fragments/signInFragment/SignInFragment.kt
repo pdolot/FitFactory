@@ -13,6 +13,10 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
 import com.example.fitfactory.R
 import kotlinx.android.synthetic.main.sign_in_fragment.*
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.MainScope
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 class SignInFragment : Fragment() {
 
@@ -42,22 +46,32 @@ class SignInFragment : Fragment() {
             animateView((v as ImageView).background)
             signInFragment_googleSignIn.visibility = View.GONE
             signInFragment_signIn.visibility = View.GONE
+            moveToMapFragment(v)
         }
         signInFragment_googleSignIn.setOnClickListener { v ->
             animateView(signInFragment_logo.drawable)
             animateView((v as ImageView).background)
             signInFragment_facebookSignIn.visibility = View.GONE
             signInFragment_signIn.visibility = View.GONE
+            moveToMapFragment(v)
         }
         signInFragment_signIn.setOnClickListener { v ->
             animateView(signInFragment_logo.drawable)
             animateView((v as ImageView).background)
             signInFragment_googleSignIn.visibility = View.GONE
             signInFragment_facebookSignIn.visibility = View.GONE
+            moveToMapFragment(v)
         }
 
         signInFragment_signUp.setOnClickListener { findNavController().navigate(R.id.signUpFragment) }
         signInFragment_forgotPassword.setOnClickListener { findNavController().navigate(R.id.rememberPasswordFragment) }
+    }
+
+    private fun moveToMapFragment(view: ImageView){
+        MainScope().launch {
+            delay(4000)
+            findNavController().navigate(R.id.mainFragment)
+        }
     }
 
     private fun animateView(drawable: Drawable) {
