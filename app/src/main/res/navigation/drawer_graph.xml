@@ -8,8 +8,4 @@
     <fragment android:id="@+id/mapFragment"
               android:name="com.example.fitfactory.presentation.fragments.mapFragment.MapFragment"
               android:label="map_fragment" tools:layout="@layout/map_fragment"/>
-
-    <fragment android:id="@+id/signInFragment2"
-              android:name="com.example.fitfactory.presentation.fragments.signInFragment.SignInFragment"
-              android:label="sign_in_fragment" tools:layout="@layout/sign_in_fragment"/>
 </navigation>

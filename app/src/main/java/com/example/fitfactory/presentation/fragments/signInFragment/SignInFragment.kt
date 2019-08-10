@@ -13,7 +13,6 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
 import com.example.fitfactory.R
 import kotlinx.android.synthetic.main.sign_in_fragment.*
-import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -67,9 +66,9 @@ class SignInFragment : Fragment() {
         signInFragment_forgotPassword.setOnClickListener { findNavController().navigate(R.id.rememberPasswordFragment) }
     }
 
-    private fun moveToMapFragment(view: ImageView){
+    private fun moveToMapFragment(view: ImageView) {
         MainScope().launch {
-            delay(4000)
+            delay(1000)
             findNavController().navigate(R.id.mainFragment)
         }
     }
@@ -85,7 +84,7 @@ class SignInFragment : Fragment() {
         animateList.forEach { drawable ->
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                 drawable.reset()
-            }else{
+            } else {
                 drawable.stop()
             }
         }

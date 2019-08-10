@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.drawerlayout.widget.DrawerLayout
+<com.example.fitfactory.presentation.components.CustomDrawerLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
         xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -10,6 +10,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
+
         <fragment
                 android:id="@+id/drawer_host_fragment"
                 android:name="androidx.navigation.fragment.NavHostFragment"
@@ -22,16 +23,26 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"/>
 
-        <com.example.fitfactory.presentation.components.TopBar
-                android:id="@+id/mainFragment_topBar"
-                android:layout_width="match_parent"
+        <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/mainFragment_guideline"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintGuide_percent="0.7"/>
+
+        <com.example.fitfactory.presentation.components.FlexibleBottomView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                app:topBarId="@id/mainFragment_topBar"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"/>
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintBottom_toTopOf="@id/mainFragment_guideline"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <include layout="@layout/navigation_layout"/>
+    <include
+            layout="@layout/navigation_layout"/>
 
-</androidx.drawerlayout.widget.DrawerLayout>
+
+</com.example.fitfactory.presentation.components.CustomDrawerLayout>

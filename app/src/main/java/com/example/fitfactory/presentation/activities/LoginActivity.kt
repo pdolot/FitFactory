@@ -8,9 +8,9 @@ import com.example.fitfactory.R
 import com.example.fitfactory.presentation.components.TopBar
 import com.example.fitfactory.presentation.fragments.mainFragment.MainFragmentInterface
 import com.example.fitfactory.presentation.fragments.mainFragment.MainInterface
-import kotlinx.android.synthetic.main.main_fragment.*
+import kotlinx.android.synthetic.main.activity_main.*
 
-class MainActivity : AppCompatActivity(), MainInterface {
+class LoginActivity : AppCompatActivity(), MainInterface {
     override var actions: MainFragmentInterface?
         get() = TODO("not implemented") //To change initializer of created properties use File | Settings | File Templates.
         set(value) {}

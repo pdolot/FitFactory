@@ -3,7 +3,7 @@ package com.example.fitfactory.data.models
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
-@Entity( tableName = "user_table")
+@Entity(tableName = "user_table")
 data class User(
     @PrimaryKey(autoGenerate = true)
     var id: Long = 0

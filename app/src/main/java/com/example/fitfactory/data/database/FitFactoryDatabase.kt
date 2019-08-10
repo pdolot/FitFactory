@@ -7,5 +7,4 @@ import com.example.fitfactory.data.models.User
 @Database(
     entities = [User::class], version = 1
 )
-abstract class FitFactoryDatabase : RoomDatabase() {
-}
+abstract class FitFactoryDatabase : RoomDatabase()

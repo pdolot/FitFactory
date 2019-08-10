@@ -7,12 +7,10 @@
         <attr name="iconLeft" format="reference" />
         <attr name="outlineColor" format="color" />
         <attr name="hintColor" format="color"/>
-
-        <attr name="progressStrokeWidth" format="integer" />
-        <attr name="progressBackgroundColor" format="color" />
-        <attr name="progressFirstColor" format="color" />
-        <attr name="progressSecondColor" format="color" />
-        <attr name="progress" format="integer" />
-        <attr name="angleMAX" format="integer" />
+        <attr name="topBarId" format="reference"/>
+        <attr name="view" format="reference"/>
+        <attr name="thumbSize" format="float"/>
+        <attr name="iconDown" format="reference"/>
+        <attr name="iconUp" format="reference"/>
     </declare-styleable>
 </resources>

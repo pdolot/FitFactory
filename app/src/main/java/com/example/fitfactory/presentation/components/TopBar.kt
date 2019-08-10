@@ -19,7 +19,7 @@ class TopBar @JvmOverloads constructor(
         View.inflate(context, R.layout.top_bar, this)
     }
 
-    fun setTitle(title: String){
+    fun setTitle(title: String) {
         topBar_title.text = title
     }
 }
