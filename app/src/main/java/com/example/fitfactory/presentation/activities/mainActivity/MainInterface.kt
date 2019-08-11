@@ -1,4 +1,4 @@
-package com.example.fitfactory.presentation.fragments.mainFragment
+package com.example.fitfactory.presentation.activities.mainActivity
 
 interface MainInterface : MainFragmentInterface {
     var actions: MainFragmentInterface?

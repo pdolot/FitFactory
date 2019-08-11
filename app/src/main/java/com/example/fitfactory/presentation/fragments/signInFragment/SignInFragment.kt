@@ -1,5 +1,6 @@
 package com.example.fitfactory.presentation.fragments.signInFragment
 
+import android.content.Intent
 import android.graphics.drawable.AnimatedVectorDrawable
 import android.graphics.drawable.Drawable
 import android.os.Build
@@ -12,6 +13,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
 import com.example.fitfactory.R
+import com.example.fitfactory.presentation.activities.mainActivity.MainActivity
 import kotlinx.android.synthetic.main.sign_in_fragment.*
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.delay
@@ -69,7 +71,10 @@ class SignInFragment : Fragment() {
     private fun moveToMapFragment(view: ImageView) {
         MainScope().launch {
             delay(1000)
-            findNavController().navigate(R.id.mainFragment)
+            val mainActivity = Intent(activity, MainActivity::class.java)
+            mainActivity.flags = Intent.FLAG_ACTIVITY_NO_ANIMATION
+            startActivity(mainActivity)
+            activity?.finish()
         }
     }
 
@@ -96,7 +101,7 @@ class SignInFragment : Fragment() {
     }
 
     override fun onDestroyView() {
-        resetAnimations()
         super.onDestroyView()
+        resetAnimations()
     }
 }

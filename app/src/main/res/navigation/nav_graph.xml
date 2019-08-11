@@ -15,7 +15,4 @@
     <fragment android:id="@+id/rememberPasswordFragment"
               android:name="com.example.fitfactory.presentation.fragments.rememberPasswordFragment.RememberPasswordFragment"
               android:label="remember_password_fragment" tools:layout="@layout/remember_password_fragment"/>
-    <fragment android:id="@+id/mainFragment"
-              android:name="com.example.fitfactory.presentation.fragments.mainFragment.MainFragment"
-              android:label="main_fragment" tools:layout="@layout/main_fragment"/>
 </navigation>

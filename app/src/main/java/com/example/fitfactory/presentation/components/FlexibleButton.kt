@@ -159,10 +159,10 @@ class FlexibleButton @JvmOverloads constructor(
         return result
     }
 
-    fun changeIcon(translation: Float){
-        icon = if (translation == 0f){
+    fun changeIcon(translation: Float) {
+        icon = if (translation == 0f) {
             iconUp
-        }else{
+        } else {
             iconDown
         }
         invalidate()
