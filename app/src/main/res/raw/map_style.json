@@ -96,7 +96,7 @@
     "featureType": "poi",
     "stylers": [
       {
-        "visibility": "on"
+        "visibility": "off"
       }
     ]
   },
@@ -129,7 +129,7 @@
         "color": "#535353"
       },
       {
-        "visibility": "on"
+        "visibility": "off"
       }
     ]
   },
@@ -155,7 +155,7 @@
     "featureType": "poi.school",
     "stylers": [
       {
-        "visibility": "on"
+        "visibility": "off"
       }
     ]
   },
@@ -164,7 +164,7 @@
     "elementType": "labels.icon",
     "stylers": [
       {
-        "visibility": "on"
+        "visibility": "off"
       }
     ]
   },
@@ -176,7 +176,7 @@
         "color": "#000000"
       },
       {
-        "visibility": "on"
+        "visibility": "off"
       }
     ]
   },
@@ -261,10 +261,19 @@
     ]
   },
   {
+    "featureType": "poi.business",
+    "elementType": "labels.icon",
+    "stylers": [
+      {
+        "visibility": "off"
+      }
+    ]
+  },
+  {
     "featureType": "transit",
     "stylers": [
       {
-        "visibility": "on"
+        "visibility": "off"
       }
     ]
   },
