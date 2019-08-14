@@ -3,11 +3,18 @@ package com.example.fitfactory.di
 import com.example.fitfactory.di.modules.AppModule
 import com.example.fitfactory.di.modules.DbModule
 import com.example.fitfactory.di.modules.RestModule
-import com.example.fitfactory.presentation.activities.MainActivity
-import com.example.fitfactory.presentation.fragments.mainFragment.MainFragment
-import com.example.fitfactory.presentation.fragments.mainFragment.MainViewModel
+import com.example.fitfactory.presentation.activities.LoginActivity
+import com.example.fitfactory.presentation.activities.mainActivity.MainActivity
+import com.example.fitfactory.presentation.activities.mainActivity.MainViewModel
+import com.example.fitfactory.presentation.fragments.mapFragment.MapFragment
+import com.example.fitfactory.presentation.fragments.mapFragment.MapViewModel
+import com.example.fitfactory.presentation.fragments.rememberPasswordFragment.RememberPasswordFragment
+import com.example.fitfactory.presentation.fragments.rememberPasswordFragment.RememberPasswordViewModel
 import com.example.fitfactory.presentation.fragments.signInFragment.SignInFragment
 import com.example.fitfactory.presentation.fragments.signInFragment.SignInViewModel
+import com.example.fitfactory.presentation.fragments.signUpFragment.SignUpFragment
+import com.example.fitfactory.presentation.fragments.signUpFragment.SignUpViewModel
+import com.example.fitfactory.utils.BitmapHelper
 import dagger.Component
 import javax.inject.Singleton
 
@@ -20,13 +27,23 @@ import javax.inject.Singleton
     ]
 )
 interface AppComponent {
+    // Activities
+    fun inject(into: LoginActivity)
     fun inject(into: MainActivity)
+    fun inject(into: MainViewModel)
 
     // Fragments
-    fun inject(into: MainFragment)
     fun inject(into: SignInFragment)
+    fun inject(into: SignUpFragment)
+    fun inject(into: RememberPasswordFragment)
+    fun inject(into: MapFragment)
 
     // ViewModels
-    fun inject(into: MainViewModel)
     fun inject(into: SignInViewModel)
+    fun inject(into: SignUpViewModel)
+    fun inject(into: RememberPasswordViewModel)
+    fun inject(into: MapViewModel)
+
+    // Utils
+    fun inject(into: BitmapHelper)
 }

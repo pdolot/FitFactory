@@ -15,6 +15,13 @@
         <item name="android:textSize">14sp</item>
     </style>
 
+    <style name="TopBarTitle">
+        <item name="android:textColor">@color/silverLight</item>
+        <item name="android:fontFamily">sans-serif-light</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">16sp</item>
+    </style>
+
     <style name="ButtonLabel">
         <item name="android:textColor">@color/secondaryVeryDark</item>
         <item name="android:fontFamily">sans-serif-light</item>

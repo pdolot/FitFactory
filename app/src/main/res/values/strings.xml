@@ -1,12 +1,25 @@
 <resources>
-    <string name="GOOGLE_MAPS_API_KEY">AIzaSyDrY4Yy5aOULva7AeuuaoJfe2-42C47ehA</string>
+    <string name="GOOGLE_MAPS_API_KEY">AIzaSyAGoPxpW1TlX7AP23uGuE68SnIyTV2K7F8</string>
     <string name="app_name">FitFactory</string>
-    <string name="forgot_password">Nie pamiętasz hasła? <b><u>Przypomnij hasło!</u></b></string>
-    <string name="signUp">Nie masz konta? <b><u>Dołącz do nas!</u></b></string>
+    <string name="forgot_password">Nie pamiętasz hasła?
+        <b>
+            <u>Przypomnij hasło!</u>
+        </b>
+    </string>
+    <string name="signUp">Nie masz konta?
+        <b>
+            <u>Dołącz do nas!</u>
+        </b>
+    </string>
     <string name="user_name">Nazwa użytkownika</string>
     <string name="password">Hasło</string>
     <string name="confirm_password">Potwierdź hasło</string>
     <string name="email_address">Adres email</string>
-    <string name="regulations">Oświadczam, że zapoznałem(am) się z treścią <b><u>Regulaminu</u></b> oraz oświadczam, że akceptuję jego postanowienia</string>
+    <string name="regulations">Oświadczam, że zapoznałem(am) się z treścią
+        <b>
+            <u>Regulaminu</u>
+        </b>
+        oraz oświadczam, że akceptuję jego postanowienia
+    </string>
     <string name="insert_email">Podaj adres email, na ktory ma zostać wysłane wygenerowane nowe hasło</string>
 </resources>

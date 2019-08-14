@@ -1,5 +1,6 @@
 package com.example.fitfactory.presentation.fragments.signInFragment
 
+import android.content.Intent
 import android.graphics.drawable.AnimatedVectorDrawable
 import android.graphics.drawable.Drawable
 import android.os.Build
@@ -12,7 +13,11 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
 import com.example.fitfactory.R
+import com.example.fitfactory.presentation.activities.mainActivity.MainActivity
 import kotlinx.android.synthetic.main.sign_in_fragment.*
+import kotlinx.coroutines.MainScope
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 class SignInFragment : Fragment() {
 
@@ -42,22 +47,35 @@ class SignInFragment : Fragment() {
             animateView((v as ImageView).background)
             signInFragment_googleSignIn.visibility = View.GONE
             signInFragment_signIn.visibility = View.GONE
+            moveToMapFragment(v)
         }
         signInFragment_googleSignIn.setOnClickListener { v ->
             animateView(signInFragment_logo.drawable)
             animateView((v as ImageView).background)
             signInFragment_facebookSignIn.visibility = View.GONE
             signInFragment_signIn.visibility = View.GONE
+            moveToMapFragment(v)
         }
         signInFragment_signIn.setOnClickListener { v ->
             animateView(signInFragment_logo.drawable)
             animateView((v as ImageView).background)
             signInFragment_googleSignIn.visibility = View.GONE
             signInFragment_facebookSignIn.visibility = View.GONE
+            moveToMapFragment(v)
         }
 
         signInFragment_signUp.setOnClickListener { findNavController().navigate(R.id.signUpFragment) }
         signInFragment_forgotPassword.setOnClickListener { findNavController().navigate(R.id.rememberPasswordFragment) }
+    }
+
+    private fun moveToMapFragment(view: ImageView) {
+        MainScope().launch {
+            delay(1000)
+            val mainActivity = Intent(activity, MainActivity::class.java)
+            mainActivity.flags = Intent.FLAG_ACTIVITY_NO_ANIMATION
+            startActivity(mainActivity)
+            activity?.finish()
+        }
     }
 
     private fun animateView(drawable: Drawable) {
@@ -71,7 +89,7 @@ class SignInFragment : Fragment() {
         animateList.forEach { drawable ->
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                 drawable.reset()
-            }else{
+            } else {
                 drawable.stop()
             }
         }
@@ -83,7 +101,7 @@ class SignInFragment : Fragment() {
     }
 
     override fun onDestroyView() {
-        resetAnimations()
         super.onDestroyView()
+        resetAnimations()
     }
 }
