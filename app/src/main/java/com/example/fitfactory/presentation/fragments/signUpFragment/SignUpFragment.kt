@@ -1,5 +1,6 @@
 package com.example.fitfactory.presentation.fragments.signUpFragment
 
+import android.animation.ObjectAnimator
 import android.graphics.drawable.AnimatedVectorDrawable
 import android.graphics.drawable.Drawable
 import android.os.Bundle

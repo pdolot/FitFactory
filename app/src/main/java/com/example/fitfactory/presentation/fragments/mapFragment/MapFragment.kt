@@ -4,7 +4,6 @@ import android.Manifest
 import android.app.Activity
 import android.content.Intent
 import android.content.IntentSender
-import android.location.Location
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -14,6 +13,7 @@ import androidx.lifecycle.ViewModelProviders
 import com.example.fitfactory.R
 import com.example.fitfactory.di.Injector
 import com.example.fitfactory.presentation.base.BaseFragment
+import com.example.fitfactory.presentation.components.FloatingLayout
 import com.example.fitfactory.utils.BitmapHelper
 import com.example.fitfactory.utils.Constants
 import com.example.fitfactory.utils.PermissionManager
@@ -27,6 +27,7 @@ import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MapStyleOptions
 import com.google.android.gms.tasks.Task
 import com.google.maps.android.clustering.ClusterManager
+import kotlinx.android.synthetic.main.map_fragment.*
 import javax.inject.Inject
 
 class MapFragment : BaseFragment(), OnMapReadyCallback {
@@ -65,7 +66,7 @@ class MapFragment : BaseFragment(), OnMapReadyCallback {
 
         setClusterManger()
         fetchFitnessClubs()
-        setListeners()
+        setMapListeners()
     }
 
 
@@ -92,7 +93,15 @@ class MapFragment : BaseFragment(), OnMapReadyCallback {
         mapFragment.getMapAsync(this)
         fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(activity.applicationContext)
         checkLocationSettings()
+        setListeners()
+    }
 
+    private fun setListeners() {
+        mapFragment_floatingLayout.setFloatingLayoutListener(object : FloatingLayout.FloatingLayoutListener {
+            override fun onClick() {
+                mapFragment_floatingLayout.toggle()
+            }
+        })
     }
 
 
@@ -153,7 +162,7 @@ class MapFragment : BaseFragment(), OnMapReadyCallback {
             override fun onLocationResult(locationResult: LocationResult?) {
                 locationResult ?: return
                 for (location in locationResult.locations) {
-                    if (!isCameraMoving) moveCamera(location)
+                    if (!isCameraMoving) moveCamera(LatLng(location.latitude, location.longitude))
                 }
             }
         }
@@ -167,13 +176,10 @@ class MapFragment : BaseFragment(), OnMapReadyCallback {
         }
     }
 
-    private fun moveCamera(location: Location) {
+    private fun moveCamera(latLng: LatLng) {
         map?.animateCamera(
             CameraUpdateFactory.newLatLngZoom(
-                LatLng(
-                    location.latitude,
-                    location.longitude
-                ), 13f
+                latLng, map?.cameraPosition?.zoom ?: 13f
             )
         )
     }
@@ -182,14 +188,14 @@ class MapFragment : BaseFragment(), OnMapReadyCallback {
         clusterManager.addItem(
             MyClusterItem(
                 LatLng(51.766259, 19.456518),
-                BitmapHelper().bitmapDescriptorFromVector(R.drawable.marker_neutral),
+                BitmapHelper().bitmapDescriptorFromVector(R.drawable.marker),
                 null
             )
         )
         clusterManager.addItem(
             MyClusterItem(
                 LatLng(51.771258, 19.446819),
-                BitmapHelper().bitmapDescriptorFromVector(R.drawable.marker_neutral),
+                BitmapHelper().bitmapDescriptorFromVector(R.drawable.marker_positive),
                 null
             )
         )
@@ -203,7 +209,7 @@ class MapFragment : BaseFragment(), OnMapReadyCallback {
         clusterManager.addItem(
             MyClusterItem(
                 LatLng(51.775062, 19.470068),
-                BitmapHelper().bitmapDescriptorFromVector(R.drawable.marker_positive),
+                BitmapHelper().bitmapDescriptorFromVector(R.drawable.marker),
                 null
             )
         )
@@ -217,9 +223,16 @@ class MapFragment : BaseFragment(), OnMapReadyCallback {
         }
     }
 
-    private fun setListeners() {
+    private fun setMapListeners() {
         map?.setOnCameraMoveStartedListener { isCameraMoving = true }
         map?.setOnCameraIdleListener { isCameraMoving = false }
+        map?.setOnMarkerClickListener(clusterManager)
+        clusterManager.setOnClusterItemClickListener {
+            moveCamera(it.position)
+            isCameraMoving = true
+            mapFragment_floatingLayout.expand()
+            true
+        }
     }
 
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {

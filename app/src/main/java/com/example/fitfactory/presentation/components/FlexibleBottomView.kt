@@ -123,7 +123,6 @@ class FlexibleBottomView @JvmOverloads constructor(
             }
             start()
         }
-
     }
 
 }

@@ -25,4 +25,5 @@
     <color name="black70">#4D4D4D</color>
     <color name="black65">#5A5A5A</color>
     <color name="black20">#CCCCCC</color>
+    <color name="transparent">#00000000</color>
 </resources>

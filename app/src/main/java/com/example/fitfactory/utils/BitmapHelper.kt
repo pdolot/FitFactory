@@ -3,6 +3,8 @@ package com.example.fitfactory.utils
 import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.Canvas
+import android.graphics.ColorFilter
+import android.graphics.PorterDuff
 import androidx.core.content.ContextCompat
 import com.example.fitfactory.di.Injector
 import com.google.android.gms.maps.model.BitmapDescriptor

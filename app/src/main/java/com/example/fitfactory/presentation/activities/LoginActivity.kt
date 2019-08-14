@@ -1,5 +1,8 @@
 package com.example.fitfactory.presentation.activities
 
+import android.animation.ObjectAnimator
+import android.graphics.drawable.AnimatedVectorDrawable
+import android.graphics.drawable.shapes.RoundRectShape
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.example.fitfactory.R
@@ -11,6 +14,7 @@ class LoginActivity : AppCompatActivity() {
         setContentView(R.layout.activity_login)
         (application as App).setCurrentActivity(this)
 //        findNavController(R.id.nav_host_fragment).navigate(R.id.mapFragment)
+
     }
 
 }
