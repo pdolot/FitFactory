@@ -1,20 +1,13 @@
 package com.example.fitfactory.presentation.activities.mainActivity
 
-import android.content.Context
-import android.net.Uri
 import android.os.Bundle
-import android.util.AttributeSet
-import android.view.Gravity
-import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
-import androidx.drawerlayout.widget.DrawerLayout
 import androidx.lifecycle.ViewModelProviders
-import androidx.navigation.findNavController
-import androidx.navigation.ui.setupWithNavController
 import com.example.fitfactory.R
 import com.example.fitfactory.app.App
 import com.example.fitfactory.presentation.components.TopBar
+import com.example.fitfactory.presentation.fragments.navigationFragment.NavigationFragment
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity(), MainInterface {
@@ -28,6 +21,13 @@ class MainActivity : AppCompatActivity(), MainInterface {
         (application as App).setCurrentActivity(this)
         setListeners()
         setTopBarProfileImage()
+        setNavigationView()
+    }
+
+    private fun setNavigationView() {
+        val ft = supportFragmentManager.beginTransaction()
+        ft.replace(R.id.navigation_root, NavigationFragment.newInstance())
+        ft.commit()
     }
 
     private fun setTopBarProfileImage() {
@@ -35,7 +35,7 @@ class MainActivity : AppCompatActivity(), MainInterface {
     }
 
     private fun setListeners() {
-        mainFragment_topBar.setTopBarListeners(object : TopBar.TopBarListener{
+        mainFragment_topBar.setTopBarListeners(object : TopBar.TopBarListener {
             override fun onOptionsClick() {
                 mainFragment_drawerLayout.openDrawer(GravityCompat.START)
             }
@@ -48,5 +48,14 @@ class MainActivity : AppCompatActivity(), MainInterface {
 
     override fun getTopBar(): TopBar? {
         return mainFragment_topBar
+    }
+
+    override fun onBackPressed() {
+        val host = supportFragmentManager.findFragmentById(R.id.main_host_fragment)
+        if (host?.childFragmentManager?.backStackEntryCount == 0) {
+            this.moveTaskToBack(true)
+        }else{
+            super.onBackPressed()
+        }
     }
 }

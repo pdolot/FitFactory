@@ -95,7 +95,10 @@ class FlexibleBottomView @JvmOverloads constructor(
                 view.viewTreeObserver.removeOnGlobalLayoutListener(this)
                 topBarSize = view.height.toFloat()
                 flexibleLayout_content.setPadding(0, topBarSize.toInt(), 0, 0)
-
+                val params = flexibleLayout_qrCode.layoutParams
+                params.height = width / 2
+                params.width = width / 2
+                flexibleLayout_qrCode.layoutParams = params
                 flexibleLayout_content.getLocalVisibleRect(contentRect)
                 flexibleLayout_thumb.getLocalVisibleRect(thumbRect)
                 minTranslation = (-contentRect.bottom + topBarSize)

@@ -16,10 +16,17 @@
     </style>
 
     <style name="TopBarTitle">
-        <item name="android:textColor">@color/silverLight</item>
-        <item name="android:fontFamily">sans-serif-light</item>
+        <item name="android:textColor">@color/primaryLight</item>
+        <item name="android:fontFamily">@font/kenyan_coffee_rg</item>
         <item name="android:textStyle">bold</item>
-        <item name="android:textSize">16sp</item>
+        <item name="android:textSize">24sp</item>
+        <item name="android:letterSpacing">0.1</item>
+    </style>
+
+    <style name="HeaderTextView">
+        <item name="android:textColor">@color/silverLight</item>
+        <item name="android:fontFamily">@font/kenyan_coffee_rg</item>
+        <item name="android:textSize">20sp</item>
     </style>
 
     <style name="ButtonLabel">

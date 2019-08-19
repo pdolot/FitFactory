@@ -22,4 +22,12 @@
         oraz oświadczam, że akceptuję jego postanowienia
     </string>
     <string name="insert_email">Podaj adres email, na ktory ma zostać wysłane wygenerowane nowe hasło</string>
+    <string name="map">Mapa</string>
+    <string name="passes">Karnety</string>
+    <string name="buy_pass">Kup karnet</string>
+    <string name="exercises">Ćwiczenia</string>
+    <string name="fitness_lessons">Zajęcia fitness</string>
+    <string name="settings">Ustawienia</string>
+    <string name="sign_out">Wyloguj</string>
+    <string name="history">Historia wejść</string>
 </resources>

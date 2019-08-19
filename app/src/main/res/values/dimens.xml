@@ -9,4 +9,5 @@
     <dimen name="small_margin">8dp</dimen>
     <dimen name="text_view_padding">12dp</dimen>
     <dimen name="corner_radius">8dp</dimen>
+    <dimen name="icon_size">32dp</dimen>
 </resources>
