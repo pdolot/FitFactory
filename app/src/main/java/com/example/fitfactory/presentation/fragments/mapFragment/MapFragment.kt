@@ -75,7 +75,7 @@ class MapFragment : BaseFragment(), OnMapReadyCallback {
         Injector.component.inject(this)
         viewModel = ViewModelProviders.of(this).get(MapViewModel::class.java)
         permissionManager = PermissionManager(activity)
-        topBar?.setTitle("Mapa")
+        topBar?.setTitle("FitFactory")
     }
 
     override fun onCreateView(
@@ -103,7 +103,6 @@ class MapFragment : BaseFragment(), OnMapReadyCallback {
             }
         })
     }
-
 
     override fun onPause() {
         super.onPause()
@@ -162,7 +161,9 @@ class MapFragment : BaseFragment(), OnMapReadyCallback {
             override fun onLocationResult(locationResult: LocationResult?) {
                 locationResult ?: return
                 for (location in locationResult.locations) {
-                    if (!isCameraMoving) moveCamera(LatLng(location.latitude, location.longitude))
+                    if (!isCameraMoving) moveCamera(
+                        LatLng(location.latitude, location.longitude),
+                        map?.cameraPosition?.zoom ?: 13f)
                 }
             }
         }
@@ -176,10 +177,10 @@ class MapFragment : BaseFragment(), OnMapReadyCallback {
         }
     }
 
-    private fun moveCamera(latLng: LatLng) {
+    private fun moveCamera(latLng: LatLng, zoom: Float) {
         map?.animateCamera(
             CameraUpdateFactory.newLatLngZoom(
-                latLng, map?.cameraPosition?.zoom ?: 13f
+                latLng, zoom
             )
         )
     }
@@ -228,7 +229,7 @@ class MapFragment : BaseFragment(), OnMapReadyCallback {
         map?.setOnCameraIdleListener { isCameraMoving = false }
         map?.setOnMarkerClickListener(clusterManager)
         clusterManager.setOnClusterItemClickListener {
-            moveCamera(it.position)
+            moveCamera(it.position, 15f)
             isCameraMoving = true
             mapFragment_floatingLayout.expand()
             true

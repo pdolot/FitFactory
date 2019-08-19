@@ -3,11 +3,13 @@ package com.example.fitfactory.di
 import com.example.fitfactory.di.modules.AppModule
 import com.example.fitfactory.di.modules.DbModule
 import com.example.fitfactory.di.modules.RestModule
+import com.example.fitfactory.di.modules.UserModule
 import com.example.fitfactory.presentation.activities.LoginActivity
 import com.example.fitfactory.presentation.activities.mainActivity.MainActivity
 import com.example.fitfactory.presentation.activities.mainActivity.MainViewModel
 import com.example.fitfactory.presentation.fragments.mapFragment.MapFragment
 import com.example.fitfactory.presentation.fragments.mapFragment.MapViewModel
+import com.example.fitfactory.presentation.fragments.navigationFragment.NavigationRecyclerViewAdapter
 import com.example.fitfactory.presentation.fragments.rememberPasswordFragment.RememberPasswordFragment
 import com.example.fitfactory.presentation.fragments.rememberPasswordFragment.RememberPasswordViewModel
 import com.example.fitfactory.presentation.fragments.signInFragment.SignInFragment
@@ -23,7 +25,8 @@ import javax.inject.Singleton
     modules = [
         AppModule::class,
         DbModule::class,
-        RestModule::class
+        RestModule::class,
+        UserModule::class
     ]
 )
 interface AppComponent {
@@ -46,4 +49,7 @@ interface AppComponent {
 
     // Utils
     fun inject(into: BitmapHelper)
+
+    // Adapters
+    fun inject(into: NavigationRecyclerViewAdapter)
 }
