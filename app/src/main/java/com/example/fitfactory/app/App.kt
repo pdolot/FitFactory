@@ -3,6 +3,7 @@ package com.example.fitfactory.app
 import android.app.Application
 import androidx.appcompat.app.AppCompatActivity
 import com.example.fitfactory.di.Injector
+import com.facebook.FacebookSdk
 
 class App : Application() {
 

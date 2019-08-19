@@ -1,16 +1,23 @@
 package com.example.fitfactory.presentation.activities.mainActivity
 
+import android.net.Uri
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
 import androidx.lifecycle.ViewModelProviders
 import com.example.fitfactory.R
 import com.example.fitfactory.app.App
+import com.example.fitfactory.data.models.User
+import com.example.fitfactory.di.Injector
 import com.example.fitfactory.presentation.components.TopBar
 import com.example.fitfactory.presentation.fragments.navigationFragment.NavigationFragment
 import kotlinx.android.synthetic.main.activity_main.*
+import javax.inject.Inject
 
 class MainActivity : AppCompatActivity(), MainInterface {
+
+    @Inject
+    lateinit var user: User
 
     private lateinit var viewModel: MainViewModel
 
@@ -19,6 +26,7 @@ class MainActivity : AppCompatActivity(), MainInterface {
         setContentView(R.layout.activity_main)
         viewModel = ViewModelProviders.of(this).get(MainViewModel::class.java)
         (application as App).setCurrentActivity(this)
+        Injector.component.inject(this)
         setListeners()
         setTopBarProfileImage()
         setNavigationView()
@@ -31,7 +39,7 @@ class MainActivity : AppCompatActivity(), MainInterface {
     }
 
     private fun setTopBarProfileImage() {
-        mainFragment_topBar.setProfileImage(null)
+        mainFragment_topBar.setProfileImage(Uri.parse(user.picture))
     }
 
     private fun setListeners() {

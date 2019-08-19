@@ -9,6 +9,7 @@ import com.example.fitfactory.presentation.activities.mainActivity.MainActivity
 import com.example.fitfactory.presentation.activities.mainActivity.MainViewModel
 import com.example.fitfactory.presentation.fragments.mapFragment.MapFragment
 import com.example.fitfactory.presentation.fragments.mapFragment.MapViewModel
+import com.example.fitfactory.presentation.fragments.navigationFragment.NavigationFragment
 import com.example.fitfactory.presentation.fragments.navigationFragment.NavigationRecyclerViewAdapter
 import com.example.fitfactory.presentation.fragments.rememberPasswordFragment.RememberPasswordFragment
 import com.example.fitfactory.presentation.fragments.rememberPasswordFragment.RememberPasswordViewModel
@@ -40,6 +41,7 @@ interface AppComponent {
     fun inject(into: SignUpFragment)
     fun inject(into: RememberPasswordFragment)
     fun inject(into: MapFragment)
+    fun inject(into: NavigationFragment)
 
     // ViewModels
     fun inject(into: SignInViewModel)
@@ -52,4 +54,6 @@ interface AppComponent {
 
     // Adapters
     fun inject(into: NavigationRecyclerViewAdapter)
+
+
 }

@@ -2,10 +2,12 @@ package com.example.fitfactory.presentation.components
 
 import android.content.Context
 import android.graphics.Color
+import android.net.Uri
 import android.util.AttributeSet
 import android.view.View
 import android.view.ViewTreeObserver
 import androidx.constraintlayout.widget.ConstraintLayout
+import com.bumptech.glide.Glide
 import com.example.fitfactory.R
 import com.sdsmdg.harjot.vectormaster.models.PathModel
 import kotlinx.android.synthetic.main.profile_navigation_view.view.*
@@ -19,6 +21,14 @@ class ProfileView @JvmOverloads constructor(
 
     init {
         init(context)
+    }
+
+    fun setProfileImage(uri: Uri?) {
+        Glide.with(context)
+            .load(uri)
+            .placeholder(R.drawable.user_image)
+            .centerCrop()
+            .into(profile_image)
     }
 
     private fun init(context: Context) {
@@ -55,12 +65,12 @@ class ProfileView @JvmOverloads constructor(
         third?.trimPathEnd = 0f
         fourth?.trimPathEnd = 0f
 
-        if (level == 8){
+        if (level == 8) {
             first?.trimPathEnd = 1f
             second?.trimPathEnd = 1f
             third?.trimPathEnd = 1f
             fourth?.trimPathEnd = 1f
-        }else{
+        } else {
             when (val c = entriesCount - (level * 30)) {
                 in 0..10 -> first?.let {
                     it.trimPathEnd = 0.1f * c
@@ -118,10 +128,10 @@ class ProfileView @JvmOverloads constructor(
         profile_level.update()
     }
 
-    private fun getLevelColors(level: Int): ArrayList<Int>{
+    private fun getLevelColors(level: Int): ArrayList<Int> {
         var levelColorSet = ArrayList<Int>()
 
-        when (level){
+        when (level) {
             0 -> {
                 levelColorSet.add(Color.parseColor("#B53636"))
                 levelColorSet.add(Color.parseColor("#CC8322"))
@@ -157,7 +167,7 @@ class ProfileView @JvmOverloads constructor(
                 levelColorSet.add(Color.parseColor("#AB283B"))
                 levelColorSet.add(Color.parseColor("#c79a00"))
             }
-            7,8 -> {
+            7, 8 -> {
                 levelColorSet.add(Color.parseColor("#c79a00"))
                 levelColorSet.add(Color.parseColor("#ffca28"))
                 levelColorSet.add(Color.parseColor("#fffd61"))
@@ -167,8 +177,8 @@ class ProfileView @JvmOverloads constructor(
         return levelColorSet
     }
 
-    private fun getLevel(entriesCount: Int): Int{
-        when(entriesCount){
+    private fun getLevel(entriesCount: Int): Int {
+        when (entriesCount) {
             in 0..30 -> return 0
             in 31..60 -> return 1
             in 61..90 -> return 2
