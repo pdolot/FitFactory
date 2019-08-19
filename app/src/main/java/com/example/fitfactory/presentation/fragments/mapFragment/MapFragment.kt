@@ -153,7 +153,6 @@ class MapFragment : BaseFragment(), OnMapReadyCallback {
                 }
             }
         }
-
     }
 
     private fun defineLocationCallback() {

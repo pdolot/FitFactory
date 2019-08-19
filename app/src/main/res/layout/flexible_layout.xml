@@ -43,7 +43,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             app:thumbSize="100"
-            app:color="@color/primaryDark"
+            app:color="@color/primaryMedium"
             app:iconDown="@drawable/ic_arrow_down"
             app:iconUp="@drawable/ic_arrow_up"
             app:iconColor="@color/primaryLight"/>
