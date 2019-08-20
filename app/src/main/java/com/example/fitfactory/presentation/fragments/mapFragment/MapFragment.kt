@@ -32,6 +32,7 @@ import javax.inject.Inject
 
 class MapFragment : BaseFragment(), OnMapReadyCallback {
 
+
     @Inject
     lateinit var activity: AppCompatActivity
 
@@ -41,8 +42,9 @@ class MapFragment : BaseFragment(), OnMapReadyCallback {
     private lateinit var permissionManager: PermissionManager
     private var locationRequest: LocationRequest? = null
     private lateinit var locationCallback: LocationCallback
-    private var isAbleToLocationUpdate: Boolean = false
     private var isCameraMoving: Boolean = false
+
+    private var requestingLocationUpdates: Boolean = false
 
     private lateinit var clusterManager: ClusterManager<MyClusterItem>
 
@@ -72,10 +74,10 @@ class MapFragment : BaseFragment(), OnMapReadyCallback {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        updatesValuesFromBundle(savedInstanceState)
         Injector.component.inject(this)
         viewModel = ViewModelProviders.of(this).get(MapViewModel::class.java)
         permissionManager = PermissionManager(activity)
-        topBar?.setTitle("FitFactory")
     }
 
     override fun onCreateView(
@@ -88,6 +90,7 @@ class MapFragment : BaseFragment(), OnMapReadyCallback {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        topBar?.setTitle("FitFactory")
         val mapFragment: SupportMapFragment =
             childFragmentManager.findFragmentById(R.id.mapFragment_map) as SupportMapFragment
         mapFragment.getMapAsync(this)
@@ -104,9 +107,14 @@ class MapFragment : BaseFragment(), OnMapReadyCallback {
         })
     }
 
+    override fun onResume() {
+        super.onResume()
+        if (requestingLocationUpdates) startLocationUpdates()
+    }
+
     override fun onPause() {
         super.onPause()
-        if (isAbleToLocationUpdate) stopLocationUpdates()
+        if (requestingLocationUpdates) stopLocationUpdates()
     }
 
     private fun stopLocationUpdates() {
@@ -129,12 +137,12 @@ class MapFragment : BaseFragment(), OnMapReadyCallback {
 
             task.apply {
                 addOnSuccessListener {
-                    isAbleToLocationUpdate = true
+                    requestingLocationUpdates = true
                     defineLocationCallback()
                     startLocationUpdates()
                 }
                 addOnFailureListener {
-                    isAbleToLocationUpdate = false
+                    requestingLocationUpdates = false
                     if (exception is ResolvableApiException) {
                         try {
                             startIntentSenderForResult(
@@ -195,14 +203,14 @@ class MapFragment : BaseFragment(), OnMapReadyCallback {
         clusterManager.addItem(
             MyClusterItem(
                 LatLng(51.771258, 19.446819),
-                BitmapHelper().bitmapDescriptorFromVector(R.drawable.marker_positive),
+                BitmapHelper().bitmapDescriptorFromVector(R.drawable.marker),
                 null
             )
         )
         clusterManager.addItem(
             MyClusterItem(
                 LatLng(51.776410, 19.460809),
-                BitmapHelper().bitmapDescriptorFromVector(R.drawable.marker_negative),
+                BitmapHelper().bitmapDescriptorFromVector(R.drawable.marker),
                 null
             )
         )
@@ -249,11 +257,23 @@ class MapFragment : BaseFragment(), OnMapReadyCallback {
         if (resultCode == Activity.RESULT_OK) {
             when (requestCode) {
                 Constants.REQUEST_CHECK_SETTINGS -> {
-                    isAbleToLocationUpdate = true
+                    requestingLocationUpdates = true
                     defineLocationCallback()
                     startLocationUpdates()
                 }
             }
+        }
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        outState.putBoolean(Constants.REQUESTING_LOCATION_UPDATES_KEY, requestingLocationUpdates)
+        super.onSaveInstanceState(outState)
+    }
+
+    private fun updatesValuesFromBundle(savedInstanceState: Bundle?) {
+        savedInstanceState ?: return
+        if (savedInstanceState.keySet().contains(Constants.REQUESTING_LOCATION_UPDATES_KEY)){
+            requestingLocationUpdates = savedInstanceState.getBoolean(Constants.REQUESTING_LOCATION_UPDATES_KEY)
         }
     }
 

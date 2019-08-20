@@ -14,7 +14,7 @@ object Injector {
             .dbModule(DbModule(application))
             .restModule(RestModule())
             .appModule(AppModule(application))
-            .userModule(UserModule())
+            .userModule(UserModule(application))
             .build()
     }
 }

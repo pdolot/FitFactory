@@ -4,11 +4,13 @@ import android.net.Uri
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
+import androidx.drawerlayout.widget.DrawerLayout
 import androidx.lifecycle.ViewModelProviders
 import com.example.fitfactory.R
 import com.example.fitfactory.app.App
 import com.example.fitfactory.data.models.User
 import com.example.fitfactory.di.Injector
+import com.example.fitfactory.presentation.components.CustomDrawerLayout
 import com.example.fitfactory.presentation.components.TopBar
 import com.example.fitfactory.presentation.fragments.navigationFragment.NavigationFragment
 import kotlinx.android.synthetic.main.activity_main.*
@@ -56,6 +58,10 @@ class MainActivity : AppCompatActivity(), MainInterface {
 
     override fun getTopBar(): TopBar? {
         return mainFragment_topBar
+    }
+
+    override fun getDrawer(): CustomDrawerLayout? {
+        return mainFragment_drawerLayout
     }
 
     override fun onBackPressed() {

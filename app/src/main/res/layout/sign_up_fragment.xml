@@ -162,7 +162,7 @@
                 android:id="@+id/signUpFragment_label"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Zarejestruj"
+                android:text="ZAREJESTRUJ"
                 style="@style/ButtonLabel"
                 android:paddingEnd="78dp"
                 android:paddingStart="78dp"

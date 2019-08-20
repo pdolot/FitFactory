@@ -5,15 +5,15 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.fitfactory.R
 import com.example.fitfactory.data.models.User
 import com.example.fitfactory.di.Injector
+import com.example.fitfactory.presentation.base.BaseFragment
 import kotlinx.android.synthetic.main.navigation_layout.*
 import javax.inject.Inject
 
-class NavigationFragment : Fragment() {
+class NavigationFragment : BaseFragment() {
     @Inject
     lateinit var user: User
 
@@ -58,7 +58,7 @@ class NavigationFragment : Fragment() {
     }
 
     private fun setAdapter() {
-        navigationAdapter = NavigationRecyclerViewAdapter(menuItemList)
+        navigationAdapter = NavigationRecyclerViewAdapter(menuItemList, drawerLayout)
         navigation_recyclerView.apply {
             layoutManager = LinearLayoutManager(context)
             adapter = navigationAdapter
