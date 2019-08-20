@@ -108,8 +108,10 @@ class SignInFragment : Fragment() {
             delay(1000)
             val mainActivity = Intent(activity, MainActivity::class.java)
             mainActivity.flags = Intent.FLAG_ACTIVITY_NO_ANIMATION
+            mainActivity.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
+            mainActivity.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK
+            mainActivity.flags = Intent.FLAG_ACTIVITY_NEW_TASK
             startActivity(mainActivity)
-            activity?.finish()
         }
     }
 
