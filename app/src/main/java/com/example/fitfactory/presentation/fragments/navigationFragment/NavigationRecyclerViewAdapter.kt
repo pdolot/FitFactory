@@ -14,8 +14,8 @@ import com.example.fitfactory.R
 import com.example.fitfactory.data.models.User
 import com.example.fitfactory.di.Injector
 import com.example.fitfactory.presentation.activities.LoginActivity
-import com.example.fitfactory.presentation.activities.mainActivity.MainActivity
 import com.facebook.login.LoginManager
+import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import kotlinx.android.synthetic.main.navigation_item.view.*
 import javax.inject.Inject
 
@@ -30,6 +30,9 @@ class NavigationRecyclerViewAdapter(private var itemList: List<NavigationItem>?)
 
     @Inject
     lateinit var user: User
+
+    @Inject
+    lateinit var googleClient: GoogleSignInClient
 
     init {
         Injector.component.inject(this)
@@ -63,22 +66,23 @@ class NavigationRecyclerViewAdapter(private var itemList: List<NavigationItem>?)
         viewHolder.itemView.setOnClickListener { _ ->
             item?.destinationId?.let {
                 activity.findViewById<DrawerLayout>(R.id.mainFragment_drawerLayout).apply {
-                    closeDrawer(GravityCompat.START, true)
                     addDrawerListener(object : DrawerLayout.SimpleDrawerListener() {
                         override fun onDrawerClosed(drawerView: View) {
                             super.onDrawerClosed(drawerView)
                             removeDrawerListener(this)
                             val navController = activity.findNavController(R.id.main_host_fragment)
-                            if (navController.currentDestination?.id != it){
-                                activity.findNavController(R.id.main_host_fragment).navigate(it)
+                            if (navController.currentDestination?.id != it) {
+                                navController.navigate(it)
                             }
                         }
                     })
+                    closeDrawer(GravityCompat.START, true)
                 }
             }
 
-            if (item?.destinationId == null){
+            if (item?.destinationId == null) {
                 LoginManager.getInstance().logOut()
+                googleClient.signOut()
                 moveToSignIn()
             }
         }
@@ -87,6 +91,7 @@ class NavigationRecyclerViewAdapter(private var itemList: List<NavigationItem>?)
     private fun moveToSignIn() {
         val loginActivity = Intent(activity, LoginActivity::class.java)
         loginActivity.flags = Intent.FLAG_ACTIVITY_NO_ANIMATION
+        loginActivity.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
         activity.startActivity(loginActivity)
         activity.finish()
     }

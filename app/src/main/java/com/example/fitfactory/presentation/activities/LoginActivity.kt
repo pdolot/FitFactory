@@ -10,6 +10,8 @@ import com.example.fitfactory.di.Injector
 import com.example.fitfactory.presentation.activities.mainActivity.MainActivity
 import com.facebook.AccessToken
 import com.facebook.Profile
+import com.google.android.gms.auth.api.signin.GoogleSignIn
+import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import javax.inject.Inject
 
 class LoginActivity : AppCompatActivity() {
@@ -30,6 +32,13 @@ class LoginActivity : AppCompatActivity() {
                 user.picture = profile.getProfilePictureUri(300, 300).toString()
                 moveToMapFragment()
             }
+        }
+
+        GoogleSignIn.getLastSignedInAccount(applicationContext)?.let {
+            user.firstName = it.givenName ?: ""
+            user.lastName = it.familyName ?: ""
+            user.picture = it.photoUrl.toString()
+            moveToMapFragment()
         }
 
     }

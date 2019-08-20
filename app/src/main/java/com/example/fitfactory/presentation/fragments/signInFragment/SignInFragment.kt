@@ -5,6 +5,7 @@ import android.graphics.drawable.AnimatedVectorDrawable
 import android.graphics.drawable.Drawable
 import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -17,24 +18,31 @@ import com.example.fitfactory.R
 import com.example.fitfactory.data.models.User
 import com.example.fitfactory.di.Injector
 import com.example.fitfactory.presentation.activities.mainActivity.MainActivity
+import com.example.fitfactory.utils.Constants
 import com.facebook.CallbackManager
 import com.facebook.FacebookCallback
 import com.facebook.FacebookException
 import com.facebook.Profile
 import com.facebook.login.LoginManager
 import com.facebook.login.LoginResult
+import com.google.android.gms.auth.api.signin.GoogleSignIn
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount
+import com.google.android.gms.auth.api.signin.GoogleSignInClient
+import com.google.android.gms.common.api.ApiException
+import com.google.android.gms.tasks.Task
 import kotlinx.android.synthetic.main.sign_in_fragment.*
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
-import java.util.*
 import javax.inject.Inject
-import kotlin.collections.ArrayList
 
 class SignInFragment : Fragment() {
 
     @Inject
     lateinit var user: User
+
+    @Inject
+    lateinit var googleClient: GoogleSignInClient
 
     private lateinit var viewModel: SignInViewModel
     private var animateList = ArrayList<AnimatedVectorDrawable>()
@@ -76,7 +84,8 @@ class SignInFragment : Fragment() {
             animateView((v as ImageView).background)
             signInFragment_facebookSignIn.visibility = View.GONE
             signInFragment_signIn.visibility = View.GONE
-            moveToMapFragment()
+            googleSignIn()
+//            moveToMapFragment()
         }
         signInFragment_signIn.setOnClickListener { v ->
             animateView(signInFragment_logo.drawable)
@@ -88,6 +97,10 @@ class SignInFragment : Fragment() {
 
         signInFragment_signUp.setOnClickListener { findNavController().navigate(R.id.signUpFragment) }
         signInFragment_forgotPassword.setOnClickListener { findNavController().navigate(R.id.rememberPasswordFragment) }
+    }
+
+    private fun googleSignIn() {
+        startActivityForResult(googleClient.signInIntent, Constants.GOOGLE_SIGN_IN_REQUEST_CODE)
     }
 
     private fun moveToMapFragment() {
@@ -122,8 +135,8 @@ class SignInFragment : Fragment() {
         signInFragment_signIn.visibility = View.VISIBLE
     }
 
-    private fun registerFacebookCallback(){
-        LoginManager.getInstance().registerCallback(callbackManager, object : FacebookCallback<LoginResult>{
+    private fun registerFacebookCallback() {
+        LoginManager.getInstance().registerCallback(callbackManager, object : FacebookCallback<LoginResult> {
             override fun onSuccess(result: LoginResult?) {
                 val profile = Profile.getCurrentProfile()
                 user.firstName = profile.firstName
@@ -134,11 +147,10 @@ class SignInFragment : Fragment() {
 
             override fun onCancel() {
                 resetAnimations()
-                Toast.makeText(context,"Cancel", Toast.LENGTH_SHORT).show()
             }
 
             override fun onError(error: FacebookException?) {
-                Toast.makeText(context,"Błąd logowania", Toast.LENGTH_SHORT).show()
+                Toast.makeText(context, getString(R.string.sign_in_failed), Toast.LENGTH_SHORT).show()
                 resetAnimations()
             }
 
@@ -148,6 +160,29 @@ class SignInFragment : Fragment() {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         callbackManager.onActivityResult(requestCode, resultCode, data)
         super.onActivityResult(requestCode, resultCode, data)
+
+        when (requestCode) {
+            Constants.GOOGLE_SIGN_IN_REQUEST_CODE -> {
+                val task: Task<GoogleSignInAccount> = GoogleSignIn.getSignedInAccountFromIntent(data)
+                handleSignInResult(task)
+            }
+        }
+    }
+
+    private fun handleSignInResult(task: Task<GoogleSignInAccount>) {
+        try {
+            val account: GoogleSignInAccount? = task.getResult(ApiException::class.java)
+            account?.let {
+                user.firstName = it.givenName ?: ""
+                user.lastName = it.familyName ?: ""
+                user.picture = it.photoUrl.toString()
+                moveToMapFragment()
+            }
+        } catch (e: ApiException) {
+            Log.e("SignInGoogle", "Sign in failed code = ${e.statusCode}")
+            Toast.makeText(context, getString(R.string.sign_in_failed), Toast.LENGTH_SHORT).show()
+            resetAnimations()
+        }
     }
 
     override fun onDestroyView() {

@@ -32,4 +32,5 @@
     <string name="settings">Ustawienia</string>
     <string name="sign_out">Wyloguj</string>
     <string name="history">Historia wejść</string>
+    <string name="sign_in_failed">Błąd logowania</string>
 </resources>
