@@ -11,12 +11,14 @@ import com.example.fitfactory.app.App
 import com.example.fitfactory.data.models.User
 import com.example.fitfactory.di.Injector
 import com.example.fitfactory.presentation.components.CustomDrawerLayout
+import com.example.fitfactory.presentation.components.FlexibleBottomView
 import com.example.fitfactory.presentation.components.TopBar
 import com.example.fitfactory.presentation.fragments.navigationFragment.NavigationFragment
 import kotlinx.android.synthetic.main.activity_main.*
 import javax.inject.Inject
 
 class MainActivity : AppCompatActivity(), MainInterface {
+
 
     @Inject
     lateinit var user: User
@@ -62,6 +64,10 @@ class MainActivity : AppCompatActivity(), MainInterface {
 
     override fun getDrawer(): CustomDrawerLayout? {
         return mainFragment_drawerLayout
+    }
+
+    override fun getFlexibleLayout(): FlexibleBottomView {
+        return mainFragment_flexibleLayout
     }
 
     override fun onBackPressed() {

@@ -45,7 +45,7 @@ class NavigationFragment : BaseFragment() {
     private fun initMenuList() {
         val map = NavigationItem(getString(R.string.map), R.drawable.ic_map, R.id.mapFragment)
         val passes = NavigationItem(getString(R.string.passes), R.drawable.ic_pass, R.id.mapFragment)
-        val buyPass = NavigationItem(getString(R.string.buy_pass), R.drawable.ic_shop, R.id.mapFragment)
+        val buyPass = NavigationItem(getString(R.string.buy_pass), R.drawable.ic_shop, R.id.buyPassFragment)
         val exercises = NavigationItem(getString(R.string.exercises), R.drawable.ic_fit_exercises, R.id.mapFragment)
         val fitnessLessons =
             NavigationItem(getString(R.string.fitness_lessons), R.drawable.ic_fitness_lesson, R.id.mapFragment)

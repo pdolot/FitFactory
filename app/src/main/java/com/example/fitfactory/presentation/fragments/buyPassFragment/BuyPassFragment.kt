@@ -1,21 +1,22 @@
 package com.example.fitfactory.presentation.fragments.buyPassFragment
 
-import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-
+import androidx.lifecycle.ViewModelProviders
 import com.example.fitfactory.R
+import com.example.fitfactory.presentation.base.BaseFragment
 
-class BuyPassFragment : Fragment() {
-
-    companion object {
-        fun newInstance() = BuyPassFragment()
-    }
+class BuyPassFragment : BaseFragment() {
 
     private lateinit var viewModel: BuyPassViewModel
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        viewModel = ViewModelProviders.of(this).get(BuyPassViewModel::class.java)
+
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -24,10 +25,9 @@ class BuyPassFragment : Fragment() {
         return inflater.inflate(R.layout.buy_pass_fragment, container, false)
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProviders.of(this).get(BuyPassViewModel::class.java)
-        // TODO: Use the ViewModel
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        setPaddingTop(view)
     }
 
 }

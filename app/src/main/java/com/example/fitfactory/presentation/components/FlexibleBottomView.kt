@@ -109,6 +109,10 @@ class FlexibleBottomView @JvmOverloads constructor(
         setListeners()
     }
 
+    fun getThumbHeight(): Int{
+        return flexibleLayout_thumb.height
+    }
+
 
     private fun translateAnimation(translationY: Float) {
 
