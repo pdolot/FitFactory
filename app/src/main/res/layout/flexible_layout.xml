@@ -34,7 +34,7 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <com.example.fitfactory.presentation.components.FlexibleButton
+    <com.example.fitfactory.presentation.customViews.FlexibleButton
             android:id="@+id/flexibleLayout_thumb"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

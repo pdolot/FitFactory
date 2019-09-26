@@ -40,6 +40,30 @@
         <item name="android:textSize">16sp</item>
     </style>
 
+    <style name="ButtonPositiveLabel">
+        <item name="android:textColor">@color/positiveLight</item>
+        <item name="android:fontFamily">sans-serif-light</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">16sp</item>
+    </style>
+
+    <style name="ItemLabelTextView">
+        <item name="android:textColor">@color/primaryMedium</item>
+        <item name="android:fontFamily">sans-serif-light</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">13sp</item>
+        <item name="android:textAlignment">textStart</item>
+    </style>
+    <style name="ItemValueTextView">
+        <item name="android:textColor">@color/silverLight</item>
+        <item name="android:fontFamily">sans-serif-light</item>
+        <item name="android:textSize">17sp</item>
+        <item name="android:layout_marginStart">4dp</item>
+        <item name="android:layout_marginTop">2dp</item>
+        <item name="android:textAlignment">textStart</item>
+    </style>
+
+
     <style name="FancyEditText" parent="Widget.AppCompat.EditText">
         <item name="android:colorControlActivated">@color/primaryMedium</item>
         <item name="android:background">@android:color/transparent</item>

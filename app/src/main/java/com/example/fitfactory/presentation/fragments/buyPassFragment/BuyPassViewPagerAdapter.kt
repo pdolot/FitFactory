@@ -4,10 +4,11 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentStatePagerAdapter
 
-class BuyPassViewPagerAdapter(fragmentManager: FragmentManager) : FragmentStatePagerAdapter(fragmentManager) {
+class BuyPassViewPagerAdapter(fragmentManager: FragmentManager) :
+    FragmentStatePagerAdapter(fragmentManager, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT) {
 
     private val fragments = ArrayList<Fragment>()
-    private val fragmentTitles = ArrayList<String>()
+    private val fragmentsTitles = ArrayList<String>()
 
     override fun getItem(position: Int): Fragment {
         return fragments[position]
@@ -18,11 +19,11 @@ class BuyPassViewPagerAdapter(fragmentManager: FragmentManager) : FragmentStateP
     }
 
     override fun getPageTitle(position: Int): CharSequence? {
-        return fragmentTitles[position]
+        return fragmentsTitles[position]
     }
 
     fun addFragment(fragment: Fragment, title: String) {
         fragments.add(fragment)
-        fragmentTitles.add(title)
+        fragmentsTitles.add(title)
     }
 }

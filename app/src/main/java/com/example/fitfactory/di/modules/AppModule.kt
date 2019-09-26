@@ -28,4 +28,5 @@ class AppModule(private val application: App) {
     fun provideActivity(): AppCompatActivity {
         return application.activity
     }
+
 }

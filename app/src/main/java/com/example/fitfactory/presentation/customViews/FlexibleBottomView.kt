@@ -1,4 +1,4 @@
-package com.example.fitfactory.presentation.components
+package com.example.fitfactory.presentation.customViews
 
 import android.content.Context
 import android.graphics.Rect
@@ -17,11 +17,11 @@ class FlexibleBottomView @JvmOverloads constructor(
 ) : ConstraintLayout(context, attrs, defStyleAttr) {
 
     private var minTranslation: Float = 0f
-    private var maxTranslation: Float = 0f
     private var topBarId: Int = 0
     private var topBarSize: Float = 0f
     private var contentRect = Rect()
     private var thumbRect = Rect()
+    var isViewEnable: Boolean = true
 
     init {
         init(context)
@@ -31,6 +31,15 @@ class FlexibleBottomView @JvmOverloads constructor(
     private fun init(context: Context) {
         View.inflate(context, R.layout.flexible_layout, this)
         setQrCode()
+    }
+
+    fun setViewEnabled(isEnable: Boolean) {
+        isViewEnable = isEnable
+        visibility = if (isEnable){
+            View.VISIBLE
+        }else{
+            View.GONE
+        }
     }
 
     private fun setQrCode() {
@@ -115,7 +124,6 @@ class FlexibleBottomView @JvmOverloads constructor(
 
 
     private fun translateAnimation(translationY: Float) {
-
         var translation = if (translationY == 0f) {
             minTranslation
         } else {

@@ -13,7 +13,7 @@ import androidx.lifecycle.ViewModelProviders
 import com.example.fitfactory.R
 import com.example.fitfactory.di.Injector
 import com.example.fitfactory.presentation.base.BaseFragment
-import com.example.fitfactory.presentation.components.FloatingLayout
+import com.example.fitfactory.presentation.customViews.FloatingLayout
 import com.example.fitfactory.utils.BitmapHelper
 import com.example.fitfactory.utils.Constants
 import com.example.fitfactory.utils.PermissionManager
@@ -27,7 +27,7 @@ import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MapStyleOptions
 import com.google.android.gms.tasks.Task
 import com.google.maps.android.clustering.ClusterManager
-import kotlinx.android.synthetic.main.map_fragment.*
+import kotlinx.android.synthetic.main.fragment_map.*
 import javax.inject.Inject
 
 class MapFragment : BaseFragment(), OnMapReadyCallback {
@@ -84,7 +84,7 @@ class MapFragment : BaseFragment(), OnMapReadyCallback {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.map_fragment, container, false)
+        return inflater.inflate(R.layout.fragment_map, container, false)
     }
 
 
@@ -196,31 +196,40 @@ class MapFragment : BaseFragment(), OnMapReadyCallback {
         clusterManager.addItem(
             MyClusterItem(
                 LatLng(51.766259, 19.456518),
-                BitmapHelper().bitmapDescriptorFromVector(R.drawable.marker),
+                BitmapHelper().bitmapDescriptorFromVector(R.drawable.marker_),
                 null
             )
         )
         clusterManager.addItem(
             MyClusterItem(
                 LatLng(51.771258, 19.446819),
-                BitmapHelper().bitmapDescriptorFromVector(R.drawable.marker),
+                BitmapHelper().bitmapDescriptorFromVector(R.drawable.marker_),
                 null
             )
         )
         clusterManager.addItem(
             MyClusterItem(
                 LatLng(51.776410, 19.460809),
-                BitmapHelper().bitmapDescriptorFromVector(R.drawable.marker),
+                BitmapHelper().bitmapDescriptorFromVector(R.drawable.marker_),
                 null
             )
         )
         clusterManager.addItem(
             MyClusterItem(
                 LatLng(51.775062, 19.470068),
-                BitmapHelper().bitmapDescriptorFromVector(R.drawable.marker),
+                BitmapHelper().bitmapDescriptorFromVector(R.drawable.marker_),
                 null
             )
         )
+
+        clusterManager.addItem(
+            MyClusterItem(
+                LatLng(51.675062, 19.370068),
+                BitmapHelper().bitmapDescriptorFromVector(R.drawable.marker_),
+                null
+            )
+        )
+
         clusterManager.renderer = ClusterIconRenderer(context, map, clusterManager)
     }
 
@@ -233,8 +242,13 @@ class MapFragment : BaseFragment(), OnMapReadyCallback {
 
     private fun setMapListeners() {
         map?.setOnCameraMoveStartedListener { isCameraMoving = true }
-        map?.setOnCameraIdleListener { isCameraMoving = false }
+        map?.setOnCameraIdleListener(clusterManager)
         map?.setOnMarkerClickListener(clusterManager)
+        clusterManager.setOnClusterClickListener {
+            moveCamera(it.position, 15f)
+            isCameraMoving = true
+            true
+        }
         clusterManager.setOnClusterItemClickListener {
             moveCamera(it.position, 15f)
             isCameraMoving = true

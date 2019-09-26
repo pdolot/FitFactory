@@ -4,9 +4,9 @@ import android.content.Context
 import android.view.View
 import androidx.fragment.app.Fragment
 import com.example.fitfactory.presentation.activities.mainActivity.MainFragmentInterface
-import com.example.fitfactory.presentation.components.CustomDrawerLayout
-import com.example.fitfactory.presentation.components.FlexibleBottomView
-import com.example.fitfactory.presentation.components.TopBar
+import com.example.fitfactory.presentation.customViews.CustomDrawerLayout
+import com.example.fitfactory.presentation.customViews.FlexibleBottomView
+import com.example.fitfactory.presentation.customViews.TopBar
 
 abstract class BaseFragment : Fragment() {
 
@@ -36,9 +36,16 @@ abstract class BaseFragment : Fragment() {
     }
 
     fun setPaddingTop(view: View) {
-
         val topBarHeight = topBar?.height ?: 0
-        val thumbHeight = flexibleLayout?.getThumbHeight()?.div(2) ?: 0
+        var thumbHeight = 0
+        flexibleLayout?.let {
+            thumbHeight = if (it.isViewEnable) {
+                it.getThumbHeight().div(2)
+            }else{
+                0
+            }
+        }
+
         view.setPadding(
             view.paddingLeft,
             topBarHeight + thumbHeight + view.paddingTop,

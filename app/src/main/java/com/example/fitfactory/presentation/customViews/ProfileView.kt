@@ -1,4 +1,4 @@
-package com.example.fitfactory.presentation.components
+package com.example.fitfactory.presentation.customViews
 
 import android.content.Context
 import android.graphics.Color

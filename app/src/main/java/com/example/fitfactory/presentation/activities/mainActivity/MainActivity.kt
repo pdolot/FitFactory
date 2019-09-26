@@ -4,16 +4,16 @@ import android.net.Uri
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
-import androidx.drawerlayout.widget.DrawerLayout
 import androidx.lifecycle.ViewModelProviders
+import androidx.navigation.findNavController
 import com.example.fitfactory.R
 import com.example.fitfactory.app.App
 import com.example.fitfactory.data.models.User
 import com.example.fitfactory.di.Injector
-import com.example.fitfactory.presentation.components.CustomDrawerLayout
-import com.example.fitfactory.presentation.components.FlexibleBottomView
-import com.example.fitfactory.presentation.components.TopBar
-import com.example.fitfactory.presentation.fragments.navigationFragment.NavigationFragment
+import com.example.fitfactory.presentation.customViews.CustomDrawerLayout
+import com.example.fitfactory.presentation.customViews.FlexibleBottomView
+import com.example.fitfactory.presentation.customViews.TopBar
+import com.example.fitfactory.presentation.navigationDrawer.NavigationRecyclerViewAdapter
 import kotlinx.android.synthetic.main.activity_main.*
 import javax.inject.Inject
 
@@ -33,14 +33,20 @@ class MainActivity : AppCompatActivity(), MainInterface {
         Injector.component.inject(this)
         setListeners()
         setTopBarProfileImage()
-        setNavigationView()
+        setNavigationDrawer()
     }
 
-    private fun setNavigationView() {
-        val ft = supportFragmentManager.beginTransaction()
-        ft.replace(R.id.navigation_root, NavigationFragment.newInstance())
-        ft.commit()
+    private fun setNavigationDrawer() {
+        mainFragment_navigationDrawer.setProfileView()
+        mainFragment_navigationDrawer.setAdapter(setAdapter())
     }
+
+    private fun setAdapter(): NavigationRecyclerViewAdapter =
+        NavigationRecyclerViewAdapter(
+            viewModel.getMenuList(),
+            mainFragment_drawerLayout,
+            findNavController(R.id.main_host_fragment)
+        )
 
     private fun setTopBarProfileImage() {
         mainFragment_topBar.setProfileImage(Uri.parse(user.picture))
@@ -74,7 +80,7 @@ class MainActivity : AppCompatActivity(), MainInterface {
         val host = supportFragmentManager.findFragmentById(R.id.main_host_fragment)
         if (host?.childFragmentManager?.backStackEntryCount == 0) {
             this.moveTaskToBack(true)
-        }else{
+        } else {
             super.onBackPressed()
         }
     }

@@ -6,7 +6,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-    <com.example.fitfactory.presentation.components.ShrekProfileBackground
+    <com.example.fitfactory.presentation.customViews.ShrekProfileBackground
             android:id="@+id/profile_background"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

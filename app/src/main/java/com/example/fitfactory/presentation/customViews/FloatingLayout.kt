@@ -1,14 +1,11 @@
-package com.example.fitfactory.presentation.components
+package com.example.fitfactory.presentation.customViews
 
 import android.animation.*
 import android.content.Context
-import android.graphics.drawable.AnimatedVectorDrawable
 import android.graphics.drawable.GradientDrawable
-import android.graphics.drawable.VectorDrawable
 import android.util.AttributeSet
 import android.view.View
 import androidx.constraintlayout.widget.ConstraintLayout
-import androidx.vectordrawable.graphics.drawable.AnimatedVectorDrawableCompat
 import com.example.fitfactory.R
 import kotlinx.android.synthetic.main.club_bar.view.*
 

@@ -33,4 +33,9 @@
     <string name="sign_out">Wyloguj</string>
     <string name="history">Historia wejść</string>
     <string name="sign_in_failed">Błąd logowania</string>
+    <string name="passFragment_passName">Nazwa</string>
+    <string name="passFragment_passDuration">Czas trwania</string>
+    <string name="passFragment_passPrice">Cena</string>
+    <string name="passFragment_passDescription">Opis</string>
+    <string name="passFragment_passBenefits">Benefity</string>
 </resources>

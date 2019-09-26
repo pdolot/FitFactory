@@ -1,8 +1,8 @@
 package com.example.fitfactory.presentation.activities.mainActivity
 
-import com.example.fitfactory.presentation.components.CustomDrawerLayout
-import com.example.fitfactory.presentation.components.FlexibleBottomView
-import com.example.fitfactory.presentation.components.TopBar
+import com.example.fitfactory.presentation.customViews.CustomDrawerLayout
+import com.example.fitfactory.presentation.customViews.FlexibleBottomView
+import com.example.fitfactory.presentation.customViews.TopBar
 
 interface MainFragmentInterface {
     fun getTopBar(): TopBar?

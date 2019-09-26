@@ -10,7 +10,7 @@ import android.widget.ImageView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
 import com.example.fitfactory.R
-import kotlinx.android.synthetic.main.remember_password_fragment.*
+import kotlinx.android.synthetic.main.fragment_remember_password.*
 
 class RememberPasswordFragment : Fragment() {
 
@@ -26,7 +26,7 @@ class RememberPasswordFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.remember_password_fragment, container, false)
+        return inflater.inflate(R.layout.fragment_remember_password, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

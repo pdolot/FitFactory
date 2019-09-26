@@ -42,7 +42,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintBottom_toTopOf="@+id/signInFragment_userName"/>
 
-        <com.example.fitfactory.presentation.components.FancyEditText
+        <com.example.fitfactory.presentation.customViews.FancyEditText
                 android:id="@+id/signInFragment_userName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -62,7 +62,7 @@
                 app:iconLeft="@drawable/ic_user"
                 app:outlineColor="@color/black70"/>
 
-        <com.example.fitfactory.presentation.components.FancyEditText
+        <com.example.fitfactory.presentation.customViews.FancyEditText
                 android:id="@+id/signInFragment_userPassword"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

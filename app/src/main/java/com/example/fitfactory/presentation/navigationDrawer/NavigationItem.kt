@@ -1,4 +1,4 @@
-package com.example.fitfactory.presentation.fragments.navigationFragment
+package com.example.fitfactory.presentation.navigationDrawer
 
 data class NavigationItem(
     var name: String? = null,

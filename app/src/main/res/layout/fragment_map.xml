@@ -41,7 +41,7 @@
             app:layout_constraintTop_toBottomOf="@id/guidelineBottom"
             app:layout_constraintBottom_toBottomOf="parent"/>
 
-    <com.example.fitfactory.presentation.components.FloatingLayout
+    <com.example.fitfactory.presentation.customViews.FloatingLayout
             android:id="@+id/mapFragment_floatingLayout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -49,7 +49,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             android:layout_margin="@dimen/big_margin">
 
-    </com.example.fitfactory.presentation.components.FloatingLayout>
+    </com.example.fitfactory.presentation.customViews.FloatingLayout>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/pass_cardView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:cardBackgroundColor="@color/transparent95"
+        app:cardCornerRadius="@dimen/card_corner_radius"
+        app:cardElevation="0dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        <ImageView
+                android:id="@+id/pass_image"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="@id/guideline"/>
+
+        <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintGuide_percent="0.6" />
+
+        <ScrollView
+                android:id="@+id/scrollView"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:scrollbars="none"
+                android:overScrollMode="never"
+                app:layout_constraintTop_toBottomOf="@id/guideline"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:padding="@dimen/medium_margin">
+
+                <androidx.constraintlayout.widget.Guideline
+                        android:id="@+id/vertical_guide"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        app:layout_constraintGuide_percent="0.5"/>
+                <TextView
+                        android:id="@+id/passFragment_passDurationLabel"
+                        style="@style/ItemLabelTextView"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="@dimen/small_margin"
+                        android:text="@string/passFragment_passDuration"
+                        app:layout_constraintEnd_toEndOf="@id/vertical_guide"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                        android:id="@+id/passFragment_passDuration"
+                        style="@style/ItemValueTextView"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:text="12 miesięcy"
+                        app:layout_constraintEnd_toEndOf="@id/passFragment_passDurationLabel"
+                        app:layout_constraintStart_toStartOf="@id/passFragment_passDurationLabel"
+                        app:layout_constraintTop_toBottomOf="@id/passFragment_passDurationLabel" />
+
+                <TextView
+                        android:id="@+id/passFragment_fullPriceLabel"
+                        style="@style/ItemLabelTextView"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:text="@string/passFragment_passPrice"
+                        android:layout_marginStart="@dimen/small_margin"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="@id/vertical_guide"
+                        app:layout_constraintTop_toTopOf="@id/passFragment_passDurationLabel" />
+
+                <TextView
+                        android:id="@+id/passFragment_fullPrice"
+                        style="@style/ItemValueTextView"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:text="89,99 zł / msc"
+                        app:layout_constraintEnd_toEndOf="@id/passFragment_fullPriceLabel"
+                        app:layout_constraintStart_toStartOf="@id/passFragment_fullPriceLabel"
+                        app:layout_constraintTop_toBottomOf="@id/passFragment_fullPriceLabel" />
+
+                <TextView
+                        android:id="@+id/passFragment_passDescriptionLabel"
+                        style="@style/ItemLabelTextView"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/medium_margin"
+                        android:text="@string/passFragment_passDescription"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="@id/passFragment_passDurationLabel"
+                        app:layout_constraintTop_toBottomOf="@id/passFragment_passDuration" />
+
+                <TextView
+                        android:id="@+id/passFragment_passDescription"
+                        style="@style/ItemValueTextView"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="@id/passFragment_passDescriptionLabel"
+                        app:layout_constraintTop_toBottomOf="@id/passFragment_passDescriptionLabel" />
+
+                <TextView
+                        android:id="@+id/passFragment_passBenefitsLabel"
+                        style="@style/ItemLabelTextView"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/medium_margin"
+                        android:text="@string/passFragment_passBenefits"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="@id/passFragment_passDurationLabel"
+                        app:layout_constraintTop_toBottomOf="@id/passFragment_passDescription" />
+
+                <TextView
+                        android:id="@+id/passFragment_passBenefits"
+                        style="@style/ItemValueTextView"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="@id/passFragment_passBenefitsLabel"
+                        app:layout_constraintTop_toBottomOf="@id/passFragment_passBenefitsLabel" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </ScrollView>
+
+        <View
+                android:id="@+id/shadow"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:background="@color/transparentDark50"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.cardview.widget.CardView>
+
+
+
