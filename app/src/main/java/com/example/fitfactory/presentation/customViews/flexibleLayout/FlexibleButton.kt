@@ -1,4 +1,4 @@
-package com.example.fitfactory.presentation.customViews
+package com.example.fitfactory.presentation.customViews.flexibleLayout
 
 import android.content.Context
 import android.graphics.Canvas

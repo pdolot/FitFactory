@@ -11,7 +11,7 @@ import com.example.fitfactory.app.App
 import com.example.fitfactory.data.models.User
 import com.example.fitfactory.di.Injector
 import com.example.fitfactory.presentation.customViews.CustomDrawerLayout
-import com.example.fitfactory.presentation.customViews.FlexibleBottomView
+import com.example.fitfactory.presentation.customViews.flexibleLayout.FlexibleView
 import com.example.fitfactory.presentation.customViews.TopBar
 import com.example.fitfactory.presentation.navigationDrawer.NavigationRecyclerViewAdapter
 import kotlinx.android.synthetic.main.activity_main.*
@@ -72,7 +72,7 @@ class MainActivity : AppCompatActivity(), MainInterface {
         return mainFragment_drawerLayout
     }
 
-    override fun getFlexibleLayout(): FlexibleBottomView {
+    override fun getFlexibleLayout(): FlexibleView {
         return mainFragment_flexibleLayout
     }
 

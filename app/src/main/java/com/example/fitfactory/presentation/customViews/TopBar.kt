@@ -25,7 +25,7 @@ class TopBar @JvmOverloads constructor(
     }
 
     fun setTitle(title: String) {
-        topBar_title.text = title
+        topBar_title.text = title.toUpperCase()
     }
 
     fun setProfileImage(uri: Uri?){

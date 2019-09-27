@@ -23,6 +23,14 @@ class MyTabLayout @JvmOverloads constructor(
     private var recyclerView: RecyclerView? = null
     private var snapHelper: PagerSnapHelper? = null
     private var bounds = Bound(0, 0, 0, 0)
+    private var page = 0
+        set(value) {
+            if (field != value){
+                field = value
+                val onPage = tab_indicator.itemCount - (tab_indicator.maxItemCountInRow * field)
+                tab_indicator.itemInRow = if ( onPage >= tab_indicator.maxItemCountInRow) tab_indicator.maxItemCountInRow else onPage
+            }
+        }
 
     init {
         View.inflate(context, R.layout.tab_layout, this)
@@ -30,9 +38,8 @@ class MyTabLayout @JvmOverloads constructor(
         tab_indicator.setTabIndicatorListener(object : TabIndicator.TabIndicatorListener {
             override fun onItemSelected(position: Int) {
                 viewPager?.setCurrentItem(position, false)
-                recyclerView?.smoothScrollToPosition(position)
+                recyclerView?.smoothScrollToPosition(page * tab_indicator.maxItemCountInRow + position)
             }
-
         })
     }
 
@@ -49,17 +56,20 @@ class MyTabLayout @JvmOverloads constructor(
         snapHelper?.attachToRecyclerView(this.recyclerView)
         tab_indicator.itemCount = recyclerView.adapter?.itemCount ?: 1
         setRecyclerListener()
+        setIndicator()
     }
 
     private fun setRecyclerListener() {
         recyclerView?.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             var position = 0
-            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
-                val lm = recyclerView.layoutManager
+
+            override fun onScrolled(rv: RecyclerView, dx: Int, dy: Int) {
+                val lm = rv.layoutManager
                 val snapView = snapHelper?.findSnapView(lm)
                 snapView?.let {
                     position = lm?.getPosition(it) ?: -1
-                    setIndicatorBounds(position)
+                    page = position / tab_indicator.maxItemCountInRow
+                    setIndicatorBounds(position % tab_indicator.maxItemCountInRow)
                 }
             }
 
@@ -81,6 +91,9 @@ class MyTabLayout @JvmOverloads constructor(
                 viewTreeObserver.removeOnGlobalLayoutListener(this)
                 setIndicatorBounds(0)
                 tab_title.text = viewPager?.adapter?.getPageTitle(0)
+                tab_title.text = recyclerView?.adapter?.let {
+                    (it as PassAdapter).getTitle(0)
+                }
             }
         })
     }

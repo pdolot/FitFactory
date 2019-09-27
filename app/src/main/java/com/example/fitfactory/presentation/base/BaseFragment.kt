@@ -5,7 +5,7 @@ import android.view.View
 import androidx.fragment.app.Fragment
 import com.example.fitfactory.presentation.activities.mainActivity.MainFragmentInterface
 import com.example.fitfactory.presentation.customViews.CustomDrawerLayout
-import com.example.fitfactory.presentation.customViews.FlexibleBottomView
+import com.example.fitfactory.presentation.customViews.flexibleLayout.FlexibleView
 import com.example.fitfactory.presentation.customViews.TopBar
 
 abstract class BaseFragment : Fragment() {
@@ -13,7 +13,7 @@ abstract class BaseFragment : Fragment() {
     var actions: MainFragmentInterface? = null
     var topBar: TopBar? = null
     var drawerLayout: CustomDrawerLayout? = null
-    var flexibleLayout: FlexibleBottomView? = null
+    var flexibleLayout: FlexibleView? = null
 
     override fun onAttach(context: Context) {
         super.onAttach(context)

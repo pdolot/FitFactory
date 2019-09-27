@@ -244,6 +244,7 @@ class MapFragment : BaseFragment(), OnMapReadyCallback {
         map?.setOnCameraMoveStartedListener { isCameraMoving = true }
         map?.setOnCameraIdleListener(clusterManager)
         map?.setOnMarkerClickListener(clusterManager)
+
         clusterManager.setOnClusterClickListener {
             moveCamera(it.position, 15f)
             isCameraMoving = true

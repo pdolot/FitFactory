@@ -3,27 +3,16 @@
     <string name="facebook_app_id">857308371322604</string>
     <string name="fb_login_protocol_scheme">fb857308371322604</string>
     <string name="app_name">FitFactory</string>
-    <string name="forgot_password">Nie pamiętasz hasła?
-        <b>
-            <u>Przypomnij hasło!</u>
-        </b>
+    <string name="forgot_password">Nie pamiętasz hasła? <b>Przypomnij hasło!</b>
     </string>
-    <string name="signUp">Nie masz konta?
-        <b>
-            <u>Dołącz do nas!</u>
-        </b>
+    <string name="signUp">Nie masz konta? <b>Dołącz do nas!</b>
     </string>
     <string name="user_name">Nazwa użytkownika</string>
     <string name="password">Hasło</string>
     <string name="confirm_password">Potwierdź hasło</string>
     <string name="email_address">Adres email</string>
-    <string name="regulations">Oświadczam, że zapoznałem(am) się z treścią
-        <b>
-            <u>Regulaminu</u>
-        </b>
-        oraz oświadczam, że akceptuję jego postanowienia
-    </string>
-    <string name="insert_email">Podaj adres email, na ktory ma zostać wysłane wygenerowane nowe hasło</string>
+    <string name="regulations">Oświadczam, że zapoznałem(am) się z treścią <b>Regulaminu</b> oraz oświadczam, że akceptuję jego postanowienia</string>
+    <string name="insert_email">W celu zresetowania hasła, wpisz poniżej adres mailowy, który podałeś przy rejestracji i oczekuj na wiadomość z nowo wygenerowanym hasłem</string>
     <string name="map">Mapa</string>
     <string name="passes">Karnety</string>
     <string name="buy_pass">Kup karnet</string>

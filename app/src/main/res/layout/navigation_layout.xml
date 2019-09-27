@@ -16,16 +16,18 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/navigation_header_layout"
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:padding="@dimen/big_margin"
+                android:paddingTop="@dimen/big_margin"
+                android:paddingStart="@dimen/big_margin"
+                android:paddingEnd="@dimen/big_margin"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
 
             <com.example.fitfactory.presentation.customViews.ProfileView
                     android:id="@+id/navigation_profileView"
-                    android:layout_width="match_parent"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     app:layout_constraintBottom_toTopOf="@id/navigation_userName"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -34,12 +36,13 @@
 
             <TextView
                     android:id="@+id/navigation_userName"
-                    style="@style/HeaderTextView"
+                    style="@style/FontH1_BOLD"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/medium_margin"
-                    android:text="Patryk Doleciński"
-                    android:textSize="28sp"
+                    android:layout_marginBottom="@dimen/medium_margin"
+                    tools:text="Patryk Doleciński"
+                    android:textColor="@color/silverMedium"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"

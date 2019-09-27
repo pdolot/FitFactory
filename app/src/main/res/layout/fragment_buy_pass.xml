@@ -17,7 +17,6 @@
             app:color="@color/black85"
             app:indicatorActiveColor="@color/primaryLight"
             app:indicatorColor="@color/black80"
-            app:text="ProAge12M"
             app:indicatorRadius="6dp"
             app:itemCount="6"
             />

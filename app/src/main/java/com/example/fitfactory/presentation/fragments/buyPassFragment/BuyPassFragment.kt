@@ -14,7 +14,6 @@ import kotlinx.android.synthetic.main.fragment_buy_pass.*
 class BuyPassFragment : BaseFragment() {
 
     private lateinit var viewModel: BuyPassViewModel
-    //    private lateinit var adapter: BuyPassViewPagerAdapter
     private lateinit var adapter: PassAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -39,11 +38,11 @@ class BuyPassFragment : BaseFragment() {
     }
 
     private fun setAdapter() {
-        adapter = PassAdapter(listOf(Pass(name = "ProAge12m"),
-            Pass(name = "ProAge12m2"),
-            Pass(name = "ProAge12m2"),
-            Pass(name = "ProAge12m2"),
-            Pass(name = "ProAge12m2")))
+        adapter = PassAdapter(listOf(
+            Pass(name = "ProAge1"),
+            Pass(name = "ProAge2"),
+            Pass(name = "ProAge3"),
+            Pass(name = "ProAge4")))
         buyPassFragment_recyclerView.apply {
             this.adapter = this@BuyPassFragment.adapter
             this.layoutManager = LinearLayoutManager(context, RecyclerView.HORIZONTAL, false)

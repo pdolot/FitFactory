@@ -1,4 +1,4 @@
-package com.example.fitfactory.presentation.customViews
+package com.example.fitfactory.presentation.customViews.flexibleLayout
 
 import android.content.Context
 import android.graphics.Rect
@@ -12,7 +12,7 @@ import com.bumptech.glide.Glide
 import com.example.fitfactory.R
 import kotlinx.android.synthetic.main.flexible_layout.view.*
 
-class FlexibleBottomView @JvmOverloads constructor(
+class FlexibleView @JvmOverloads constructor(
     context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
 ) : ConstraintLayout(context, attrs, defStyleAttr) {
 
@@ -24,13 +24,7 @@ class FlexibleBottomView @JvmOverloads constructor(
     var isViewEnable: Boolean = true
 
     init {
-        init(context)
         init(context, attrs)
-    }
-
-    private fun init(context: Context) {
-        View.inflate(context, R.layout.flexible_layout, this)
-        setQrCode()
     }
 
     fun setViewEnabled(isEnable: Boolean) {
@@ -45,6 +39,7 @@ class FlexibleBottomView @JvmOverloads constructor(
     private fun setQrCode() {
         Glide.with(context)
             .load("https://pl.qr-code-generator.com/wp-content/themes/qr/new_structure/markets/core_market/generator/dist/generator/assets/images/websiteQRCode_noFrame.png")
+            .fitCenter()
             .into(flexibleLayout_qrCode)
     }
 
@@ -79,6 +74,7 @@ class FlexibleBottomView @JvmOverloads constructor(
     }
 
     private fun init(context: Context, attrs: AttributeSet?) {
+        View.inflate(context, R.layout.flexible_layout, this)
         val typedArray = context.obtainStyledAttributes(
             attrs,
             R.styleable.style
@@ -104,10 +100,6 @@ class FlexibleBottomView @JvmOverloads constructor(
                 view.viewTreeObserver.removeOnGlobalLayoutListener(this)
                 topBarSize = view.height.toFloat()
                 flexibleLayout_content.setPadding(0, topBarSize.toInt(), 0, 0)
-                val params = flexibleLayout_qrCode.layoutParams
-                params.height = width / 2
-                params.width = width / 2
-                flexibleLayout_qrCode.layoutParams = params
                 flexibleLayout_content.getLocalVisibleRect(contentRect)
                 flexibleLayout_thumb.getLocalVisibleRect(thumbRect)
                 minTranslation = (-contentRect.bottom + topBarSize)
@@ -116,6 +108,7 @@ class FlexibleBottomView @JvmOverloads constructor(
 
         })
         setListeners()
+        setQrCode()
     }
 
     fun getThumbHeight(): Int{

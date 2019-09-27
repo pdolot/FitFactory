@@ -10,6 +10,7 @@ import android.view.View
 import androidx.core.content.ContextCompat
 import com.example.fitfactory.R
 import com.example.fitfactory.utils.Bound
+import kotlin.math.floor
 import kotlin.math.min
 
 class TabIndicator @JvmOverloads constructor(
@@ -27,6 +28,13 @@ class TabIndicator @JvmOverloads constructor(
     private var indicatorsBgPositions: ArrayList<Bound> = ArrayList()
     private val indicatorBackground = ContextCompat.getDrawable(context, R.drawable.indicator_bg)
     private lateinit var tabIndicatorListener: TabIndicatorListener
+    var maxItemCountInRow = 0
+    var itemInRow: Int? = null
+        set(value) {
+            field = value
+            measurePoints()
+            invalidate()
+        }
 
     var indicatorColor: Int? = null
         set(value) {
@@ -60,8 +68,10 @@ class TabIndicator @JvmOverloads constructor(
         setOnTouchListener { _, motionEvent ->
             when (motionEvent.action) {
                 MotionEvent.ACTION_DOWN -> {
-                    measureCurrentItem(motionEvent.x)?.let { tabIndicatorListener.onItemSelected(it) }
-                    true
+                    measureCurrentItem(motionEvent.x)?.let {
+                        tabIndicatorListener.onItemSelected(it)
+                        true
+                    }
                 }
             }
             false
@@ -87,32 +97,40 @@ class TabIndicator @JvmOverloads constructor(
             measureDimension(measuredWidth, widthMeasureSpec),
             measureDimension(indicatorRadius * 5, heightMeasureSpec)
         )
-        val spaceSize = measuredWidth / itemCount
-        val startPosition = spaceSize / 2
+        maxItemCountInRow = floor(measuredWidth / (indicatorRadius * 5.0)).toInt()
+        itemInRow = if (itemCount <= maxItemCountInRow) itemCount else maxItemCountInRow
+    }
 
-        for (i in 0 until itemCount) {
-            val centerPosition = startPosition + (spaceSize * i)
-            indicatorsPositions.add(
-                Bound(
-                    centerPosition - indicatorRadius,
-                    (measuredHeight / 2) - indicatorRadius,
-                    centerPosition + indicatorRadius,
-                    (measuredHeight / 2) + indicatorRadius
+    private fun measurePoints(){
+        itemInRow?.let {
+            val spaceSize = measuredWidth / it
+            val startPosition = spaceSize / 2
+            indicatorsPositions.clear()
+            indicatorsBgPositions.clear()
+            for (i in 0 until it) {
+                val centerPosition = startPosition + (spaceSize * i)
+                indicatorsPositions.add(
+                    Bound(
+                        centerPosition - indicatorRadius,
+                        (measuredHeight / 2) - indicatorRadius,
+                        centerPosition + indicatorRadius,
+                        (measuredHeight / 2) + indicatorRadius
+                    )
                 )
-            )
-            indicatorsBgPositions.add(
-                Bound(
-                    centerPosition - (measuredHeight / 2),
-                    0,
-                    centerPosition + (measuredHeight / 2),
-                    measuredHeight
+                indicatorsBgPositions.add(
+                    Bound(
+                        centerPosition - (measuredHeight / 2),
+                        0,
+                        centerPosition + (measuredHeight / 2),
+                        measuredHeight
+                    )
                 )
-            )
-        }
+            }
 
-        spaceWidth = indicatorsBgPositions[0].left
-        if (spaceWidth % 2 != 0) {
-            spaceWidth +=  1
+            spaceWidth = indicatorsBgPositions[0].left
+            if (spaceWidth % 2 != 0) {
+                spaceWidth +=  1
+            }
         }
 
     }
@@ -135,41 +153,44 @@ class TabIndicator @JvmOverloads constructor(
 
     override fun onDraw(canvas: Canvas) {
         super.onDraw(canvas)
-        for (i in 0 until itemCount) {
-            val indicatorPosition = indicatorsPositions[i]
-            val indicatorBgPosition = indicatorsBgPositions[i]
-            canvas.drawOval(
-                indicatorPosition.left.toFloat(),
-                indicatorPosition.top.toFloat(),
-                indicatorPosition.right.toFloat(),
-                indicatorPosition.bottom.toFloat(),
-                indicatorPaint
-            )
+        itemInRow?.let {
+            for (i in 0 until it) {
+                val indicatorPosition = indicatorsPositions[i]
+                val indicatorBgPosition = indicatorsBgPositions[i]
+                canvas.drawOval(
+                    indicatorPosition.left.toFloat(),
+                    indicatorPosition.top.toFloat(),
+                    indicatorPosition.right.toFloat(),
+                    indicatorPosition.bottom.toFloat(),
+                    indicatorPaint
+                )
 
-            val d = indicatorBackground
-            d?.setTint(backgroundPaint.color)
-            d?.setBounds(
-                indicatorBgPosition.left,
-                indicatorBgPosition.top,
-                indicatorBgPosition.right,
-                indicatorBgPosition.bottom
-            )
-            d?.draw(canvas)
-            canvas.drawRect(
-                indicatorBgPosition.left.toFloat() - spaceWidth,
-                0f,
-                indicatorBgPosition.left.toFloat(),
-                ((measuredHeight / 2) - (indicatorRadius / 2)).toFloat(),
-                backgroundPaint
-            )
-            canvas.drawRect(
-                indicatorBgPosition.right.toFloat(),
-                0f,
-                indicatorBgPosition.right.toFloat() + spaceWidth,
-                ((measuredHeight / 2) - (indicatorRadius / 2)).toFloat(),
-                backgroundPaint
-            )
+                val d = indicatorBackground
+                d?.setTint(backgroundPaint.color)
+                d?.setBounds(
+                    indicatorBgPosition.left,
+                    indicatorBgPosition.top,
+                    indicatorBgPosition.right,
+                    indicatorBgPosition.bottom
+                )
+                d?.draw(canvas)
+                canvas.drawRect(
+                    indicatorBgPosition.left.toFloat() - spaceWidth,
+                    0f,
+                    indicatorBgPosition.left.toFloat(),
+                    ((measuredHeight / 2) - (indicatorRadius / 2)).toFloat(),
+                    backgroundPaint
+                )
+                canvas.drawRect(
+                    indicatorBgPosition.right.toFloat(),
+                    0f,
+                    indicatorBgPosition.right.toFloat() + spaceWidth,
+                    ((measuredHeight / 2) - (indicatorRadius / 2)).toFloat(),
+                    backgroundPaint
+                )
+            }
         }
+
     }
 
     fun getPositionAt(index: Int): Bound {

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
         android:id="@+id/pass_cardView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -49,10 +50,11 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:orientation="vertical"
-                        app:layout_constraintGuide_percent="0.5"/>
+                        app:layout_constraintGuide_percent="0.5" />
                 <TextView
                         android:id="@+id/passFragment_passDurationLabel"
-                        style="@style/ItemLabelTextView"
+                        style="@style/FontH6_LIGHT"
+                        android:textColor="@color/primaryLight"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="@dimen/small_margin"
@@ -63,17 +65,21 @@
 
                 <TextView
                         android:id="@+id/passFragment_passDuration"
-                        style="@style/ItemValueTextView"
+                        style="@style/FontH5_LIGHT"
+                        android:paddingStart="4dp"
+                        android:paddingTop="2dp"
+                        android:textColor="@color/silverLight"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:text="12 miesięcy"
+                        tools:text="12 miesięcy"
                         app:layout_constraintEnd_toEndOf="@id/passFragment_passDurationLabel"
                         app:layout_constraintStart_toStartOf="@id/passFragment_passDurationLabel"
                         app:layout_constraintTop_toBottomOf="@id/passFragment_passDurationLabel" />
 
                 <TextView
                         android:id="@+id/passFragment_fullPriceLabel"
-                        style="@style/ItemLabelTextView"
+                        style="@style/FontH6_LIGHT"
+                        android:textColor="@color/primaryLight"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:text="@string/passFragment_passPrice"
@@ -84,7 +90,10 @@
 
                 <TextView
                         android:id="@+id/passFragment_fullPrice"
-                        style="@style/ItemValueTextView"
+                        style="@style/FontH5_LIGHT"
+                        android:paddingStart="4dp"
+                        android:paddingTop="2dp"
+                        android:textColor="@color/silverLight"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:text="89,99 zł / msc"
@@ -94,7 +103,8 @@
 
                 <TextView
                         android:id="@+id/passFragment_passDescriptionLabel"
-                        style="@style/ItemLabelTextView"
+                        style="@style/FontH6_LIGHT"
+                        android:textColor="@color/primaryLight"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/medium_margin"
@@ -105,7 +115,10 @@
 
                 <TextView
                         android:id="@+id/passFragment_passDescription"
-                        style="@style/ItemValueTextView"
+                        style="@style/FontH5_LIGHT"
+                        android:paddingStart="4dp"
+                        android:paddingTop="2dp"
+                        android:textColor="@color/silverLight"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         app:layout_constraintEnd_toEndOf="parent"
@@ -114,7 +127,8 @@
 
                 <TextView
                         android:id="@+id/passFragment_passBenefitsLabel"
-                        style="@style/ItemLabelTextView"
+                        style="@style/FontH6_LIGHT"
+                        android:textColor="@color/primaryLight"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/medium_margin"
@@ -125,7 +139,10 @@
 
                 <TextView
                         android:id="@+id/passFragment_passBenefits"
-                        style="@style/ItemValueTextView"
+                        style="@style/FontH5_LIGHT"
+                        android:paddingStart="4dp"
+                        android:paddingTop="2dp"
+                        android:textColor="@color/silverLight"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         app:layout_constraintBottom_toBottomOf="parent"

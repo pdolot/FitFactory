@@ -31,7 +31,7 @@
                 android:orientation="horizontal"
                 app:layout_constraintGuide_percent="0.7"/>
 
-        <com.example.fitfactory.presentation.customViews.FlexibleBottomView
+        <com.example.fitfactory.presentation.customViews.flexibleLayout.FlexibleView
                 android:id="@+id/mainFragment_flexibleLayout"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
