@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.example.fitfactory.presentation.components.CustomDrawerLayout
+<com.example.fitfactory.presentation.customViews.CustomDrawerLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
         xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -31,7 +31,8 @@
                 android:orientation="horizontal"
                 app:layout_constraintGuide_percent="0.7"/>
 
-        <com.example.fitfactory.presentation.components.FlexibleBottomView
+        <com.example.fitfactory.presentation.customViews.flexibleLayout.FlexibleView
+                android:id="@+id/mainFragment_flexibleLayout"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 app:topBarId="@id/mainFragment_topBar"
@@ -40,21 +41,23 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintBottom_toTopOf="@id/mainFragment_guideline"/>
 
-        <com.example.fitfactory.presentation.components.TopBar
+        <com.example.fitfactory.presentation.customViews.TopBar
                 android:id="@+id/mainFragment_topBar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"/>
+                app:layout_constraintStart_toStartOf="parent"
+                android:outlineProvider="bounds"
+                android:elevation="@dimen/topBar_elevation"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <FrameLayout
-            android:id="@+id/navigation_root"
+    <com.example.fitfactory.presentation.navigationDrawer.NavigationDrawer
+            android:id="@+id/mainFragment_navigationDrawer"
             android:layout_gravity="start"
             android:layout_width="match_parent"
             android:layout_height="match_parent"/>
 
 
-</com.example.fitfactory.presentation.components.CustomDrawerLayout>
+</com.example.fitfactory.presentation.customViews.CustomDrawerLayout>

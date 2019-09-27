@@ -10,6 +10,11 @@
         <attr name="topBarId" format="reference"/>
         <attr name="view" format="reference"/>
         <attr name="thumbSize" format="float"/>
+        <attr name="indicatorRadius" format="dimension"/>
+        <attr name="itemCount" format="integer"/>
+        <attr name="text" format="string"/>
+        <attr name="indicatorActiveColor" format="color"/>
+        <attr name="indicatorColor" format="color"/>
         <attr name="iconDown" format="reference"/>
         <attr name="iconUp" format="reference"/>
     </declare-styleable>

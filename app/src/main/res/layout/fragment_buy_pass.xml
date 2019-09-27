@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/black90"
+        tools:context=".presentation.fragments.buyPassFragment.BuyPassFragment">
+
+    <com.example.fitfactory.presentation.customViews.tabLayout.MyTabLayout
+            android:id="@+id/buyPassFragment_tabLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:color="@color/black85"
+            app:indicatorActiveColor="@color/primaryLight"
+            app:indicatorColor="@color/black80"
+            app:indicatorRadius="6dp"
+            app:itemCount="6"
+            />
+
+<!--    <androidx.viewpager.widget.ViewPager-->
+<!--            android:id="@+id/buyPassFragment_viewPager"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="0dp"-->
+<!--            android:layout_marginEnd="@dimen/medium_margin"-->
+<!--            android:layout_marginStart="@dimen/medium_margin"-->
+<!--            android:layout_marginBottom="@dimen/medium_margin"-->
+<!--            android:overScrollMode="never"-->
+<!--            app:layout_constraintBottom_toTopOf="@id/buyPassFragment_buyButton"-->
+<!--            app:layout_constraintEnd_toEndOf="parent"-->
+<!--            app:layout_constraintStart_toStartOf="parent"-->
+<!--            app:layout_constraintTop_toBottomOf="@id/buyPassFragment_tabLayout" />-->
+
+    <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/buyPassFragment_recyclerView"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginBottom="@dimen/medium_margin"
+            android:overScrollMode="never"
+            tools:listitem="@layout/fragment_pass"
+            app:layout_constraintBottom_toTopOf="@id/buyPassFragment_buyButton"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/buyPassFragment_tabLayout" />
+
+    <TextView
+            android:id="@+id/buyPassFragment_buyButton"
+            style="@style/ButtonLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingStart="@dimen/big_margin"
+            android:paddingEnd="@dimen/big_margin"
+            android:paddingTop="@dimen/small_margin"
+            android:paddingBottom="@dimen/small_margin"
+            android:background="@drawable/buy_button"
+            android:textColor="@color/positiveLight"
+            android:text="KUP KARNET"
+            android:layout_marginBottom="@dimen/medium_margin"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"/>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

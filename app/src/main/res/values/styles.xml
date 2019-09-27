@@ -9,22 +9,41 @@
         <item name="android:navigationBarColor">@color/black90</item>
     </style>
 
-    <style name="TextViewLabel">
-        <item name="android:textColor">@color/silverLight</item>
-        <item name="android:fontFamily">sans-serif-light</item>
-        <item name="android:textSize">14sp</item>
+    <style name="FontH1_BOLD">
+        <item name="android:fontFamily">@font/fira_sans_condensed_bold</item>
+        <item name="android:textSize">25sp</item>
+        <item name="android:textAlignment">center</item>
+    </style>
+    <style name="FontH2_BOLD">
+        <item name="android:textColor">@color/silverMedium</item>
+        <item name="android:fontFamily">@font/fira_sans_condensed_bold</item>
+        <item name="android:textSize">22sp</item>
+        <item name="android:textAlignment">center</item>
     </style>
 
-    <style name="TopBarTitle">
-        <item name="android:textColor">@color/primaryLight</item>
-        <item name="android:fontFamily">sans-serif</item>
-        <item name="android:textSize">18sp</item>
+    <style name="FontH3_LIGHT">
+        <item name="android:textColor">@color/silverMedium</item>
+        <item name="android:fontFamily">@font/fira_sans_condensed_light</item>
+        <item name="android:textSize">19sp</item>
     </style>
+    <style name="FontH5_LIGHT">
+        <item name="android:textColor">@color/silverLight</item>
+        <item name="android:fontFamily">@font/fira_sans_condensed_medium</item>
+        <item name="android:textSize">17sp</item>
+    </style>
+
+    <style name="FontH6_LIGHT">
+        <item name="android:textColor">@color/silverLight</item>
+        <item name="android:fontFamily">@font/fira_sans_condensed_medium</item>
+        <item name="android:textSize">15sp</item>
+    </style>
+
 
     <style name="HeaderTextView">
         <item name="android:textColor">@color/silverLight</item>
-        <item name="android:fontFamily">@font/kenyan_coffee_rg</item>
-        <item name="android:textSize">20sp</item>
+        <item name="android:fontFamily">@font/fira_sans_condensed_bold</item>
+        <item name="android:textAlignment">center</item>
+        <item name="android:textSize">18sp</item>
     </style>
 
     <style name="MenuItemTextView">
@@ -37,15 +56,44 @@
         <item name="android:textColor">@color/secondaryVeryDark</item>
         <item name="android:fontFamily">sans-serif-light</item>
         <item name="android:textStyle">bold</item>
-        <item name="android:textSize">18sp</item>
+        <item name="android:textSize">16sp</item>
     </style>
+
+    <style name="ButtonPositiveLabel">
+        <item name="android:textColor">@color/positiveLight</item>
+        <item name="android:fontFamily">sans-serif-light</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">16sp</item>
+    </style>
+
+    <style name="ItemLabelTextView">
+        <item name="android:textColor">@color/primaryMedium</item>
+        <item name="android:fontFamily">sans-serif-light</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">13sp</item>
+        <item name="android:textAlignment">textStart</item>
+    </style>
+    <style name="ItemValueTextView">
+        <item name="android:textColor">@color/silverLight</item>
+        <item name="android:fontFamily">sans-serif-light</item>
+        <item name="android:textSize">17sp</item>
+        <item name="android:layout_marginStart">4dp</item>
+        <item name="android:layout_marginTop">2dp</item>
+        <item name="android:textAlignment">textStart</item>
+    </style>
+
 
     <style name="FancyEditText" parent="Widget.AppCompat.EditText">
         <item name="android:colorControlActivated">@color/primaryMedium</item>
         <item name="android:background">@android:color/transparent</item>
         <item name="android:textCursorDrawable">@null</item>
         <item name="android:importantForAutofill" tools:targetApi="o">no</item>
-        <item name="android:textSize">16sp</item>
+    </style>
+
+    <style name="FancyEditText_Text">
+        <item name="android:textSize">17sp</item>
+        <item name="android:textColor">@color/primaryLight</item>
+        <item name="android:fontFamily">@font/fira_sans_condensed_medium</item>
     </style>
 
 </resources>

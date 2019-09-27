@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+            android:width="34dp"
+            android:height="34dp"
+            android:gravity="center">
+        <shape
+                android:innerRadius="11dp"
+                android:shape="ring"
+                android:thickness="6dp"
+                android:useLevel="false">
+            <size
+                    android:width="34dp"
+                    android:height="34dp" />
+            <solid android:color="#26000000" />
+        </shape>
+    </item>
+
+    <item
+            android:width="34dp"
+            android:height="34dp"
+            android:gravity="center">
+        <shape
+                android:innerRadius="12dp"
+                android:shape="ring"
+                android:thickness="4dp"
+                android:useLevel="false">
+            <size
+                    android:width="34dp"
+                    android:height="34dp" />
+            <solid android:color="@color/primaryLight" />
+            <gradient
+                    android:centerX="0.5"
+                    android:centerY="0.5"
+                    android:endColor="@color/primaryLight"
+                    android:startColor="@color/primaryDark"
+                    android:type="sweep" />
+        </shape>
+    </item>
+
+    <item
+            android:width="4dp"
+            android:height="4dp"
+            android:gravity="center|end"
+            android:end="1dp">
+        <shape android:shape="oval">
+            <solid android:color="@color/primaryLight" />
+            <size
+                    android:width="4dp"
+                    android:height="4dp" />
+        </shape>
+    </item>
+
+    <item
+            android:width="11dp"
+            android:height="11dp"
+            android:gravity="center">
+        <shape android:shape="oval">
+            <solid android:color="#26000000" />
+            <size
+                    android:width="11dp"
+                    android:height="11dp" />
+        </shape>
+    </item>
+
+    <item
+            android:width="10dp"
+            android:height="10dp"
+            android:gravity="center">
+        <shape android:shape="oval">
+            <solid android:color="@color/primaryLight" />
+            <size
+                    android:width="10dp"
+                    android:height="10dp" />
+        </shape>
+    </item>
+
+</layer-list>

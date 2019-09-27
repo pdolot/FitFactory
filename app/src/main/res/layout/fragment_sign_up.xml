@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".presentation.fragments.signUpFragment.SignUpFragment"
+        android:background="@color/black90">
+
+    <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:src="@drawable/background_arrow"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:id="@+id/imageView"/>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_margin="@dimen/screen_padding"
+            android:padding="@dimen/screen_padding"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/field"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:elevation="@dimen/layout_elevation"
+            android:clickable="true"
+            android:focusableInTouchMode="true"
+            android:focusable="true">
+
+        <ImageView
+                android:id="@+id/signUpFragment_logo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/logo_anim"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toTopOf="@+id/signUpFragment_userEmail"/>
+
+        <com.example.fitfactory.presentation.customViews.FancyEditText
+                android:id="@+id/signUpFragment_userEmail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/email_address"
+                android:inputType="textEmailAddress"
+                android:theme="@style/FancyEditText"
+                style="@style/FancyEditText_Text"
+                tools:text="Admin"
+                app:layout_constraintBottom_toTopOf="@id/signUpFragment_userName"
+                app:layout_constraintTop_toBottomOf="@+id/signUpFragment_logo"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:backgroundColor="@color/black90"
+                app:color="@color/primaryLight"
+                app:hintColor="@color/black70"
+                app:iconColor="@color/primaryDark"
+                app:iconLeft="@drawable/ic_mail"
+                app:outlineColor="@color/black70"/>
+
+        <com.example.fitfactory.presentation.customViews.FancyEditText
+                android:id="@+id/signUpFragment_userName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/user_name"
+                style="@style/FancyEditText_Text"
+                android:inputType="text"
+                android:theme="@style/FancyEditText"
+                app:layout_constraintTop_toBottomOf="@+id/signUpFragment_userEmail"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toTopOf="@id/signUpFragment_userPassword"
+                app:backgroundColor="@color/black90"
+                app:color="@color/primaryLight"
+                app:hintColor="@color/black70"
+                app:iconColor="@color/primaryDark"
+                app:iconLeft="@drawable/ic_user"
+                app:outlineColor="@color/black70"/>
+
+        <com.example.fitfactory.presentation.customViews.FancyEditText
+                android:id="@+id/signUpFragment_userPassword"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/password"
+                android:inputType="textPassword"
+                style="@style/FancyEditText_Text"
+                android:theme="@style/FancyEditText"
+                app:layout_constraintBottom_toTopOf="@id/signUpFragment_userConfirmPassword"
+                app:layout_constraintTop_toBottomOf="@+id/signUpFragment_userName"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:backgroundColor="@color/black90"
+                app:color="@color/primaryLight"
+                app:hintColor="@color/black70"
+                app:iconColor="@color/primaryDark"
+                app:iconLeft="@drawable/ic_password"
+                app:outlineColor="@color/black70"/>
+
+        <com.example.fitfactory.presentation.customViews.FancyEditText
+                android:id="@+id/signUpFragment_userConfirmPassword"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/confirm_password"
+                android:inputType="textPassword"
+                style="@style/FancyEditText_Text"
+                android:theme="@style/FancyEditText"
+                app:layout_constraintBottom_toTopOf="@id/signUpFragment_regulationsCheckbox"
+                app:layout_constraintTop_toBottomOf="@+id/signUpFragment_userPassword"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:backgroundColor="@color/black90"
+                app:color="@color/primaryLight"
+                app:hintColor="@color/black70"
+                app:iconColor="@color/primaryDark"
+                app:iconLeft="@drawable/ic_confirmpassword"
+                app:outlineColor="@color/black70"/>
+
+        <CheckBox
+                android:id="@+id/signUpFragment_regulationsCheckbox"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/small_margin"
+                android:button="@drawable/checkbox_selector"
+                app:layout_constraintTop_toTopOf="@id/signUpFragment_regulations"
+                app:layout_constraintTop_toBottomOf="@id/signUpFragment_userConfirmPassword"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/signUpFragment_regulations"/>
+
+        <TextView
+                android:id="@+id/signUpFragment_regulations"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@string/regulations"
+                style="@style/FontH6_LIGHT"
+                android:justificationMode="inter_word"
+                android:layout_marginStart="@dimen/small_margin"
+                android:layout_marginEnd="@dimen/small_margin"
+                app:layout_constraintBottom_toTopOf="@id/signUpFragment_signUp"
+                app:layout_constraintTop_toBottomOf="@id/signUpFragment_userConfirmPassword"
+                app:layout_constraintStart_toEndOf="@+id/signUpFragment_regulationsCheckbox"
+                app:layout_constraintEnd_toEndOf="parent"/>
+
+        <ImageView
+                android:id="@+id/signUpFragment_signUp"
+                android:layout_width="0dp"
+                android:layout_height="48dp"
+                android:src="@drawable/load_button_anim2v2"
+                android:scaleType="centerInside"
+                app:layout_constraintTop_toTopOf="@id/signUpFragment_label"
+                app:layout_constraintStart_toStartOf="@+id/signUpFragment_label"
+                app:layout_constraintEnd_toEndOf="@+id/signUpFragment_label"
+                app:layout_constraintBottom_toBottomOf="@id/signUpFragment_label"/>
+
+        <TextView
+                android:id="@+id/signUpFragment_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="ZAREJESTRUJ"
+                style="@style/ButtonLabel"
+                android:fontFamily="@font/fira_sans_condensed_black"
+                android:paddingEnd="78dp"
+                android:paddingStart="78dp"
+                app:layout_constraintBottom_toTopOf="@id/signUpFragment_logotype"
+                app:layout_constraintTop_toBottomOf="@id/signUpFragment_regulations"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"/>
+
+
+        <ImageView
+                android:id="@+id/signUpFragment_logotype"
+                android:layout_width="wrap_content"
+                android:layout_height="14dp"
+                android:src="@drawable/logotype"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/signUpFragment_signUp"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -7,5 +7,8 @@
 
     <fragment android:id="@+id/mapFragment"
               android:name="com.example.fitfactory.presentation.fragments.mapFragment.MapFragment"
-              android:label="map_fragment" tools:layout="@layout/map_fragment"/>
+              android:label="map_fragment" tools:layout="@layout/fragment_map"/>
+    <fragment android:id="@+id/buyPassFragment"
+              android:name="com.example.fitfactory.presentation.fragments.buyPassFragment.BuyPassFragment"
+              android:label="buy_pass_fragment" tools:layout="@layout/fragment_buy_pass"/>
 </navigation>

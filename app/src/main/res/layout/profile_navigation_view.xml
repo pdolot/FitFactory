@@ -6,7 +6,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-    <com.example.fitfactory.presentation.components.ShrekProfileBackground
+    <com.example.fitfactory.presentation.customViews.ShrekProfileBackground
             android:id="@+id/profile_background"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -56,12 +56,15 @@
             android:layout_height="72dp"/>
 
     <TextView
+            android:gravity="center"
             android:id="@+id/profile_entriesCount"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:textAlignment="center"
-            style="@style/HeaderTextView"
-            android:text="0"
+            android:layout_height="0dp"
+            android:textColor="@color/silverMedium"
+            android:autoSizeTextType="uniform"
+            android:autoSizeMaxTextSize="26sp"
+            android:fontFamily="@font/fira_sans_condensed_bold"
+            android:text="120"
             app:layout_constraintTop_toTopOf="@id/profile_entriesCountView"
             app:layout_constraintBottom_toBottomOf="@id/profile_entriesCountView"
             app:layout_constraintEnd_toEndOf="@id/profile_entriesCountView"
