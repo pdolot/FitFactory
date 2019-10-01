@@ -1,4 +1,4 @@
-package com.example.fitfactory.presentation.fragments.buyPassFragment
+package com.example.fitfactory.presentation.fragments.buyPass
 
 import androidx.lifecycle.ViewModel;
 

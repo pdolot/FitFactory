@@ -21,19 +21,16 @@ class FlexibleView @JvmOverloads constructor(
     private var topBarSize: Float = 0f
     private var contentRect = Rect()
     private var thumbRect = Rect()
-    var isViewEnable: Boolean = true
+    var isViewEnable: Boolean = false
+        set(value) {
+            if (field != value){
+                field = value
+                visibility = if (value) View.VISIBLE else View.GONE
+            }
+        }
 
     init {
         init(context, attrs)
-    }
-
-    fun setViewEnabled(isEnable: Boolean) {
-        isViewEnable = isEnable
-        visibility = if (isEnable){
-            View.VISIBLE
-        }else{
-            View.GONE
-        }
     }
 
     private fun setQrCode() {

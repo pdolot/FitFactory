@@ -1,4 +1,4 @@
-package com.example.fitfactory.presentation.fragments.rememberPasswordFragment
+package com.example.fitfactory.presentation.fragments.signUp
 
 import android.graphics.drawable.AnimatedVectorDrawable
 import android.graphics.drawable.Drawable
@@ -10,23 +10,26 @@ import android.widget.ImageView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
 import com.example.fitfactory.R
-import kotlinx.android.synthetic.main.fragment_remember_password.*
+import kotlinx.android.synthetic.main.fragment_sign_up.*
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
-class RememberPasswordFragment : Fragment() {
+class SignUpFragment : Fragment() {
 
-    private lateinit var viewModel: RememberPasswordViewModel
+    private lateinit var viewModel: SignUpViewModel
     private var animationList = ArrayList<AnimatedVectorDrawable>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        viewModel = ViewModelProviders.of(this).get(RememberPasswordViewModel::class.java)
+        viewModel = ViewModelProviders.of(this).get(SignUpViewModel::class.java)
     }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_remember_password, container, false)
+        return inflater.inflate(R.layout.fragment_sign_up, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -35,9 +38,15 @@ class RememberPasswordFragment : Fragment() {
     }
 
     private fun setListeners() {
-        rememberPasswordFragment_rememberPassword.setOnClickListener { v ->
+        signUpFragment_signUp.setOnClickListener { v ->
             animateView((v as ImageView).drawable)
-            rememberPasswordFragment_label.visibility = View.INVISIBLE
+            signUpFragment_label.visibility = View.INVISIBLE
+            GlobalScope.launch {
+                delay(4000)
+                resetAnimations()
+                signUpFragment_signUp.setImageDrawable(resources.getDrawable(R.drawable.load_button_endanim_positive))
+                animateView(v.drawable)
+            }
         }
     }
 
@@ -49,6 +58,7 @@ class RememberPasswordFragment : Fragment() {
     }
 
     private fun animateView(drawable: Drawable) {
+
         (drawable as? AnimatedVectorDrawable)?.let {
             it.start()
             animationList.add(it)

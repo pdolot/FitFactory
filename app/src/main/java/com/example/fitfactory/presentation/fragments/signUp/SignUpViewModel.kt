@@ -1,4 +1,4 @@
-package com.example.fitfactory.presentation.fragments.signUpFragment
+package com.example.fitfactory.presentation.fragments.signUp
 
 import androidx.lifecycle.ViewModel
 

@@ -3,10 +3,10 @@
     <string name="facebook_app_id">857308371322604</string>
     <string name="fb_login_protocol_scheme">fb857308371322604</string>
     <string name="app_name">FitFactory</string>
-    <string name="forgot_password">Nie pamiętasz hasła? <b>Przypomnij hasło!</b>
-    </string>
-    <string name="signUp">Nie masz konta? <b>Dołącz do nas!</b>
-    </string>
+    <string name="forgot_password">Nie pamiętasz hasła? Przypomnij hasło!</string>
+    <string name="remember_password">Przypomnij hasło</string>
+    <string name="signUp">Nie masz konta? Dołącz do nas!</string>
+    <string name="joinUs">Dołącz do nas</string>
     <string name="user_name">Nazwa użytkownika</string>
     <string name="password">Hasło</string>
     <string name="confirm_password">Potwierdź hasło</string>
@@ -27,4 +27,13 @@
     <string name="passFragment_passPrice">Cena</string>
     <string name="passFragment_passDescription">Opis</string>
     <string name="passFragment_passBenefits">Benefity</string>
+    <string name="active">Aktywne</string>
+    <string name="non_active">Nieaktywne</string>
+    <string name="duration">%1$s - %2$s</string>
+    <string name="price">%1$d zł/msc</string>
+    <plurals name="months_plural">
+        <item quantity="one">%d miesiąc</item>
+        <item quantity="few">%d miesiące</item>
+        <item quantity="other">%d miesięcy</item>
+    </plurals>
 </resources>

@@ -1,4 +1,4 @@
-package com.example.fitfactory.presentation.fragments.buyPassFragment
+package com.example.fitfactory.presentation.fragments.buyPass
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -8,13 +8,14 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.fitfactory.R
+import com.example.fitfactory.data.models.PassType
 import com.example.fitfactory.presentation.base.BaseFragment
 import kotlinx.android.synthetic.main.fragment_buy_pass.*
 
 class BuyPassFragment : BaseFragment() {
 
     private lateinit var viewModel: BuyPassViewModel
-    private lateinit var adapter: PassAdapter
+    private lateinit var adapter: PassToBuyAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,27 +33,17 @@ class BuyPassFragment : BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         topBar?.setTitle(getString(R.string.buy_pass))
-        flexibleLayout?.setViewEnabled(false)
+        flexibleLayout?.isViewEnable = false
         setPaddingTop(view)
         setAdapter()
     }
 
     private fun setAdapter() {
-        adapter = PassAdapter(listOf(
-            Pass(name = "ProAge1"),
-            Pass(name = "ProAge2"),
-            Pass(name = "ProAge3"),
-            Pass(name = "ProAge4")))
+        adapter = PassToBuyAdapter(PassType.values().toList())
         buyPassFragment_recyclerView.apply {
             this.adapter = this@BuyPassFragment.adapter
             this.layoutManager = LinearLayoutManager(context, RecyclerView.HORIZONTAL, false)
         }
         buyPassFragment_tabLayout.setupWithRecyclerView(buyPassFragment_recyclerView)
     }
-
-    override fun onDestroyView() {
-        flexibleLayout?.setViewEnabled(true)
-        super.onDestroyView()
-    }
-
 }

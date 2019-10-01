@@ -6,13 +6,13 @@
             app:startDestination="@+id/signInFragment">
 
     <fragment android:id="@+id/signInFragment"
-              android:name="com.example.fitfactory.presentation.fragments.signInFragment.SignInFragment"
+              android:name="com.example.fitfactory.presentation.fragments.signIn.SignInFragment"
               android:label="sign_in_fragment" tools:layout="@layout/fragment_sign_in"/>
 
     <fragment android:id="@+id/signUpFragment"
-              android:name="com.example.fitfactory.presentation.fragments.signUpFragment.SignUpFragment"
+              android:name="com.example.fitfactory.presentation.fragments.signUp.SignUpFragment"
               android:label="sign_up_fragment" tools:layout="@layout/fragment_sign_up"/>
     <fragment android:id="@+id/rememberPasswordFragment"
-              android:name="com.example.fitfactory.presentation.fragments.rememberPasswordFragment.RememberPasswordFragment"
+              android:name="com.example.fitfactory.presentation.fragments.rememberPassword.RememberPasswordFragment"
               android:label="remember_password_fragment" tools:layout="@layout/fragment_remember_password"/>
 </navigation>

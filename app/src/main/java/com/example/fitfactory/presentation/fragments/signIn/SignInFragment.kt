@@ -1,10 +1,11 @@
-package com.example.fitfactory.presentation.fragments.signInFragment
+package com.example.fitfactory.presentation.fragments.signIn
 
 import android.content.Intent
 import android.graphics.drawable.AnimatedVectorDrawable
 import android.graphics.drawable.Drawable
 import android.os.Build
 import android.os.Bundle
+import android.text.style.ClickableSpan
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -19,6 +20,7 @@ import com.example.fitfactory.data.models.User
 import com.example.fitfactory.di.Injector
 import com.example.fitfactory.presentation.activities.mainActivity.MainActivity
 import com.example.fitfactory.utils.Constants
+import com.example.fitfactory.utils.SpanTextUtil
 import com.facebook.CallbackManager
 import com.facebook.FacebookCallback
 import com.facebook.FacebookException
@@ -95,8 +97,21 @@ class SignInFragment : Fragment() {
             moveToMapFragment()
         }
 
-        signInFragment_signUp.setOnClickListener { findNavController().navigate(R.id.signUpFragment) }
-        signInFragment_forgotPassword.setOnClickListener { findNavController().navigate(R.id.rememberPasswordFragment) }
+        context?.let {
+            SpanTextUtil(it).
+                setClickableSpanOnTextView(signInFragment_signUp, getString(R.string.joinUs), object : ClickableSpan(){
+                    override fun onClick(widget: View) {
+                        findNavController().navigate(R.id.signUpFragment)
+                    }
+                }, R.color.silverLight)
+            SpanTextUtil(it).setClickableSpanOnTextView(signInFragment_forgotPassword, getString(R.string.remember_password), object : ClickableSpan(){
+                override fun onClick(widget: View) {
+                    findNavController().navigate(R.id.rememberPasswordFragment)
+                }
+            }, R.color.silverLight)
+        }
+//        signInFragment_signUp.setOnClickListener { findNavController().navigate(R.id.signUpFragment) }
+//        signInFragment_forgotPassword.setOnClickListener { findNavController().navigate(R.id.rememberPasswordFragment) }
     }
 
     private fun googleSignIn() {

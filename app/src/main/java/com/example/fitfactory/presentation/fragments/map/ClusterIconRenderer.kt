@@ -1,4 +1,4 @@
-package com.example.fitfactory.presentation.fragments.mapFragment
+package com.example.fitfactory.presentation.fragments.map
 
 import android.content.Context
 import com.google.android.gms.maps.GoogleMap

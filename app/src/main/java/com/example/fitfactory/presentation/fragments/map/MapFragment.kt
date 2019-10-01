@@ -1,4 +1,4 @@
-package com.example.fitfactory.presentation.fragments.mapFragment
+package com.example.fitfactory.presentation.fragments.map
 
 import android.Manifest
 import android.app.Activity
@@ -91,6 +91,7 @@ class MapFragment : BaseFragment(), OnMapReadyCallback {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         topBar?.setTitle("FitFactory")
+        flexibleLayout?.isViewEnable = true
         val mapFragment: SupportMapFragment =
             childFragmentManager.findFragmentById(R.id.mapFragment_map) as SupportMapFragment
         mapFragment.getMapAsync(this)
@@ -98,6 +99,7 @@ class MapFragment : BaseFragment(), OnMapReadyCallback {
         checkLocationSettings()
         setListeners()
     }
+
 
     private fun setListeners() {
         mapFragment_floatingLayout.setFloatingLayoutListener(object : FloatingLayout.FloatingLayoutListener {
@@ -196,28 +198,28 @@ class MapFragment : BaseFragment(), OnMapReadyCallback {
         clusterManager.addItem(
             MyClusterItem(
                 LatLng(51.766259, 19.456518),
-                BitmapHelper().bitmapDescriptorFromVector(R.drawable.marker_),
+                BitmapHelper().bitmapDescriptorFromVector(R.drawable.marker),
                 null
             )
         )
         clusterManager.addItem(
             MyClusterItem(
                 LatLng(51.771258, 19.446819),
-                BitmapHelper().bitmapDescriptorFromVector(R.drawable.marker_),
+                BitmapHelper().bitmapDescriptorFromVector(R.drawable.marker),
                 null
             )
         )
         clusterManager.addItem(
             MyClusterItem(
                 LatLng(51.776410, 19.460809),
-                BitmapHelper().bitmapDescriptorFromVector(R.drawable.marker_),
+                BitmapHelper().bitmapDescriptorFromVector(R.drawable.marker),
                 null
             )
         )
         clusterManager.addItem(
             MyClusterItem(
                 LatLng(51.775062, 19.470068),
-                BitmapHelper().bitmapDescriptorFromVector(R.drawable.marker_),
+                BitmapHelper().bitmapDescriptorFromVector(R.drawable.marker),
                 null
             )
         )
@@ -225,7 +227,7 @@ class MapFragment : BaseFragment(), OnMapReadyCallback {
         clusterManager.addItem(
             MyClusterItem(
                 LatLng(51.675062, 19.370068),
-                BitmapHelper().bitmapDescriptorFromVector(R.drawable.marker_),
+                BitmapHelper().bitmapDescriptorFromVector(R.drawable.marker),
                 null
             )
         )

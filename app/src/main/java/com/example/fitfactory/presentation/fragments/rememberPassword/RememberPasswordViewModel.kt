@@ -1,4 +1,4 @@
-package com.example.fitfactory.presentation.fragments.rememberPasswordFragment
+package com.example.fitfactory.presentation.fragments.rememberPassword
 
 import androidx.lifecycle.ViewModel
 

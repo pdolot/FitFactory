@@ -1,4 +1,4 @@
-package com.example.fitfactory.presentation.fragments.mapFragment
+package com.example.fitfactory.presentation.fragments.map
 
 import com.google.android.gms.maps.model.BitmapDescriptor
 import com.google.android.gms.maps.model.LatLng
