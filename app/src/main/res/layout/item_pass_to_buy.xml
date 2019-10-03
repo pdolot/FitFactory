@@ -5,7 +5,7 @@
         android:id="@+id/pass_cardView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:cardBackgroundColor="@color/transparent95"
+        app:cardBackgroundColor="@color/black85"
         app:cardCornerRadius="@dimen/card_corner_radius"
         app:cardElevation="0dp">
 
@@ -65,7 +65,7 @@
 
                 <TextView
                         android:id="@+id/passDuration"
-                        style="@style/FontH5_MEDIUM"
+                        style="@style/FontH5_LIGHT"
                         android:paddingStart="4dp"
                         android:paddingTop="2dp"
                         android:textColor="@color/silverLight"
@@ -90,7 +90,7 @@
 
                 <TextView
                         android:id="@+id/passFullPrice"
-                        style="@style/FontH5_MEDIUM"
+                        style="@style/FontH5_LIGHT"
                         android:paddingStart="4dp"
                         android:paddingTop="2dp"
                         android:textColor="@color/silverLight"
@@ -115,7 +115,7 @@
 
                 <TextView
                         android:id="@+id/passDescription"
-                        style="@style/FontH5_MEDIUM"
+                        style="@style/FontH5_LIGHT"
                         android:paddingStart="4dp"
                         android:paddingTop="2dp"
                         android:textColor="@color/silverLight"
@@ -139,7 +139,7 @@
 
                 <TextView
                         android:id="@+id/passBenefits"
-                        style="@style/FontH5_MEDIUM"
+                        style="@style/FontH5_LIGHT"
                         android:paddingStart="4dp"
                         android:paddingTop="2dp"
                         android:textColor="@color/silverLight"
@@ -151,6 +151,25 @@
                         app:layout_constraintTop_toBottomOf="@id/passBenefitsLabel" />
             </androidx.constraintlayout.widget.ConstraintLayout>
         </ScrollView>
+
+        <ImageView
+                android:layout_width="0dp"
+                android:layout_height="@dimen/medium_margin"
+                android:src="@drawable/shadow_background2"
+                android:tint="@color/black85"
+                app:layout_constraintTop_toTopOf="@id/scrollView"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"/>
+
+        <ImageView
+                android:layout_width="0dp"
+                android:layout_height="@dimen/medium_margin"
+                android:src="@drawable/shadow_background2_rounded"
+                android:rotation="180"
+                android:tint="@color/black85"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"/>
 
         <View
                 android:id="@+id/shadow"

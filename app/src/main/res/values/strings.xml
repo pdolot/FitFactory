@@ -30,7 +30,10 @@
     <string name="active">Aktywne</string>
     <string name="non_active">Nieaktywne</string>
     <string name="duration">%1$s - %2$s</string>
-    <string name="price">%1$d zł/msc</string>
+    <string name="price">%1$.2f zł/msc</string>
+    <string name="distance">Znajdujesz się %1$.2f km od obiektu</string>
+    <string name="address">%1$s ul. %2$s, %3$s %4$s</string>
+    <string name="openHours">%1$s - %2$s (%3$s)</string>
     <plurals name="months_plural">
         <item quantity="one">%d miesiąc</item>
         <item quantity="few">%d miesiące</item>

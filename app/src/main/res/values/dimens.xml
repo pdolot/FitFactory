@@ -14,4 +14,7 @@
     <dimen name="large_margin">64dp</dimen>
     <dimen name="topBar_elevation">4dp</dimen>
     <dimen name="mini_margin">4dp</dimen>
+    <dimen name="topBarHeight">64dp</dimen>
+    <dimen name="thumbSize">32dp</dimen>
+    <dimen name="barWidth">2dp</dimen>
 </resources>

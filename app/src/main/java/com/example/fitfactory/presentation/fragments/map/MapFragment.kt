@@ -4,10 +4,12 @@ import android.Manifest
 import android.app.Activity
 import android.content.Intent
 import android.content.IntentSender
+import android.location.Location
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProviders
 import com.example.fitfactory.R
@@ -32,20 +34,18 @@ import javax.inject.Inject
 
 class MapFragment : BaseFragment(), OnMapReadyCallback {
 
-
     @Inject
     lateinit var activity: AppCompatActivity
 
     private var map: GoogleMap? = null
+    private var lastKnownLocation: Location? = null
     private lateinit var fusedLocationProviderClient: FusedLocationProviderClient
     private lateinit var viewModel: MapViewModel
     private lateinit var permissionManager: PermissionManager
     private var locationRequest: LocationRequest? = null
     private lateinit var locationCallback: LocationCallback
     private var isCameraMoving: Boolean = false
-
     private var requestingLocationUpdates: Boolean = false
-
     private lateinit var clusterManager: ClusterManager<MyClusterItem>
 
     override fun onMapReady(googleMap: GoogleMap?) {
@@ -94,15 +94,18 @@ class MapFragment : BaseFragment(), OnMapReadyCallback {
         flexibleLayout?.isViewEnable = true
         val mapFragment: SupportMapFragment =
             childFragmentManager.findFragmentById(R.id.mapFragment_map) as SupportMapFragment
+
         mapFragment.getMapAsync(this)
-        fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(activity.applicationContext)
+        fusedLocationProviderClient =
+            LocationServices.getFusedLocationProviderClient(activity.applicationContext)
         checkLocationSettings()
         setListeners()
     }
 
 
     private fun setListeners() {
-        mapFragment_floatingLayout.setFloatingLayoutListener(object : FloatingLayout.FloatingLayoutListener {
+        mapFragment_floatingLayout.setFloatingLayoutListener(object :
+            FloatingLayout.FloatingLayoutListener {
             override fun onClick() {
                 mapFragment_floatingLayout.toggle()
             }
@@ -125,7 +128,11 @@ class MapFragment : BaseFragment(), OnMapReadyCallback {
 
     private fun startLocationUpdates() {
         if (permissionManager.checkPermission(Manifest.permission.ACCESS_FINE_LOCATION)) {
-            fusedLocationProviderClient.requestLocationUpdates(locationRequest, locationCallback, null)
+            fusedLocationProviderClient.requestLocationUpdates(
+                locationRequest,
+                locationCallback,
+                null
+            )
         }
     }
 
@@ -170,9 +177,11 @@ class MapFragment : BaseFragment(), OnMapReadyCallback {
             override fun onLocationResult(locationResult: LocationResult?) {
                 locationResult ?: return
                 for (location in locationResult.locations) {
+                    lastKnownLocation = location
                     if (!isCameraMoving) moveCamera(
                         LatLng(location.latitude, location.longitude),
-                        map?.cameraPosition?.zoom ?: 13f)
+                        map?.cameraPosition?.zoom ?: 13f
+                    )
                 }
             }
         }
@@ -195,44 +204,16 @@ class MapFragment : BaseFragment(), OnMapReadyCallback {
     }
 
     private fun fetchFitnessClubs() {
-        clusterManager.addItem(
-            MyClusterItem(
-                LatLng(51.766259, 19.456518),
-                BitmapHelper().bitmapDescriptorFromVector(R.drawable.marker),
-                null
+        map?.clear()
+        viewModel.getFitnessClub().forEach {
+            clusterManager.addItem(
+                MyClusterItem(
+                    it,
+                    BitmapHelper().bitmapDescriptorFromVector(R.drawable.marker),
+                    it.id
+                )
             )
-        )
-        clusterManager.addItem(
-            MyClusterItem(
-                LatLng(51.771258, 19.446819),
-                BitmapHelper().bitmapDescriptorFromVector(R.drawable.marker),
-                null
-            )
-        )
-        clusterManager.addItem(
-            MyClusterItem(
-                LatLng(51.776410, 19.460809),
-                BitmapHelper().bitmapDescriptorFromVector(R.drawable.marker),
-                null
-            )
-        )
-        clusterManager.addItem(
-            MyClusterItem(
-                LatLng(51.775062, 19.470068),
-                BitmapHelper().bitmapDescriptorFromVector(R.drawable.marker),
-                null
-            )
-        )
-
-        clusterManager.addItem(
-            MyClusterItem(
-                LatLng(51.675062, 19.370068),
-                BitmapHelper().bitmapDescriptorFromVector(R.drawable.marker),
-                null
-            )
-        )
-
-        clusterManager.renderer = ClusterIconRenderer(context, map, clusterManager)
+        }
     }
 
     private fun setClusterManger() {
@@ -243,24 +224,41 @@ class MapFragment : BaseFragment(), OnMapReadyCallback {
     }
 
     private fun setMapListeners() {
+        clusterManager.renderer = ClusterIconRenderer(context, map, clusterManager)
+        clusterManager.setOnClusterClickListener {
+            moveCamera(it.position, 11f)
+            isCameraMoving = true
+            true
+        }
+
+        clusterManager.setOnClusterItemClickListener {
+
+            moveCamera(it.position, 15f)
+            isCameraMoving = true
+            if (!mapFragment_floatingLayout.isAnimated) {
+                mapFragment_floatingLayout.fitnessClub = it.fitnessClub
+                lastKnownLocation?.let { l ->
+                    val distance = l.distanceTo(Location("club").apply {
+                        latitude = it.position.latitude
+                        longitude = it.position.longitude
+                    })
+                    mapFragment_floatingLayout.setDistance(distance / 1000)
+                }
+                mapFragment_floatingLayout.expand()
+            }
+            true
+        }
+
         map?.setOnCameraMoveStartedListener { isCameraMoving = true }
         map?.setOnCameraIdleListener(clusterManager)
         map?.setOnMarkerClickListener(clusterManager)
-
-        clusterManager.setOnClusterClickListener {
-            moveCamera(it.position, 15f)
-            isCameraMoving = true
-            true
-        }
-        clusterManager.setOnClusterItemClickListener {
-            moveCamera(it.position, 15f)
-            isCameraMoving = true
-            mapFragment_floatingLayout.expand()
-            true
-        }
     }
 
-    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray
+    ) {
         if (requestCode == Constants.LOCATION_REQUEST_CODE) {
             if (permissionManager.checkPermission(Manifest.permission.ACCESS_FINE_LOCATION)) {
                 map?.isMyLocationEnabled = true
@@ -289,8 +287,9 @@ class MapFragment : BaseFragment(), OnMapReadyCallback {
 
     private fun updatesValuesFromBundle(savedInstanceState: Bundle?) {
         savedInstanceState ?: return
-        if (savedInstanceState.keySet().contains(Constants.REQUESTING_LOCATION_UPDATES_KEY)){
-            requestingLocationUpdates = savedInstanceState.getBoolean(Constants.REQUESTING_LOCATION_UPDATES_KEY)
+        if (savedInstanceState.keySet().contains(Constants.REQUESTING_LOCATION_UPDATES_KEY)) {
+            requestingLocationUpdates =
+                savedInstanceState.getBoolean(Constants.REQUESTING_LOCATION_UPDATES_KEY)
         }
     }
 

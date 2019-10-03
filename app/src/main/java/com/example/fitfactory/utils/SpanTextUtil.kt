@@ -1,6 +1,7 @@
 package com.example.fitfactory.utils
 
 import android.content.Context
+import android.graphics.Typeface
 import android.text.Spannable
 import android.text.SpannableString
 import android.text.TextPaint

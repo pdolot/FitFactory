@@ -17,20 +17,28 @@ class FlexibleView @JvmOverloads constructor(
 ) : ConstraintLayout(context, attrs, defStyleAttr) {
 
     private var minTranslation: Float = 0f
-    private var topBarId: Int = 0
-    private var topBarSize: Float = 0f
-    private var contentRect = Rect()
     private var thumbRect = Rect()
     var isViewEnable: Boolean = false
         set(value) {
-            if (field != value){
+            if (field != value) {
                 field = value
                 visibility = if (value) View.VISIBLE else View.GONE
             }
         }
 
     init {
-        init(context, attrs)
+        View.inflate(context, R.layout.flexible_layout, this)
+        viewTreeObserver.addOnGlobalLayoutListener(object : ViewTreeObserver.OnGlobalLayoutListener{
+            override fun onGlobalLayout() {
+                viewTreeObserver.removeOnGlobalLayoutListener(this)
+                flexibleLayout_content.setPadding(0, context.resources.getDimensionPixelSize(R.dimen.topBarHeight), 0, 0)
+                flexibleLayout_thumb.getLocalVisibleRect(thumbRect)
+                minTranslation = (-flexibleLayout_content.measuredHeight + context.resources.getDimensionPixelSize(R.dimen.topBarHeight)).toFloat()
+                translationY = minTranslation
+            }
+        })
+        setListeners()
+        setQrCode()
     }
 
     private fun setQrCode() {
@@ -53,15 +61,13 @@ class FlexibleView @JvmOverloads constructor(
                 MotionEvent.ACTION_MOVE -> {
                     if (v.touchStart && event.y >= thumbRect.top + v.thumbSize + v.barWidth && event.y <= thumbRect.bottom - v.barWidth) {
                         v.touchY = event.y
-                        v.updateView()
                     }
                 }
                 MotionEvent.ACTION_UP, MotionEvent.ACTION_CANCEL -> {
                     if (v.touchStart && event.y >= thumbRect.top + v.thumbSize) {
                         v.touchY = v.thumbSize + v.barWidth
                         v.touchStart = false
-                        v.updateView()
-                        translateAnimation(translationY)
+                        translateAnimation()
                     }
                 }
             }
@@ -70,50 +76,16 @@ class FlexibleView @JvmOverloads constructor(
 
     }
 
-    private fun init(context: Context, attrs: AttributeSet?) {
-        View.inflate(context, R.layout.flexible_layout, this)
-        val typedArray = context.obtainStyledAttributes(
-            attrs,
-            R.styleable.style
-        )
-        val count = typedArray.indexCount
-
-        try {
-            for (i in 0 until count) {
-                val attr = typedArray.getIndex(i)
-                when (attr) {
-                    R.styleable.style_topBarId -> {
-                        topBarId = typedArray.getResourceId(attr, 0)
-                    }
-                }
-            }
-        } finally {
-            typedArray.recycle()
-        }
-
-        rootView.viewTreeObserver.addOnGlobalLayoutListener(object : ViewTreeObserver.OnGlobalLayoutListener {
-            override fun onGlobalLayout() {
-                var view = rootView.findViewById<View>(topBarId)
-                view.viewTreeObserver.removeOnGlobalLayoutListener(this)
-                topBarSize = view.height.toFloat()
-                flexibleLayout_content.setPadding(0, topBarSize.toInt(), 0, 0)
-                flexibleLayout_content.getLocalVisibleRect(contentRect)
-                flexibleLayout_thumb.getLocalVisibleRect(thumbRect)
-                minTranslation = (-contentRect.bottom + topBarSize)
-                translationY = minTranslation
-            }
-
-        })
-        setListeners()
-        setQrCode()
-    }
-
-    fun getThumbHeight(): Int{
+    fun getThumbHeight(): Int {
         return flexibleLayout_thumb.height
     }
 
+    fun forceClose() {
+        translationY = minTranslation
+        flexibleLayout_thumb.changeIcon(minTranslation)
+    }
 
-    private fun translateAnimation(translationY: Float) {
+    private fun translateAnimation() {
         var translation = if (translationY == 0f) {
             minTranslation
         } else {
@@ -124,7 +96,7 @@ class FlexibleView @JvmOverloads constructor(
             duration = 1000
             interpolator = LinearInterpolator()
             withEndAction {
-                flexibleLayout_thumb.changeIcon(translation)
+                flexibleLayout_thumb.changeIcon(translationY)
             }
             start()
         }

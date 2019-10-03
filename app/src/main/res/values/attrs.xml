@@ -9,7 +9,8 @@
         <attr name="hintColor" format="color"/>
         <attr name="topBarId" format="reference"/>
         <attr name="view" format="reference"/>
-        <attr name="thumbSize" format="float"/>
+        <attr name="thumbSize" format="dimension"/>
+        <attr name="barWidth" format="dimension"/>
         <attr name="indicatorRadius" format="dimension"/>
         <attr name="itemCount" format="integer"/>
         <attr name="text" format="string"/>
@@ -17,5 +18,10 @@
         <attr name="indicatorColor" format="color"/>
         <attr name="iconDown" format="reference"/>
         <attr name="iconUp" format="reference"/>
+
+        <attr name="pieceCount" format="integer"/>
+        <attr name="spacePercent" format="integer"/>
+        <attr name="strokeWidth" format="dimension"/>
+        <attr name="progress" format="float"/>
     </declare-styleable>
 </resources>

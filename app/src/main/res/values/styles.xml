@@ -7,6 +7,14 @@
         <item name="colorAccent">@color/secondaryMedium</item>
         <item name="android:statusBarColor">@color/black90</item>
         <item name="android:navigationBarColor">@color/black90</item>
+        <item name="md_font_title">@font/fira_sans_condensed_extra_bold</item>
+        <item name="md_font_body">@font/fira_sans_condensed_medium</item>
+        <item name="md_font_button">@font/fira_sans_condensed_bold</item>
+        <item name="md_corner_radius">@dimen/corner_radius</item>
+        <item name="md_background_color">@color/black85</item>
+        <item name="md_color_title">@color/primaryLight</item>
+        <item name="md_color_content">@color/silverMedium</item>
+        <item name="md_color_button_text">@color/secondaryMedium</item>
     </style>
 
     <style name="FontH1_BOLD">

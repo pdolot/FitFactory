@@ -5,6 +5,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
+import com.afollestad.materialdialogs.MaterialDialog
+import com.afollestad.materialdialogs.customview.customView
+import com.afollestad.materialdialogs.customview.getCustomView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.example.fitfactory.R
@@ -57,6 +60,19 @@ class PassAdapter : RecyclerView.Adapter<PassAdapter.ViewHolder>() {
             passName.text = item?.passType?.passName
             passDuration.text = context.getString(R.string.duration, item?.startDate, item?.endDate)
             passPrice.text = context.getString(R.string.price, item?.passType?.price)
+
+            contract_termination.setOnClickListener {
+                MaterialDialog(context).show {
+                    title(text = "Czy na pewno chcesz zerwać umowę?")
+                    message(text = "Za zerwanie umowy zostanie naliczona kara zgodnie z przelicznikiem. Po naciśnięciu opcji ZERWIJ zostaniesz przeniesiony do ekranu zapłaty")
+                    positiveButton(text = "ZERWIJ"){
+                        //TODO
+                    }
+                    negativeButton(text = "ANULUJ"){
+                        dismiss()
+                    }
+                }
+            }
         }
     }
 
