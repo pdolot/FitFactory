@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/medium_margin"
+        android:layout_marginEnd="@dimen/medium_margin"
+        android:layout_marginStart="@dimen/medium_margin"
+        android:background="@drawable/item_background"
+        android:elevation="@dimen/layout_elevation"
+        android:padding="@dimen/small_margin">
+
+    <androidx.cardview.widget.CardView
+            android:id="@+id/qrCode_cardView"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:cardBackgroundColor="@null"
+            app:cardCornerRadius="4dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintDimensionRatio="1:1"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+                android:id="@+id/qrCode"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="centerCrop" />
+    </androidx.cardview.widget.CardView>
+
+    <TextView
+            android:id="@+id/passName"
+            style="@style/FontH3_BOLD"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            tools:text="ProAge12m"
+            android:textColor="@color/primaryLight"
+            android:layout_marginStart="@dimen/small_margin"
+            android:layout_marginEnd="@dimen/small_margin"
+            android:maxLines="1"
+            android:ellipsize="end"
+            app:layout_constraintStart_toEndOf="@id/qrCode_cardView"
+            app:layout_constraintEnd_toStartOf="@id/reBuyPass"
+            app:layout_constraintTop_toTopOf="parent"/>
+
+    <TextView
+            android:id="@+id/passDuration"
+            style="@style/FontH7_LIGHT"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            tools:text="12.03.2019-12.03.2020"
+            android:layout_marginStart="@dimen/small_margin"
+            android:layout_marginEnd="@dimen/small_margin"
+            android:maxLines="1"
+            android:ellipsize="end"
+            app:layout_constraintStart_toEndOf="@id/qrCode_cardView"
+            app:layout_constraintEnd_toStartOf="@id/reBuyPass"
+            app:layout_constraintTop_toBottomOf="@id/passName"/>
+
+    <TextView
+            android:id="@+id/passPrice"
+            style="@style/FontH7_LIGHT"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            tools:text="89,99 zł/msc"
+            android:layout_marginStart="@dimen/small_margin"
+            android:layout_marginEnd="@dimen/small_margin"
+            android:maxLines="1"
+            android:ellipsize="end"
+            app:layout_constraintStart_toEndOf="@id/qrCode_cardView"
+            app:layout_constraintEnd_toStartOf="@id/reBuyPass"
+            app:layout_constraintTop_toBottomOf="@id/passDuration"/>
+
+    <ImageView
+            android:id="@+id/contract_termination"
+            android:layout_width="42dp"
+            android:layout_height="42dp"
+            android:src="@drawable/contract_termination"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+            android:id="@+id/reBuyPass"
+            android:layout_width="42dp"
+            android:layout_height="42dp"
+            android:layout_marginEnd="@dimen/small_margin"
+            android:src="@drawable/rebuy_pass"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/contract_termination"
+            app:layout_constraintTop_toTopOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

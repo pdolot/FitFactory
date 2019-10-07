@@ -17,7 +17,7 @@ import com.example.fitfactory.presentation.activities.LoginActivity
 import com.example.fitfactory.presentation.customViews.CustomDrawerLayout
 import com.facebook.login.LoginManager
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
-import kotlinx.android.synthetic.main.navigation_item.view.*
+import kotlinx.android.synthetic.main.item_navigation.view.*
 import javax.inject.Inject
 
 class NavigationRecyclerViewAdapter(
@@ -45,7 +45,7 @@ class NavigationRecyclerViewAdapter(
 
     override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int): NavigationViewHolder {
         val itemView = LayoutInflater.from(viewGroup.context)
-            .inflate(R.layout.navigation_item, viewGroup, false)
+            .inflate(R.layout.item_navigation, viewGroup, false)
         return NavigationViewHolder(itemView)
     }
 

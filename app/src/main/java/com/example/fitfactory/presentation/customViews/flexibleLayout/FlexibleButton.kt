@@ -8,6 +8,7 @@ import android.graphics.drawable.Drawable
 import android.util.AttributeSet
 import android.view.View
 import com.example.fitfactory.R
+import kotlin.math.min
 
 
 class FlexibleButton @JvmOverloads constructor(
@@ -26,13 +27,19 @@ class FlexibleButton @JvmOverloads constructor(
     var barWidth: Float = 10f
 
     var touchY: Float = 0f
-    private lateinit var firstPoint: Point
-    private lateinit var firstPointControl: Point
-    private lateinit var endPoint: Point
-    private lateinit var endPointControl: Point
-    private lateinit var centerPoint: Point
-    private lateinit var centerPointControlLeft: Point
-    private lateinit var centerPointControlRight: Point
+        set(value) {
+            field = value
+            measurePoints()
+            invalidate()
+        }
+    private lateinit var center: Point
+    private lateinit var sp: Point // start point
+    private lateinit var lp: Point  // left point control
+    private lateinit var ep: Point // end point
+    private lateinit var rp: Point // right point control
+    private lateinit var cp: Point // center point
+    private lateinit var clp: Point // center left point control
+    private lateinit var crp: Point // center right point control
     private lateinit var iconBound: Bound
 
     init {
@@ -49,11 +56,12 @@ class FlexibleButton @JvmOverloads constructor(
         try {
             for (i in 0 until count) {
 
-                val attr = typedArray.getIndex(i)
-                when (attr) {
+                when (val attr = typedArray.getIndex(i)) {
                     R.styleable.style_thumbSize -> {
-                        thumbSize = typedArray.getFloat(attr, 100f)
-                        touchY = thumbSize
+                        thumbSize = typedArray.getDimension(attr, 10f)
+                    }
+                    R.styleable.style_barWidth -> {
+                        barWidth = typedArray.getDimension(attr, 10f)
                     }
                     R.styleable.style_iconDown -> {
                         iconDown = typedArray.getDrawable(attr)
@@ -63,10 +71,12 @@ class FlexibleButton @JvmOverloads constructor(
                         iconUp = typedArray.getDrawable(attr)
                     }
                     R.styleable.style_iconColor -> {
-                        iconColor = typedArray.getColor(attr, resources.getColor(R.color.primaryDark))
+                        iconColor =
+                            typedArray.getColor(attr, resources.getColor(R.color.primaryDark))
                     }
                     R.styleable.style_color -> {
-                        viewColor = typedArray.getColor(attr, resources.getColor(R.color.primaryMedium))
+                        viewColor =
+                            typedArray.getColor(attr, resources.getColor(R.color.primaryMedium))
                     }
                 }
             }
@@ -84,50 +94,44 @@ class FlexibleButton @JvmOverloads constructor(
     override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
         setMeasuredDimension(
             measureDimension(suggestedMinimumWidth, widthMeasureSpec),
-            measureDimension(touchY.toInt() * 2, heightMeasureSpec)
+            measureDimension(thumbSize.toInt() * 2 + barWidth.toInt(), heightMeasureSpec)
         )
+        touchY = thumbSize + barWidth
     }
 
     private fun measurePoints() {
-        firstPoint = Point((measuredWidth.toFloat() / 2) - (thumbSize * 2), barWidth)
-        firstPointControl = Point((measuredWidth.toFloat() / 2) - thumbSize, barWidth)
-        centerPointControlLeft = Point((measuredWidth.toFloat() / 2) - thumbSize, touchY + barWidth)
-        centerPoint = Point((measuredWidth.toFloat() / 2), touchY + barWidth)
-        centerPointControlRight = Point((measuredWidth.toFloat() / 2) + thumbSize, touchY + barWidth)
-        endPoint = Point((measuredWidth.toFloat() / 2) + (thumbSize * 2), barWidth)
-        endPointControl = Point((measuredWidth.toFloat() / 2) + thumbSize, barWidth)
+        center = Point(measuredWidth / 2f, touchY - (thumbSize / 2))
+        sp = Point(center.x - (thumbSize * 2), barWidth)
+        lp = Point(center.x - thumbSize, barWidth)
+        clp = Point(center.x - thumbSize, touchY)
+        cp = Point(center.x, touchY)
+        crp = Point(center.x + thumbSize, touchY)
+        rp = Point(center.x + thumbSize, barWidth)
+        ep = Point(center.x + (thumbSize * 2), barWidth)
 
         iconBound = Bound(
-            (measuredWidth / 2) - (thumbSize / 2 + barWidth).toInt(),
-            (touchY - thumbSize + barWidth).toInt(),
-            (measuredWidth / 2) + (thumbSize / 2 + barWidth).toInt(),
-            (touchY + barWidth).toInt()
+            (center.x - thumbSize / 2).toInt(),
+            (center.y - thumbSize / 2).toInt(),
+            (center.x + thumbSize / 2).toInt(),
+            (center.y + thumbSize / 2).toInt()
         )
     }
 
     override fun onDraw(canvas: Canvas) {
-        measurePoints()
         path.reset()
-
         path.moveTo(0f, 0f)
         path.lineTo(measuredWidth.toFloat(), 0f)
         path.lineTo(measuredWidth.toFloat(), barWidth)
-        path.lineTo(firstPoint.x, firstPoint.y)
+        path.lineTo(sp.x, sp.y)
         path.cubicTo(
-            firstPointControl.x,
-            firstPointControl.y,
-            centerPointControlLeft.x,
-            centerPointControlLeft.y,
-            centerPoint.x,
-            centerPoint.y
+            lp.x, lp.y,
+            clp.x, clp.y,
+            cp.x, cp.y
         )
         path.cubicTo(
-            centerPointControlRight.x,
-            centerPointControlRight.y,
-            endPointControl.x,
-            endPointControl.y,
-            endPoint.x,
-            endPoint.y
+            crp.x, crp.y,
+            rp.x, rp.y,
+            ep.x, ep.y
         )
         path.lineTo(0f, barWidth)
         path.close()
@@ -137,10 +141,6 @@ class FlexibleButton @JvmOverloads constructor(
         icon?.setBounds(iconBound.left, iconBound.top, iconBound.right, iconBound.bottom)
         icon?.draw(canvas)
         super.onDraw(canvas)
-    }
-
-    fun updateView() {
-        invalidate()
     }
 
     private fun measureDimension(desiredSize: Int, measureSpec: Int): Int {
@@ -153,7 +153,7 @@ class FlexibleButton @JvmOverloads constructor(
         } else {
             result = desiredSize
             if (specMode == MeasureSpec.AT_MOST) {
-                result = Math.min(result, specSize)
+                result = min(result, specSize)
             }
         }
         return result

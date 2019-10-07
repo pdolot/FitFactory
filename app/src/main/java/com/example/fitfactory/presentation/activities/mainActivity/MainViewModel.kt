@@ -26,7 +26,7 @@ class MainViewModel : ViewModel(){
         val passes = NavigationItem(
             context.getString(R.string.passes),
             R.drawable.ic_pass,
-            R.id.mapFragment
+            R.id.passFragment
         )
         val buyPass = NavigationItem(
             context.getString(R.string.buy_pass),

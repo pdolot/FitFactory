@@ -7,6 +7,14 @@
         <item name="colorAccent">@color/secondaryMedium</item>
         <item name="android:statusBarColor">@color/black90</item>
         <item name="android:navigationBarColor">@color/black90</item>
+        <item name="md_font_title">@font/fira_sans_condensed_extra_bold</item>
+        <item name="md_font_body">@font/fira_sans_condensed_medium</item>
+        <item name="md_font_button">@font/fira_sans_condensed_bold</item>
+        <item name="md_corner_radius">@dimen/corner_radius</item>
+        <item name="md_background_color">@color/black85</item>
+        <item name="md_color_title">@color/primaryLight</item>
+        <item name="md_color_content">@color/silverMedium</item>
+        <item name="md_color_button_text">@color/secondaryMedium</item>
     </style>
 
     <style name="FontH1_BOLD">
@@ -14,6 +22,7 @@
         <item name="android:textSize">25sp</item>
         <item name="android:textAlignment">center</item>
     </style>
+
     <style name="FontH2_BOLD">
         <item name="android:textColor">@color/silverMedium</item>
         <item name="android:fontFamily">@font/fira_sans_condensed_bold</item>
@@ -21,21 +30,57 @@
         <item name="android:textAlignment">center</item>
     </style>
 
+    <style name="FontH3_BOLD">
+        <item name="android:textColor">@color/silverMedium</item>
+        <item name="android:fontFamily">@font/fira_sans_condensed_bold</item>
+        <item name="android:textSize">19sp</item>
+    </style>
+
     <style name="FontH3_LIGHT">
         <item name="android:textColor">@color/silverMedium</item>
         <item name="android:fontFamily">@font/fira_sans_condensed_light</item>
         <item name="android:textSize">19sp</item>
     </style>
-    <style name="FontH5_LIGHT">
+
+    <style name="FontH4_LIGHT">
+        <item name="android:textColor">@color/silverMedium</item>
+        <item name="android:fontFamily">@font/fira_sans_condensed_light</item>
+        <item name="android:textSize">18sp</item>
+    </style>
+
+    <style name="FontH5_MEDIUM">
+        <item name="android:textColorHighlight">#00FFFFFF</item>
         <item name="android:textColor">@color/silverLight</item>
         <item name="android:fontFamily">@font/fira_sans_condensed_medium</item>
         <item name="android:textSize">17sp</item>
     </style>
 
-    <style name="FontH6_LIGHT">
+    <style name="FontH5_LIGHT">
+        <item name="android:textColorHighlight">#00FFFFFF</item>
+        <item name="android:textColor">@color/silverLight</item>
+        <item name="android:fontFamily">@font/fira_sans_condensed_light</item>
+        <item name="android:textSize">17sp</item>
+    </style>
+
+    <style name="FontH6_MEDIUM">
+        <item name="android:textColorHighlight">#00FFFFFF</item>
         <item name="android:textColor">@color/silverLight</item>
         <item name="android:fontFamily">@font/fira_sans_condensed_medium</item>
         <item name="android:textSize">15sp</item>
+    </style>
+
+    <style name="FontH6_LIGHT">
+        <item name="android:textColorHighlight">#00FFFFFF</item>
+        <item name="android:textColor">@color/silverLight</item>
+        <item name="android:fontFamily">@font/fira_sans_condensed_light</item>
+        <item name="android:textSize">15sp</item>
+    </style>
+
+    <style name="FontH7_LIGHT">
+        <item name="android:textColorHighlight">#00FFFFFF</item>
+        <item name="android:textColor">@color/silverLight</item>
+        <item name="android:fontFamily">@font/fira_sans_condensed_light</item>
+        <item name="android:textSize">13sp</item>
     </style>
 
 
@@ -73,6 +118,7 @@
         <item name="android:textSize">13sp</item>
         <item name="android:textAlignment">textStart</item>
     </style>
+
     <style name="ItemValueTextView">
         <item name="android:textColor">@color/silverLight</item>
         <item name="android:fontFamily">sans-serif-light</item>

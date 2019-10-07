@@ -4,7 +4,7 @@
         xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".presentation.fragments.signInFragment.SignInFragment"
+        tools:context=".presentation.fragments.signIn.SignInFragment"
         android:background="@color/black90">
 
     <ImageView
@@ -85,12 +85,13 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/forgot_password"
+                android:textColor="@color/silverVeryDark"
                 android:padding="@dimen/text_view_padding"
                 app:layout_constraintBottom_toTopOf="@id/signInFragment_buttonsContent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/signInFragment_userPassword"
                 app:layout_constraintEnd_toEndOf="parent"
-                style="@style/FontH6_LIGHT"/>
+                style="@style/FontH6_MEDIUM"/>
 
         <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/signInFragment_buttonsContent"
@@ -156,12 +157,13 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/signUp"
+                android:textColor="@color/silverVeryDark"
                 android:padding="@dimen/text_view_padding"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/signInFragment_separator"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintBottom_toTopOf="@id/signInFragment_logotype"
-                style="@style/FontH6_LIGHT"/>
+                style="@style/FontH6_MEDIUM"/>
 
         <ImageView
                 android:id="@+id/signInFragment_logotype"

@@ -61,7 +61,7 @@
                 app:layout_constraintTop_toBottomOf="@id/navigation_header_layout"
                 android:nestedScrollingEnabled="false"
                 android:isScrollContainer="false"
-                tools:listitem="@layout/navigation_item" />
+                tools:listitem="@layout/item_navigation" />
 
         <ImageView
                 android:id="@+id/navigation_facebookButton"

@@ -4,7 +4,7 @@
         xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".presentation.fragments.signUpFragment.SignUpFragment"
+        tools:context=".presentation.fragments.signUp.SignUpFragment"
         android:background="@color/black90">
 
     <ImageView
@@ -135,7 +135,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:text="@string/regulations"
-                style="@style/FontH6_LIGHT"
+                style="@style/FontH6_MEDIUM"
                 android:justificationMode="inter_word"
                 android:layout_marginStart="@dimen/small_margin"
                 android:layout_marginEnd="@dimen/small_margin"

@@ -5,7 +5,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/black90"
-        tools:context=".presentation.fragments.buyPassFragment.BuyPassFragment">
+        tools:context=".presentation.fragments.buyPass.BuyPassFragment">
 
     <com.example.fitfactory.presentation.customViews.tabLayout.MyTabLayout
             android:id="@+id/buyPassFragment_tabLayout"
@@ -14,10 +14,10 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:color="@color/black85"
+            app:color="@color/primaryMedium"
             app:indicatorActiveColor="@color/primaryLight"
-            app:indicatorColor="@color/black80"
-            app:indicatorRadius="6dp"
+            app:indicatorColor="@color/primaryDark"
+            app:indicatorRadius="8dp"
             app:itemCount="6"
             />
 
@@ -40,7 +40,7 @@
             android:layout_height="0dp"
             android:layout_marginBottom="@dimen/medium_margin"
             android:overScrollMode="never"
-            tools:listitem="@layout/fragment_pass"
+            tools:listitem="@layout/item_pass_to_buy"
             app:layout_constraintBottom_toTopOf="@id/buyPassFragment_buyButton"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.PagerSnapHelper
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager.widget.ViewPager
 import com.example.fitfactory.R
-import com.example.fitfactory.presentation.fragments.buyPassFragment.PassAdapter
+import com.example.fitfactory.presentation.fragments.buyPass.PassToBuyAdapter
 import com.example.fitfactory.utils.Bound
 import com.example.fitfactory.utils.scaleValue
 import kotlinx.android.synthetic.main.tab_layout.view.*
@@ -75,7 +75,7 @@ class MyTabLayout @JvmOverloads constructor(
 
             override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
                 if (newState == RecyclerView.SCROLL_STATE_IDLE){
-                    (recyclerView.adapter as PassAdapter).apply {
+                    (recyclerView.adapter as PassToBuyAdapter).apply {
                         tab_title.text = getTitle(position)
                         setCurrentItem(position)
                     }
@@ -92,7 +92,7 @@ class MyTabLayout @JvmOverloads constructor(
                 setIndicatorBounds(0)
                 tab_title.text = viewPager?.adapter?.getPageTitle(0)
                 tab_title.text = recyclerView?.adapter?.let {
-                    (it as PassAdapter).getTitle(0)
+                    (it as PassToBuyAdapter).getTitle(0)
                 }
             }
         })
