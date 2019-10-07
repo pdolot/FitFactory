@@ -14,10 +14,10 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:color="@color/black85"
+            app:color="@color/primaryMedium"
             app:indicatorActiveColor="@color/primaryLight"
-            app:indicatorColor="@color/black80"
-            app:indicatorRadius="6dp"
+            app:indicatorColor="@color/primaryDark"
+            app:indicatorRadius="8dp"
             app:itemCount="6"
             />
 
