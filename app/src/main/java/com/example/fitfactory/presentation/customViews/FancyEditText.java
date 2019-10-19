@@ -12,7 +12,9 @@ import android.text.method.PasswordTransformationMethod;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
+
 import androidx.appcompat.widget.AppCompatEditText;
+
 import com.example.fitfactory.R;
 
 public class FancyEditText extends AppCompatEditText implements View.OnTouchListener {
@@ -34,6 +36,7 @@ public class FancyEditText extends AppCompatEditText implements View.OnTouchList
     private Drawable rightIcon;
 
     private boolean passwordIsVisible = false;
+    private boolean drawBar = true;
 
 
     public FancyEditText(Context context) {
@@ -84,14 +87,19 @@ public class FancyEditText extends AppCompatEditText implements View.OnTouchList
         mCanvas.drawOval(0, 0, height, height, iconBackgroundPaint);
         int padding = height / 4;
 
-        // bar
-        if (getText().toString().equals("") && !hasFocus()) {
-            mCanvas.drawRect(height / 2, 0, width - (1.5f * height), height, iconBackgroundPaint);
-            mCanvas.drawArc(width - (2.5f * height), -height, width - (height / 2), height, 0, 90, true, iconBackgroundPaint);
-            setHintTextColor(iconColor);
+        if (drawBar) {
+            // bar
+            if (getText().toString().equals("") && !hasFocus()) {
+                mCanvas.drawRect(height / 2, 0, width - (1.5f * height), height, iconBackgroundPaint);
+                mCanvas.drawArc(width - (2.5f * height), -height, width - (height / 2), height, 0, 90, true, iconBackgroundPaint);
+                setHintTextColor(iconColor);
+            } else {
+                setHintTextColor(hintColor);
+            }
         } else {
             setHintTextColor(hintColor);
         }
+
 
         if (icon != null) {
 
@@ -157,6 +165,8 @@ public class FancyEditText extends AppCompatEditText implements View.OnTouchList
                     outlineColor = typedArray.getColor(attr, getResources().getColor(R.color.colorPrimaryDark));
                 } else if (attr == R.styleable.style_hintColor) {
                     hintColor = typedArray.getColor(attr, getResources().getColor(R.color.colorPrimaryDark));
+                } else if (attr == R.styleable.style_drawBar) {
+                    drawBar = typedArray.getBoolean(attr, true);
                 }
             }
         }

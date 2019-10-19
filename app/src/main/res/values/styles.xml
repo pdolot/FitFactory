@@ -1,7 +1,7 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+    <style name="AppTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
         <item name="colorPrimary">@color/primaryMedium</item>
         <item name="colorPrimaryDark">@color/primaryDark</item>
         <item name="colorAccent">@color/secondaryMedium</item>
@@ -133,6 +133,22 @@
         <item name="android:colorControlActivated">@color/primaryMedium</item>
         <item name="android:background">@android:color/transparent</item>
         <item name="android:textCursorDrawable">@null</item>
+        <item name="android:importantForAutofill" tools:targetApi="o">no</item>
+    </style>
+
+    <style name="HelperText">
+        <item name="android:textColor">@color/transparent95</item>
+        <item name="android:textSize">12sp</item>
+    </style>
+
+    <style name="TextInputLayoutAppearance" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense">
+        <!-- reference our hint & error styles -->
+        <item name="android:fontFamily">@font/fira_sans_condensed_medium</item>
+        <item name="android:textColor">@color/primaryMedium</item>
+        <item name="android:textColorHint">@color/black65</item>
+        <item name="android:textColorPrimary">@color/primaryLight</item>
+        <item name="colorControlNormal">@color/transparent95</item>
+        <item name="colorControlActivated">@color/black40</item>
         <item name="android:importantForAutofill" tools:targetApi="o">no</item>
     </style>
 

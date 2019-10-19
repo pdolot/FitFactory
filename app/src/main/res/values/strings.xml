@@ -15,6 +15,7 @@
     <string name="insert_email">W celu zresetowania hasła, wpisz poniżej adres mailowy, który podałeś przy rejestracji i oczekuj na wiadomość z nowo wygenerowanym hasłem</string>
     <string name="map">Mapa</string>
     <string name="passes">Karnety</string>
+    <string name="payment">Płatność</string>
     <string name="buy_pass">Kup karnet</string>
     <string name="exercises">Ćwiczenia</string>
     <string name="fitness_lessons">Zajęcia fitness</string>
@@ -34,6 +35,8 @@
     <string name="distance">Znajdujesz się %1$.2f km od obiektu</string>
     <string name="address">%1$s ul. %2$s, %3$s %4$s</string>
     <string name="openHours">%1$s - %2$s (%3$s)</string>
+    <string name="card_number">Numer karty</string>
+    <string name="card_expiry">Data ważności</string>
     <plurals name="months_plural">
         <item quantity="one">%d miesiąc</item>
         <item quantity="few">%d miesiące</item>

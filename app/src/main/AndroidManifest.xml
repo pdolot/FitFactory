@@ -22,7 +22,7 @@
         <activity
                 android:name=".presentation.activities.mainActivity.MainActivity"
                 android:screenOrientation="portrait"
-                android:windowSoftInputMode="adjustNothing">
+                android:windowSoftInputMode="adjustResize">
         </activity>
         <activity
                 android:name=".presentation.activities.LoginActivity"

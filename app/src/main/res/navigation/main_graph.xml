@@ -10,9 +10,15 @@
               android:label="map_fragment" tools:layout="@layout/fragment_map"/>
     <fragment android:id="@+id/buyPassFragment"
               android:name="com.example.fitfactory.presentation.fragments.buyPass.BuyPassFragment"
-              android:label="buy_pass_fragment" tools:layout="@layout/fragment_buy_pass"/>
+              android:label="buy_pass_fragment" tools:layout="@layout/fragment_buy_pass">
+    </fragment>
     <fragment
             android:id="@+id/passFragment"
             android:name="com.example.fitfactory.presentation.fragments.pass.PassFragment"
             android:label="PassFragment" />
+    <fragment
+            android:id="@+id/paymentFragment"
+            android:name="com.example.fitfactory.presentation.fragments.payment.PaymentFragment"
+            android:label="PaymentFragment" />
+
 </navigation>
