@@ -22,8 +22,17 @@
             android:label="PaymentFragment" />
     <fragment
             android:id="@+id/exercisesInfo"
-            android:name="com.example.fitfactory.presentation.fragments.exercises.ExercisesInfo"
+            android:name="com.example.fitfactory.presentation.fragments.exercises.info.ExercisesInfoFragment"
             android:label="fragment_exercises_info"
             tools:layout="@layout/fragment_exercises_info" />
+    <fragment
+            android:id="@+id/scanner"
+            android:name="com.example.fitfactory.presentation.fragments.exercises.scannerView.ScannerFragment"
+            android:label="fragment_scanner"
+            tools:layout="@layout/fragment_scanner" />
+    <fragment
+            android:id="@+id/exerciseFragment"
+            android:name="com.example.fitfactory.presentation.fragments.exercises.exercise.ExerciseFragment"
+            android:label="ExerciseFragment" />
 
 </navigation>

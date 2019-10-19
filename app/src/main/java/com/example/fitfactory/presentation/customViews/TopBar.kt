@@ -40,13 +40,18 @@ class TopBar @JvmOverloads constructor(
     }
 
     private fun setListeners(){
-        topBar_optionsButton.setOnClickListener {
-            topBarListener.onOptionsClick()
-        }
+
     }
 
     interface TopBarListener {
-        fun onOptionsClick()
+        fun onOptionsClick(isBackEnabled: Boolean)
+    }
+
+    fun setBackButtonEnabled(isEnabled: Boolean){
+        topBar_optionsButton.setImageResource(if (isEnabled) R.drawable.ic_arrow_left else R.drawable.ic_options)
+        topBar_optionsButton.setOnClickListener {
+            topBarListener.onOptionsClick(isEnabled)
+        }
     }
 }
 

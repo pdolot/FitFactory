@@ -1,4 +1,4 @@
-package com.example.fitfactory.presentation.fragments.exercises
+package com.example.fitfactory.presentation.fragments.exercises.info
 
 import androidx.lifecycle.ViewModel
 

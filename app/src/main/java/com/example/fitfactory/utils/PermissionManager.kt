@@ -1,10 +1,10 @@
 package com.example.fitfactory.utils
 
-import android.Manifest
 import android.content.pm.PackageManager
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import com.example.fitfactory.constants.Constants
 
 class PermissionManager(private val activity: AppCompatActivity) {
     

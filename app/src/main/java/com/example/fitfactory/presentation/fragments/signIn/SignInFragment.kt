@@ -19,7 +19,7 @@ import com.example.fitfactory.R
 import com.example.fitfactory.data.models.User
 import com.example.fitfactory.di.Injector
 import com.example.fitfactory.presentation.activities.mainActivity.MainActivity
-import com.example.fitfactory.utils.Constants
+import com.example.fitfactory.constants.Constants
 import com.example.fitfactory.utils.SpanTextUtil
 import com.facebook.CallbackManager
 import com.facebook.FacebookCallback

@@ -42,4 +42,6 @@ class PaymentFragment : BaseFragment() {
 
         }
     }
+
+    override fun backButtonEnabled(): Boolean = true
 }

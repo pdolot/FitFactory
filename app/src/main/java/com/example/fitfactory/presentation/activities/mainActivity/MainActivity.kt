@@ -2,6 +2,7 @@ package com.example.fitfactory.presentation.activities.mainActivity
 
 import android.net.Uri
 import android.os.Bundle
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
 import androidx.lifecycle.ViewModelProviders
@@ -54,9 +55,15 @@ class MainActivity : AppCompatActivity(), MainInterface {
 
     private fun setListeners() {
         mainFragment_topBar.setTopBarListeners(object : TopBar.TopBarListener {
-            override fun onOptionsClick() {
-                mainFragment_drawerLayout.openDrawer(GravityCompat.START)
+            override fun onOptionsClick(isBackEnabled: Boolean) {
+                if (isBackEnabled){
+                    findNavController(R.id.main_host_fragment).popBackStack()
+                    println("CLICK")
+                }else{
+                    mainFragment_drawerLayout.openDrawer(GravityCompat.START)
+                }
             }
+
         })
     }
 

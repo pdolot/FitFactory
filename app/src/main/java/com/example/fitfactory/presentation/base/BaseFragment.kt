@@ -2,6 +2,7 @@ package com.example.fitfactory.presentation.base
 
 import android.content.Context
 import android.view.View
+import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
 import com.example.fitfactory.presentation.activities.mainActivity.MainFragmentInterface
 import com.example.fitfactory.presentation.customViews.CustomDrawerLayout
@@ -45,4 +46,15 @@ abstract class BaseFragment : Fragment() {
             view.paddingBottom
         )
     }
+
+    override fun onResume() {
+        super.onResume()
+        backButtonEnabled().let {
+            topBar?.setBackButtonEnabled(it)
+            drawerLayout?.setDrawerLockMode(if (it) DrawerLayout.LOCK_MODE_LOCKED_CLOSED else DrawerLayout.LOCK_MODE_UNLOCKED)
+        }
+
+    }
+
+    abstract fun backButtonEnabled(): Boolean
 }

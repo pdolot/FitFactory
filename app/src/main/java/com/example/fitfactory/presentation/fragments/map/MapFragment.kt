@@ -9,7 +9,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProviders
 import com.example.fitfactory.R
@@ -17,7 +16,7 @@ import com.example.fitfactory.di.Injector
 import com.example.fitfactory.presentation.base.BaseFragment
 import com.example.fitfactory.presentation.customViews.FloatingLayout
 import com.example.fitfactory.utils.BitmapHelper
-import com.example.fitfactory.utils.Constants
+import com.example.fitfactory.constants.Constants
 import com.example.fitfactory.utils.PermissionManager
 import com.google.android.gms.common.api.ResolvableApiException
 import com.google.android.gms.location.*
@@ -102,6 +101,7 @@ class MapFragment : BaseFragment(), OnMapReadyCallback {
         setListeners()
     }
 
+    override fun backButtonEnabled(): Boolean = false
 
     private fun setListeners() {
         mapFragment_floatingLayout.setFloatingLayoutListener(object :

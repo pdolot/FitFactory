@@ -1,18 +1,20 @@
-package com.example.fitfactory.presentation.fragments.exercises
+package com.example.fitfactory.presentation.fragments.exercises.info
 
-import androidx.lifecycle.ViewModelProviders
+import android.Manifest
+import android.content.pm.PackageManager
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.fragment.findNavController
 
 import com.example.fitfactory.R
+import com.example.fitfactory.constants.Constants.Companion.CAMERA_REQUEST_CODE
 import com.example.fitfactory.presentation.base.BaseFragment
 import com.example.fitfactory.utils.SpanTextUtil
 import kotlinx.android.synthetic.main.fragment_exercises_info.*
 
-class ExercisesInfo : BaseFragment() {
+class ExercisesInfoFragment : BaseFragment() {
 
 
     private val viewModel by lazy { ExercisesInfoViewModel() }
@@ -33,5 +35,29 @@ class ExercisesInfo : BaseFragment() {
             setSpanOnTextView(firstInfo, "QR", R.color.primaryLight)
             setSpanOnTextView(secondInfo, "kontuzji", R.color.negativeMedium)
         }
+
+        scanButton.setOnClickListener {
+            requestPermissions(arrayOf(Manifest.permission.CAMERA), CAMERA_REQUEST_CODE)
+        }
     }
+
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray
+    ) {
+        when (requestCode) {
+            CAMERA_REQUEST_CODE -> {
+                grantResults.any {
+                    if (it == PackageManager.PERMISSION_GRANTED) {
+                        findNavController().navigate(R.id.scanner)
+                        true
+                    }
+                    false
+                }
+            }
+        }
+    }
+
+    override fun backButtonEnabled(): Boolean = false
 }

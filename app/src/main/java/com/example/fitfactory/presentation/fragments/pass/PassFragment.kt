@@ -32,6 +32,8 @@ class PassFragment : BaseFragment() {
         setAdapter()
     }
 
+    override fun backButtonEnabled(): Boolean = false
+
     private fun setAdapter() {
         passFragment_recyclerView.apply {
             this.adapter = this@PassFragment.adapter
