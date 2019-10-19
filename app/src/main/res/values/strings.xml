@@ -37,6 +37,8 @@
     <string name="openHours">%1$s - %2$s (%3$s)</string>
     <string name="card_number">Numer karty</string>
     <string name="card_expiry">Data ważności</string>
+    <string name="exercises_secondInfo">Pamiętaj, że nieprawidłowe wykonywacnie ćwiczenia może prowadzić do kontuzji. Zwróć uwagę na prawidłową postawę ciała i osiągaj swoje cele!</string>
+    <string name="exercises_firstInfo">Zeskanuj kod QR znajdujący się na urządzeniu aby uzyskać przykładowe ćwiczenia, które można wykonać na rządzeniu</string>
     <plurals name="months_plural">
         <item quantity="one">%d miesiąc</item>
         <item quantity="few">%d miesiące</item>

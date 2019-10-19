@@ -20,5 +20,10 @@
             android:id="@+id/paymentFragment"
             android:name="com.example.fitfactory.presentation.fragments.payment.PaymentFragment"
             android:label="PaymentFragment" />
+    <fragment
+            android:id="@+id/exercisesInfo"
+            android:name="com.example.fitfactory.presentation.fragments.exercises.ExercisesInfo"
+            android:label="fragment_exercises_info"
+            tools:layout="@layout/fragment_exercises_info" />
 
 </navigation>

@@ -36,7 +36,7 @@ class MainViewModel : ViewModel(){
         val exercises = NavigationItem(
             context.getString(R.string.exercises),
             R.drawable.ic_fit_exercises,
-            R.id.mapFragment
+            R.id.exercisesInfo
         )
         val fitnessLessons =
             NavigationItem(
