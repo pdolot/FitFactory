@@ -4,9 +4,12 @@
         <attr name="backgroundColor" format="color" />
         <attr name="color" format="color" />
         <attr name="iconColor" format="color" />
+        <attr name="disabledIconColor" format="color" />
+        <attr name="icon" format="reference" />
         <attr name="iconLeft" format="reference" />
         <attr name="outlineColor" format="color" />
         <attr name="hintColor" format="color"/>
+        <attr name="drawBar" format="boolean"/>
         <attr name="topBarId" format="reference"/>
         <attr name="view" format="reference"/>
         <attr name="thumbSize" format="dimension"/>
@@ -23,5 +26,13 @@
         <attr name="spacePercent" format="integer"/>
         <attr name="strokeWidth" format="dimension"/>
         <attr name="progress" format="float"/>
+
+        <attr name="buttonRadius" format="dimension"/>
+        <attr name="bias" format="float"/>
+        <attr name="spaceWidth" format="dimension"/>
+        <attr name="roundRadius" format="dimension"/>
+        <attr name="thumbColor" format="color"/>
+        <attr name="disableColor" format="color"/>
+        <attr name="isEnable" format="boolean"/>
     </declare-styleable>
 </resources>

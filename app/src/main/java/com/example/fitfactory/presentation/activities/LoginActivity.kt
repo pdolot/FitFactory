@@ -11,7 +11,6 @@ import com.example.fitfactory.presentation.activities.mainActivity.MainActivity
 import com.facebook.AccessToken
 import com.facebook.Profile
 import com.google.android.gms.auth.api.signin.GoogleSignIn
-import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import javax.inject.Inject
 
 class LoginActivity : AppCompatActivity() {

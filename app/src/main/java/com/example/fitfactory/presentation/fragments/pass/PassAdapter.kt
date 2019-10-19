@@ -4,6 +4,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.afollestad.materialdialogs.MaterialDialog
 import com.afollestad.materialdialogs.customview.customView
@@ -72,6 +73,10 @@ class PassAdapter : RecyclerView.Adapter<PassAdapter.ViewHolder>() {
                         dismiss()
                     }
                 }
+            }
+
+            reBuyPass.setOnClickListener {
+                findNavController().navigate(R.id.paymentFragment)
             }
         }
     }
