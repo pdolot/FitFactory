@@ -23,6 +23,9 @@ class ExerciseFragment : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        flexibleLayout?.isViewEnable = false
+        topBar?.setTitle("ćwiczenia")
+        setPaddingTop(view)
 //        body_parts.getPathModelByName("left_calf").fillColor = ContextCompat.getColor(context!!, R.color.negativeMedium)
     }
 }
