@@ -11,11 +11,15 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.example.fitfactory.R
 import com.example.fitfactory.data.models.PassType
 import com.example.fitfactory.di.Injector
+import com.example.fitfactory.presentation.base.BaseAdapter
 import kotlinx.android.synthetic.main.item_pass_to_buy.view.*
 import javax.inject.Inject
 import kotlin.math.roundToInt
 
-class PassToBuyAdapter(private val passes: List<PassType>) : RecyclerView.Adapter<PassToBuyAdapter.ViewHolder>() {
+
+
+
+class PassToBuyAdapter(private val passes: List<PassType>) : BaseAdapter<PassToBuyAdapter.ViewHolder>() {
 
     @Inject
     lateinit var activity: AppCompatActivity
@@ -34,7 +38,7 @@ class PassToBuyAdapter(private val passes: List<PassType>) : RecyclerView.Adapte
 
     override fun getItemCount(): Int = passes.size
 
-    fun getTitle(position: Int): String? = passes[position].passName
+    override fun getTitle(position: Int): String? = passes[position].passName
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item =  passes[position]
@@ -53,7 +57,7 @@ class PassToBuyAdapter(private val passes: List<PassType>) : RecyclerView.Adapte
         setCellWidth(holder, position)
     }
 
-    fun setCurrentItem(position: Int) {
+    override fun setCurrentItem(position: Int) {
         this.currentItem = position
         notifyDataSetChanged()
     }
