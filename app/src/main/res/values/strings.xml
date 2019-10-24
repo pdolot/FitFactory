@@ -1,5 +1,5 @@
 <resources>
-    <string name="GOOGLE_MAPS_API_KEY">AIzaSyAGoPxpW1TlX7AP23uGuE68SnIyTV2K7F8</string>
+    <string name="GOOGLE_MAPS_API_KEY">AIzaSyCOvGz7UyGrTHxXwyo4HYT-kb3EFI7krLA</string>
     <string name="facebook_app_id">857308371322604</string>
     <string name="fb_login_protocol_scheme">fb857308371322604</string>
     <string name="app_name">FitFactory</string>

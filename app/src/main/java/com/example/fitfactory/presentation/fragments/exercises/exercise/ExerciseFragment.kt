@@ -4,12 +4,16 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.fitfactory.R
 import com.example.fitfactory.presentation.base.BaseFragment
+import kotlinx.android.synthetic.main.fragment_exercise.*
 
 class ExerciseFragment : BaseFragment() {
 
     private val viewModel by lazy { ExerciseViewModel()}
+    private val adapter by lazy { ExercisesAdapter()}
 
     override fun backButtonEnabled(): Boolean = true
 
@@ -26,6 +30,14 @@ class ExerciseFragment : BaseFragment() {
         flexibleLayout?.isViewEnable = false
         topBar?.setTitle("ćwiczenia")
         setPaddingTop(view)
-//        body_parts.getPathModelByName("left_calf").fillColor = ContextCompat.getColor(context!!, R.color.negativeMedium)
+
+        adapter.setData(viewModel.getExercises())
+        exercisesRv.apply {
+            layoutManager = LinearLayoutManager(context, RecyclerView.HORIZONTAL, false)
+            adapter = this@ExerciseFragment.adapter
+        }
+        tab_layout.setupWithRecyclerView(exercisesRv)
+
+
     }
 }

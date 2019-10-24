@@ -1,11 +1,112 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         xmlns:tools="http://schemas.android.com/tools"
-        android:background="@color/black85"
-        android:orientation="vertical">
+        tools:background="@color/black90"
+        android:orientation="vertical"
+        android:scrollbars="none"
+        android:overScrollMode="never"
+        android:id="@+id/nestedScrollView">
 
+    <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <TextView
+                style="@style/FontH5_MEDIUM"
+                android:id="@+id/startPositionLabel"
+                android:text="Pozycja wyjściowa"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/primaryLight"
+                android:layout_marginTop="@dimen/medium_margin"
+                android:layout_marginStart="@dimen/medium_margin"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"/>
+
+        <TextView
+                style="@style/FontH5_LIGHT"
+                android:id="@+id/startPosition"
+                android:text="1) Instruction\n2) Instruction\n3) Instruction\n4) Instruction\n5) Instruction\n6) Instruction"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/small_margin"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintTop_toBottomOf="@id/startPositionLabel"
+                app:layout_constraintStart_toStartOf="@id/startPositionLabel"
+                app:layout_constraintEnd_toEndOf="parent"/>
+
+        <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/imagesRv"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/medium_margin"
+                android:overScrollMode="never"
+                android:isScrollContainer="false"
+                android:nestedScrollingEnabled="false"
+                tools:listitem="@layout/item_exercise_image"
+                tools:itemCount="3"
+                app:layout_constraintTop_toBottomOf="@id/startPosition"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"/>
+
+        <TextView
+                style="@style/FontH5_MEDIUM"
+                android:id="@+id/movementLabel"
+                android:text="Ruch"
+                android:textColor="@color/primaryLight"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/medium_margin"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintTop_toBottomOf="@id/imagesRv"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"/>
+
+        <TextView
+                style="@style/FontH5_LIGHT"
+                android:id="@+id/movement"
+                android:text="1) Instruction\n2) Instruction\n3) Instruction\n4) Instruction\n5) Instruction\n6) Instruction"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/small_margin"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintTop_toBottomOf="@id/movementLabel"
+                app:layout_constraintStart_toStartOf="@id/movementLabel"
+                app:layout_constraintEnd_toEndOf="parent"/>
+
+        <TextView
+                style="@style/FontH5_MEDIUM"
+                android:id="@+id/tipsLabel"
+                android:text="Wskazówki"
+                android:textColor="@color/primaryLight"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/medium_margin"
+                android:layout_marginStart="@dimen/medium_margin"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintTop_toBottomOf="@id/movement"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"/>
+
+        <TextView
+                style="@style/FontH5_LIGHT"
+                android:id="@+id/tips"
+                android:text="1) Instruction\n2) Instruction\n3) Instruction\n4) Instruction\n5) Instruction\n6) Instruction"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/small_margin"
+                android:layout_marginBottom="@dimen/medium_margin"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintTop_toBottomOf="@id/tipsLabel"
+                app:layout_constraintStart_toStartOf="@id/tipsLabel"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.core.widget.NestedScrollView>
