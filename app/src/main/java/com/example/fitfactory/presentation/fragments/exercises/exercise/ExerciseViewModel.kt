@@ -10,8 +10,8 @@ class ExerciseViewModel : ViewModel() {
             Exercise(
                 name = "Face pull",
                 images = listOf(
-                    "https://cdn.muscleandstrength.com/sites/default/files/cable-face-pull.jpg",
-                    "https://cdn.muscleandstrength.com/sites/default/files/field/feature-wide-image/article/ultimate-guide-to-face-pulls-wide.jpg")
+                    "https://www.fabrykasily.pl/upload/gallery/2018/07/id_9695_1531134585_1260x841.jpg",
+                    "https://www.fabrykasily.pl/upload/gallery/2018/07/id_9695_1531134585_1260x841.jpg")
             ),
             Exercise(
                 name = "Wiosłowanie hantlami",
@@ -22,8 +22,8 @@ class ExerciseViewModel : ViewModel() {
             Exercise(
                 name = "Face pull",
                 images = listOf(
-                    "https://cdn.muscleandstrength.com/sites/default/files/cable-face-pull.jpg",
-                    "https://cdn.muscleandstrength.com/sites/default/files/field/feature-wide-image/article/ultimate-guide-to-face-pulls-wide.jpg")
+                    "https://www.fabrykasily.pl/upload/gallery/2018/07/id_9695_1531134585_1260x841.jpg",
+                    "https://www.fabrykasily.pl/upload/gallery/2018/07/id_9695_1531134585_1260x841.jpg")
             )
         )
     }

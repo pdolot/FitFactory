@@ -1,39 +1,58 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        xmlns:tools="http://schemas.android.com/tools">
+        android:layout_height="wrap_content">
 
     <View
             android:id="@+id/tab_titleBackground"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="0dp"
             android:background="#000000"
+            app:layout_constraintBottom_toTopOf="@id/tab_indicator"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintBottom_toTopOf="@id/tab_indicator"
-            app:layout_constraintTop_toTopOf="parent"/>
+            app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
             android:id="@+id/tab_title"
+            style="@style/FontH2_BOLD"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            style="@style/FontH2_BOLD"
-            tools:text="Title"
-            app:layout_constraintEnd_toEndOf="@id/tab_titleBackground"
-            app:layout_constraintStart_toStartOf="@id/tab_titleBackground"
             app:layout_constraintBottom_toTopOf="@id/tab_titleBackground"
+            app:layout_constraintEnd_toStartOf="@id/rightIcon"
+            app:layout_constraintStart_toEndOf="@id/leftIcon"
             app:layout_constraintTop_toTopOf="@id/tab_titleBackground"
-            />
+            tools:text="Title" />
+
+    <ImageView
+            android:visibility="invisible"
+            android:id="@+id/rightIcon"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="@id/tab_titleBackground"
+            app:layout_constraintDimensionRatio="1:1"
+            app:layout_constraintTop_toTopOf="@id/tab_titleBackground"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+    <ImageView
+            android:visibility="invisible"
+            android:id="@+id/leftIcon"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="@id/tab_titleBackground"
+            app:layout_constraintDimensionRatio="1:1"
+            app:layout_constraintTop_toTopOf="@id/tab_titleBackground"
+            app:layout_constraintStart_toStartOf="parent" />
 
 
     <com.example.fitfactory.presentation.customViews.tabLayout.TabIndicator
             android:id="@+id/tab_indicator"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingBottom="@dimen/small_margin"
             android:paddingTop="@dimen/small_margin"
+            android:paddingBottom="@dimen/small_margin"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -43,8 +62,8 @@
             android:id="@+id/indicator"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingBottom="@dimen/small_margin"
             android:paddingTop="@dimen/small_margin"
+            android:paddingBottom="@dimen/small_margin"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

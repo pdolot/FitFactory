@@ -3,6 +3,7 @@ package com.example.fitfactory.presentation.fragments.exercises.exercise
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.widget.NestedScrollView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.fitfactory.R

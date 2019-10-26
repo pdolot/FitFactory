@@ -7,6 +7,7 @@ import com.example.fitfactory.di.modules.UserModule
 import com.example.fitfactory.presentation.activities.LoginActivity
 import com.example.fitfactory.presentation.activities.mainActivity.MainActivity
 import com.example.fitfactory.presentation.activities.mainActivity.MainViewModel
+import com.example.fitfactory.presentation.customViews.flexibleLayout.FlexibleView
 import com.example.fitfactory.presentation.fragments.buyPass.PassToBuyAdapter
 import com.example.fitfactory.presentation.fragments.map.MapFragment
 import com.example.fitfactory.presentation.fragments.map.MapViewModel
@@ -58,6 +59,9 @@ interface AppComponent {
     fun inject(into: NavigationRecyclerViewAdapter)
     fun inject(into: PassToBuyAdapter)
     fun inject(into: PassAdapter)
+
+    // Views
+    fun inject(into: FlexibleView)
 
 
 }

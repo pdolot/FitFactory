@@ -4,8 +4,10 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import androidx.transition.TransitionManager
 import com.example.fitfactory.R
 import com.example.fitfactory.presentation.base.BaseFragment
 import kotlinx.android.synthetic.main.fragment_exercise.*
@@ -30,7 +32,6 @@ class ExerciseFragment : BaseFragment() {
         flexibleLayout?.isViewEnable = false
         topBar?.setTitle("ćwiczenia")
         setPaddingTop(view)
-
         adapter.setData(viewModel.getExercises())
         exercisesRv.apply {
             layoutManager = LinearLayoutManager(context, RecyclerView.HORIZONTAL, false)
@@ -38,6 +39,10 @@ class ExerciseFragment : BaseFragment() {
         }
         tab_layout.setupWithRecyclerView(exercisesRv)
 
-
+        tab_layout.rightIconClickListener = {
+            TransitionManager.beginDelayedTransition(bodyParts_content)
+            bodyParts_content.visibility = if (bodyParts_content.visibility != View.GONE) View.GONE else View.VISIBLE
+            tab_layout.iconColor = ContextCompat.getColor(context!!, if (bodyParts_content.visibility == View.VISIBLE) R.color.primaryLight else R.color.black65)
+        }
     }
 }

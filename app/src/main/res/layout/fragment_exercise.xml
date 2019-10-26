@@ -6,16 +6,26 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:background="@color/black90">
 
-    <com.sdsmdg.harjot.vectormaster.VectorMasterView
-            android:id="@+id/body_parts"
+    <androidx.constraintlayout.widget.ConstraintLayout
+            android:visibility="gone"
+            android:id="@+id/bodyParts_content"
             android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:background="@color/black85"
-            app:layout_constraintBottom_toBottomOf="@id/guide"
+            android:layout_height="260dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:vector_src="@drawable/body_parts" />
+            app:layout_constraintTop_toTopOf="parent">
+        <com.sdsmdg.harjot.vectormaster.VectorMasterView
+                android:id="@+id/body_parts"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:background="@color/black85"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:vector_src="@drawable/body_parts" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <com.example.fitfactory.presentation.customViews.tabLayout.MyTabLayout
             android:id="@+id/tab_layout"
@@ -25,10 +35,13 @@
             app:indicatorActiveColor="@color/primaryLight"
             app:indicatorColor="@color/black65"
             app:indicatorRadius="6dp"
-            app:itemCount="1"
+            app:iconRight="@drawable/body_icon"
+            app:iconPadding="4dp"
+            app:iconColor="@color/black65"
+            app:itemCount="5"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/guide" />
+            app:layout_constraintTop_toBottomOf="@id/bodyParts_content" />
 
 
     <ImageView

@@ -1,17 +1,18 @@
 package com.example.fitfactory.presentation.customViews.tabLayout
 
 import android.content.Context
+import android.graphics.drawable.Drawable
 import android.util.AttributeSet
 import android.view.View
 import android.view.ViewTreeObserver
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
+import androidx.core.view.setPadding
 import androidx.recyclerview.widget.PagerSnapHelper
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager.widget.ViewPager
 import com.example.fitfactory.R
 import com.example.fitfactory.presentation.base.BaseAdapter
-import com.example.fitfactory.presentation.fragments.buyPass.PassToBuyAdapter
 import com.example.fitfactory.utils.Bound
 import com.example.fitfactory.utils.scaleValue
 import kotlinx.android.synthetic.main.tab_layout.view.*
@@ -22,16 +23,31 @@ class MyTabLayout @JvmOverloads constructor(
 
     private var viewPager: ViewPager? = null
     private var recyclerView: RecyclerView? = null
+    private var leftIconDrawable: Drawable? = null
+    private var rightIconDrawable: Drawable? = null
+    private var iconPadding: Int = 0
+    var iconColor: Int? = null
+        set(value) {
+            field = value
+            value?.let {
+                leftIcon.drawable?.setTint(it)
+                rightIcon.drawable?.setTint(it)
+            }
+
+        }
     private var snapHelper: PagerSnapHelper? = null
     private var bounds = Bound(0, 0, 0, 0)
     private var page = 0
         set(value) {
-            if (field != value){
+            if (field != value) {
                 field = value
                 val onPage = tab_indicator.itemCount - (tab_indicator.maxItemCountInRow * field)
-                tab_indicator.itemInRow = if ( onPage >= tab_indicator.maxItemCountInRow) tab_indicator.maxItemCountInRow else onPage
+                tab_indicator.itemInRow =
+                    if (onPage >= tab_indicator.maxItemCountInRow) tab_indicator.maxItemCountInRow else onPage
             }
         }
+    var rightIconClickListener: () -> Unit = {}
+    var leftIconClickListener: () -> Unit = {}
 
     init {
         View.inflate(context, R.layout.tab_layout, this)
@@ -42,6 +58,8 @@ class MyTabLayout @JvmOverloads constructor(
                 recyclerView?.smoothScrollToPosition(page * tab_indicator.maxItemCountInRow + position)
             }
         })
+        rightIcon.setOnClickListener { rightIconClickListener() }
+        leftIcon.setOnClickListener { leftIconClickListener() }
     }
 
     fun setupWithViewPager(viewPager: ViewPager) {
@@ -75,7 +93,7 @@ class MyTabLayout @JvmOverloads constructor(
             }
 
             override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
-                if (newState == RecyclerView.SCROLL_STATE_IDLE){
+                if (newState == RecyclerView.SCROLL_STATE_IDLE) {
                     (recyclerView.adapter as BaseAdapter).apply {
                         tab_title.text = getTitle(position)
                         setCurrentItem(position)
@@ -178,17 +196,61 @@ class MyTabLayout @JvmOverloads constructor(
                     R.styleable.style_text -> {
                         tab_title.text = typedArray.getString(attr)
                     }
+                    R.styleable.style_textSize -> {
+                        tab_title.textSize = typedArray.getDimensionPixelSize(attr, 12).toFloat()
+                    }
+                    R.styleable.style_iconLeft -> {
+                        leftIconDrawable = typedArray.getDrawable(attr)
+                    }
+                    R.styleable.style_iconRight -> {
+                        rightIconDrawable = typedArray.getDrawable(attr)
+                    }
+                    R.styleable.style_iconColor -> {
+                        iconColor = typedArray.getColor(
+                            attr,
+                            ContextCompat.getColor(context, R.color.colorAccent)
+                        )
+                    }
+                    R.styleable.style_iconPadding -> {
+                        iconPadding = typedArray.getDimensionPixelSize(attr, 0)
+                    }
+
                 }
             }
         } finally {
             typedArray.recycle()
         }
 
+        iconColor?.let {
+            leftIconDrawable?.setTint(it)
+            rightIconDrawable?.setTint(it)
+        }
+
+
+        leftIconDrawable?.let { id ->
+            leftIcon.also {
+                it.setImageDrawable(id)
+                it.visibility = View.VISIBLE
+            }
+        }
+        rightIconDrawable?.let { id ->
+            rightIcon.also {
+                it.setImageDrawable(id)
+                it.visibility = View.VISIBLE
+            }
+        }
+
+
+
+        if (iconPadding != 0){
+            rightIcon.setPadding(iconPadding)
+            leftIcon.setPadding(iconPadding)
+        }
+
         tab_indicator.bgColor?.let { tab_titleBackground.setBackgroundColor(it) }
-        tab_title.setPadding(
+        tab_title.setPadding(0,
             (indicator.indicatorRadius * 2.5).toInt(),
-            (indicator.indicatorRadius * 2.5).toInt(),
-            (indicator.indicatorRadius * 2.5).toInt(),
+            0,
             indicator.indicatorRadius * 2
         )
     }
