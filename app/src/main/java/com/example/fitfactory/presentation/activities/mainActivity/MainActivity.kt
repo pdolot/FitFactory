@@ -19,8 +19,6 @@ import kotlinx.android.synthetic.main.activity_main.*
 import javax.inject.Inject
 
 class MainActivity : AppCompatActivity(), MainInterface {
-
-
     @Inject
     lateinit var user: User
 

@@ -1,31 +1,20 @@
 package com.example.fitfactory.presentation.customViews.flexibleLayout
 
-import android.Manifest
-import android.app.Activity
 import android.content.Context
 import android.graphics.Rect
-import android.provider.Settings
 import android.util.AttributeSet
 import android.view.MotionEvent
 import android.view.View
 import android.view.ViewTreeObserver
-import android.view.WindowManager
 import android.view.animation.LinearInterpolator
-import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintLayout
 import com.bumptech.glide.Glide
 import com.example.fitfactory.R
-import com.example.fitfactory.constants.Constants
-import com.example.fitfactory.di.Injector
 import kotlinx.android.synthetic.main.flexible_layout.view.*
-import javax.inject.Inject
 
 class FlexibleView @JvmOverloads constructor(
     context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
 ) : ConstraintLayout(context, attrs, defStyleAttr) {
-
-    @Inject
-    lateinit var activity: AppCompatActivity
 
     private var oldScreenBrightness = 0
     private var minTranslation: Float = 0f
@@ -39,14 +28,22 @@ class FlexibleView @JvmOverloads constructor(
         }
 
     init {
-        Injector.component.inject(this)
         View.inflate(context, R.layout.flexible_layout, this)
-        viewTreeObserver.addOnGlobalLayoutListener(object : ViewTreeObserver.OnGlobalLayoutListener{
+        viewTreeObserver.addOnGlobalLayoutListener(object :
+            ViewTreeObserver.OnGlobalLayoutListener {
             override fun onGlobalLayout() {
                 viewTreeObserver.removeOnGlobalLayoutListener(this)
-                flexibleLayout_content.setPadding(0, context.resources.getDimensionPixelSize(R.dimen.topBarHeight), 0, 0)
+                flexibleLayout_content.setPadding(
+                    0,
+                    context.resources.getDimensionPixelSize(R.dimen.topBarHeight),
+                    0,
+                    0
+                )
                 flexibleLayout_thumb.getLocalVisibleRect(thumbRect)
-                minTranslation = (-flexibleLayout_content.measuredHeight + context.resources.getDimensionPixelSize(R.dimen.topBarHeight)).toFloat()
+                minTranslation =
+                    (-flexibleLayout_content.measuredHeight + context.resources.getDimensionPixelSize(
+                        R.dimen.topBarHeight
+                    )).toFloat()
                 translationY = minTranslation
             }
         })
