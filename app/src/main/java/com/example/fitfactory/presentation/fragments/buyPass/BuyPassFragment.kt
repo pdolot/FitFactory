@@ -54,4 +54,6 @@ class BuyPassFragment : BaseFragment() {
         }
         buyPassFragment_tabLayout.setupWithRecyclerView(buyPassFragment_recyclerView)
     }
+
+    override fun backButtonEnabled(): Boolean = false
 }

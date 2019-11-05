@@ -18,7 +18,7 @@ class TabIndicator @JvmOverloads constructor(
 ) : View(context, attrs, defStyleAttr) {
 
     var indicatorRadius: Int = 18
-    var itemCount = 3
+    var itemCount = 1
         set(value) {
             field = value
             invalidate()
@@ -28,7 +28,7 @@ class TabIndicator @JvmOverloads constructor(
     private var indicatorsBgPositions: ArrayList<Bound> = ArrayList()
     private val indicatorBackground = ContextCompat.getDrawable(context, R.drawable.indicator_bg)
     private lateinit var tabIndicatorListener: TabIndicatorListener
-    var maxItemCountInRow = 0
+    var maxItemCountInRow = 1
     var itemInRow: Int? = null
         set(value) {
             field = value
@@ -103,33 +103,35 @@ class TabIndicator @JvmOverloads constructor(
 
     private fun measurePoints(){
         itemInRow?.let {
-            val spaceSize = measuredWidth / it
-            val startPosition = spaceSize / 2
-            indicatorsPositions.clear()
-            indicatorsBgPositions.clear()
-            for (i in 0 until it) {
-                val centerPosition = startPosition + (spaceSize * i)
-                indicatorsPositions.add(
-                    Bound(
-                        centerPosition - indicatorRadius,
-                        (measuredHeight / 2) - indicatorRadius,
-                        centerPosition + indicatorRadius,
-                        (measuredHeight / 2) + indicatorRadius
+            if (it != 0){
+                val spaceSize = measuredWidth / it
+                val startPosition = spaceSize / 2
+                indicatorsPositions.clear()
+                indicatorsBgPositions.clear()
+                for (i in 0 until it) {
+                    val centerPosition = startPosition + (spaceSize * i)
+                    indicatorsPositions.add(
+                        Bound(
+                            centerPosition - indicatorRadius,
+                            (measuredHeight / 2) - indicatorRadius,
+                            centerPosition + indicatorRadius,
+                            (measuredHeight / 2) + indicatorRadius
+                        )
                     )
-                )
-                indicatorsBgPositions.add(
-                    Bound(
-                        centerPosition - (measuredHeight / 2),
-                        0,
-                        centerPosition + (measuredHeight / 2),
-                        measuredHeight
+                    indicatorsBgPositions.add(
+                        Bound(
+                            centerPosition - (measuredHeight / 2),
+                            0,
+                            centerPosition + (measuredHeight / 2),
+                            measuredHeight
+                        )
                     )
-                )
-            }
+                }
 
-            spaceWidth = indicatorsBgPositions[0].left
-            if (spaceWidth % 2 != 0) {
-                spaceWidth +=  1
+                spaceWidth = indicatorsBgPositions[0].left
+                if (spaceWidth % 2 != 0) {
+                    spaceWidth +=  1
+                }
             }
         }
 

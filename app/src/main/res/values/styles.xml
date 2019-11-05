@@ -66,7 +66,7 @@
         <item name="android:textColorHighlight">#00FFFFFF</item>
         <item name="android:textColor">@color/silverLight</item>
         <item name="android:fontFamily">@font/fira_sans_condensed_medium</item>
-        <item name="android:textSize">15sp</item>
+<!--        <item name="android:textSize">15sp</item>-->
     </style>
 
     <style name="FontH6_LIGHT">
@@ -156,6 +156,13 @@
         <item name="android:textSize">17sp</item>
         <item name="android:textColor">@color/primaryLight</item>
         <item name="android:fontFamily">@font/fira_sans_condensed_medium</item>
+        <item name="color">@color/primaryLight</item>
+        <item name="hintColor">@color/black70</item>
+        <item name="iconColor">@color/primaryDark</item>
+        <item name="outlineColor">@color/black70</item>
+        <item name="backgroundColor">@color/black90</item>
+        <item name="android:maxLines">1</item>
+        <item name="android:ellipsize">end</item>
     </style>
 
 </resources>

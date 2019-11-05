@@ -7,6 +7,7 @@
         <attr name="disabledIconColor" format="color" />
         <attr name="icon" format="reference" />
         <attr name="iconLeft" format="reference" />
+        <attr name="iconRight" format="reference" />
         <attr name="outlineColor" format="color" />
         <attr name="hintColor" format="color"/>
         <attr name="drawBar" format="boolean"/>
@@ -17,10 +18,12 @@
         <attr name="indicatorRadius" format="dimension"/>
         <attr name="itemCount" format="integer"/>
         <attr name="text" format="string"/>
+        <attr name="textSize" format="dimension"/>
         <attr name="indicatorActiveColor" format="color"/>
         <attr name="indicatorColor" format="color"/>
         <attr name="iconDown" format="reference"/>
         <attr name="iconUp" format="reference"/>
+        <attr name="iconPadding" format="dimension"/>
 
         <attr name="pieceCount" format="integer"/>
         <attr name="spacePercent" format="integer"/>

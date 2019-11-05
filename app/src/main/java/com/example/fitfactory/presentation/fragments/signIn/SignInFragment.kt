@@ -19,7 +19,7 @@ import com.example.fitfactory.R
 import com.example.fitfactory.data.models.User
 import com.example.fitfactory.di.Injector
 import com.example.fitfactory.presentation.activities.mainActivity.MainActivity
-import com.example.fitfactory.utils.Constants
+import com.example.fitfactory.constants.Constants
 import com.example.fitfactory.utils.SpanTextUtil
 import com.facebook.CallbackManager
 import com.facebook.FacebookCallback
@@ -72,39 +72,39 @@ class SignInFragment : Fragment() {
     }
 
     private fun setListeners() {
-        signInFragment_facebookSignIn.setOnClickListener { v ->
-            animateView(signInFragment_logo.drawable)
+        facebookSignIn.setOnClickListener { v ->
+            animateView(logo.drawable)
             animateView((v as ImageView).background)
-            signInFragment_googleSignIn.visibility = View.GONE
-            signInFragment_signIn.visibility = View.GONE
+            googleSignIn.visibility = View.GONE
+            signIn.visibility = View.GONE
             registerFacebookCallback()
             LoginManager.getInstance().logInWithReadPermissions(this, mutableListOf("public_profile"))
         }
 
-        signInFragment_googleSignIn.setOnClickListener { v ->
-            animateView(signInFragment_logo.drawable)
+        googleSignIn.setOnClickListener { v ->
+            animateView(logo.drawable)
             animateView((v as ImageView).background)
-            signInFragment_facebookSignIn.visibility = View.GONE
-            signInFragment_signIn.visibility = View.GONE
+            facebookSignIn.visibility = View.GONE
+            signIn.visibility = View.GONE
             googleSignIn()
 //            moveToMapFragment()
         }
-        signInFragment_signIn.setOnClickListener { v ->
-            animateView(signInFragment_logo.drawable)
+        signIn.setOnClickListener { v ->
+            animateView(logo.drawable)
             animateView((v as ImageView).background)
-            signInFragment_googleSignIn.visibility = View.GONE
-            signInFragment_facebookSignIn.visibility = View.GONE
+            googleSignIn.visibility = View.GONE
+            facebookSignIn.visibility = View.GONE
             moveToMapFragment()
         }
 
         context?.let {
             SpanTextUtil(it).
-                setClickableSpanOnTextView(signInFragment_signUp, getString(R.string.joinUs), object : ClickableSpan(){
+                setClickableSpanOnTextView(signUp, getString(R.string.joinUs), object : ClickableSpan(){
                     override fun onClick(widget: View) {
                         findNavController().navigate(R.id.signUpFragment)
                     }
                 }, R.color.silverLight)
-            SpanTextUtil(it).setClickableSpanOnTextView(signInFragment_forgotPassword, getString(R.string.remember_password), object : ClickableSpan(){
+            SpanTextUtil(it).setClickableSpanOnTextView(forgotPassword, getString(R.string.remember_password), object : ClickableSpan(){
                 override fun onClick(widget: View) {
                     findNavController().navigate(R.id.rememberPasswordFragment)
                 }
@@ -147,9 +147,9 @@ class SignInFragment : Fragment() {
         }
         animateList.clear()
 
-        signInFragment_googleSignIn.visibility = View.VISIBLE
-        signInFragment_facebookSignIn.visibility = View.VISIBLE
-        signInFragment_signIn.visibility = View.VISIBLE
+        googleSignIn.visibility = View.VISIBLE
+        facebookSignIn.visibility = View.VISIBLE
+        signIn.visibility = View.VISIBLE
     }
 
     private fun registerFacebookCallback() {

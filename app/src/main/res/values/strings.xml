@@ -1,5 +1,5 @@
 <resources>
-    <string name="GOOGLE_MAPS_API_KEY">AIzaSyAGoPxpW1TlX7AP23uGuE68SnIyTV2K7F8</string>
+    <string name="GOOGLE_MAPS_API_KEY">AIzaSyCOvGz7UyGrTHxXwyo4HYT-kb3EFI7krLA</string>
     <string name="facebook_app_id">857308371322604</string>
     <string name="fb_login_protocol_scheme">fb857308371322604</string>
     <string name="app_name">FitFactory</string>
@@ -37,6 +37,8 @@
     <string name="openHours">%1$s - %2$s (%3$s)</string>
     <string name="card_number">Numer karty</string>
     <string name="card_expiry">Data ważności</string>
+    <string name="exercises_secondInfo">Pamiętaj, że nieprawidłowe wykonywacnie ćwiczenia może prowadzić do kontuzji. Zwróć uwagę na prawidłową postawę ciała i osiągaj swoje cele!</string>
+    <string name="exercises_firstInfo">Zeskanuj kod QR znajdujący się na urządzeniu aby uzyskać przykładowe ćwiczenia, które można wykonać na urządzeniu</string>
     <plurals name="months_plural">
         <item quantity="one">%d miesiąc</item>
         <item quantity="few">%d miesiące</item>

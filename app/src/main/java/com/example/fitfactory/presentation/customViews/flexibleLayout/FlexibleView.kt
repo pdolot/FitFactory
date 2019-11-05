@@ -16,6 +16,7 @@ class FlexibleView @JvmOverloads constructor(
     context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
 ) : ConstraintLayout(context, attrs, defStyleAttr) {
 
+    private var oldScreenBrightness = 0
     private var minTranslation: Float = 0f
     private var thumbRect = Rect()
     var isViewEnable: Boolean = false
@@ -28,12 +29,21 @@ class FlexibleView @JvmOverloads constructor(
 
     init {
         View.inflate(context, R.layout.flexible_layout, this)
-        viewTreeObserver.addOnGlobalLayoutListener(object : ViewTreeObserver.OnGlobalLayoutListener{
+        viewTreeObserver.addOnGlobalLayoutListener(object :
+            ViewTreeObserver.OnGlobalLayoutListener {
             override fun onGlobalLayout() {
                 viewTreeObserver.removeOnGlobalLayoutListener(this)
-                flexibleLayout_content.setPadding(0, context.resources.getDimensionPixelSize(R.dimen.topBarHeight), 0, 0)
+                flexibleLayout_content.setPadding(
+                    0,
+                    context.resources.getDimensionPixelSize(R.dimen.topBarHeight),
+                    0,
+                    0
+                )
                 flexibleLayout_thumb.getLocalVisibleRect(thumbRect)
-                minTranslation = (-flexibleLayout_content.measuredHeight + context.resources.getDimensionPixelSize(R.dimen.topBarHeight)).toFloat()
+                minTranslation =
+                    (-flexibleLayout_content.measuredHeight + context.resources.getDimensionPixelSize(
+                        R.dimen.topBarHeight
+                    )).toFloat()
                 translationY = minTranslation
             }
         })
@@ -101,5 +111,4 @@ class FlexibleView @JvmOverloads constructor(
             start()
         }
     }
-
 }

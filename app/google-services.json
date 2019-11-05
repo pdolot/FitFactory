@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "980600382193",
+    "firebase_url": "https://fitfactory-1559736109369.firebaseio.com",
+    "project_id": "fitfactory-1559736109369",
+    "storage_bucket": "fitfactory-1559736109369.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:980600382193:android:9e70cf2ebf2d4ed4e6ff50",
+        "android_client_info": {
+          "package_name": "com.example.fitfactory"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "980600382193-01l77tu8os9mju26q8cvsrm037eaavee.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.fitfactory",
+            "certificate_hash": "e035a32f61ca3b1a1d7331915b597473eb85a74a"
+          }
+        },
+        {
+          "client_id": "980600382193-uvil1q3ba0qkdg8f7lqgc9cr5l1d5jd1.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAE1sLHFuU7loKeLh0VzCfCYgWyC_6tlMU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "980600382193-uvil1q3ba0qkdg8f7lqgc9cr5l1d5jd1.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

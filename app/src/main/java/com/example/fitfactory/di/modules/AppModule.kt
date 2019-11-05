@@ -4,6 +4,8 @@ import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.FragmentManager
 import com.example.fitfactory.app.App
+import com.example.fitfactory.functional.localStorage.LocalStorage
+import com.example.fitfactory.functional.localStorage.SharedPrefLocalStorage
 import dagger.Module
 import dagger.Provides
 import javax.inject.Singleton
@@ -27,6 +29,12 @@ class AppModule(private val application: App) {
     @Singleton
     fun provideActivity(): AppCompatActivity {
         return application.activity
+    }
+
+    @Provides
+    @Singleton
+    fun provideLocalStorage(): LocalStorage{
+        return SharedPrefLocalStorage(application.applicationContext)
     }
 
 }

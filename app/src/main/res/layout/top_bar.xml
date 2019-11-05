@@ -10,14 +10,14 @@
 
     <ImageView
             android:id="@+id/topBar_optionsButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:adjustViewBounds="true"
+            android:padding="@dimen/medium_margin"
+            app:layout_constraintDimensionRatio="1:1"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@id/topBar_title"
-            android:layout_marginStart="@dimen/medium_margin"
-            android:layout_marginEnd="@dimen/medium_margin"
             android:src="@drawable/ic_options"
             android:tint="@color/primaryLight"/>
 
@@ -28,6 +28,8 @@
             tools:text="FIT FACTORY"
             android:textColor="@color/primaryLight"
             style="@style/FontH2_BOLD"
+            android:layout_marginEnd="@dimen/medium_margin"
+            android:layout_marginStart="@dimen/medium_margin"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toEndOf="@id/topBar_optionsButton"
@@ -35,15 +37,14 @@
 
     <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/topBar_profileImage"
-            android:layout_width="32dp"
-            android:layout_height="32dp"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:padding="12dp"
+            app:layout_constraintDimensionRatio="1:1"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toEndOf="@id/topBar_title"
             app:civ_border_color="@color/primaryLight"
-            app:civ_border_width="1dp"
-            android:layout_marginEnd="@dimen/medium_margin"
-            android:layout_marginStart="@dimen/medium_margin"/>
+            app:civ_border_width="1dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

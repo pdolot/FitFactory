@@ -5,6 +5,18 @@
             android:id="@+id/main_graph"
             app:startDestination="@+id/mapFragment">
 
+    <fragment android:id="@+id/signInFragment"
+            android:name="com.example.fitfactory.presentation.fragments.signIn.SignInFragment"
+            android:label="sign_in_fragment" tools:layout="@layout/fragment_sign_in"/>
+
+    <fragment android:id="@+id/signUpFragment"
+            android:name="com.example.fitfactory.presentation.fragments.signUp.SignUpFragment"
+            android:label="sign_up_fragment" tools:layout="@layout/fragment_sign_up"/>
+
+    <fragment android:id="@+id/rememberPasswordFragment"
+            android:name="com.example.fitfactory.presentation.fragments.rememberPassword.RememberPasswordFragment"
+            android:label="remember_password_fragment" tools:layout="@layout/fragment_remember_password"/>
+
     <fragment android:id="@+id/mapFragment"
               android:name="com.example.fitfactory.presentation.fragments.map.MapFragment"
               android:label="map_fragment" tools:layout="@layout/fragment_map"/>
@@ -20,5 +32,19 @@
             android:id="@+id/paymentFragment"
             android:name="com.example.fitfactory.presentation.fragments.payment.PaymentFragment"
             android:label="PaymentFragment" />
+    <fragment
+            android:id="@+id/exercisesInfo"
+            android:name="com.example.fitfactory.presentation.fragments.exercises.info.ExercisesInfoFragment"
+            android:label="fragment_exercises_info"
+            tools:layout="@layout/fragment_exercises_info" />
+    <fragment
+            android:id="@+id/scanner"
+            android:name="com.example.fitfactory.presentation.fragments.exercises.scannerView.ScannerFragment"
+            android:label="fragment_scanner"
+            tools:layout="@layout/fragment_scanner" />
+    <fragment
+            android:id="@+id/exerciseFragment"
+            android:name="com.example.fitfactory.presentation.fragments.exercises.exercise.ExerciseFragment"
+            android:label="ExerciseFragment" />
 
 </navigation>

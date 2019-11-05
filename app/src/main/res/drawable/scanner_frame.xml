@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:gravity="start|top">
+        <layer-list>
+            <item android:gravity="top">
+                <shape android:shape="rectangle">
+                    <size
+                        android:width="80dp"
+                        android:height="4dp" />
+                    <solid android:color="@color/silverLight" />
+                    <corners android:radius="2dp"/>
+                </shape>
+            </item>
+            <item android:gravity="start">
+                    <shape android:shape="rectangle">
+                        <size
+                            android:width="4dp"
+                            android:height="80dp" />
+                        <solid android:color="@color/silverLight" />
+                        <corners android:radius="2dp"/>
+                    </shape>
+            </item>
+        </layer-list>
+    </item>
+    <item
+        android:left="160dp"
+        android:gravity="end|top">
+        <rotate android:fromDegrees="90" android:toDegrees="0">
+            <layer-list>
+                <item android:gravity="top">
+                    <shape android:shape="rectangle">
+                        <size
+                            android:width="80dp"
+                            android:height="4dp" />
+                        <corners android:radius="2dp"/>
+                        <solid android:color="@color/silverLight" />
+                    </shape>
+                </item>
+                <item android:gravity="start">
+                    <shape android:shape="rectangle">
+                        <size
+                            android:width="4dp"
+                            android:height="80dp" />
+                        <corners android:radius="2dp"/>
+                        <solid android:color="@color/silverLight" />
+                    </shape>
+                </item>
+            </layer-list>
+        </rotate>
+    </item>
+
+    <item
+        android:top="160dp"
+        android:gravity="start|bottom">
+        <rotate android:fromDegrees="270" android:toDegrees="0">
+            <layer-list>
+                <item android:gravity="top">
+                    <shape android:shape="rectangle">
+                        <size
+                            android:width="80dp"
+                            android:height="4dp" />
+                        <corners android:radius="2dp"/>
+                        <solid android:color="@color/silverLight" />
+                    </shape>
+                </item>
+                <item android:gravity="start">
+                    <shape android:shape="rectangle">
+                        <size
+                            android:width="4dp"
+                            android:height="80dp" />
+                        <corners android:radius="2dp"/>
+                        <solid android:color="@color/silverLight" />
+                    </shape>
+                </item>
+            </layer-list>
+        </rotate>
+    </item>
+    <item
+        android:top="160dp"
+        android:left="160dp"
+        android:gravity="end|bottom">
+        <rotate android:fromDegrees="180" android:toDegrees="0">
+            <layer-list>
+                <item android:gravity="top">
+                    <shape android:shape="rectangle">
+                        <size
+                            android:width="80dp"
+                            android:height="4dp" />
+                        <corners android:radius="2dp"/>
+                        <solid android:color="@color/silverLight" />
+                    </shape>
+                </item>
+                <item android:gravity="start">
+                    <shape android:shape="rectangle">
+                        <size
+                            android:width="4dp"
+                            android:height="80dp" />
+                        <corners android:radius="2dp"/>
+                        <solid android:color="@color/silverLight" />
+                    </shape>
+                </item>
+            </layer-list>
+        </rotate>
+    </item>
+</layer-list>
