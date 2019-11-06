@@ -1,46 +1,36 @@
 package com.example.fitfactory.functional.localStorage
 
 import android.content.Context
-import com.example.fitfactory.data.models.User
-import com.facebook.AccessToken
-import com.google.android.gms.auth.api.signin.GoogleSignIn
 
-class SharedPrefLocalStorage(private val context: Context) : LocalStorage {
-    override fun getAccountType(): AccountType? {
-        AccessToken.getCurrentAccessToken()?.let {
-            if (!it.isExpired) {
-                return AccountType.FACEBOOK
-            }
-        }
+class SharedPrefLocalStorage(context: Context) : LocalStorage {
 
-        GoogleSignIn.getLastSignedInAccount(context)?.let {
-            return AccountType.GOOGLE
-        }
+    private var sharedPref = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
+    private val liveSharedPreferences = LiveSharedPreferences(sharedPref)
 
-        return null
+    override fun isLoggedLive(): LivePreference<Boolean> {
+        return liveSharedPreferences.getBoolean(IS_LOGGED, false)
     }
 
     override fun isLogged(): Boolean {
-        return getAccountType() != null
+        return sharedPref.getBoolean(IS_LOGGED, false)
     }
 
-    override fun saveUser(user: User) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    override fun readToken(): String? {
+        return sharedPref.getString(IS_LOGGED, null)
     }
 
-    override fun getUser(): User? {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    override fun setToken(token: String?) {
+        sharedPref.edit().apply {
+            putBoolean(IS_LOGGED, token != null)
+            putString(TOKEN, token)
+            apply()
+        }
     }
-
-    override fun signOut() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
-
-    private var sharedPref = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
-
 
     companion object {
         const val PREFS_NAME = "fitfactory"
+        const val IS_LOGGED = "isLoggedLive"
+        const val TOKEN = "token"
     }
 
 }

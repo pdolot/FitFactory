@@ -9,3 +9,9 @@ class Constants {
         const val CAMERA_REQUEST_CODE: Int = 101
     }
 }
+
+class RestConstants{
+    companion object{
+        const val BEARER: String = "BEARER"
+    }
+}

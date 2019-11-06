@@ -3,15 +3,8 @@ package com.example.fitfactory.functional.localStorage
 import com.example.fitfactory.data.models.User
 
 interface LocalStorage {
+    fun isLoggedLive(): LivePreference<Boolean>
     fun isLogged(): Boolean
-    fun saveUser(user: User)
-    fun getUser(): User?
-    fun signOut()
-    fun getAccountType(): AccountType?
-}
-
-enum class AccountType{
-    FACEBOOK,
-    GOOGLE,
-    FITFACTORY
+    fun setToken(token: String?)
+    fun readToken(): String?
 }

@@ -10,12 +10,13 @@ import android.widget.ImageView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
 import com.example.fitfactory.R
+import com.example.fitfactory.presentation.base.BaseFragment
 import kotlinx.android.synthetic.main.fragment_sign_up.*
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
-class SignUpFragment : Fragment() {
+class SignUpFragment : BaseFragment() {
 
     private lateinit var viewModel: SignUpViewModel
     private var animationList = ArrayList<AnimatedVectorDrawable>()
@@ -69,5 +70,11 @@ class SignUpFragment : Fragment() {
         resetAnimations()
         super.onDestroyView()
     }
+
+    override fun flexibleViewEnabled() = false
+    override fun paddingTopEnabled() = false
+    override fun topBarTitle() = null
+    override fun topBarEnabled() = false
+    override fun backButtonEnabled(): Boolean = true
 
 }

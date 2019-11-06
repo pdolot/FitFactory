@@ -1,0 +1,87 @@
+<animated-vector xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:aapt="http://schemas.android.com/aapt">
+    <aapt:attr name="android:drawable">
+        <vector
+                android:name="vector"
+                android:width="250dp"
+                android:height="250dp"
+                android:viewportWidth="250"
+                android:viewportHeight="250">
+            <group
+                    android:name="group"
+                    android:pivotX="125"
+                    android:pivotY="125">
+                <path
+                        android:name="path_1"
+                        android:fillAlpha="0"
+                        android:pathData="M 25 67 C 35 50 50 36 67 25 M 95 14 C 115 9 135 9 155 14 M 183 25 C 200 35 214 50 225 67 M 236 95 C 241 115 241 135 236 155 M 225 183 C 215 200 200 214 183 225 M 155 236 C 135 241 115 241 95 236 M 67 225 C 50 215 36 200 25 183 M 14 155 C 9 135 9 115 14 95"
+                        android:strokeWidth="6"
+                        android:strokeColor="#00838f"
+                        android:strokeLineCap="round"
+                        android:strokeLineJoin="round" />
+            </group>
+            <group
+                    android:name="group_2"
+                    android:pivotX="125"
+                    android:pivotY="125">
+                <path
+                        android:name="path_3"
+                        android:fillAlpha="0"
+                        android:pathData="M 75 38 C 106 21 144 21 175 38 M 38 175 C 21 144 21 106 38 75 M 175 212 C 144 229 106 229 75 212 M 212 75 C 229 106 229 144 212 175"
+                        android:strokeWidth="6"
+                        android:strokeColor="#4fb3bf"
+                        android:strokeLineCap="round"
+                        android:strokeLineJoin="round" />
+            </group>
+            <group
+                    android:name="group_1"
+                    android:pivotX="125"
+                    android:pivotY="125">
+                <path
+                        android:name="path_2"
+                        android:fillAlpha="0"
+                        android:pathData="M 43 147 C 39 133 39 117 43 103 M 82 199 C 70 191 59 180 51 168 M 147 207 C 133 211 117 211 103 207 M 199 168 C 191 180 180 191 168 199 M 207 103 C 211 117 211 133 207 147 M 168 51 C 180 59 191 70 199 82 M 103 43 C 117 39 133 39 147 43 M 51 82 C 59 70 70 59 82 51"
+                        android:strokeWidth="6"
+                        android:strokeColor="#00838f"
+                        android:strokeLineCap="round"
+                        android:strokeLineJoin="round" />
+            </group>
+        </vector>
+    </aapt:attr>
+    <target android:name="group">
+        <aapt:attr name="android:animation">
+            <objectAnimator
+                    android:duration="8000"
+                    android:interpolator="@android:anim/linear_interpolator"
+                    android:propertyName="rotation"
+                    android:repeatCount="infinite"
+                    android:valueFrom="0"
+                    android:valueTo="360"
+                    android:valueType="floatType" />
+        </aapt:attr>
+    </target>
+    <target android:name="group_1">
+        <aapt:attr name="android:animation">
+            <objectAnimator
+                    android:duration="8000"
+                    android:interpolator="@android:anim/linear_interpolator"
+                    android:propertyName="rotation"
+                    android:valueFrom="0"
+                    android:valueTo="180"
+                    android:repeatCount="infinite"
+                    android:valueType="floatType" />
+        </aapt:attr>
+    </target>
+    <target android:name="group_2">
+        <aapt:attr name="android:animation">
+            <objectAnimator
+                    android:duration="8000"
+                    android:interpolator="@android:anim/linear_interpolator"
+                    android:propertyName="rotation"
+                    android:valueFrom="0"
+                    android:valueTo="270"
+                    android:repeatCount="infinite"
+                    android:valueType="floatType" />
+        </aapt:attr>
+    </target>
+</animated-vector>

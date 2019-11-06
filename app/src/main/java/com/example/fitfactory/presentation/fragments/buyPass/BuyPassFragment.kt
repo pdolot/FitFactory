@@ -33,9 +33,9 @@ class BuyPassFragment : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        topBar?.setTitle(getString(R.string.buy_pass))
-        flexibleLayout?.isViewEnable = false
-        setPaddingTop(view)
+//        topBar?.setTitle(getString(R.string.buy_pass))
+//        flexibleLayout?.isViewEnable = false
+//        setPaddingTop(view)
         setAdapter()
         setListeners()
     }
@@ -55,5 +55,9 @@ class BuyPassFragment : BaseFragment() {
         buyPassFragment_tabLayout.setupWithRecyclerView(buyPassFragment_recyclerView)
     }
 
+    override fun flexibleViewEnabled() = false
+    override fun paddingTopEnabled() = true
+    override fun topBarTitle() = getString(R.string.buy_pass)
+    override fun topBarEnabled() = true
     override fun backButtonEnabled(): Boolean = false
 }

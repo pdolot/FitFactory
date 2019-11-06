@@ -1,6 +1,7 @@
 package com.example.fitfactory.presentation.base
 
 import android.content.Context
+import android.os.Bundle
 import android.view.View
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
@@ -36,6 +37,18 @@ abstract class BaseFragment : Fragment() {
         flexibleLayout = null
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        if(topBarEnabled()){
+            topBar?.visibility = View.VISIBLE
+            topBar?.setTitle(topBarTitle() ?: "FitFactory")
+        }else{
+            topBar?.visibility = View.GONE
+        }
+        flexibleLayout?.isViewEnable = flexibleViewEnabled()
+        if (paddingTopEnabled()) setPaddingTop(view)
+    }
+
     fun setPaddingTop(view: View) {
         view.setPadding(
             view.paddingLeft,
@@ -56,5 +69,9 @@ abstract class BaseFragment : Fragment() {
 
     }
 
+    abstract fun flexibleViewEnabled(): Boolean
+    abstract fun paddingTopEnabled(): Boolean
+    abstract fun topBarTitle(): String?
+    abstract fun topBarEnabled(): Boolean
     abstract fun backButtonEnabled(): Boolean
 }

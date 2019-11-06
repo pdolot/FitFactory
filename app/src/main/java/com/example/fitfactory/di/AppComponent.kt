@@ -1,5 +1,6 @@
 package com.example.fitfactory.di
 
+import com.example.fitfactory.data.rest.TokenInterceptor
 import com.example.fitfactory.di.modules.AppModule
 import com.example.fitfactory.di.modules.DbModule
 import com.example.fitfactory.di.modules.RestModule
@@ -7,6 +8,7 @@ import com.example.fitfactory.di.modules.UserModule
 import com.example.fitfactory.presentation.activities.LoginActivity
 import com.example.fitfactory.presentation.activities.mainActivity.MainActivity
 import com.example.fitfactory.presentation.activities.mainActivity.MainViewModel
+import com.example.fitfactory.presentation.customViews.TopBar
 import com.example.fitfactory.presentation.customViews.flexibleLayout.FlexibleView
 import com.example.fitfactory.presentation.fragments.buyPass.PassToBuyAdapter
 import com.example.fitfactory.presentation.fragments.map.MapFragment
@@ -63,7 +65,8 @@ interface AppComponent {
     // Views
     fun inject(into: FlexibleView)
 
-
+    fun inject(into: TopBar)
+    fun inject(into: TokenInterceptor)
 
 
 }

@@ -1,3 +1,8 @@
 package com.example.fitfactory.data.rest
 
-interface RetrofitService
+import retrofit2.http.POST
+
+interface RetrofitService{
+//    @POST("/signUp")
+    
+}

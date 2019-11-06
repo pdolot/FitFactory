@@ -1,30 +1,19 @@
 package com.example.fitfactory.presentation.navigationDrawer
 
 import android.content.Context
-import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.GravityCompat
-import androidx.drawerlayout.widget.DrawerLayout
-import androidx.navigation.NavController
 import androidx.recyclerview.widget.RecyclerView
 import com.example.fitfactory.R
 import com.example.fitfactory.data.models.User
 import com.example.fitfactory.di.Injector
-import com.example.fitfactory.presentation.activities.LoginActivity
-import com.example.fitfactory.presentation.customViews.CustomDrawerLayout
-import com.facebook.login.LoginManager
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import kotlinx.android.synthetic.main.item_navigation.view.*
 import javax.inject.Inject
 
-class NavigationRecyclerViewAdapter(
-    private var itemList: List<NavigationItem>?,
-    private val drawerLayout: CustomDrawerLayout?,
-    private val navController: NavController
-) :
+class NavigationRecyclerViewAdapter :
     RecyclerView.Adapter<NavigationRecyclerViewAdapter.NavigationViewHolder>() {
 
     @Inject
@@ -39,8 +28,17 @@ class NavigationRecyclerViewAdapter(
     @Inject
     lateinit var googleClient: GoogleSignInClient
 
+    private var itemList: List<NavigationItem>? = null
+
+    var onItemClick: (destinationId: Int?) -> Unit = {}
+
     init {
         Injector.component.inject(this)
+    }
+
+    fun setData(itemList: List<NavigationItem>) {
+        this.itemList = itemList
+        notifyDataSetChanged()
     }
 
     override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int): NavigationViewHolder {
@@ -71,39 +69,10 @@ class NavigationRecyclerViewAdapter(
             }
         }
 
-        item?.destinationId?.let { destination ->
-            viewHolder.itemView.setOnClickListener {
-                drawerLayout?.addDrawerListener(object : DrawerLayout.SimpleDrawerListener() {
-                    override fun onDrawerClosed(drawerView: View) {
-                        drawerLayout.removeDrawerListener(this)
-                        if (navController.currentDestination?.id != destination) {
-                            navController.navigate(destination)
-                        }
-                        super.onDrawerClosed(drawerView)
-                    }
-                })
-                drawerLayout?.closeDrawer(GravityCompat.START, true)
-            }
+
+        viewHolder.itemView.setOnClickListener {
+            onItemClick(item?.destinationId)
         }
-
-        if (item?.destinationId == null) {
-            viewHolder.itemView.setOnClickListener {
-                LoginManager.getInstance().logOut()
-                googleClient.signOut()
-                moveToSignIn()
-            }
-        }
-
-    }
-
-    private fun moveToSignIn() {
-        val loginActivity = Intent(activity, LoginActivity::class.java)
-        loginActivity.flags = Intent.FLAG_ACTIVITY_NO_ANIMATION
-        loginActivity.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
-        loginActivity.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK
-        loginActivity.flags = Intent.FLAG_ACTIVITY_NEW_TASK
-        activity.startActivity(loginActivity)
-        activity.finish()
     }
 
     inner class NavigationViewHolder internal constructor(view: View) :

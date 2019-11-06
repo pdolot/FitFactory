@@ -11,6 +11,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProviders
+import androidx.navigation.fragment.findNavController
 import com.example.fitfactory.R
 import com.example.fitfactory.di.Injector
 import com.example.fitfactory.presentation.base.BaseFragment
@@ -89,8 +90,8 @@ class MapFragment : BaseFragment(), OnMapReadyCallback {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        topBar?.setTitle("FitFactory")
-        flexibleLayout?.isViewEnable = true
+//        topBar?.setTitle("FitFactory")
+//        flexibleLayout?.isViewEnable = true
         val mapFragment: SupportMapFragment =
             childFragmentManager.findFragmentById(R.id.mapFragment_map) as SupportMapFragment
 
@@ -101,6 +102,10 @@ class MapFragment : BaseFragment(), OnMapReadyCallback {
         setListeners()
     }
 
+    override fun flexibleViewEnabled() = true
+    override fun paddingTopEnabled() = false
+    override fun topBarTitle() = getString(R.string.app_name)
+    override fun topBarEnabled() = true
     override fun backButtonEnabled(): Boolean = false
 
     private fun setListeners() {

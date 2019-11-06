@@ -20,6 +20,7 @@ import com.example.fitfactory.data.models.User
 import com.example.fitfactory.di.Injector
 import com.example.fitfactory.presentation.activities.mainActivity.MainActivity
 import com.example.fitfactory.constants.Constants
+import com.example.fitfactory.presentation.base.BaseFragment
 import com.example.fitfactory.utils.SpanTextUtil
 import com.facebook.CallbackManager
 import com.facebook.FacebookCallback
@@ -38,7 +39,7 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-class SignInFragment : Fragment() {
+class SignInFragment : BaseFragment() {
 
     @Inject
     lateinit var user: User
@@ -94,7 +95,7 @@ class SignInFragment : Fragment() {
             animateView((v as ImageView).background)
             googleSignIn.visibility = View.GONE
             facebookSignIn.visibility = View.GONE
-            moveToMapFragment()
+            findNavController().navigate(R.id.mapFragment)
         }
 
         context?.let {
@@ -116,18 +117,6 @@ class SignInFragment : Fragment() {
 
     private fun googleSignIn() {
         startActivityForResult(googleClient.signInIntent, Constants.GOOGLE_SIGN_IN_REQUEST_CODE)
-    }
-
-    private fun moveToMapFragment() {
-        MainScope().launch {
-            delay(1000)
-            val mainActivity = Intent(activity, MainActivity::class.java)
-            mainActivity.flags = Intent.FLAG_ACTIVITY_NO_ANIMATION
-            mainActivity.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
-            mainActivity.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK
-            mainActivity.flags = Intent.FLAG_ACTIVITY_NEW_TASK
-            startActivity(mainActivity)
-        }
     }
 
     private fun animateView(drawable: Drawable) {
@@ -159,7 +148,7 @@ class SignInFragment : Fragment() {
                 user.firstName = profile.firstName
                 user.lastName = profile.lastName
                 user.picture = profile.getProfilePictureUri(300, 300).toString()
-                moveToMapFragment()
+                findNavController().navigate(R.id.mapFragment)
             }
 
             override fun onCancel() {
@@ -193,7 +182,7 @@ class SignInFragment : Fragment() {
                 user.firstName = it.givenName ?: ""
                 user.lastName = it.familyName ?: ""
                 user.picture = it.photoUrl.toString()
-                moveToMapFragment()
+                findNavController().navigate(R.id.mapFragment)
             }
         } catch (e: ApiException) {
             Log.e("SignInGoogle", "Sign in failed code = ${e.statusCode}")
@@ -206,4 +195,10 @@ class SignInFragment : Fragment() {
         super.onDestroyView()
         resetAnimations()
     }
+
+    override fun flexibleViewEnabled() = false
+    override fun paddingTopEnabled() = false
+    override fun topBarTitle() = null
+    override fun topBarEnabled() = false
+    override fun backButtonEnabled(): Boolean = true
 }

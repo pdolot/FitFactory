@@ -23,9 +23,9 @@ class PaymentFragment : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        topBar?.setTitle(getString(R.string.payment))
-        flexibleLayout?.isViewEnable = false
-        setPaddingTop(view)
+//        topBar?.setTitle(getString(R.string.payment))
+//        flexibleLayout?.isViewEnable = false
+//        setPaddingTop(view)
 
         paymentFragment_cardNo.addMaskAndTextWatcher("#### #### #### ####")
         paymentFragment_cardExpiry.addMaskAndTextWatcher("##/##")
@@ -43,5 +43,9 @@ class PaymentFragment : BaseFragment() {
         }
     }
 
+    override fun flexibleViewEnabled() = false
+    override fun paddingTopEnabled() = true
+    override fun topBarTitle() = getString(R.string.payment)
+    override fun topBarEnabled() = true
     override fun backButtonEnabled(): Boolean = true
 }
