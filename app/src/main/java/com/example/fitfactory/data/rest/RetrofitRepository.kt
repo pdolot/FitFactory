@@ -14,7 +14,7 @@ class RetrofitRepository @Inject constructor(private val retrofitService: Retrof
     }
 
 
-    fun signUp(signUpRequest: SignUpRequest): Observable<BaseResponse>{
+    fun signUp(signUpRequest: SignUpRequest): Single<BaseResponse>{
         return retrofitService.signUp(signUpRequest)
     }
 

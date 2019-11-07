@@ -35,9 +35,9 @@ class SignUpFragment : BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setListeners()
-        viewModel.response?.observe(viewLifecycleOwner, Observer {
+        viewModel.response.observe(viewLifecycleOwner, Observer {
             println(it)
-//            resetAnimations()
+            resetAnimations()
             when (it) {
                 is BaseResponse -> {
                     Toast.makeText(context, it.message, Toast.LENGTH_SHORT).show()
@@ -59,8 +59,8 @@ class SignUpFragment : BaseFragment() {
 
     private fun setListeners() {
         signUpFragment_signUp.setOnClickListener { v ->
-//            animateView((v as ImageView).drawable)
-//            signUpFragment_label.visibility = View.INVISIBLE
+            animateView((v as ImageView).drawable)
+            signUpFragment_label.visibility = View.INVISIBLE
             viewModel.signUpUser(
                 signUpFragment_userName.text.toString(),
                 signUpFragment_userEmail.text.toString(),
