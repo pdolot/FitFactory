@@ -7,9 +7,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import android.widget.Toast
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.example.fitfactory.R
+import com.example.fitfactory.data.models.response.BaseResponse
 import com.example.fitfactory.presentation.base.BaseFragment
 import kotlinx.android.synthetic.main.fragment_sign_up.*
 import kotlinx.coroutines.GlobalScope
@@ -18,13 +22,8 @@ import kotlinx.coroutines.launch
 
 class SignUpFragment : BaseFragment() {
 
-    private lateinit var viewModel: SignUpViewModel
+    private val viewModel by lazy { SignUpViewModel() }
     private var animationList = ArrayList<AnimatedVectorDrawable>()
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        viewModel = ViewModelProviders.of(this).get(SignUpViewModel::class.java)
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -36,18 +35,37 @@ class SignUpFragment : BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setListeners()
+        viewModel.response?.observe(viewLifecycleOwner, Observer {
+            println(it)
+//            resetAnimations()
+            when (it) {
+                is BaseResponse -> {
+                    Toast.makeText(context, it.message, Toast.LENGTH_SHORT).show()
+                    signUpFragment_signUp.setImageDrawable(
+                        ContextCompat.getDrawable(
+                            context!!,
+                            if (it.status) R.drawable.load_button_endanim_positive else R.drawable.load_button_endanim_negative
+                        )
+                    )
+                }
+                else -> {
+                    signUpFragment_signUp.setImageDrawable(ContextCompat.getDrawable(context!!, R.drawable.load_button_endanim_negative))
+                    Toast.makeText(context, "Błąd połączenia", Toast.LENGTH_SHORT).show()
+                }
+            }
+//            animateView(signUpFragment_signUp.drawable)
+        })
     }
 
     private fun setListeners() {
         signUpFragment_signUp.setOnClickListener { v ->
-            animateView((v as ImageView).drawable)
-            signUpFragment_label.visibility = View.INVISIBLE
-            GlobalScope.launch {
-                delay(4000)
-                resetAnimations()
-                signUpFragment_signUp.setImageDrawable(resources.getDrawable(R.drawable.load_button_endanim_positive))
-                animateView(v.drawable)
-            }
+//            animateView((v as ImageView).drawable)
+//            signUpFragment_label.visibility = View.INVISIBLE
+            viewModel.signUpUser(
+                signUpFragment_userName.text.toString(),
+                signUpFragment_userEmail.text.toString(),
+                signUpFragment_userPassword.text.toString()
+            )
         }
     }
 
@@ -59,7 +77,6 @@ class SignUpFragment : BaseFragment() {
     }
 
     private fun animateView(drawable: Drawable) {
-
         (drawable as? AnimatedVectorDrawable)?.let {
             it.start()
             animationList.add(it)
