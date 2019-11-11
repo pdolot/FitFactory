@@ -6,7 +6,7 @@ import android.content.Intent
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.fitfactory.constants.Constants
+import com.example.fitfactory.constants.RequestCode
 import com.example.fitfactory.di.Injector
 import com.facebook.login.LoginManager
 import com.facebook.login.LoginResult
@@ -17,19 +17,23 @@ import com.google.android.gms.common.api.ApiException
 import com.google.android.gms.tasks.Task
 import javax.inject.Inject
 import android.os.Bundle
+import android.widget.EditText
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.afollestad.materialdialogs.MaterialDialog
 import com.afollestad.materialdialogs.customview.customView
-import com.example.fitfactory.R
 import com.example.fitfactory.data.models.request.SignInRequest
 import com.example.fitfactory.data.models.request.SignUpRequest
 import com.example.fitfactory.data.rest.RetrofitRepository
 import com.example.fitfactory.functional.localStorage.LocalStorage
 import com.example.fitfactory.presentation.customViews.SignInDialog
+import com.example.fitfactory.utils.Validator
 import com.facebook.*
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.rxkotlin.subscribeBy
 import io.reactivex.schedulers.Schedulers
+import kotlinx.android.synthetic.main.fragment_sign_in.*
+import kotlinx.android.synthetic.main.fragment_sign_up.*
 import java.util.concurrent.TimeUnit
 
 
@@ -116,7 +120,7 @@ class SignInViewModel : ViewModel() {
         googleClient.signOut()
         owner.startActivityForResult(
             googleClient.signInIntent,
-            Constants.GOOGLE_SIGN_IN_REQUEST_CODE
+            RequestCode.GOOGLE_SIGN_IN_REQUEST_CODE
         )
     }
 
@@ -127,7 +131,7 @@ class SignInViewModel : ViewModel() {
     fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         callbackManager.onActivityResult(requestCode, resultCode, data)
         when (requestCode) {
-            Constants.GOOGLE_SIGN_IN_REQUEST_CODE -> {
+            RequestCode.GOOGLE_SIGN_IN_REQUEST_CODE -> {
                 val task: Task<GoogleSignInAccount> =
                     GoogleSignIn.getSignedInAccountFromIntent(data)
                 handleSignInResult(task)
@@ -214,6 +218,12 @@ class SignInViewModel : ViewModel() {
                     callResult.postValue(ErrorSignIn(it.localizedMessage))
                 }
             )
+    }
+
+    fun validate(username: EditText, password: EditText): Boolean{
+        if (!Validator(username).validateTextField()) return false
+        if (!Validator(password).validatePassword()) return false
+        return true
     }
 }
 

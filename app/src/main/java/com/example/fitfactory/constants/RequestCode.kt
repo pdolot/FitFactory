@@ -1,6 +1,6 @@
 package com.example.fitfactory.constants
 
-class Constants {
+class RequestCode {
     companion object {
         const val REQUESTING_LOCATION_UPDATES_KEY: String = "LOCATION_UPDATES"
         const val GOOGLE_SIGN_IN_REQUEST_CODE: Int = 79
@@ -10,8 +10,15 @@ class Constants {
     }
 }
 
-class RestConstants{
+class RestConstant{
     companion object{
         const val BEARER: String = "BEARER"
+    }
+}
+
+class RegularExpression{
+    companion object{
+        const val EMAIL: String = "^[a-zA-Z\\d\\.]+?@[a-zA-Z\\d]+?\\..{2,}[^\\.\$&+,:;=?@#|'<>.^*()%!-]\$"
+        const val TEXT: String = "^[a-zA-z]+\$"
     }
 }

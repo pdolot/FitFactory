@@ -63,8 +63,10 @@ class SignInFragment : BaseFragment() {
             viewModel.googleSignIn(this)
         }
         signIn.setOnClickListener { v ->
-            animateView(v)
-            viewModel.defaultSignIn(userName.text.toString(), userPassword.text.toString())
+            if (viewModel.validate(userName, userPassword)){
+                animateView(v)
+                viewModel.defaultSignIn(userName.text.toString(), userPassword.text.toString())
+            }
         }
 
         context?.let {

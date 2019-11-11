@@ -11,13 +11,12 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProviders
-import androidx.navigation.fragment.findNavController
 import com.example.fitfactory.R
 import com.example.fitfactory.di.Injector
 import com.example.fitfactory.presentation.base.BaseFragment
 import com.example.fitfactory.presentation.customViews.FloatingLayout
 import com.example.fitfactory.utils.BitmapHelper
-import com.example.fitfactory.constants.Constants
+import com.example.fitfactory.constants.RequestCode
 import com.example.fitfactory.utils.PermissionManager
 import com.google.android.gms.common.api.ResolvableApiException
 import com.google.android.gms.location.*
@@ -161,7 +160,7 @@ class MapFragment : BaseFragment(), OnMapReadyCallback {
                         try {
                             startIntentSenderForResult(
                                 (exception as ResolvableApiException).resolution.intentSender,
-                                Constants.REQUEST_CHECK_SETTINGS,
+                                RequestCode.REQUEST_CHECK_SETTINGS,
                                 null,
                                 0,
                                 0,
@@ -264,7 +263,7 @@ class MapFragment : BaseFragment(), OnMapReadyCallback {
         permissions: Array<out String>,
         grantResults: IntArray
     ) {
-        if (requestCode == Constants.LOCATION_REQUEST_CODE) {
+        if (requestCode == RequestCode.LOCATION_REQUEST_CODE) {
             if (permissionManager.checkPermission(Manifest.permission.ACCESS_FINE_LOCATION)) {
                 map?.isMyLocationEnabled = true
             }
@@ -276,7 +275,7 @@ class MapFragment : BaseFragment(), OnMapReadyCallback {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         if (resultCode == Activity.RESULT_OK) {
             when (requestCode) {
-                Constants.REQUEST_CHECK_SETTINGS -> {
+                RequestCode.REQUEST_CHECK_SETTINGS -> {
                     requestingLocationUpdates = true
                     defineLocationCallback()
                     startLocationUpdates()
@@ -286,15 +285,15 @@ class MapFragment : BaseFragment(), OnMapReadyCallback {
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
-        outState.putBoolean(Constants.REQUESTING_LOCATION_UPDATES_KEY, requestingLocationUpdates)
+        outState.putBoolean(RequestCode.REQUESTING_LOCATION_UPDATES_KEY, requestingLocationUpdates)
         super.onSaveInstanceState(outState)
     }
 
     private fun updatesValuesFromBundle(savedInstanceState: Bundle?) {
         savedInstanceState ?: return
-        if (savedInstanceState.keySet().contains(Constants.REQUESTING_LOCATION_UPDATES_KEY)) {
+        if (savedInstanceState.keySet().contains(RequestCode.REQUESTING_LOCATION_UPDATES_KEY)) {
             requestingLocationUpdates =
-                savedInstanceState.getBoolean(Constants.REQUESTING_LOCATION_UPDATES_KEY)
+                savedInstanceState.getBoolean(RequestCode.REQUESTING_LOCATION_UPDATES_KEY)
         }
     }
 

@@ -23,6 +23,7 @@ import com.example.fitfactory.presentation.fragments.signUp.SignUpViewModel
 import com.example.fitfactory.presentation.navigationDrawer.NavigationDrawer
 import com.example.fitfactory.presentation.navigationDrawer.NavigationRecyclerViewAdapter
 import com.example.fitfactory.utils.BitmapHelper
+import com.example.fitfactory.utils.Validator
 import dagger.Component
 import javax.inject.Singleton
 
@@ -67,6 +68,7 @@ interface AppComponent {
     fun inject(into: TopBar)
     fun inject(into: TokenInterceptor)
     fun inject(into: RetrofitRepository)
+    fun inject(into: Validator)
 
 
 }

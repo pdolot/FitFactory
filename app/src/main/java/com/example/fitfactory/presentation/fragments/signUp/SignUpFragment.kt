@@ -17,6 +17,8 @@ import com.example.fitfactory.data.models.request.SignUpRequest
 import com.example.fitfactory.data.models.response.BaseResponse
 import com.example.fitfactory.presentation.base.BaseFragment
 import com.example.fitfactory.presentation.fragments.signIn.ErrorSignIn
+import com.example.fitfactory.utils.Validator
+import kotlinx.android.synthetic.main.fragment_sign_in.*
 import kotlinx.android.synthetic.main.fragment_sign_up.*
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.delay
@@ -60,16 +62,23 @@ class SignUpFragment : BaseFragment() {
 
     private fun setListeners() {
         signUpFragment_signUp.setOnClickListener { v ->
-            animateView((v as ImageView).drawable)
-            signUpFragment_label.visibility = View.INVISIBLE
-            viewModel.signUp(
-                SignUpRequest(
-                    username = signUpFragment_userName.text.toString(),
-                    email = signUpFragment_userEmail.text.toString(),
-                    password = signUpFragment_userPassword.text.toString()
-                )
+            if (viewModel.validate(
+                    signUpFragment_userName,
+                    signUpFragment_userEmail,
+                    signUpFragment_userPassword,
+                    signUpFragment_userConfirmPassword
+                )){
+                animateView((v as ImageView).drawable)
+                signUpFragment_label.visibility = View.INVISIBLE
+                viewModel.signUp(
+                    SignUpRequest(
+                        username = signUpFragment_userName.text.toString().trim(),
+                        email = signUpFragment_userEmail.text.toString().trim(),
+                        password = signUpFragment_userPassword.text.toString().trim()
+                    )
 
-            )
+                )
+            }
         }
     }
 

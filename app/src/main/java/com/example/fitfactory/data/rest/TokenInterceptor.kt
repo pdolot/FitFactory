@@ -1,7 +1,7 @@
 package com.example.fitfactory.data.rest
 
 
-import com.example.fitfactory.constants.RestConstants.Companion.BEARER
+import com.example.fitfactory.constants.RestConstant.Companion.BEARER
 import com.example.fitfactory.di.Injector
 import com.example.fitfactory.functional.localStorage.LocalStorage
 import okhttp3.Interceptor

@@ -2,6 +2,7 @@ package com.example.fitfactory
 
 import android.content.Context
 import com.example.fitfactory.functional.localStorage.SharedPrefLocalStorage
+import com.example.fitfactory.utils.Validator
 import org.junit.Test
 
 import org.junit.Assert.*
@@ -16,5 +17,6 @@ class ExampleUnitTest {
     fun addition_isCorrect() {
         assertEquals(4, 2 + 2)
     }
+
 
 }

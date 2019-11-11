@@ -9,7 +9,7 @@ import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
 
 import com.example.fitfactory.R
-import com.example.fitfactory.constants.Constants.Companion.CAMERA_REQUEST_CODE
+import com.example.fitfactory.constants.RequestCode.Companion.CAMERA_REQUEST_CODE
 import com.example.fitfactory.presentation.base.BaseFragment
 import com.example.fitfactory.utils.SpanTextUtil
 import kotlinx.android.synthetic.main.fragment_exercises_info.*

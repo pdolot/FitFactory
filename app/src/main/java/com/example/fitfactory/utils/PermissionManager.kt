@@ -4,7 +4,7 @@ import android.content.pm.PackageManager
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
-import com.example.fitfactory.constants.Constants
+import com.example.fitfactory.constants.RequestCode
 
 class PermissionManager(private val activity: AppCompatActivity) {
     
@@ -15,9 +15,9 @@ class PermissionManager(private val activity: AppCompatActivity) {
             ) != PackageManager.PERMISSION_GRANTED
         ) {
             if (ActivityCompat.shouldShowRequestPermissionRationale(activity, permission)) {
-                ActivityCompat.requestPermissions(activity, arrayOf(permission), Constants.LOCATION_REQUEST_CODE)
+                ActivityCompat.requestPermissions(activity, arrayOf(permission), RequestCode.LOCATION_REQUEST_CODE)
             } else {
-                ActivityCompat.requestPermissions(activity, arrayOf(permission), Constants.LOCATION_REQUEST_CODE)
+                ActivityCompat.requestPermissions(activity, arrayOf(permission), RequestCode.LOCATION_REQUEST_CODE)
             }
         }
     }
