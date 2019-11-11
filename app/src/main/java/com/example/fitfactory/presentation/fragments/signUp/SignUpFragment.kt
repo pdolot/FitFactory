@@ -13,8 +13,10 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.example.fitfactory.R
+import com.example.fitfactory.data.models.request.SignUpRequest
 import com.example.fitfactory.data.models.response.BaseResponse
 import com.example.fitfactory.presentation.base.BaseFragment
+import com.example.fitfactory.presentation.fragments.signIn.ErrorSignIn
 import kotlinx.android.synthetic.main.fragment_sign_up.*
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.delay
@@ -35,8 +37,7 @@ class SignUpFragment : BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setListeners()
-        viewModel.response.observe(viewLifecycleOwner, Observer {
-            println(it)
+        viewModel.callResult.observe(viewLifecycleOwner, Observer {
             resetAnimations()
             when (it) {
                 is BaseResponse -> {
@@ -48,9 +49,9 @@ class SignUpFragment : BaseFragment() {
                         )
                     )
                 }
-                else -> {
+                is ErrorSignIn -> {
                     signUpFragment_signUp.setImageDrawable(ContextCompat.getDrawable(context!!, R.drawable.load_button_endanim_negative))
-                    Toast.makeText(context, "Błąd połączenia", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(context, it.message ?: "Błąd", Toast.LENGTH_SHORT).show()
                 }
             }
 //            animateView(signUpFragment_signUp.drawable)
@@ -61,10 +62,13 @@ class SignUpFragment : BaseFragment() {
         signUpFragment_signUp.setOnClickListener { v ->
             animateView((v as ImageView).drawable)
             signUpFragment_label.visibility = View.INVISIBLE
-            viewModel.signUpUser(
-                signUpFragment_userName.text.toString(),
-                signUpFragment_userEmail.text.toString(),
-                signUpFragment_userPassword.text.toString()
+            viewModel.signUp(
+                SignUpRequest(
+                    username = signUpFragment_userName.text.toString(),
+                    email = signUpFragment_userEmail.text.toString(),
+                    password = signUpFragment_userPassword.text.toString()
+                )
+
             )
         }
     }

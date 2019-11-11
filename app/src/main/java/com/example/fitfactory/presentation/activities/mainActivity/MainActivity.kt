@@ -10,7 +10,7 @@ import androidx.lifecycle.Observer
 import androidx.navigation.findNavController
 import com.example.fitfactory.R
 import com.example.fitfactory.app.App
-import com.example.fitfactory.data.models.User
+import com.example.fitfactory.data.models.UserGetResource
 import com.example.fitfactory.di.Injector
 import com.example.fitfactory.presentation.customViews.CustomDrawerLayout
 import com.example.fitfactory.presentation.customViews.TopBar
@@ -20,8 +20,6 @@ import kotlinx.android.synthetic.main.activity_main.*
 import javax.inject.Inject
 
 class MainActivity : AppCompatActivity(), MainInterface {
-    @Inject
-    lateinit var user: User
 
     private val viewModel by lazy { MainViewModel() }
     private val adapter by lazy { NavigationRecyclerViewAdapter() }
@@ -37,17 +35,25 @@ class MainActivity : AppCompatActivity(), MainInterface {
         viewModel.localStorage.isLoggedLive().observe(this, Observer {
             mainFragment_navigationDrawer.setHeader(it)
             adapter.setData(viewModel.getMenuList(it))
+            if (it){
+                mainFragment_navigationDrawer.setProfileView()
+                setTopBarProfileImage()
+            }else{
+                mainFragment_topBar.setProfileImage(null)
+            }
         })
     }
 
 
     private fun setNavigationDrawer() {
-        mainFragment_navigationDrawer.setProfileView()
         mainFragment_navigationDrawer.setAdapter(adapter)
     }
 
     private fun setTopBarProfileImage() {
-        mainFragment_topBar.setProfileImage(Uri.parse(user.picture))
+        viewModel.localStorage.getUser()?.profileImage?.let {
+            mainFragment_topBar.setProfileImage(Uri.parse(it))
+        }
+
     }
 
     private fun setListeners() {
@@ -63,7 +69,10 @@ class MainActivity : AppCompatActivity(), MainInterface {
         })
 
         adapter.onItemClick = {
-            if (it != null) closeDrawer(it) else viewModel.localStorage.setToken(null)
+            if (it != null) closeDrawer(it) else {
+                closeDrawer(R.id.mapFragment)
+                viewModel.localStorage.setToken(null)
+            }
         }
         mainFragment_navigationDrawer.onSignInClick = { closeDrawer(R.id.signInFragment) }
         mainFragment_navigationDrawer.onSignUpClick = { closeDrawer(R.id.signUpFragment) }

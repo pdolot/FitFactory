@@ -6,15 +6,14 @@ import android.text.style.ClickableSpan
 import android.util.AttributeSet
 import android.view.View
 import androidx.constraintlayout.widget.ConstraintLayout
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.fitfactory.R
-import com.example.fitfactory.data.models.User
+import com.example.fitfactory.data.models.UserGetResource
 import com.example.fitfactory.di.Injector
+import com.example.fitfactory.functional.localStorage.LocalStorage
 import com.example.fitfactory.utils.SpanTextUtil
 import com.example.fitfactory.utils.animateDrawable
 import com.example.fitfactory.utils.resetAnimation
-import kotlinx.android.synthetic.main.fragment_sign_in.*
 import kotlinx.android.synthetic.main.navigation_layout.view.*
 import javax.inject.Inject
 
@@ -23,7 +22,7 @@ class NavigationDrawer @JvmOverloads constructor(
 ) : ConstraintLayout(context, attrs, defStyleAttr) {
 
     @Inject
-    lateinit var user: User
+    lateinit var localStorage: LocalStorage
 
     var onSignInClick: () -> Unit = {}
     var onSignUpClick: () -> Unit = {}
@@ -33,23 +32,41 @@ class NavigationDrawer @JvmOverloads constructor(
         Injector.component.inject(this)
 
         SpanTextUtil(context).apply {
-            setClickableSpanOnTextView(actionLabel, context.getString(R.string.signUpSpan), object : ClickableSpan(){
-                override fun onClick(widget: View) {
-                    onSignUpClick()
-                }
-            }, R.color.silverLight)
-            setClickableSpanOnTextView(actionLabel, context.getString(R.string.signInSpan), object : ClickableSpan(){
-                override fun onClick(widget: View) {
-                    onSignInClick()
-                }
-            }, R.color.silverLight)
+            setClickableSpanOnTextView(
+                actionLabel,
+                context.getString(R.string.signUpSpan),
+                object : ClickableSpan() {
+                    override fun onClick(widget: View) {
+                        onSignUpClick()
+                    }
+                },
+                R.color.silverLight
+            )
+            setClickableSpanOnTextView(
+                actionLabel,
+                context.getString(R.string.signInSpan),
+                object : ClickableSpan() {
+                    override fun onClick(widget: View) {
+                        onSignInClick()
+                    }
+                },
+                R.color.silverLight
+            )
         }
     }
 
     fun setProfileView() {
-        navigation_profileView.setProfileImage(Uri.parse(user.picture))
-        navigation_profileView.setLevel(324)
-        navigation_userName.text = "${user.firstName} ${user.lastName}"
+        localStorage.getUser()?.let {
+            it.profileImage?.let { navigation_profileView.setProfileImage(Uri.parse(it)) }
+            navigation_profileView.setLevel(324)
+
+            if (it.firstName != null && it.lastName != null) {
+                navigation_userName.text = "${it.firstName} ${it.lastName}"
+            } else {
+                navigation_userName.text = "${it.username}"
+            }
+
+        }
     }
 
     fun setAdapter(navigationAdapter: NavigationRecyclerViewAdapter) {
@@ -63,9 +80,9 @@ class NavigationDrawer @JvmOverloads constructor(
         headerIfLogged.visibility = if (isLogged) View.VISIBLE else View.GONE
         headerIfNotLogged.visibility = if (isLogged) View.GONE else View.VISIBLE
         animatedCircle.drawable.apply {
-            if (!isLogged){
+            if (!isLogged) {
                 this.animateDrawable()
-            }else{
+            } else {
                 this.resetAnimation()
             }
         }

@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.example.fitfactory.R
-import com.example.fitfactory.data.models.User
+import com.example.fitfactory.data.models.UserGetResource
 import com.example.fitfactory.di.Injector
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import kotlinx.android.synthetic.main.item_navigation.view.*
@@ -21,9 +21,6 @@ class NavigationRecyclerViewAdapter :
 
     @Inject
     lateinit var activity: AppCompatActivity
-
-    @Inject
-    lateinit var user: User
 
     @Inject
     lateinit var googleClient: GoogleSignInClient
@@ -54,8 +51,8 @@ class NavigationRecyclerViewAdapter :
     override fun onBindViewHolder(viewHolder: NavigationViewHolder, position: Int) {
 
 
-        if (position == itemCount - 1) viewHolder.itemView.navigationItem_separator.visibility =
-            View.INVISIBLE
+//        if (position == itemCount - 1) viewHolder.itemView.navigationItem_separator.visibility =
+//            View.INVISIBLE
 
         val item = itemList?.get(position)
         item?.let {
