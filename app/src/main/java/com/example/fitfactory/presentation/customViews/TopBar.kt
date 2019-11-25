@@ -31,9 +31,9 @@ class TopBar @JvmOverloads constructor(
         topBar_title.text = title.toUpperCase()
     }
 
-    fun setProfileImage(uri: Uri?){
+    fun setProfileImage(profileImage : String?){
         Glide.with(context)
-            .load(uri)
+            .load(profileImage)
             .placeholder(R.drawable.user_image)
             .into(topBar_profileImage)
     }

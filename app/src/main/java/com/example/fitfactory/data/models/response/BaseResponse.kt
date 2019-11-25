@@ -2,11 +2,9 @@ package com.example.fitfactory.data.models.response
 
 import com.google.gson.annotations.SerializedName
 
-data class BaseResponse(
+open class BaseResponse(
     @SerializedName("message")
     var message: String = "",
     @SerializedName("status")
-    var status: Boolean = false,
-    @SerializedName("data")
-    var data: Any? = null
+    var status: Boolean = false
 )

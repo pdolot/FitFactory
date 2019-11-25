@@ -9,6 +9,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        android:id="@+id/navigationScroll"
+        android:descendantFocusability="blocksDescendants"
         android:overScrollMode="never">
 
     <androidx.constraintlayout.widget.ConstraintLayout

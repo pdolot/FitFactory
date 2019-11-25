@@ -12,10 +12,15 @@ import android.view.animation.OvershootInterpolator
 import androidx.constraintlayout.widget.ConstraintLayout
 import com.example.fitfactory.R
 import com.example.fitfactory.data.models.FitnessClub
+import com.example.fitfactory.data.models.OpenHours
 import com.example.fitfactory.utils.SpanTextUtil
 import com.example.fitfactory.utils.isBetween
 import kotlinx.android.synthetic.main.club_bar.view.*
+import org.joda.time.DateTime
+import org.joda.time.format.DateTimeFormat
+import org.joda.time.format.DateTimeFormatter
 import java.sql.Time
+import java.time.DayOfWeek
 import java.util.*
 
 class FloatingLayout @JvmOverloads constructor(
@@ -58,21 +63,50 @@ class FloatingLayout @JvmOverloads constructor(
                 it.address?.zipCode,
                 it.address?.zipCodeCity
             )
-//        val calendar = Calendar.getInstance()
 
-            clubBar_openHours.text = resources.getString(R.string.openHours, it.openHour, it.closeHour, "Otwarte")
+            val openHours = getTodayOpenHours(it.openHours)
+            clubBar_openHours.text = resources.getString(R.string.openHours, openHours, checkIfIsOpen(openHours))
+            SpanTextUtil(context).setSpanOnTextView(clubBar_openHours, "Otwarte", R.color.positiveLight)
+            SpanTextUtil(context).setSpanOnTextView(clubBar_openHours, "Zamknięte", R.color.negativeLight)
 
-            //            if (Time.valueOf("${calendar.get(Calendar.HOUR_OF_DAY)}:${calendar.get(Calendar.MINUTE)}").isBetween(
-//                    fitnessClub.openHour ?: "00:00",
-//                    fitnessClub.closeHour ?: "00:00"
-//                )
-//            ) "(Otwarte)" else "(Zamknięte)"
-
-            clubBar_clutter.progress = (it.peopleCountAtThisTime.toFloat()/ it.peopleLimit.toFloat())
+            clubBar_clutter.progress =
+                (it.currentNumberOfMen.toFloat() + it.currentNumberOfWomen.toFloat()) / (it.menLockerRoomLimit.toFloat() + it.womenLockerRoomLimit.toFloat())
             clubBar_clutterIcon.drawable.setTint(clubBar_clutter.color)
 
             clubBar_name.text = fitnessClub?.name
         }
+    }
+
+    private fun getTodayOpenHours(openingHours: OpenHours?): String {
+        openingHours?.let {
+            when (DateTime.now().dayOfWeek().get()) {
+                1 -> openingHours.monday?.let { return it }
+                2 -> openingHours.tuesday?.let { return it }
+                3 -> openingHours.wednesday?.let { return it }
+                4 -> openingHours.thursday?.let { return it }
+                5 -> openingHours.friday?.let { return it }
+                6 -> openingHours.saturday?.let { return it }
+                7 -> openingHours.sunday?.let { return it }
+                else -> return "brak danych"
+            }
+        }
+        return "brak danych"
+    }
+
+    private fun checkIfIsOpen(hours: String): String{
+        val now = DateTime.now()
+        val formatter = DateTimeFormat.forPattern("dd/MM/yyyy") as DateTimeFormatter
+        val formatter2 = DateTimeFormat.forPattern("dd/MM/yyyy HH:mm") as DateTimeFormatter
+        val startDate = DateTime(formatter2.parseDateTime(formatter.print(now) + " ${hours.substring(0, 5)}").toDate())
+        val endDate = DateTime(formatter2.parseDateTime(formatter.print(now) + " ${hours.substring(6)}").toDate())
+
+        if(now.isAfter(startDate) && now.isBefore(endDate)){
+            return "Otwarte"
+        }else{
+            return "Zamknięte"
+        }
+
+        return ""
     }
 
     fun setDistance(distance: Float) {
@@ -114,9 +148,10 @@ class FloatingLayout @JvmOverloads constructor(
         return super.onSaveInstanceState()
     }
 
-    fun forceClose(){
+    fun forceClose() {
         clubBar_topBar.collapse(false)
-        cornerAnimation = ObjectAnimator.ofFloat(gradientDrawable, "cornerRadius", 0f, 1000f).apply { start() }
+        cornerAnimation =
+            ObjectAnimator.ofFloat(gradientDrawable, "cornerRadius", 0f, 1000f).apply { start() }
         val params = clubBar_bottomBar.layoutParams as LayoutParams
         params.width = clubBar_bottomBar.height
         params.horizontalBias = 1f

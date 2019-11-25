@@ -30,7 +30,6 @@ class NavigationDrawer @JvmOverloads constructor(
     init {
         View.inflate(context, R.layout.navigation_layout, this)
         Injector.component.inject(this)
-
         SpanTextUtil(context).apply {
             setClickableSpanOnTextView(
                 actionLabel,
@@ -65,8 +64,11 @@ class NavigationDrawer @JvmOverloads constructor(
             } else {
                 navigation_userName.text = "${it.username}"
             }
-
         }
+    }
+
+    fun resetScroll(){
+        navigationScroll.scrollTo(0,0)
     }
 
     fun setAdapter(navigationAdapter: NavigationRecyclerViewAdapter) {

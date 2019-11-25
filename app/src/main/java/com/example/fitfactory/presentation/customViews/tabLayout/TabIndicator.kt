@@ -21,6 +21,8 @@ class TabIndicator @JvmOverloads constructor(
     var itemCount = 1
         set(value) {
             field = value
+            maxItemCountInRow = floor(measuredWidth / (indicatorRadius * 5.0)).toInt()
+            itemInRow = if (itemCount <= maxItemCountInRow) itemCount else maxItemCountInRow
             invalidate()
         }
     private var spaceWidth = 0
@@ -97,8 +99,6 @@ class TabIndicator @JvmOverloads constructor(
             measureDimension(measuredWidth, widthMeasureSpec),
             measureDimension(indicatorRadius * 5, heightMeasureSpec)
         )
-        maxItemCountInRow = floor(measuredWidth / (indicatorRadius * 5.0)).toInt()
-        itemInRow = if (itemCount <= maxItemCountInRow) itemCount else maxItemCountInRow
     }
 
     private fun measurePoints(){

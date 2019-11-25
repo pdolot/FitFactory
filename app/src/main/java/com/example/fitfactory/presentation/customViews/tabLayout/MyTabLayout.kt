@@ -70,12 +70,16 @@ class MyTabLayout @JvmOverloads constructor(
     }
 
     fun setupWithRecyclerView(recyclerView: RecyclerView) {
-        this.recyclerView = recyclerView
-        snapHelper = PagerSnapHelper()
-        snapHelper?.attachToRecyclerView(this.recyclerView)
-        tab_indicator.itemCount = recyclerView.adapter?.itemCount ?: 1
-        setRecyclerListener()
-        setIndicator()
+        val itemCount = recyclerView.adapter?.itemCount ?: 0
+        if (itemCount > 0){
+            this.recyclerView = recyclerView
+            snapHelper = PagerSnapHelper()
+            snapHelper?.attachToRecyclerView(this.recyclerView)
+            tab_indicator.itemCount = itemCount
+            setRecyclerListener()
+            setIndicator()
+        }
+
     }
 
     private fun setRecyclerListener() {

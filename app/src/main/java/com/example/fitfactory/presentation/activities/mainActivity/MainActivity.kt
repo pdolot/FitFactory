@@ -17,6 +17,7 @@ import com.example.fitfactory.presentation.customViews.TopBar
 import com.example.fitfactory.presentation.customViews.flexibleLayout.FlexibleView
 import com.example.fitfactory.presentation.navigationDrawer.NavigationRecyclerViewAdapter
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.navigation_layout.*
 import javax.inject.Inject
 
 class MainActivity : AppCompatActivity(), MainInterface {
@@ -51,7 +52,7 @@ class MainActivity : AppCompatActivity(), MainInterface {
 
     private fun setTopBarProfileImage() {
         viewModel.localStorage.getUser()?.profileImage?.let {
-            mainFragment_topBar.setProfileImage(Uri.parse(it))
+            mainFragment_topBar.setProfileImage(it)
         }
 
     }
@@ -76,6 +77,13 @@ class MainActivity : AppCompatActivity(), MainInterface {
         }
         mainFragment_navigationDrawer.onSignInClick = { closeDrawer(R.id.signInFragment) }
         mainFragment_navigationDrawer.onSignUpClick = { closeDrawer(R.id.signUpFragment) }
+
+        mainFragment_drawerLayout.addDrawerListener(object : DrawerLayout.SimpleDrawerListener(){
+            override fun onDrawerClosed(drawerView: View) {
+                super.onDrawerClosed(drawerView)
+                mainFragment_navigationDrawer.resetScroll()
+            }
+        })
     }
 
     private fun closeDrawer(destinationId: Int) {

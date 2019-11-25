@@ -43,7 +43,7 @@ class SharedPrefLocalStorage(context: Context) : LocalStorage {
     }
 
     override fun readToken(): String? {
-        return sharedPref.getString(IS_LOGGED, null)
+        return sharedPref.getString(TOKEN, null)
     }
 
     override fun setToken(token: String?) {

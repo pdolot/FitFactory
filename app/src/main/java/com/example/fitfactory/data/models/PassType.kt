@@ -1,17 +1,13 @@
 package com.example.fitfactory.data.models
 
-enum class PassType(
-    val passName: String, val durationInDays: Int,
-    val price: Double, val description: String,
-    val benefits: List<String>) {
+data class PassType(
+    val id: Int,
+    val fullName: String? = null,
+    val shortName: String? = null,
+    val durationInDays: Int? = null,
+    val periodPrice: Double? = null,
+    val description: String? = null,
+    val benefits: List<String>? = null,
+    val promoImage: String? = null
 
-    PROAGE_12M("ProAge12M", 365, 89.99,
-        "Oferta przeznaczona dla studentów, uczniów do 26 roku życia z ważną legitymacją",
-        listOf("Dostęp do sprzętu siłowni", "Sauna", "Jeden trening personalny w miesiącu", "Możliwość pomiaru ciała")),
-    ACCESS_1M("ProAge12M", 31, 89.99,
-        "Oferta przeznaczona dla studentów, uczniów do 26 roku życia z ważną legitymacją",
-        listOf("Dostęp do sprzętu siłowni", "Sauna", "Jeden trening personalny w miesiącu", "Możliwość pomiaru ciała")),
-    PROAGE_6M("ProAge12M", 120, 89.99,
-        "Oferta przeznaczona dla studentów, uczniów do 26 roku życia z ważną legitymacją",
-        listOf("Dostęp do sprzętu siłowni", "Sauna", "Jeden trening personalny w miesiącu", "Możliwość pomiaru ciała"))
-}
+)

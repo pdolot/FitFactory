@@ -6,7 +6,7 @@
         android:layout_height="match_parent"
         android:background="@color/black90"
         android:padding="@dimen/medium_margin"
-        tools:context=".presentation.fragments.exercises.info.ExercisesInfoFragment">
+        tools:context=".presentation.pages.exercises.info.ExercisesInfoFragment">
 
     <androidx.cardview.widget.CardView
             android:layout_width="0dp"

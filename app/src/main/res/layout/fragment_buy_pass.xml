@@ -5,7 +5,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/black90"
-        tools:context=".presentation.fragments.buyPass.BuyPassFragment">
+        tools:context=".presentation.pages.buyPass.BuyPassFragment">
 
     <com.example.fitfactory.presentation.customViews.tabLayout.MyTabLayout
             android:id="@+id/buyPassFragment_tabLayout"
@@ -18,7 +18,6 @@
             app:indicatorActiveColor="@color/primaryLight"
             app:indicatorColor="@color/black65"
             app:indicatorRadius="6dp"
-            app:itemCount="6"
             />
 
     <androidx.recyclerview.widget.RecyclerView
@@ -43,7 +42,8 @@
             android:paddingTop="@dimen/small_margin"
             android:paddingBottom="@dimen/small_margin"
             android:background="@drawable/buy_button"
-            android:textColor="@color/positiveLight"
+            android:enabled="true"
+            android:textColor="@color/silverLight"
             android:text="KUP KARNET"
             android:layout_marginBottom="@dimen/medium_margin"
             app:layout_constraintBottom_toBottomOf="parent"
