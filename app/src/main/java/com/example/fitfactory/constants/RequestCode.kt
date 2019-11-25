@@ -12,7 +12,7 @@ class RequestCode {
 
 class RestConstant{
     companion object{
-        const val BEARER: String = "BEARER"
+        const val BEARER: String = "Bearer"
     }
 }
 

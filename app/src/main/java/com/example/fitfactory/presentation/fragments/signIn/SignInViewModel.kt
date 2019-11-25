@@ -210,7 +210,7 @@ class SignInViewModel : ViewModel() {
             .observeOn(AndroidSchedulers.mainThread())
             .subscribeBy(
                 onSuccess = {
-                    localStorage.setToken("Bearer ${it.token}")
+                    localStorage.setToken(it.token)
                     localStorage.setUser(it.user)
                     callResult.postValue(SuccessSignIn())
                 },
