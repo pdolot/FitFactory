@@ -1,8 +1,15 @@
 package com.example.fitfactory.utils
 
+import android.graphics.drawable.AnimatedVectorDrawable
+import android.graphics.drawable.Drawable
+import android.os.Build
 import android.text.Editable
 import android.text.TextWatcher
+import com.example.fitfactory.data.models.Address
 import com.google.android.material.textfield.TextInputEditText
+import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
+import okhttp3.ResponseBody
 import java.sql.Time
 import kotlin.math.floor
 
@@ -54,4 +61,20 @@ fun TextInputEditText.addMaskAndTextWatcher(mask: String) {
         override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
         }
     })
+}
+
+fun Drawable.animateDrawable(){
+    (this as? AnimatedVectorDrawable)?.let {
+        it.start()
+    }
+}
+
+fun Drawable.resetAnimation(){
+    (this as? AnimatedVectorDrawable)?.let {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            it.reset()
+        } else {
+            it.stop()
+        }
+    }
 }

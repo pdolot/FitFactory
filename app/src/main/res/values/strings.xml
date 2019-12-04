@@ -6,6 +6,8 @@
     <string name="forgot_password">Nie pamiętasz hasła? Przypomnij hasło!</string>
     <string name="remember_password">Przypomnij hasło</string>
     <string name="signUp">Nie masz konta? Dołącz do nas!</string>
+    <string name="signUpSpan">zarejestruj się</string>
+    <string name="signInSpan">Zaloguj</string>
     <string name="joinUs">Dołącz do nas</string>
     <string name="user_name">Nazwa użytkownika</string>
     <string name="password">Hasło</string>
@@ -39,6 +41,7 @@
     <string name="card_expiry">Data ważności</string>
     <string name="exercises_secondInfo">Pamiętaj, że nieprawidłowe wykonywacnie ćwiczenia może prowadzić do kontuzji. Zwróć uwagę na prawidłową postawę ciała i osiągaj swoje cele!</string>
     <string name="exercises_firstInfo">Zeskanuj kod QR znajdujący się na urządzeniu aby uzyskać przykładowe ćwiczenia, które można wykonać na urządzeniu</string>
+    <string name="scanCode">Zeskanuj kod</string>
     <plurals name="months_plural">
         <item quantity="one">%d miesiąc</item>
         <item quantity="few">%d miesiące</item>

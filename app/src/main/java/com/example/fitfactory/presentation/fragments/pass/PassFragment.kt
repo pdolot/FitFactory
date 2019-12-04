@@ -25,13 +25,17 @@ class PassFragment : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        topBar?.setTitle(getString(R.string.passes))
-        flexibleLayout?.isViewEnable = false
-        setPaddingTop(view)
+//        topBar?.setTitle(getString(R.string.passes))
+//        flexibleLayout?.isViewEnable = false
+//        setPaddingTop(view)
         setListeners()
         setAdapter()
     }
 
+    override fun flexibleViewEnabled() = false
+    override fun paddingTopEnabled() = true
+    override fun topBarTitle() = getString(R.string.passes)
+    override fun topBarEnabled() = true
     override fun backButtonEnabled(): Boolean = false
 
     private fun setAdapter() {

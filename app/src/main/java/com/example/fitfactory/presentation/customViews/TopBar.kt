@@ -7,7 +7,10 @@ import android.view.View
 import androidx.constraintlayout.widget.ConstraintLayout
 import com.bumptech.glide.Glide
 import com.example.fitfactory.R
+import com.example.fitfactory.di.Injector
+import com.example.fitfactory.functional.localStorage.LocalStorage
 import kotlinx.android.synthetic.main.top_bar.view.*
+import javax.inject.Inject
 
 class TopBar @JvmOverloads constructor(
     context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0

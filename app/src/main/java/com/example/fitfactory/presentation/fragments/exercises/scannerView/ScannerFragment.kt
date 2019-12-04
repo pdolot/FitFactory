@@ -23,9 +23,9 @@ class ScannerFragment : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        flexibleLayout?.isViewEnable = false
-        topBar?.setTitle("Zeskanuj kod")
-        setPaddingTop(view)
+//        flexibleLayout?.isViewEnable = false
+//        topBar?.setTitle("Zeskanuj kod")
+//        setPaddingTop(view)
 
         torch.setOnClickListener {
             viewModel.isTorchEnabled = !viewModel.isTorchEnabled
@@ -61,6 +61,10 @@ class ScannerFragment : BaseFragment() {
         viewModel.barcode.postValue(null)
     }
 
+    override fun flexibleViewEnabled() = false
+    override fun paddingTopEnabled() = true
+    override fun topBarTitle() = getString(R.string.scanCode)
+    override fun topBarEnabled() = true
     override fun backButtonEnabled(): Boolean = true
 
 }

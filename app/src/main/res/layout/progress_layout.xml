@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        >
+
+    <View
+            android:backgroundTint="@color/secondaryMedium"
+            android:id="@+id/viewBackground"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="@drawable/rounded_button"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"/>
+
+    <ImageView
+            android:id="@+id/anim"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintDimensionRatio="1:1"
+            android:adjustViewBounds="true"
+            android:src="@drawable/enter_anim"
+            android:tint="@color/secondaryMedium"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            />
+
+    <TextView
+            android:id="@+id/title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:textAlignment="center"
+            android:text="ZAREJESTRUJ"
+            android:paddingStart="24dp"
+            android:paddingEnd="24dp"
+            android:maxLines="1"
+            style="@style/ButtonLabel"
+            android:fontFamily="@font/fira_sans_condensed_black"
+            app:layout_constraintTop_toTopOf="@id/viewBackground"
+            app:layout_constraintBottom_toBottomOf="@id/viewBackground"
+            app:layout_constraintEnd_toEndOf="@id/viewBackground"
+            app:layout_constraintStart_toStartOf="@id/viewBackground"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

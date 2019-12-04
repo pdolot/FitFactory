@@ -3,52 +3,109 @@
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/black90"
+        android:layout_height="match_parent"
+        android:background="@drawable/drawer_background"
         android:scrollbars="none"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        android:overScrollMode="never">
 
     <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/navigation_header_layout"
+                android:id="@+id/headerLayout"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:paddingTop="@dimen/big_margin"
-                android:paddingStart="@dimen/big_margin"
-                android:paddingEnd="@dimen/big_margin"
-                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
-
-            <com.example.fitfactory.presentation.customViews.ProfileView
-                    android:id="@+id/navigation_profileView"
+            <androidx.constraintlayout.widget.ConstraintLayout
+                    android:visibility="gone"
+                    android:id="@+id/headerIfLogged"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    app:layout_constraintBottom_toTopOf="@id/navigation_userName"
+                    android:paddingTop="@dimen/big_margin"
+                    android:paddingStart="@dimen/big_margin"
+                    android:paddingEnd="@dimen/big_margin"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintTop_toTopOf="parent">
 
-            <TextView
-                    android:id="@+id/navigation_userName"
-                    style="@style/FontH1_BOLD"
-                    android:layout_width="wrap_content"
+                <com.example.fitfactory.presentation.customViews.ProfileView
+                        android:id="@+id/navigation_profileView"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintBottom_toTopOf="@id/navigation_userName"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                        android:id="@+id/navigation_userName"
+                        style="@style/FontH1_BOLD"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/medium_margin"
+                        android:layout_marginBottom="@dimen/medium_margin"
+                        tools:text="Patryk Doleciński"
+                        android:textColor="@color/silverMedium"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/navigation_profileView" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/headerIfNotLogged"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/medium_margin"
-                    android:layout_marginBottom="@dimen/medium_margin"
-                    tools:text="Patryk Doleciński"
-                    android:textColor="@color/silverMedium"
-                    app:layout_constraintBottom_toBottomOf="parent"
+                    android:paddingTop="@dimen/big_margin"
+                    android:paddingStart="@dimen/big_margin"
+                    android:paddingEnd="@dimen/big_margin"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/navigation_profileView" />
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
 
+                <ImageView
+                        android:id="@+id/animatedCircle"
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        android:src="@drawable/circles_animated"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintDimensionRatio="1:1"/>
+
+                <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/actionLabel"
+                        style="@style/FontH5_MEDIUM"
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        android:text="Zaloguj\nlub\nzarejestruj się"
+                        android:textAlignment="center"
+                        android:gravity="center"
+                        android:layout_margin="65dp"
+                        android:textColor="@color/silverVeryDark"
+                        app:lineHeight="28dp"
+                        app:autoSizeTextType="uniform"
+                        app:autoSizeMaxTextSize="18sp"
+                        app:autoSizeMinTextSize="12sp"
+                        app:autoSizeStepGranularity="2sp"
+                        app:layout_constraintTop_toTopOf="@id/animatedCircle"
+                        app:layout_constraintBottom_toBottomOf="@id/animatedCircle"
+                        app:layout_constraintEnd_toEndOf="@id/animatedCircle"
+                        app:layout_constraintStart_toStartOf="@id/animatedCircle" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>
+
+
 
         <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/navigation_recyclerView"
@@ -58,10 +115,11 @@
                 app:layout_constraintBottom_toTopOf="@id/navigation_facebookButton"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/navigation_header_layout"
+                app:layout_constraintTop_toBottomOf="@id/headerLayout"
                 android:nestedScrollingEnabled="false"
                 android:isScrollContainer="false"
-                tools:listitem="@layout/item_navigation" />
+                tools:listitem="@layout/item_navigation"
+                />
 
         <ImageView
                 android:id="@+id/navigation_facebookButton"
@@ -75,12 +133,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/navigation_recyclerView" />
 
-        <View android:layout_width="1dp"
-                android:layout_height="0dp"
-                android:background="@color/black65"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"/>
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

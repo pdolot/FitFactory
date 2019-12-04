@@ -4,20 +4,23 @@ import android.content.Context
 import androidx.lifecycle.ViewModel
 import com.example.fitfactory.R
 import com.example.fitfactory.di.Injector
+import com.example.fitfactory.functional.localStorage.LocalStorage
 import com.example.fitfactory.presentation.navigationDrawer.NavigationItem
 import javax.inject.Inject
 
-class MainViewModel : ViewModel(){
+class MainViewModel : ViewModel() {
 
     @Inject
     lateinit var context: Context
+
+    @Inject
+    lateinit var localStorage: LocalStorage
 
     init {
         Injector.component.inject(this)
     }
 
-    fun getMenuList(): List<NavigationItem> {
-
+    fun getMenuList(isLogged: Boolean): List<NavigationItem> {
         val map = NavigationItem(
             context.getString(R.string.map),
             R.drawable.ic_map,
@@ -60,6 +63,17 @@ class MainViewModel : ViewModel(){
             null
         )
 
-        return listOf(map, passes, buyPass, exercises, fitnessLessons, history, settings, signOut)
+        return if (isLogged) listOf(
+            map,
+            passes,
+            buyPass,
+            exercises,
+            fitnessLessons,
+            history,
+            settings,
+            signOut
+        ) else listOf(map, buyPass, exercises, fitnessLessons)
     }
+
+
 }

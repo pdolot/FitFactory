@@ -1,5 +1,8 @@
 package com.example.fitfactory.data.models
 
+import androidx.room.Entity
+
+@Entity
 data class FitnessClub(
     val id: Long? = null,
     val name: String? = null,

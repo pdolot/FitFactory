@@ -9,7 +9,7 @@ import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
 
 import com.example.fitfactory.R
-import com.example.fitfactory.constants.Constants.Companion.CAMERA_REQUEST_CODE
+import com.example.fitfactory.constants.RequestCode.Companion.CAMERA_REQUEST_CODE
 import com.example.fitfactory.presentation.base.BaseFragment
 import com.example.fitfactory.utils.SpanTextUtil
 import kotlinx.android.synthetic.main.fragment_exercises_info.*
@@ -28,9 +28,9 @@ class ExercisesInfoFragment : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        flexibleLayout?.isViewEnable = false
-        topBar?.setTitle("ćwiczenia")
-        setPaddingTop(view)
+//        flexibleLayout?.isViewEnable = false
+//        topBar?.setTitle("ćwiczenia")
+//        setPaddingTop(view)
         SpanTextUtil(context ?: return).apply {
             setSpanOnTextView(firstInfo, "QR", R.color.primaryLight)
             setSpanOnTextView(secondInfo, "kontuzji", R.color.negativeMedium)
@@ -59,5 +59,9 @@ class ExercisesInfoFragment : BaseFragment() {
         }
     }
 
+    override fun flexibleViewEnabled() = false
+    override fun paddingTopEnabled() = true
+    override fun topBarTitle() = getString(R.string.exercises)
+    override fun topBarEnabled() = true
     override fun backButtonEnabled(): Boolean = false
 }

@@ -17,7 +17,7 @@ class ExerciseFragment : BaseFragment() {
     private val viewModel by lazy { ExerciseViewModel()}
     private val adapter by lazy { ExercisesAdapter()}
 
-    override fun backButtonEnabled(): Boolean = true
+
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -29,9 +29,9 @@ class ExerciseFragment : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        flexibleLayout?.isViewEnable = false
-        topBar?.setTitle("ćwiczenia")
-        setPaddingTop(view)
+//        flexibleLayout?.isViewEnable = false
+//        topBar?.setTitle("ćwiczenia")
+//        setPaddingTop(view)
         adapter.setData(viewModel.getExercises())
         exercisesRv.apply {
             layoutManager = LinearLayoutManager(context, RecyclerView.HORIZONTAL, false)
@@ -45,4 +45,10 @@ class ExerciseFragment : BaseFragment() {
             tab_layout.iconColor = ContextCompat.getColor(context!!, if (bodyParts_content.visibility == View.VISIBLE) R.color.primaryLight else R.color.black65)
         }
     }
+
+    override fun flexibleViewEnabled() = false
+    override fun paddingTopEnabled() = true
+    override fun topBarTitle() = getString(R.string.exercises)
+    override fun topBarEnabled() = true
+    override fun backButtonEnabled(): Boolean = true
 }

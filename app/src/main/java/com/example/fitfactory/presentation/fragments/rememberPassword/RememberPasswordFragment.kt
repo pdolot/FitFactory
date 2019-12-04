@@ -10,9 +10,10 @@ import android.widget.ImageView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
 import com.example.fitfactory.R
+import com.example.fitfactory.presentation.base.BaseFragment
 import kotlinx.android.synthetic.main.fragment_remember_password.*
 
-class RememberPasswordFragment : Fragment() {
+class RememberPasswordFragment : BaseFragment() {
 
     private lateinit var viewModel: RememberPasswordViewModel
     private var animationList = ArrayList<AnimatedVectorDrawable>()
@@ -59,5 +60,11 @@ class RememberPasswordFragment : Fragment() {
         resetAnimations()
         super.onDestroyView()
     }
+
+    override fun flexibleViewEnabled() = false
+    override fun paddingTopEnabled() = false
+    override fun topBarTitle() = null
+    override fun topBarEnabled() = false
+    override fun backButtonEnabled(): Boolean = true
 
 }

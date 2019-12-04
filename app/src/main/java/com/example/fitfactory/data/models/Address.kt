@@ -1,8 +1,13 @@
 package com.example.fitfactory.data.models
 
+import androidx.room.Entity
+import androidx.room.PrimaryKey
+
+@Entity
 data class Address(
-    val street: String? = null,
-    val city: String? = null,
-    val zipCode: String? = null,
-    val zipCodeCity: String? = null
+    @PrimaryKey
+    val street: String,
+    val city: String,
+    val zipCode: String,
+    val zipCodeCity: String
 )
