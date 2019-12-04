@@ -15,4 +15,7 @@ interface FitnessClubDao{
 
     @Query("SELECT * from FitnessClub")
     fun getAll(): LiveData<List<FitnessClub>>
+
+    @Query("DELETE FROM FitnessClub")
+    suspend fun deleteAll()
 }

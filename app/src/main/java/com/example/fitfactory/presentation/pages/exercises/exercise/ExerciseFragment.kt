@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
+import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.transition.TransitionManager
@@ -16,8 +17,7 @@ class ExerciseFragment : BaseFragment() {
 
     private val viewModel by lazy { ExerciseViewModel()}
     private val adapter by lazy { ExercisesAdapter()}
-
-
+    private val args: ExerciseFragmentArgs by navArgs()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -29,9 +29,7 @@ class ExerciseFragment : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-//        flexibleLayout?.isViewEnable = false
-//        topBar?.setTitle("ćwiczenia")
-//        setPaddingTop(view)
+
         adapter.setData(viewModel.getExercises())
         exercisesRv.apply {
             layoutManager = LinearLayoutManager(context, RecyclerView.HORIZONTAL, false)

@@ -45,6 +45,13 @@
     <fragment
             android:id="@+id/exerciseFragment"
             android:name="com.example.fitfactory.presentation.pages.exercises.exercise.ExerciseFragment"
-            android:label="ExerciseFragment" />
+            android:label="ExerciseFragment" >
+        <argument
+                android:name="qrcode"
+                app:argType="string" />
+    </fragment>
+    
+    <action android:id="@+id/toExerciseFragment"
+            app:destination="@id/exerciseFragment"/>
 
 </navigation>

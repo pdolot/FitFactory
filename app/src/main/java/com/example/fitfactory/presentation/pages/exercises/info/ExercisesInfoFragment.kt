@@ -28,9 +28,6 @@ class ExercisesInfoFragment : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-//        flexibleLayout?.isViewEnable = false
-//        topBar?.setTitle("ćwiczenia")
-//        setPaddingTop(view)
         SpanTextUtil(context ?: return).apply {
             setSpanOnTextView(firstInfo, "QR", R.color.primaryLight)
             setSpanOnTextView(secondInfo, "kontuzji", R.color.negativeMedium)

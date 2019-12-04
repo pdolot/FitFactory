@@ -38,6 +38,7 @@ class MapViewModel : BaseViewModel() {
             .repeatWhen { completed -> completed.delay(1, TimeUnit.MINUTES) }
             .subscribeBy(
                 onNext = {
+                    deleteAll()
                     if (it.status) {
                         insert(it.data)
                     }
@@ -50,6 +51,10 @@ class MapViewModel : BaseViewModel() {
 
     private fun insert(fitnessClubs: List<FitnessClub>?) = viewModelScope.launch {
         fitnessClubRepository.insert(fitnessClubs)
+    }
+
+    private fun deleteAll() = viewModelScope.launch {
+        fitnessClubRepository.deleteAll()
     }
 
 //    fun getFitnessClub(): List<FitnessClub>{

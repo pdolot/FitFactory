@@ -90,7 +90,7 @@ class MyTabLayout @JvmOverloads constructor(
                 val lm = rv.layoutManager
                 val snapView = snapHelper?.findSnapView(lm)
                 snapView?.let {
-                    position = lm?.getPosition(it) ?: -1
+                    position = lm?.getPosition(it) ?: 0
                     page = position / tab_indicator.maxItemCountInRow
                     setIndicatorBounds(position % tab_indicator.maxItemCountInRow)
                 }

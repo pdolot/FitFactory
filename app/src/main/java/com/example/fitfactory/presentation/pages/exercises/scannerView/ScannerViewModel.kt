@@ -23,7 +23,6 @@ class ScannerViewModel : ViewModel() {
 
     private val analyzer = BarcodeAnalyzer({
         it.firstOrNull()?.rawValue?.let {
-//            SharedPrefLocalStorage(context).saveCard(it)
             barcode.postValue(it)
         }
     }, {

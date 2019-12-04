@@ -8,6 +8,7 @@ import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.example.fitfactory.R
 import com.example.fitfactory.presentation.base.BaseFragment
+import com.example.fitfactory.presentation.pages.exercises.exercise.ExerciseFragmentDirections
 import kotlinx.android.synthetic.main.fragment_scanner.*
 
 class ScannerFragment : BaseFragment() {
@@ -23,16 +24,12 @@ class ScannerFragment : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-//        flexibleLayout?.isViewEnable = false
-//        topBar?.setTitle("Zeskanuj kod")
-//        setPaddingTop(view)
-
         torch.setOnClickListener {
             viewModel.isTorchEnabled = !viewModel.isTorchEnabled
             setTorch(viewModel.isTorchEnabled)
         }
         viewModel.barcode.observe(viewLifecycleOwner, Observer {
-            if (!it.isNullOrEmpty()) findNavController().navigate(R.id.exerciseFragment)
+            if (!it.isNullOrEmpty()) findNavController().navigate(ExerciseFragmentDirections.toExerciseFragment(it))
         })
     }
 

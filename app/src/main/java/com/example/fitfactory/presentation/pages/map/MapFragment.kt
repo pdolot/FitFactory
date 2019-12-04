@@ -256,6 +256,7 @@ class MapFragment : BaseFragment(), OnMapReadyCallback {
         map?.setOnCameraMoveStartedListener { isCameraMoving = true }
         map?.setOnCameraIdleListener(clusterManager)
         map?.setOnMarkerClickListener(clusterManager)
+
     }
 
     override fun onRequestPermissionsResult(
@@ -267,8 +268,6 @@ class MapFragment : BaseFragment(), OnMapReadyCallback {
             if (permissionManager.checkPermission(Manifest.permission.ACCESS_FINE_LOCATION)) {
                 map?.isMyLocationEnabled = true
             }
-        } else {
-            // Permission was denied. Display an error message.
         }
     }
 
