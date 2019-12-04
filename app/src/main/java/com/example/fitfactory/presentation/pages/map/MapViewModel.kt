@@ -3,11 +3,9 @@ package com.example.fitfactory.presentation.pages.map
 import android.annotation.SuppressLint
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.fitfactory.data.database.fitnessClub.FitnessClubRepository
-import com.example.fitfactory.data.models.Address
-import com.example.fitfactory.data.models.FitnessClub
+import com.example.fitfactory.data.models.app.FitnessClub
 import com.example.fitfactory.data.rest.RetrofitRepository
 import com.example.fitfactory.di.Injector
 import com.example.fitfactory.presentation.base.BaseViewModel

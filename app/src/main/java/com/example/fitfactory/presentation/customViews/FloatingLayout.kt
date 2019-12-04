@@ -6,22 +6,15 @@ import android.graphics.drawable.GradientDrawable
 import android.os.Parcelable
 import android.util.AttributeSet
 import android.view.View
-import android.view.animation.BounceInterpolator
-import android.view.animation.LinearInterpolator
-import android.view.animation.OvershootInterpolator
 import androidx.constraintlayout.widget.ConstraintLayout
 import com.example.fitfactory.R
-import com.example.fitfactory.data.models.FitnessClub
-import com.example.fitfactory.data.models.OpenHours
+import com.example.fitfactory.data.models.app.FitnessClub
+import com.example.fitfactory.data.models.app.OpenHours
 import com.example.fitfactory.utils.SpanTextUtil
-import com.example.fitfactory.utils.isBetween
 import kotlinx.android.synthetic.main.club_bar.view.*
 import org.joda.time.DateTime
 import org.joda.time.format.DateTimeFormat
 import org.joda.time.format.DateTimeFormatter
-import java.sql.Time
-import java.time.DayOfWeek
-import java.util.*
 
 class FloatingLayout @JvmOverloads constructor(
     context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0

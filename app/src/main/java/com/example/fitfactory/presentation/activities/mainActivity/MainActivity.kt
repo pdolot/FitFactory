@@ -1,6 +1,5 @@
 package com.example.fitfactory.presentation.activities.mainActivity
 
-import android.net.Uri
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
@@ -10,15 +9,12 @@ import androidx.lifecycle.Observer
 import androidx.navigation.findNavController
 import com.example.fitfactory.R
 import com.example.fitfactory.app.App
-import com.example.fitfactory.data.models.UserGetResource
 import com.example.fitfactory.di.Injector
 import com.example.fitfactory.presentation.customViews.CustomDrawerLayout
 import com.example.fitfactory.presentation.customViews.TopBar
 import com.example.fitfactory.presentation.customViews.flexibleLayout.FlexibleView
 import com.example.fitfactory.presentation.navigationDrawer.NavigationRecyclerViewAdapter
 import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.navigation_layout.*
-import javax.inject.Inject
 
 class MainActivity : AppCompatActivity(), MainInterface {
 

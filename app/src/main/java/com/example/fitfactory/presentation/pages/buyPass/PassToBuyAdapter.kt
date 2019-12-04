@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.example.fitfactory.R
-import com.example.fitfactory.data.models.PassType
+import com.example.fitfactory.data.models.app.PassType
 import com.example.fitfactory.di.Injector
 import com.example.fitfactory.presentation.base.BaseAdapter
 import kotlinx.android.synthetic.main.item_pass_to_buy.view.*

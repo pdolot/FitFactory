@@ -1,4 +1,4 @@
-package com.example.fitfactory.data.models
+package com.example.fitfactory.data.models.app
 
 data class Pass(
     val passType: PassType? = null,

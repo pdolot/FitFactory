@@ -1,9 +1,9 @@
 package com.example.fitfactory.data.models.response
 
-import com.example.fitfactory.data.models.app.FitnessClub
+import com.example.fitfactory.data.models.app.Exercise
 import com.google.gson.annotations.SerializedName
 
-data class FitnessClubsResponse(
+data class ExercisesResponse(
     @SerializedName("data")
-    val data: List<FitnessClub>? = null
+    val data: List<Exercise>? = null
 ): BaseResponse()

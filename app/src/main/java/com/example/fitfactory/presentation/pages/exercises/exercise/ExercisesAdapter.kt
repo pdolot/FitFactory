@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.fitfactory.R
-import com.example.fitfactory.data.models.Exercise
+import com.example.fitfactory.data.models.app.Exercise
 import com.example.fitfactory.presentation.base.BaseAdapter
 import kotlinx.android.synthetic.main.item_exercise.view.*
 

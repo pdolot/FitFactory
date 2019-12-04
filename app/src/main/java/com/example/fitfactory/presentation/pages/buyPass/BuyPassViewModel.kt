@@ -1,10 +1,9 @@
 package com.example.fitfactory.presentation.pages.buyPass
 
 import android.annotation.SuppressLint
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.fitfactory.data.models.PassType
+import com.example.fitfactory.data.models.app.PassType
 import com.example.fitfactory.data.rest.RetrofitRepository
 import com.example.fitfactory.di.Injector
 import com.example.fitfactory.functional.localStorage.LocalStorage

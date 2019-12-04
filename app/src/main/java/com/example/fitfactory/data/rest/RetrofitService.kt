@@ -1,6 +1,5 @@
 package com.example.fitfactory.data.rest
 
-import com.example.fitfactory.data.models.PassType
 import com.example.fitfactory.data.models.request.SignInRequest
 import com.example.fitfactory.data.models.request.SignUpRequest
 import com.example.fitfactory.data.models.response.AuthResponse

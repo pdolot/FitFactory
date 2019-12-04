@@ -8,7 +8,6 @@ import android.view.View
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.fitfactory.R
-import com.example.fitfactory.data.models.UserGetResource
 import com.example.fitfactory.di.Injector
 import com.example.fitfactory.functional.localStorage.LocalStorage
 import com.example.fitfactory.utils.SpanTextUtil

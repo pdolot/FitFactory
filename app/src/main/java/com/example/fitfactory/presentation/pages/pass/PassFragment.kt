@@ -6,8 +6,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.fitfactory.R
-import com.example.fitfactory.data.models.Pass
-import com.example.fitfactory.data.models.PassType
 import com.example.fitfactory.presentation.base.BaseFragment
 import kotlinx.android.synthetic.main.fragment_pass.*
 

@@ -1,4 +1,4 @@
-package com.example.fitfactory.data.models
+package com.example.fitfactory.data.models.app
 
 data class Exercise(
     var images: List<String>? = null,

@@ -1,7 +1,7 @@
 package com.example.fitfactory.data.database.fitnessClub
 
 import androidx.lifecycle.LiveData
-import com.example.fitfactory.data.models.FitnessClub
+import com.example.fitfactory.data.models.app.FitnessClub
 
 class FitnessClubRepository (private val fitnessClubDao: FitnessClubDao){
 

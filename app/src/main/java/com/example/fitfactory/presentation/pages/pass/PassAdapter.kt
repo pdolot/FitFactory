@@ -10,7 +10,7 @@ import com.afollestad.materialdialogs.MaterialDialog
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.example.fitfactory.R
-import com.example.fitfactory.data.models.Pass
+import com.example.fitfactory.data.models.app.Pass
 import com.example.fitfactory.di.Injector
 import kotlinx.android.synthetic.main.item_pass.view.*
 import javax.inject.Inject

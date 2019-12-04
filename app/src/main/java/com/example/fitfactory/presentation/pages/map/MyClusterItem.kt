@@ -1,6 +1,6 @@
 package com.example.fitfactory.presentation.pages.map
 
-import com.example.fitfactory.data.models.FitnessClub
+import com.example.fitfactory.data.models.app.FitnessClub
 import com.google.android.gms.maps.model.BitmapDescriptor
 import com.google.android.gms.maps.model.LatLng
 import com.google.maps.android.clustering.ClusterItem
