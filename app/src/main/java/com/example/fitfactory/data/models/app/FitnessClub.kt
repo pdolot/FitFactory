@@ -6,18 +6,20 @@ import androidx.room.PrimaryKey
 
 @Entity
 data class FitnessClub(
-    @PrimaryKey( autoGenerate = true)
+    @PrimaryKey( autoGenerate = false)
     val id: Long? = null,
     val name: String? = null,
 
     @Embedded
     val address: Address? = null,
+
     val phoneNumber: String? = null,
     val latitude: Double? = null,
     val longitude: Double? = null,
 
     @Embedded
     val openHours: OpenHours? = null,
+
     val menLockerRoomLimit: Int = 0,
     val womenLockerRoomLimit: Int = 0,
     val currentNumberOfMen: Int = 0,

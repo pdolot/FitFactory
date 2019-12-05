@@ -8,6 +8,7 @@ import com.example.fitfactory.di.modules.RestModule
 import com.example.fitfactory.di.modules.UserModule
 import com.example.fitfactory.presentation.activities.mainActivity.MainActivity
 import com.example.fitfactory.presentation.activities.mainActivity.MainViewModel
+import com.example.fitfactory.presentation.activities.splashActivity.SplashViewModel
 import com.example.fitfactory.presentation.customViews.TopBar
 import com.example.fitfactory.presentation.customViews.flexibleLayout.FlexibleView
 import com.example.fitfactory.presentation.pages.buyPass.PassToBuyAdapter
@@ -23,6 +24,7 @@ import com.example.fitfactory.presentation.pages.signUp.SignUpViewModel
 import com.example.fitfactory.presentation.navigationDrawer.NavigationDrawer
 import com.example.fitfactory.presentation.navigationDrawer.NavigationRecyclerViewAdapter
 import com.example.fitfactory.presentation.pages.buyPass.BuyPassViewModel
+import com.example.fitfactory.presentation.pages.exercises.exercise.ExerciseViewModel
 import com.example.fitfactory.utils.BitmapHelper
 import com.example.fitfactory.utils.Validator
 import dagger.Component
@@ -41,6 +43,7 @@ interface AppComponent {
     // Activities
     fun inject(into: MainActivity)
     fun inject(into: MainViewModel)
+    fun inject(into: SplashViewModel)
 
     // Fragments
     fun inject(into: SignInFragment)
@@ -54,9 +57,14 @@ interface AppComponent {
     fun inject(into: SignUpViewModel)
     fun inject(into: RememberPasswordViewModel)
     fun inject(into: MapViewModel)
+    fun inject(into: BuyPassViewModel)
+    fun inject(into: ExerciseViewModel)
 
     // Utils
     fun inject(into: BitmapHelper)
+    fun inject(into: TokenInterceptor)
+    fun inject(into: RetrofitRepository)
+    fun inject(into: Validator)
 
     // Adapters
     fun inject(into: NavigationRecyclerViewAdapter)
@@ -65,12 +73,6 @@ interface AppComponent {
 
     // Views
     fun inject(into: FlexibleView)
-
     fun inject(into: TopBar)
-    fun inject(into: TokenInterceptor)
-    fun inject(into: RetrofitRepository)
-    fun inject(into: Validator)
-    fun inject(into: BuyPassViewModel)
-
 
 }

@@ -78,6 +78,8 @@ class MyTabLayout @JvmOverloads constructor(
             tab_indicator.itemCount = itemCount
             setRecyclerListener()
             setIndicator()
+        }else{
+            tab_title.text = context.getString(R.string.data_not_given)
         }
 
     }

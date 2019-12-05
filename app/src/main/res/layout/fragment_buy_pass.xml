@@ -18,6 +18,7 @@
             app:indicatorActiveColor="@color/primaryLight"
             app:indicatorColor="@color/black65"
             app:indicatorRadius="6dp"
+            app:itemCount="0"
             />
 
     <androidx.recyclerview.widget.RecyclerView

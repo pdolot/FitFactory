@@ -1,10 +1,17 @@
 package com.example.fitfactory.data.models.app
 
+import androidx.room.Entity
+import androidx.room.PrimaryKey
+
+@Entity
 data class Exercise(
-    var images: List<String>? = null,
-    var name: String? = null,
-    var tips: String? = null,
-    var movement: String? = null,
-    var startPosition: String? = null,
-    var bodyParts: List<BodyPart>? = null
+    @PrimaryKey( autoGenerate = false)
+    val id: Long,
+    val name: String,
+    val startPosition: List<String>,
+    val movement: List<String>,
+    val tips: List<String>,
+    val images: List<String>,
+    val bodyParts: List<String>,
+    val qrCode: String
 )

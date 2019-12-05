@@ -32,12 +32,12 @@ class ExercisesAdapter : BaseAdapter<ExercisesAdapter.ViewHolder>() {
         val item = items?.get(position) as Exercise
         val adapter by lazy { ImageAdapter() }
         holder.itemView.apply {
-//            movement.text = item.movement
-//            tips.text = item.tips
-//            startPosition.text = item.startPosition
+            movement.text = item.movement.joinToString(separator = "\n")
+            tips.text = item.tips.joinToString(separator = "\n")
+            startPosition.text = item.startPosition.joinToString(separator = "\n")
             imagesRv.adapter = adapter
             imagesRv.layoutManager = LinearLayoutManager(context)
-            item.images?.let { adapter.setData(it) }
+            item.images.let { adapter.setData(it) }
         }
     }
 

@@ -15,14 +15,8 @@ import kotlinx.android.synthetic.main.fragment_buy_pass.*
 
 class BuyPassFragment : BaseFragment() {
 
-    private lateinit var viewModel: BuyPassViewModel
+    private val viewModel by lazy {BuyPassViewModel()  }
     private val adapter by lazy { PassToBuyAdapter() }
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        viewModel = ViewModelProviders.of(this).get(BuyPassViewModel::class.java)
-
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

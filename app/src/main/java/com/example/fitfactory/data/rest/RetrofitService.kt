@@ -2,10 +2,7 @@ package com.example.fitfactory.data.rest
 
 import com.example.fitfactory.data.models.request.SignInRequest
 import com.example.fitfactory.data.models.request.SignUpRequest
-import com.example.fitfactory.data.models.response.AuthResponse
-import com.example.fitfactory.data.models.response.BaseResponse
-import com.example.fitfactory.data.models.response.FitnessClubsResponse
-import com.example.fitfactory.data.models.response.PassesResponse
+import com.example.fitfactory.data.models.response.*
 import io.reactivex.Observable
 import io.reactivex.Single
 import retrofit2.http.Body
@@ -27,4 +24,8 @@ interface RetrofitService{
     // FitnessClub
     @GET("fitnessClub/getFitnessClubs")
     fun getAllFitnessClub(): Observable<FitnessClubsResponse>
+
+    // Exercises
+    @GET("fitnessExercise/getAllExercises")
+    fun getAllExercises(): Single<ExercisesResponse>
 }

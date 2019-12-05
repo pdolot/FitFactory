@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
+import androidx.lifecycle.Observer
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -29,13 +30,17 @@ class ExerciseFragment : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        viewModel.qrCode = args.qrcode
 
-        adapter.setData(viewModel.getExercises())
         exercisesRv.apply {
             layoutManager = LinearLayoutManager(context, RecyclerView.HORIZONTAL, false)
             adapter = this@ExerciseFragment.adapter
         }
-        tab_layout.setupWithRecyclerView(exercisesRv)
+
+        viewModel.exercises.observe(viewLifecycleOwner, Observer {
+            adapter.setData(it)
+            tab_layout.setupWithRecyclerView(exercisesRv)
+        })
 
         tab_layout.rightIconClickListener = {
             TransitionManager.beginDelayedTransition(bodyParts_content)

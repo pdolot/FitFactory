@@ -1,16 +1,15 @@
 package com.example.fitfactory.presentation.pages.buyPass
 
-import android.annotation.SuppressLint
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
 import com.example.fitfactory.data.models.app.PassType
 import com.example.fitfactory.data.rest.RetrofitRepository
 import com.example.fitfactory.di.Injector
 import com.example.fitfactory.functional.localStorage.LocalStorage
+import com.example.fitfactory.presentation.base.BaseViewModel
 import io.reactivex.rxkotlin.subscribeBy
 import javax.inject.Inject
 
-class BuyPassViewModel : ViewModel() {
+class BuyPassViewModel : BaseViewModel() {
 
     @Inject
     lateinit var retrofitRepository: RetrofitRepository
@@ -24,20 +23,20 @@ class BuyPassViewModel : ViewModel() {
 
     var passes = MutableLiveData<List<PassType>>()
 
-    @SuppressLint("CheckResult")
     fun getPassesType(){
-        println(localStorage.readToken())
-        retrofitRepository.getAllPassType()
+        rxDisposer.add(retrofitRepository.getAllPassType()
             .subscribeBy (
                 onSuccess = {
                     if (it.status){
                         passes.postValue(it.data)
+                    }else{
+                        passes.postValue(emptyList())
                     }
                 },
                 onError = {
                     println(it.message)
                 }
-            )
+            ))
     }
 
 }

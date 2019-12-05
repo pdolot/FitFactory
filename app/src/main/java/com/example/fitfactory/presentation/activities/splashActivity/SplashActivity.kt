@@ -3,6 +3,7 @@ package com.example.fitfactory.presentation.activities.splashActivity
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.Observer
 import com.example.fitfactory.R
 import com.example.fitfactory.presentation.activities.mainActivity.MainActivity
 
@@ -13,7 +14,10 @@ class SplashActivity: AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash)
-        startMainActivity()
+
+        viewModel.callResult.observe(this, Observer {
+            startMainActivity()
+        })
     }
 
     private fun startMainActivity() {

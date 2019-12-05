@@ -2,10 +2,7 @@ package com.example.fitfactory.data.rest
 
 import com.example.fitfactory.data.models.request.SignInRequest
 import com.example.fitfactory.data.models.request.SignUpRequest
-import com.example.fitfactory.data.models.response.AuthResponse
-import com.example.fitfactory.data.models.response.BaseResponse
-import com.example.fitfactory.data.models.response.FitnessClubsResponse
-import com.example.fitfactory.data.models.response.PassesResponse
+import com.example.fitfactory.data.models.response.*
 import com.example.fitfactory.di.Injector
 import io.reactivex.Observable
 import io.reactivex.Single
@@ -45,6 +42,13 @@ class RetrofitRepository @Inject constructor(private val retrofitService: Retrof
 
     fun getAllFitnessClub(): Observable<FitnessClubsResponse>{
         return  retrofitService.getAllFitnessClub().subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+    }
+
+    // Exercises
+
+    fun getAllExercises(): Single<ExercisesResponse>{
+        return  retrofitService.getAllExercises().subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
     }
 

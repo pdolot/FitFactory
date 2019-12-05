@@ -1,33 +1,39 @@
 package com.example.fitfactory.presentation.pages.exercises.exercise
 
+import android.util.Log
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.example.fitfactory.data.database.exercise.ExerciseRepository
 import com.example.fitfactory.data.models.app.Exercise
+import com.example.fitfactory.di.Injector
+import com.example.fitfactory.presentation.base.BaseViewModel
+import io.reactivex.rxkotlin.subscribeBy
+import javax.inject.Inject
 
-class ExerciseViewModel : ViewModel() {
+class ExerciseViewModel : BaseViewModel() {
 
-    fun getExercises(): List<Exercise>{
-        return listOf(
-            Exercise(
-                name = "Face pull",
-                images = listOf(
-                    "https://www.fabrykasily.pl/upload/gallery/2018/07/id_9695_1531134585_1260x841.jpg",
-                    "https://www.fabrykasily.pl/upload/gallery/2018/07/id_9695_1531134585_1260x841.jpg"
-                )
-            ),
-            Exercise(
-                name = "Wiosłowanie hantlami",
-                images = listOf(
-                    "https://www.fabrykasily.pl/upload/gallery/2018/07/id_9695_1531134585_1260x841.jpg",
-                    "https://www.fabrykasily.pl/upload/gallery/2018/07/id_9699_1531134832_1260x841.jpg"
-                )
-            ),
-            Exercise(
-                name = "Face pull",
-                images = listOf(
-                    "https://www.fabrykasily.pl/upload/gallery/2018/07/id_9695_1531134585_1260x841.jpg",
-                    "https://www.fabrykasily.pl/upload/gallery/2018/07/id_9695_1531134585_1260x841.jpg"
-                )
-            )
-        )
+    @Inject
+    lateinit var exerciseRepository: ExerciseRepository
+
+    val exercises = MutableLiveData<List<Exercise>>()
+    var qrCode: String? = null
+        set(value) {
+            field = value
+            fetchExercisesFromDb(value ?: return)
+        }
+    init {
+        Injector.component.inject(this)
+    }
+
+    private fun fetchExercisesFromDb(qrCode: String){
+        rxDisposer.add(exerciseRepository.getExercisesByQrCode(qrCode)
+            .subscribeBy(
+                onSuccess = {
+                    exercises.postValue(it)
+                },
+                onError = {
+                    Log.e("ExerciseViewModel", it.message)
+                }
+            ))
     }
 }
