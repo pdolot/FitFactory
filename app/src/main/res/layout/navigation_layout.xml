@@ -25,43 +25,78 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
             <androidx.constraintlayout.widget.ConstraintLayout
+                    tools:visibility="visible"
                     android:visibility="gone"
                     android:id="@+id/headerIfLogged"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:paddingTop="@dimen/big_margin"
-                    android:paddingStart="@dimen/big_margin"
-                    android:paddingEnd="@dimen/big_margin"
+                    android:layout_marginEnd="1dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent">
 
-                <com.example.fitfactory.presentation.customViews.ProfileView
-                        android:id="@+id/navigation_profileView"
+                <androidx.constraintlayout.widget.Guideline
+                        android:id="@+id/guide"
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        android:orientation="vertical"
+                        app:layout_constraintGuide_percent="0.42"/>
+
+                <View
+                        android:layout_width="0dp"
+                        app:layout_constraintTop_toTopOf="@id/background"
+                        app:layout_constraintStart_toStartOf="@id/background"
+                        app:layout_constraintEnd_toEndOf="@id/background"
+                        app:layout_constraintBottom_toBottomOf="@id/background"
+                        android:adjustViewBounds="true"
+                        android:layout_height="0dp"
+                        android:background="@color/transparentDark80"/>
+
+                <ImageView
+                        android:id="@+id/background"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        app:layout_constraintBottom_toTopOf="@id/navigation_userName"
                         app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
+                        android:adjustViewBounds="true"
+                        android:src="@drawable/profileview_bg"/>
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                        android:id="@+id/profile_image"
+                        app:layout_constraintStart_toStartOf="@id/background"
+                        app:layout_constraintEnd_toEndOf="@id/guide"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginEnd="16dp"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/user_image"
+                        app:civ_border_width="2dp"
+                        app:civ_border_color="@color/black65"/>
+
 
                 <TextView
+                        android:visibility="visible"
                         android:id="@+id/navigation_userName"
-                        style="@style/FontH1_BOLD"
-                        android:layout_width="wrap_content"
+                        style="@style/FontH2_BOLD"
+                        android:textAlignment="viewStart"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/medium_margin"
-                        android:layout_marginBottom="@dimen/medium_margin"
+                        android:layout_marginStart="@dimen/small_margin"
                         tools:text="Patryk Doleciński"
                         android:textColor="@color/silverMedium"
-                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="@id/guide"
+                        app:layout_constraintBottom_toBottomOf="@id/profile_image"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/navigation_profileView" />
+                        app:layout_constraintTop_toTopOf="@id/profile_image" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <androidx.constraintlayout.widget.ConstraintLayout
+                    android:visibility="gone"
+                    tools:visibility="gone"
                     android:id="@+id/headerIfNotLogged"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
