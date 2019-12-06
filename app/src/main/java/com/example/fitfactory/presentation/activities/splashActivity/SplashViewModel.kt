@@ -30,7 +30,10 @@ class SplashViewModel : BaseViewModel() {
                     if (it.status){
                         insertToDb(it.data)
                         callResult.postValue(true)
+                    }else{
+                        callResult.postValue(false)
                     }
+
                 },
                 onError = {
                     Log.e("SplashViewModel", it.message)

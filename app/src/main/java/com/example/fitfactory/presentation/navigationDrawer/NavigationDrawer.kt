@@ -11,6 +11,7 @@ import com.bumptech.glide.Glide
 import com.example.fitfactory.R
 import com.example.fitfactory.di.Injector
 import com.example.fitfactory.functional.localStorage.LocalStorage
+import com.example.fitfactory.utils.LevelUtil
 import com.example.fitfactory.utils.SpanTextUtil
 import com.example.fitfactory.utils.animateDrawable
 import com.example.fitfactory.utils.resetAnimation
@@ -56,19 +57,28 @@ class NavigationDrawer @JvmOverloads constructor(
         }
     }
 
+
     fun setProfileView() {
         localStorage.getUser()?.let {
             Glide.with(context)
                 .load(it.profileImage)
                 .placeholder(R.drawable.user_image)
-                .centerCrop()
+                .fitCenter()
                 .into(profile_image)
 
+            val entriesCount = 12
             if (it.firstName != null && it.lastName != null) {
                 navigation_userName.text = "${it.firstName} ${it.lastName}"
             } else {
                 navigation_userName.text = "${it.username}"
             }
+
+//            navigation_userEmail.text = it.email
+            navigation_entries.text = entriesCount.toString()
+            LevelUtil.Companion.Builder()
+                .setView(navigation_profileLevel)
+                .build()
+                .setLevel(entriesCount)
         }
     }
 
