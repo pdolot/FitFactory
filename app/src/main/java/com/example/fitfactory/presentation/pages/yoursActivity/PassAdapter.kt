@@ -1,4 +1,4 @@
-package com.example.fitfactory.presentation.pages.pass
+package com.example.fitfactory.presentation.pages.yoursActivity
 
 import android.view.LayoutInflater
 import android.view.View

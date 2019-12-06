@@ -1,4 +1,4 @@
-package com.example.fitfactory.presentation.pages.pass
+package com.example.fitfactory.presentation.pages.yoursActivity
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -32,7 +32,7 @@ class PassFragment : BaseFragment() {
 
     override fun flexibleViewEnabled() = false
     override fun paddingTopEnabled() = true
-    override fun topBarTitle() = getString(R.string.passes)
+    override fun topBarTitle() = getString(R.string.yoursActivity)
     override fun topBarEnabled() = true
     override fun backButtonEnabled(): Boolean = false
 

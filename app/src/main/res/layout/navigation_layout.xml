@@ -58,7 +58,7 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:adjustViewBounds="true"
-                        android:src="@drawable/profileview_bg"
+                        android:src="@drawable/profileview_bg2"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
@@ -155,6 +155,7 @@
                             app:vector_src="@drawable/fit_level"
                             app:layout_constraintTop_toTopOf="@id/navigation_entriesLabel"
                             app:layout_constraintBottom_toBottomOf="@id/navigation_entries"
+                            android:layout_margin="4dp"
                             app:layout_constraintEnd_toEndOf="parent"/>
                 </androidx.constraintlayout.widget.ConstraintLayout>
 

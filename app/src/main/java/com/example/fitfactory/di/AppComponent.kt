@@ -14,7 +14,7 @@ import com.example.fitfactory.presentation.customViews.flexibleLayout.FlexibleVi
 import com.example.fitfactory.presentation.pages.buyPass.PassToBuyAdapter
 import com.example.fitfactory.presentation.pages.map.MapFragment
 import com.example.fitfactory.presentation.pages.map.MapViewModel
-import com.example.fitfactory.presentation.pages.pass.PassAdapter
+import com.example.fitfactory.presentation.pages.yoursActivity.PassAdapter
 import com.example.fitfactory.presentation.pages.rememberPassword.RememberPasswordFragment
 import com.example.fitfactory.presentation.pages.rememberPassword.RememberPasswordViewModel
 import com.example.fitfactory.presentation.pages.signIn.SignInFragment
