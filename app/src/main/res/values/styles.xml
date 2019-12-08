@@ -48,6 +48,12 @@
         <item name="android:textSize">18sp</item>
     </style>
 
+    <style name="FontH4_MEDIUM">
+        <item name="android:textColor">@color/silverMedium</item>
+        <item name="android:fontFamily">@font/fira_sans_condensed_medium</item>
+        <item name="android:textSize">18sp</item>
+    </style>
+
     <style name="FontH5_MEDIUM">
         <item name="android:textColorHighlight">#00FFFFFF</item>
         <item name="android:textColor">@color/silverLight</item>

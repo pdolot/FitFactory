@@ -4,24 +4,20 @@ import android.content.Context
 import android.graphics.drawable.Drawable
 import android.util.AttributeSet
 import android.view.View
-import android.view.ViewTreeObserver
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
 import androidx.core.view.setPadding
 import androidx.recyclerview.widget.PagerSnapHelper
 import androidx.recyclerview.widget.RecyclerView
-import androidx.viewpager.widget.ViewPager
 import com.example.fitfactory.R
 import com.example.fitfactory.presentation.base.BaseAdapter
-import com.example.fitfactory.utils.Bound
-import com.example.fitfactory.utils.scaleValue
 import kotlinx.android.synthetic.main.tab_layout.view.*
 
 class MyTabLayout @JvmOverloads constructor(
     context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
 ) : ConstraintLayout(context, attrs, defStyleAttr) {
 
-    private var viewPager: ViewPager? = null
+
     private var recyclerView: RecyclerView? = null
     private var leftIconDrawable: Drawable? = null
     private var rightIconDrawable: Drawable? = null
@@ -36,7 +32,6 @@ class MyTabLayout @JvmOverloads constructor(
 
         }
     private var snapHelper: PagerSnapHelper? = null
-    private var bounds = Bound(0, 0, 0, 0)
     private var page = 0
         set(value) {
             if (field != value) {
@@ -46,46 +41,12 @@ class MyTabLayout @JvmOverloads constructor(
                     if (onPage >= tab_indicator.maxItemCountInRow) tab_indicator.maxItemCountInRow else onPage
             }
         }
+
     var rightIconClickListener: () -> Unit = {}
     var leftIconClickListener: () -> Unit = {}
 
-    init {
-        View.inflate(context, R.layout.tab_layout, this)
-        getAttrs(attrs)
-        tab_indicator.setTabIndicatorListener(object : TabIndicator.TabIndicatorListener {
-            override fun onItemSelected(position: Int) {
-                viewPager?.setCurrentItem(position, false)
-                recyclerView?.smoothScrollToPosition(page * tab_indicator.maxItemCountInRow + position)
-            }
-        })
-        rightIcon.setOnClickListener { rightIconClickListener() }
-        leftIcon.setOnClickListener { leftIconClickListener() }
-    }
-
-    fun setupWithViewPager(viewPager: ViewPager) {
-        this.viewPager = viewPager
-        tab_indicator.itemCount = viewPager.adapter?.count ?: 1
-        setIndicator()
-        setListeners()
-    }
-
-    fun setupWithRecyclerView(recyclerView: RecyclerView) {
-        val itemCount = recyclerView.adapter?.itemCount ?: 0
-        if (itemCount > 0){
-            this.recyclerView = recyclerView
-            snapHelper = PagerSnapHelper()
-            snapHelper?.attachToRecyclerView(this.recyclerView)
-            tab_indicator.itemCount = itemCount
-            setRecyclerListener()
-            setIndicator()
-        }else{
-            tab_title.text = context.getString(R.string.data_not_given)
-        }
-
-    }
-
-    private fun setRecyclerListener() {
-        recyclerView?.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+    private var scrollListener: RecyclerView.OnScrollListener =
+        object : RecyclerView.OnScrollListener() {
             var position = 0
 
             override fun onScrolled(rv: RecyclerView, dx: Int, dy: Int) {
@@ -94,7 +55,7 @@ class MyTabLayout @JvmOverloads constructor(
                 snapView?.let {
                     position = lm?.getPosition(it) ?: 0
                     page = position / tab_indicator.maxItemCountInRow
-                    setIndicatorBounds(position % tab_indicator.maxItemCountInRow)
+                    tab_indicator.activeItem = position % tab_indicator.maxItemCountInRow
                 }
             }
 
@@ -106,126 +67,60 @@ class MyTabLayout @JvmOverloads constructor(
                     }
                 }
             }
-        })
-    }
-
-    private fun setIndicator() {
-        viewTreeObserver.addOnGlobalLayoutListener(object :
-            ViewTreeObserver.OnGlobalLayoutListener {
-            override fun onGlobalLayout() {
-                viewTreeObserver.removeOnGlobalLayoutListener(this)
-                setIndicatorBounds(0)
-                tab_title.text = viewPager?.adapter?.getPageTitle(0)
-                tab_title.text = recyclerView?.adapter?.let {
-                    (it as BaseAdapter).getTitle(0)
-                }
-            }
-        })
-    }
-
-    private fun setIndicatorBounds(position: Int) {
-        bounds = tab_indicator.getPositionAt(position)
-        indicator.setBounds(
-            bounds.left.toFloat(),
-            bounds.top.toFloat(),
-            bounds.right.toFloat(),
-            bounds.bottom.toFloat()
-        )
-    }
-
-    private fun setListeners() {
-        viewPager?.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
-            var previousPosition = 0f
-            override fun onPageScrollStateChanged(state: Int) {
-            }
-
-            override fun onPageScrolled(
-                position: Int,
-                positionOffset: Float,
-                positionOffsetPixels: Int
-            ) {
-                if (positionOffset in 0.05f..0.95f) {
-                    if (previousPosition < positionOffset) {
-                        tab_title.alpha = positionOffset.scaleValue(0.05f, 0.95f, 1f, 0f)
-                    } else if (previousPosition > positionOffset) {
-                        tab_title.alpha = positionOffset.scaleValue(0.05f, 0.95f, 0f, 1f)
-                    }
-                } else {
-                    tab_title.alpha = 1f
-                }
-                previousPosition = positionOffset
-            }
-
-            override fun onPageSelected(position: Int) {
-                setIndicatorBounds(position)
-                tab_title.alpha = 1f
-                tab_title.text = viewPager?.adapter?.getPageTitle(position)
-            }
-        })
-    }
-
-    private fun getAttrs(attrs: AttributeSet?) {
-        val typedArray = context.obtainStyledAttributes(
-            attrs,
-            R.styleable.style
-        )
-        val count = typedArray.indexCount
-
-        try {
-            for (i in 0 until count) {
-                when (val attr = typedArray.getIndex(i)) {
-                    R.styleable.style_color -> {
-                        tab_indicator.bgColor = typedArray.getColor(
-                            attr,
-                            ContextCompat.getColor(context, R.color.colorPrimaryDark)
-                        )
-                    }
-                    R.styleable.style_indicatorRadius -> {
-                        tab_indicator.indicatorRadius = typedArray.getDimensionPixelSize(attr, 18)
-                        indicator.indicatorRadius = typedArray.getDimensionPixelSize(attr, 18)
-                    }
-                    R.styleable.style_indicatorColor -> {
-                        tab_indicator.indicatorColor = typedArray.getColor(
-                            attr,
-                            ContextCompat.getColor(context, R.color.colorPrimary)
-                        )
-                    }
-                    R.styleable.style_indicatorActiveColor -> {
-                        indicator.indicatorColor = typedArray.getColor(
-                            attr,
-                            ContextCompat.getColor(context, R.color.colorAccent)
-                        )
-                    }
-                    R.styleable.style_itemCount -> {
-                        tab_indicator.itemCount = typedArray.getInteger(attr, 3)
-                    }
-                    R.styleable.style_text -> {
-                        tab_title.text = typedArray.getString(attr)
-                    }
-                    R.styleable.style_textSize -> {
-                        tab_title.textSize = typedArray.getDimensionPixelSize(attr, 12).toFloat()
-                    }
-                    R.styleable.style_iconLeft -> {
-                        leftIconDrawable = typedArray.getDrawable(attr)
-                    }
-                    R.styleable.style_iconRight -> {
-                        rightIconDrawable = typedArray.getDrawable(attr)
-                    }
-                    R.styleable.style_iconColor -> {
-                        iconColor = typedArray.getColor(
-                            attr,
-                            ContextCompat.getColor(context, R.color.colorAccent)
-                        )
-                    }
-                    R.styleable.style_iconPadding -> {
-                        iconPadding = typedArray.getDimensionPixelSize(attr, 0)
-                    }
-
-                }
-            }
-        } finally {
-            typedArray.recycle()
         }
+
+    init {
+        View.inflate(context, R.layout.tab_layout, this)
+        getAttrs(attrs, defStyleAttr)
+        tab_indicator.setTabIndicatorListener(object : TabIndicator.TabIndicatorListener {
+            override fun onItemSelected(position: Int) {
+                recyclerView?.smoothScrollToPosition(page * tab_indicator.maxItemCountInRow + position)
+            }
+        })
+        rightIcon.setOnClickListener { rightIconClickListener() }
+        leftIcon.setOnClickListener { leftIconClickListener() }
+    }
+
+
+    fun setupWithRecyclerView(recyclerView: RecyclerView) {
+
+        this.recyclerView = recyclerView
+        snapHelper = PagerSnapHelper()
+        snapHelper?.attachToRecyclerView(this.recyclerView)
+
+        (recyclerView.adapter as BaseAdapter).apply {
+            onDataSetChanged = {
+                recyclerView.removeOnScrollListener(scrollListener)
+
+                val itemCount = recyclerView.adapter?.itemCount ?: 0
+                tab_indicator.itemCount = itemCount
+                if (itemCount == 0) {
+                    tab_title.text = context.getString(R.string.data_not_given)
+                } else {
+                    recyclerView.addOnScrollListener(scrollListener)
+                    recyclerView.scrollToPosition(0)
+                    setCurrentItem(0)
+                    tab_title.text = getTitle(0)
+                }
+            }
+        }
+
+    }
+
+    private fun getAttrs(attrs: AttributeSet?, defStyleAttr: Int) {
+        val a = context.theme.obtainStyledAttributes(attrs, R.styleable.MyTabLayout, defStyleAttr, 0)
+        tab_indicator.bgColor = a.getColor(R.styleable.MyTabLayout_backgroundColor, ContextCompat.getColor(context, R.color.colorPrimaryDark))
+        tab_indicator.indicatorRadius = a.getDimensionPixelSize(R.styleable.MyTabLayout_indicatorRadius, 18)
+        tab_indicator.indicatorColor = a.getColor(R.styleable.MyTabLayout_indicatorColor, ContextCompat.getColor(context, R.color.colorPrimary))
+        tab_indicator.activeIndicatorColor = a.getColor(R.styleable.MyTabLayout_activeIndicatorColor, ContextCompat.getColor(context, R.color.colorAccent))
+        tab_indicator.itemCount = a.getInteger(R.styleable.MyTabLayout_itemCount, 3)
+        tab_title.text = a.getString(R.styleable.MyTabLayout_tabTitle)
+        tab_title.textSize = a.getDimensionPixelSize(R.styleable.MyTabLayout_textSize,12).toFloat()
+        leftIconDrawable = a.getDrawable(R.styleable.MyTabLayout_leftIconDrawable)
+        rightIconDrawable = a.getDrawable(R.styleable.MyTabLayout_rightIconDrawable)
+        iconColor = a.getColor(R.styleable.MyTabLayout_iconColor, ContextCompat.getColor(context, R.color.colorAccent))
+        iconPadding = a.getDimensionPixelSize(R.styleable.MyTabLayout_iconPadding, 0)
+        a.recycle()
 
         iconColor?.let {
             leftIconDrawable?.setTint(it)
@@ -246,18 +141,18 @@ class MyTabLayout @JvmOverloads constructor(
             }
         }
 
-
-
-        if (iconPadding != 0){
+        if (iconPadding != 0) {
             rightIcon.setPadding(iconPadding)
             leftIcon.setPadding(iconPadding)
         }
 
         tab_indicator.bgColor?.let { tab_titleBackground.setBackgroundColor(it) }
-        tab_title.setPadding(0,
-            (indicator.indicatorRadius * 2.5).toInt(),
+        tab_title.setPadding(
             0,
-            indicator.indicatorRadius * 2
+            (tab_indicator.indicatorRadius * 2.5).toInt(),
+            0,
+            tab_indicator.indicatorRadius * 2
         )
     }
+
 }

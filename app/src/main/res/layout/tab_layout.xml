@@ -15,7 +15,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
+    <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tab_title"
             style="@style/FontH2_BOLD"
             android:layout_width="0dp"
@@ -24,6 +24,11 @@
             app:layout_constraintEnd_toStartOf="@id/rightIcon"
             app:layout_constraintStart_toEndOf="@id/leftIcon"
             app:layout_constraintTop_toTopOf="@id/tab_titleBackground"
+            android:maxLines="1"
+            app:autoSizeTextType="uniform"
+            app:autoSizeMinTextSize="12sp"
+            app:autoSizeMaxTextSize="22sp"
+            app:autoSizeStepGranularity="2sp"
             tools:text="Title" />
 
     <ImageView
@@ -58,15 +63,5 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tab_title" />
 
-    <com.example.fitfactory.presentation.customViews.tabLayout.Indicator
-            android:id="@+id/indicator"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingTop="@dimen/small_margin"
-            android:paddingBottom="@dimen/small_margin"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tab_title" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -28,4 +28,8 @@ interface RetrofitService{
     // Exercises
     @GET("fitnessExercise/getAllExercises")
     fun getAllExercises(): Single<ExercisesResponse>
+
+    // FitnessLesson
+    @GET ("/fitnessLesson/getAll")
+    fun getAllFitnessLesson(): Single<FitnessLessonResponse>
 }

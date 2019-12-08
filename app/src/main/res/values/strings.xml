@@ -29,12 +29,13 @@
     <string name="passFragment_passName">Nazwa</string>
     <string name="passFragment_passDuration">Czas trwania</string>
     <string name="passFragment_passPrice">Cena</string>
-    <string name="passFragment_passDescription">Opis</string>
+    <string name="description">Opis</string>
     <string name="passFragment_passBenefits">Benefity</string>
     <string name="active">Aktywne</string>
     <string name="non_active">Nieaktywne</string>
     <string name="duration">%1$s - %2$s</string>
-    <string name="price">%1$.2f zł/msc</string>
+    <string name="pricePerMonth">%1$.2f zł/msc</string>
+    <string name="price">%1$.2f zł</string>
     <string name="distance">Znajdujesz się %1$.2f km od obiektu</string>
     <string name="address">%1$s ul. %2$s, %3$s %4$s</string>
     <string name="openHours">%1$s (%2$s)</string>
@@ -44,6 +45,10 @@
     <string name="exercises_firstInfo">Zeskanuj kod QR znajdujący się na urządzeniu aby uzyskać przykładowe ćwiczenia, które można wykonać na urządzeniu</string>
     <string name="scanCode">Zeskanuj kod</string>
     <string name="data_not_given">Brak danych</string>
+    <string name="editProfile">Edytuj profil</string>
+    <string name="phoneNumber">Numer telefonu</string>
+    <string name="questionToCoach">Masz pytanie? Skontakuj się ze mną!</string>
+    <string name="coach">Trener</string>
     <plurals name="months_plural">
         <item quantity="one">%d miesiąc</item>
         <item quantity="few">%d miesiące</item>

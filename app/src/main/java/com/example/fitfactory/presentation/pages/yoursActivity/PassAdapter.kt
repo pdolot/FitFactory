@@ -58,7 +58,7 @@ class PassAdapter : RecyclerView.Adapter<PassAdapter.ViewHolder>() {
                 .into(qrCode)
             passName.text = item?.passType?.shortName
             passDuration.text = context.getString(R.string.duration, item?.startDate, item?.endDate)
-            passPrice.text = context.getString(R.string.price, item?.passType?.periodPrice)
+            passPrice.text = context.getString(R.string.pricePerMonth, item?.passType?.periodPrice)
 
             contract_termination.setOnClickListener {
                 MaterialDialog(context).show {

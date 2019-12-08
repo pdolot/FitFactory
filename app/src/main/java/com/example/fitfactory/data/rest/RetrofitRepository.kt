@@ -52,4 +52,10 @@ class RetrofitRepository @Inject constructor(private val retrofitService: Retrof
             .observeOn(AndroidSchedulers.mainThread())
     }
 
+    // FitnessLesson
+    fun getAllFitnessLesson(): Single<FitnessLessonResponse>{
+        return  retrofitService.getAllFitnessLesson().subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+    }
+
 }

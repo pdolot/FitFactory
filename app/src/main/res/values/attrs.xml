@@ -1,9 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
+    <attr name="backgroundColor" format="color" />
+    <attr name="iconColor" format="color" />
+
     <declare-styleable name="style">
-        <attr name="backgroundColor" format="color" />
+        <attr name="backgroundColor"/>
         <attr name="color" format="color" />
-        <attr name="iconColor" format="color" />
+        <attr name="iconColor" />
         <attr name="disabledIconColor" format="color" />
         <attr name="icon" format="reference" />
         <attr name="iconLeft" format="reference" />
@@ -15,15 +19,8 @@
         <attr name="view" format="reference"/>
         <attr name="thumbSize" format="dimension"/>
         <attr name="barWidth" format="dimension"/>
-        <attr name="indicatorRadius" format="dimension"/>
-        <attr name="itemCount" format="integer"/>
-        <attr name="text" format="string"/>
-        <attr name="textSize" format="dimension"/>
-        <attr name="indicatorActiveColor" format="color"/>
-        <attr name="indicatorColor" format="color"/>
         <attr name="iconDown" format="reference"/>
         <attr name="iconUp" format="reference"/>
-        <attr name="iconPadding" format="dimension"/>
 
         <attr name="pieceCount" format="integer"/>
         <attr name="spacePercent" format="integer"/>
@@ -38,4 +35,19 @@
         <attr name="disableColor" format="color"/>
         <attr name="isEnable" format="boolean"/>
     </declare-styleable>
+
+    <declare-styleable name="MyTabLayout">
+        <attr name="backgroundColor"/>
+        <attr name="indicatorRadius" format="dimension"/>
+        <attr name="indicatorColor" format="color"/>
+        <attr name="activeIndicatorColor" format="color"/>
+        <attr name="itemCount" format="integer"/>
+        <attr name="tabTitle" format="string"/>
+        <attr name="textSize" format="dimension"/>
+        <attr name="leftIconDrawable" format="reference"/>
+        <attr name="rightIconDrawable" format="reference"/>
+        <attr name="iconColor"/>
+        <attr name="iconPadding" format="dimension"/>
+    </declare-styleable>
+
 </resources>
