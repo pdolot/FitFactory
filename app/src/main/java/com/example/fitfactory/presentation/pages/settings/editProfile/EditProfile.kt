@@ -4,9 +4,11 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.bumptech.glide.Glide
 import com.example.fitfactory.R
 import com.example.fitfactory.presentation.base.BaseFragment
 import kotlinx.android.synthetic.main.fragment_edit_profile.*
+import kotlinx.android.synthetic.main.navigation_layout.view.*
 
 class EditProfile : BaseFragment() {
 
@@ -45,6 +47,12 @@ class EditProfile : BaseFragment() {
             userAddressCity.setText(user.address?.city)
             userZipCode.setText(user.address?.zipCode)
             userZipCodeCity.setText(user.address?.zipCodeCity)
+
+            Glide.with(context ?: return)
+                .load(it.profileImage)
+                .placeholder(R.drawable.user_image)
+                .fitCenter()
+                .into(profileImage)
         }
     }
 

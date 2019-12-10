@@ -34,6 +34,7 @@
         <attr name="thumbColor" format="color"/>
         <attr name="disableColor" format="color"/>
         <attr name="isEnable" format="boolean"/>
+        <attr name="paddingTop" format="dimension"/>
     </declare-styleable>
 
     <declare-styleable name="MyTabLayout">

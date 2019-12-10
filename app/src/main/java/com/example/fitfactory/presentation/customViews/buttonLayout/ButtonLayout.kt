@@ -13,6 +13,7 @@ class ButtonLayout @JvmOverloads constructor(
 ) : ConstraintLayout(context, attrs, defStyleAttr) {
 
     private var bias = 0.5f
+    private var bgColor = 0
 
     init {
         View.inflate(context, R.layout.view_button_layout, this)
@@ -35,6 +36,13 @@ class ButtonLayout @JvmOverloads constructor(
             )
         )
 
+        bgColor = a.getColor(R.styleable.style_backgroundColor, ContextCompat.getColor(context, R.color.colorPrimaryDark))
+
+        val params = paddingTopView.layoutParams
+        params.height = a.getDimensionPixelSize(R.styleable.style_paddingTop, 0)
+        paddingTopView.layoutParams = params
+
+
         overlappingButton.clickEnable = a.getBoolean(R.styleable.style_isEnable, true)
         overlappingButton.icon = a.getDrawable(R.styleable.style_icon)
         overlappingButton.iconTint = a.getColor(
@@ -52,13 +60,9 @@ class ButtonLayout @JvmOverloads constructor(
             it.layoutParams.apply {
                 height = overlappingButton.getCenterY()
             }
-            it.background.setTint(
-                a.getColor(
-                    R.styleable.style_backgroundColor,
-                    ContextCompat.getColor(context, R.color.colorPrimaryDark)
-                )
-            )
+            it.background.setTint(bgColor)
         }
+        paddingTopView.background.setTint(bgColor)
         a.recycle()
 
         (overlappingButton.layoutParams as LayoutParams).apply {
