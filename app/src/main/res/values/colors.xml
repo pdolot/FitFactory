@@ -32,6 +32,8 @@
     <color name="transparent95">#0DFFFFFF</color>
     <color name="transparent80">#33FFFFFF</color>
     <color name="transparentDark50">#80000000</color>
+    <color name="transparentDark90">#1A000000</color>
+    <color name="transparent50">#80FFFFFF</color>
     <color name="transparent98">#05FFFFFF</color>
 
     <color name="mtrl_textinput_default_box_stroke_color" tools:override="true">#333333</color>

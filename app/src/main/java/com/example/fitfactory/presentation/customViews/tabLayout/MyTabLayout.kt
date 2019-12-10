@@ -70,12 +70,18 @@ class MyTabLayout @JvmOverloads constructor(
     }
 
     fun setupWithRecyclerView(recyclerView: RecyclerView) {
-        this.recyclerView = recyclerView
-        snapHelper = PagerSnapHelper()
-        snapHelper?.attachToRecyclerView(this.recyclerView)
-        tab_indicator.itemCount = recyclerView.adapter?.itemCount ?: 1
-        setRecyclerListener()
-        setIndicator()
+        val itemCount = recyclerView.adapter?.itemCount ?: 0
+        if (itemCount > 0){
+            this.recyclerView = recyclerView
+            snapHelper = PagerSnapHelper()
+            snapHelper?.attachToRecyclerView(this.recyclerView)
+            tab_indicator.itemCount = itemCount
+            setRecyclerListener()
+            setIndicator()
+        }else{
+            tab_title.text = context.getString(R.string.data_not_given)
+        }
+
     }
 
     private fun setRecyclerListener() {
@@ -86,7 +92,7 @@ class MyTabLayout @JvmOverloads constructor(
                 val lm = rv.layoutManager
                 val snapView = snapHelper?.findSnapView(lm)
                 snapView?.let {
-                    position = lm?.getPosition(it) ?: -1
+                    position = lm?.getPosition(it) ?: 0
                     page = position / tab_indicator.maxItemCountInRow
                     setIndicatorBounds(position % tab_indicator.maxItemCountInRow)
                 }

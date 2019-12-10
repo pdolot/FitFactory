@@ -17,10 +17,22 @@
                 android:id="@+id/pass_image"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
+                android:src="@drawable/fitness_pass_promo"
+                android:scaleType="centerCrop"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toBottomOf="@id/guideline"/>
+
+        <ImageView
+                android:layout_width="0dp"
+                android:layout_height="@dimen/medium_margin"
+                android:src="@drawable/shadow_background2"
+                android:tint="@color/black85"
+                android:rotation="180"
+                app:layout_constraintBottom_toBottomOf="@id/pass_image"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"/>
 
         <androidx.constraintlayout.widget.Guideline
                 android:id="@+id/guideline"

@@ -1,11 +1,10 @@
 package com.example.fitfactory.functional.localStorage
 
 import android.content.Context
-import com.example.fitfactory.data.models.SharedPrefUser
-import com.example.fitfactory.data.models.UserGetResource
+import com.example.fitfactory.data.models.app.SharedPrefUser
+import com.example.fitfactory.data.models.app.UserGetResource
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
-import java.lang.reflect.Type
 
 class SharedPrefLocalStorage(context: Context) : LocalStorage {
 
@@ -43,7 +42,7 @@ class SharedPrefLocalStorage(context: Context) : LocalStorage {
     }
 
     override fun readToken(): String? {
-        return sharedPref.getString(IS_LOGGED, null)
+        return sharedPref.getString(TOKEN, null)
     }
 
     override fun setToken(token: String?) {
@@ -69,7 +68,13 @@ class SharedPrefLocalStorage(context: Context) : LocalStorage {
 
 
     private fun addFacebookUser(username: String, password: String, email: String): String {
-        return Gson().toJson(SharedPrefUser(username, password, email))
+        return Gson().toJson(
+            SharedPrefUser(
+                username,
+                password,
+                email
+            )
+        )
     }
 
     private fun getFacebookUser(): SharedPrefUser? {

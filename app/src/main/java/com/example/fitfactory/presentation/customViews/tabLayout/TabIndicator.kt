@@ -21,14 +21,26 @@ class TabIndicator @JvmOverloads constructor(
     var itemCount = 1
         set(value) {
             field = value
-            invalidate()
+            measureItemInRow()
         }
     private var spaceWidth = 0
     private var indicatorsPositions: ArrayList<Bound> = ArrayList()
     private var indicatorsBgPositions: ArrayList<Bound> = ArrayList()
     private val indicatorBackground = ContextCompat.getDrawable(context, R.drawable.indicator_bg)
     private lateinit var tabIndicatorListener: TabIndicatorListener
+
     var maxItemCountInRow = 1
+        set(value) {
+            field = value
+            measureItemInRow()
+        }
+
+
+    private fun measureItemInRow(){
+        itemInRow = if (itemCount <= maxItemCountInRow) itemCount else maxItemCountInRow
+        invalidate()
+    }
+
     var itemInRow: Int? = null
         set(value) {
             field = value
@@ -97,8 +109,8 @@ class TabIndicator @JvmOverloads constructor(
             measureDimension(measuredWidth, widthMeasureSpec),
             measureDimension(indicatorRadius * 5, heightMeasureSpec)
         )
+
         maxItemCountInRow = floor(measuredWidth / (indicatorRadius * 5.0)).toInt()
-        itemInRow = if (itemCount <= maxItemCountInRow) itemCount else maxItemCountInRow
     }
 
     private fun measurePoints(){

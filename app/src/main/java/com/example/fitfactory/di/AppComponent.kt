@@ -8,20 +8,23 @@ import com.example.fitfactory.di.modules.RestModule
 import com.example.fitfactory.di.modules.UserModule
 import com.example.fitfactory.presentation.activities.mainActivity.MainActivity
 import com.example.fitfactory.presentation.activities.mainActivity.MainViewModel
+import com.example.fitfactory.presentation.activities.splashActivity.SplashViewModel
 import com.example.fitfactory.presentation.customViews.TopBar
 import com.example.fitfactory.presentation.customViews.flexibleLayout.FlexibleView
-import com.example.fitfactory.presentation.fragments.buyPass.PassToBuyAdapter
-import com.example.fitfactory.presentation.fragments.map.MapFragment
-import com.example.fitfactory.presentation.fragments.map.MapViewModel
-import com.example.fitfactory.presentation.fragments.pass.PassAdapter
-import com.example.fitfactory.presentation.fragments.rememberPassword.RememberPasswordFragment
-import com.example.fitfactory.presentation.fragments.rememberPassword.RememberPasswordViewModel
-import com.example.fitfactory.presentation.fragments.signIn.SignInFragment
-import com.example.fitfactory.presentation.fragments.signIn.SignInViewModel
-import com.example.fitfactory.presentation.fragments.signUp.SignUpFragment
-import com.example.fitfactory.presentation.fragments.signUp.SignUpViewModel
+import com.example.fitfactory.presentation.pages.buyPass.PassToBuyAdapter
+import com.example.fitfactory.presentation.pages.map.MapFragment
+import com.example.fitfactory.presentation.pages.map.MapViewModel
+import com.example.fitfactory.presentation.pages.yoursActivity.PassAdapter
+import com.example.fitfactory.presentation.pages.rememberPassword.RememberPasswordFragment
+import com.example.fitfactory.presentation.pages.rememberPassword.RememberPasswordViewModel
+import com.example.fitfactory.presentation.pages.signIn.SignInFragment
+import com.example.fitfactory.presentation.pages.signIn.SignInViewModel
+import com.example.fitfactory.presentation.pages.signUp.SignUpFragment
+import com.example.fitfactory.presentation.pages.signUp.SignUpViewModel
 import com.example.fitfactory.presentation.navigationDrawer.NavigationDrawer
 import com.example.fitfactory.presentation.navigationDrawer.NavigationRecyclerViewAdapter
+import com.example.fitfactory.presentation.pages.buyPass.BuyPassViewModel
+import com.example.fitfactory.presentation.pages.exercises.exercise.ExerciseViewModel
 import com.example.fitfactory.utils.BitmapHelper
 import com.example.fitfactory.utils.Validator
 import dagger.Component
@@ -40,6 +43,7 @@ interface AppComponent {
     // Activities
     fun inject(into: MainActivity)
     fun inject(into: MainViewModel)
+    fun inject(into: SplashViewModel)
 
     // Fragments
     fun inject(into: SignInFragment)
@@ -53,9 +57,14 @@ interface AppComponent {
     fun inject(into: SignUpViewModel)
     fun inject(into: RememberPasswordViewModel)
     fun inject(into: MapViewModel)
+    fun inject(into: BuyPassViewModel)
+    fun inject(into: ExerciseViewModel)
 
     // Utils
     fun inject(into: BitmapHelper)
+    fun inject(into: TokenInterceptor)
+    fun inject(into: RetrofitRepository)
+    fun inject(into: Validator)
 
     // Adapters
     fun inject(into: NavigationRecyclerViewAdapter)
@@ -64,11 +73,6 @@ interface AppComponent {
 
     // Views
     fun inject(into: FlexibleView)
-
     fun inject(into: TopBar)
-    fun inject(into: TokenInterceptor)
-    fun inject(into: RetrofitRepository)
-    fun inject(into: Validator)
-
 
 }

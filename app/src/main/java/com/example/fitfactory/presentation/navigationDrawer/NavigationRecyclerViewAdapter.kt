@@ -7,7 +7,6 @@ import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.example.fitfactory.R
-import com.example.fitfactory.data.models.UserGetResource
 import com.example.fitfactory.di.Injector
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import kotlinx.android.synthetic.main.item_navigation.view.*

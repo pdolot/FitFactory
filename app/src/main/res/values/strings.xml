@@ -19,6 +19,7 @@
     <string name="passes">Karnety</string>
     <string name="payment">Płatność</string>
     <string name="buy_pass">Kup karnet</string>
+    <string name="yoursActivity">Twoja aktywność</string>
     <string name="exercises">Ćwiczenia</string>
     <string name="fitness_lessons">Zajęcia fitness</string>
     <string name="settings">Ustawienia</string>
@@ -36,12 +37,13 @@
     <string name="price">%1$.2f zł/msc</string>
     <string name="distance">Znajdujesz się %1$.2f km od obiektu</string>
     <string name="address">%1$s ul. %2$s, %3$s %4$s</string>
-    <string name="openHours">%1$s - %2$s (%3$s)</string>
+    <string name="openHours">%1$s (%2$s)</string>
     <string name="card_number">Numer karty</string>
     <string name="card_expiry">Data ważności</string>
     <string name="exercises_secondInfo">Pamiętaj, że nieprawidłowe wykonywacnie ćwiczenia może prowadzić do kontuzji. Zwróć uwagę na prawidłową postawę ciała i osiągaj swoje cele!</string>
     <string name="exercises_firstInfo">Zeskanuj kod QR znajdujący się na urządzeniu aby uzyskać przykładowe ćwiczenia, które można wykonać na urządzeniu</string>
     <string name="scanCode">Zeskanuj kod</string>
+    <string name="data_not_given">Brak danych</string>
     <plurals name="months_plural">
         <item quantity="one">%d miesiąc</item>
         <item quantity="few">%d miesiące</item>

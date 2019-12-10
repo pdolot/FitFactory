@@ -1,7 +1,7 @@
 package com.example.fitfactory.functional.localStorage
 
-import com.example.fitfactory.data.models.SharedPrefUser
-import com.example.fitfactory.data.models.UserGetResource
+import com.example.fitfactory.data.models.app.SharedPrefUser
+import com.example.fitfactory.data.models.app.UserGetResource
 
 interface LocalStorage {
     fun isLoggedLive(): LivePreference<Boolean>

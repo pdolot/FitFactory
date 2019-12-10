@@ -3,31 +3,21 @@ package com.example.fitfactory.presentation.activities.splashActivity
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.Observer
 import com.example.fitfactory.R
 import com.example.fitfactory.presentation.activities.mainActivity.MainActivity
 
 class SplashActivity: AppCompatActivity() {
 
+    private val viewModel by lazy { SplashViewModel() }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash)
-        startMainActivity()
 
-//        AccessToken.getCurrentAccessToken()?.let {
-//            if (!it.isExpired) {
-//                val profile = Profile.getCurrentProfile()
-//                user.firstName = profile.firstName
-//                user.lastName = profile.lastName
-//                user.picture = profile.getProfilePictureUri(300, 300).toString()
-//            }
-//        }
-//
-//        GoogleSignIn.getLastSignedInAccount(applicationContext)?.let {
-//            user.firstName = it.givenName ?: ""
-//            user.lastName = it.familyName ?: ""
-//            user.picture = it.photoUrl.toString()
-//        }
+        viewModel.callResult.observe(this, Observer {
+            startMainActivity()
+        })
     }
 
     private fun startMainActivity() {

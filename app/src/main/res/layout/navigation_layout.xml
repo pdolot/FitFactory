@@ -2,14 +2,16 @@
 <androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/navigationScroll"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@drawable/drawer_background"
+        android:descendantFocusability="blocksDescendants"
+        android:overScrollMode="never"
         android:scrollbars="none"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:overScrollMode="never">
+        app:layout_constraintTop_toTopOf="parent">
 
     <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -19,43 +21,145 @@
                 android:id="@+id/headerLayout"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
+
             <androidx.constraintlayout.widget.ConstraintLayout
-                    android:visibility="gone"
                     android:id="@+id/headerIfLogged"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:paddingTop="@dimen/big_margin"
-                    android:paddingStart="@dimen/big_margin"
-                    android:paddingEnd="@dimen/big_margin"
+                    android:layout_marginEnd="1dp"
+                    android:visibility="gone"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent">
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:visibility="visible">
 
-                <com.example.fitfactory.presentation.customViews.ProfileView
-                        android:id="@+id/navigation_profileView"
+                <androidx.constraintlayout.widget.Guideline
+                        android:id="@+id/guide"
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        android:orientation="vertical"
+                        app:layout_constraintGuide_percent="0.42" />
+
+                <View
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        android:adjustViewBounds="true"
+                        android:background="@color/transparentDark90"
+                        app:layout_constraintBottom_toBottomOf="@id/background"
+                        app:layout_constraintEnd_toEndOf="@id/background"
+                        app:layout_constraintStart_toStartOf="@id/background"
+                        app:layout_constraintTop_toTopOf="@id/background" />
+
+                <ImageView
+                        android:id="@+id/background"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        app:layout_constraintBottom_toTopOf="@id/navigation_userName"
+                        android:adjustViewBounds="true"
+                        android:src="@drawable/profileview_bg2"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 
-                <TextView
-                        android:id="@+id/navigation_userName"
-                        style="@style/FontH1_BOLD"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/medium_margin"
-                        android:layout_marginBottom="@dimen/medium_margin"
-                        tools:text="Patryk Doleciński"
-                        android:textColor="@color/silverMedium"
+                <de.hdodenhof.circleimageview.CircleImageView
+                        android:id="@+id/profile_image"
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginEnd="16dp"
+                        app:layout_constraintDimensionRatio="1:1"
+                        android:src="@drawable/user_image"
+                        app:civ_border_color="@color/black65"
+                        app:civ_border_width="2dp"
                         app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="@id/guide"
+                        app:layout_constraintStart_toStartOf="@id/background"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintBottom_toBottomOf="@id/profile_image"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/navigation_profileView" />
+                        app:layout_constraintStart_toStartOf="@id/guide"
+                        app:layout_constraintTop_toTopOf="@id/profile_image"
+                        android:layout_marginStart="@dimen/small_margin"
+                        android:layout_marginEnd="16dp"
+                        >
+                    <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/navigation_userName"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/fira_sans_condensed_bold"
+                            android:textAlignment="viewStart"
+                            android:textColor="@color/silverMedium"
+                            android:visibility="visible"
+                            android:textSize="22sp"
+                            android:maxLines="1"
+                            app:autoSizeTextType="uniform"
+                            app:autoSizeMinTextSize="10sp"
+                            app:autoSizeMaxTextSize="22sp"
+                            app:autoSizeStepGranularity="1sp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            tools:text="Patryk Doleciński" />
+
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/navigation_entriesLabel"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/fira_sans_condensed_regular"
+                            android:textAlignment="viewStart"
+                            android:textColor="@color/primaryLight"
+                            android:visibility="visible"
+                            android:textSize="14sp"
+                            android:layout_marginEnd="@dimen/small_margin"
+                            android:maxLines="1"
+                            app:autoSizeTextType="uniform"
+                            app:autoSizeMinTextSize="10sp"
+                            app:autoSizeMaxTextSize="16sp"
+                            app:autoSizeStepGranularity="1sp"
+                            app:layout_constraintEnd_toStartOf="@id/navigation_profileLevel"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/navigation_userName"
+                            android:text="Liczba wejść:" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/navigation_entries"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/fira_sans_condensed_light"
+                            android:textAlignment="viewStart"
+                            android:textColor="@color/silverMedium"
+                            android:visibility="visible"
+                            android:textSize="14sp"
+                            android:layout_marginEnd="@dimen/small_margin"
+                            app:autoSizeTextType="uniform"
+                            app:autoSizeMinTextSize="10sp"
+                            app:autoSizeMaxTextSize="16sp"
+                            app:autoSizeStepGranularity="1sp"
+                            app:layout_constraintEnd_toStartOf="@id/navigation_profileLevel"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/navigation_entriesLabel"
+                            android:text="12" />
+
+                    <com.sdsmdg.harjot.vectormaster.VectorMasterView
+                            android:id="@+id/navigation_profileLevel"
+                            android:layout_width="0dp"
+                            android:layout_height="0dp"
+                            app:layout_constraintDimensionRatio="1:1"
+                            app:vector_src="@drawable/fit_level"
+                            app:layout_constraintTop_toTopOf="@id/navigation_entriesLabel"
+                            app:layout_constraintBottom_toBottomOf="@id/navigation_entries"
+                            android:layout_margin="4dp"
+                            app:layout_constraintEnd_toEndOf="parent"/>
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -63,13 +167,15 @@
                     android:id="@+id/headerIfNotLogged"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:paddingTop="@dimen/big_margin"
                     android:paddingStart="@dimen/big_margin"
+                    android:paddingTop="@dimen/big_margin"
                     android:paddingEnd="@dimen/big_margin"
+                    android:visibility="gone"
+                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintTop_toTopOf="parent">
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:visibility="gone">
 
                 <ImageView
                         android:id="@+id/animatedCircle"
@@ -77,34 +183,33 @@
                         android:layout_height="0dp"
                         android:src="@drawable/circles_animated"
                         app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintDimensionRatio="1:1"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintDimensionRatio="1:1"/>
+                        app:layout_constraintTop_toTopOf="parent" />
 
                 <androidx.appcompat.widget.AppCompatTextView
                         android:id="@+id/actionLabel"
                         style="@style/FontH5_MEDIUM"
                         android:layout_width="0dp"
                         android:layout_height="0dp"
+                        android:layout_margin="65dp"
+                        android:gravity="center"
                         android:text="Zaloguj\nlub\nzarejestruj się"
                         android:textAlignment="center"
-                        android:gravity="center"
-                        android:layout_margin="65dp"
                         android:textColor="@color/silverVeryDark"
-                        app:lineHeight="28dp"
-                        app:autoSizeTextType="uniform"
                         app:autoSizeMaxTextSize="18sp"
                         app:autoSizeMinTextSize="12sp"
                         app:autoSizeStepGranularity="2sp"
-                        app:layout_constraintTop_toTopOf="@id/animatedCircle"
+                        app:autoSizeTextType="uniform"
                         app:layout_constraintBottom_toBottomOf="@id/animatedCircle"
                         app:layout_constraintEnd_toEndOf="@id/animatedCircle"
-                        app:layout_constraintStart_toStartOf="@id/animatedCircle" />
+                        app:layout_constraintStart_toStartOf="@id/animatedCircle"
+                        app:layout_constraintTop_toTopOf="@id/animatedCircle"
+                        app:lineHeight="28dp" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>
-
 
 
         <androidx.recyclerview.widget.RecyclerView
@@ -112,14 +217,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:clipToPadding="false"
+                android:isScrollContainer="false"
+                android:nestedScrollingEnabled="false"
                 app:layout_constraintBottom_toTopOf="@id/navigation_facebookButton"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/headerLayout"
-                android:nestedScrollingEnabled="false"
-                android:isScrollContainer="false"
-                tools:listitem="@layout/item_navigation"
-                />
+                tools:listitem="@layout/item_navigation" />
 
         <ImageView
                 android:id="@+id/navigation_facebookButton"
@@ -132,7 +236,6 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/navigation_recyclerView" />
-
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

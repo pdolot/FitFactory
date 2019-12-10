@@ -4,9 +4,9 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         xmlns:app="http://schemas.android.com/apk/res-auto"
-        tools:context=".presentation.fragments.exercises.scannerView.ScannerFragment">
+        tools:context=".presentation.pages.exercises.scannerView.ScannerFragment">
 
-    <com.example.fitfactory.presentation.fragments.exercises.barcodeScanner.CameraSourcePreview
+    <com.example.fitfactory.presentation.pages.exercises.barcodeScanner.CameraSourcePreview
             android:id="@+id/firePreview"
             android:layout_width="0dp"
             android:layout_height="0dp"
@@ -15,12 +15,12 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintBottom_toBottomOf="parent">
 
-        <com.example.fitfactory.presentation.fragments.exercises.barcodeScanner.GraphicOverlay
+        <com.example.fitfactory.presentation.pages.exercises.barcodeScanner.GraphicOverlay
                 android:id="@+id/fireFaceOverlay"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"/>
 
-    </com.example.fitfactory.presentation.fragments.exercises.barcodeScanner.CameraSourcePreview>
+    </com.example.fitfactory.presentation.pages.exercises.barcodeScanner.CameraSourcePreview>
 
 
     <androidx.constraintlayout.widget.ConstraintLayout

@@ -5,11 +5,7 @@ import android.graphics.drawable.Drawable
 import android.os.Build
 import android.text.Editable
 import android.text.TextWatcher
-import com.example.fitfactory.data.models.Address
 import com.google.android.material.textfield.TextInputEditText
-import com.google.gson.Gson
-import com.google.gson.reflect.TypeToken
-import okhttp3.ResponseBody
 import java.sql.Time
 import kotlin.math.floor
 

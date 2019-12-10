@@ -7,14 +7,17 @@ import android.util.AttributeSet
 import android.view.View
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.bumptech.glide.Glide
 import com.example.fitfactory.R
-import com.example.fitfactory.data.models.UserGetResource
 import com.example.fitfactory.di.Injector
 import com.example.fitfactory.functional.localStorage.LocalStorage
+import com.example.fitfactory.utils.LevelUtil
 import com.example.fitfactory.utils.SpanTextUtil
 import com.example.fitfactory.utils.animateDrawable
 import com.example.fitfactory.utils.resetAnimation
 import kotlinx.android.synthetic.main.navigation_layout.view.*
+import kotlinx.android.synthetic.main.navigation_layout.view.profile_image
+import kotlinx.android.synthetic.main.profile_navigation_view.view.*
 import javax.inject.Inject
 
 class NavigationDrawer @JvmOverloads constructor(
@@ -30,7 +33,6 @@ class NavigationDrawer @JvmOverloads constructor(
     init {
         View.inflate(context, R.layout.navigation_layout, this)
         Injector.component.inject(this)
-
         SpanTextUtil(context).apply {
             setClickableSpanOnTextView(
                 actionLabel,
@@ -55,18 +57,33 @@ class NavigationDrawer @JvmOverloads constructor(
         }
     }
 
+
     fun setProfileView() {
         localStorage.getUser()?.let {
-            it.profileImage?.let { navigation_profileView.setProfileImage(Uri.parse(it)) }
-            navigation_profileView.setLevel(324)
+            Glide.with(context)
+                .load(it.profileImage)
+                .placeholder(R.drawable.user_image)
+                .fitCenter()
+                .into(profile_image)
 
+            val entriesCount = 12
             if (it.firstName != null && it.lastName != null) {
                 navigation_userName.text = "${it.firstName} ${it.lastName}"
             } else {
                 navigation_userName.text = "${it.username}"
             }
 
+//            navigation_userEmail.text = it.email
+            navigation_entries.text = entriesCount.toString()
+            LevelUtil.Companion.Builder()
+                .setView(navigation_profileLevel)
+                .build()
+                .setLevel(entriesCount)
         }
+    }
+
+    fun resetScroll(){
+        navigationScroll.scrollTo(0,0)
     }
 
     fun setAdapter(navigationAdapter: NavigationRecyclerViewAdapter) {

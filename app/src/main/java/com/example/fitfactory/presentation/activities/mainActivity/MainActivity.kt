@@ -1,6 +1,5 @@
 package com.example.fitfactory.presentation.activities.mainActivity
 
-import android.net.Uri
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
@@ -10,14 +9,12 @@ import androidx.lifecycle.Observer
 import androidx.navigation.findNavController
 import com.example.fitfactory.R
 import com.example.fitfactory.app.App
-import com.example.fitfactory.data.models.UserGetResource
 import com.example.fitfactory.di.Injector
 import com.example.fitfactory.presentation.customViews.CustomDrawerLayout
 import com.example.fitfactory.presentation.customViews.TopBar
 import com.example.fitfactory.presentation.customViews.flexibleLayout.FlexibleView
 import com.example.fitfactory.presentation.navigationDrawer.NavigationRecyclerViewAdapter
 import kotlinx.android.synthetic.main.activity_main.*
-import javax.inject.Inject
 
 class MainActivity : AppCompatActivity(), MainInterface {
 
@@ -51,7 +48,7 @@ class MainActivity : AppCompatActivity(), MainInterface {
 
     private fun setTopBarProfileImage() {
         viewModel.localStorage.getUser()?.profileImage?.let {
-            mainFragment_topBar.setProfileImage(Uri.parse(it))
+            mainFragment_topBar.setProfileImage(it)
         }
 
     }
@@ -76,6 +73,13 @@ class MainActivity : AppCompatActivity(), MainInterface {
         }
         mainFragment_navigationDrawer.onSignInClick = { closeDrawer(R.id.signInFragment) }
         mainFragment_navigationDrawer.onSignUpClick = { closeDrawer(R.id.signUpFragment) }
+
+        mainFragment_drawerLayout.addDrawerListener(object : DrawerLayout.SimpleDrawerListener(){
+            override fun onDrawerClosed(drawerView: View) {
+                super.onDrawerClosed(drawerView)
+                mainFragment_navigationDrawer.resetScroll()
+            }
+        })
     }
 
     private fun closeDrawer(destinationId: Int) {

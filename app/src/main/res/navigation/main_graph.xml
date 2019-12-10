@@ -6,45 +6,52 @@
             app:startDestination="@+id/mapFragment">
 
     <fragment android:id="@+id/signInFragment"
-            android:name="com.example.fitfactory.presentation.fragments.signIn.SignInFragment"
+            android:name="com.example.fitfactory.presentation.pages.signIn.SignInFragment"
             android:label="sign_in_fragment" tools:layout="@layout/fragment_sign_in"/>
 
     <fragment android:id="@+id/signUpFragment"
-            android:name="com.example.fitfactory.presentation.fragments.signUp.SignUpFragment"
+            android:name="com.example.fitfactory.presentation.pages.signUp.SignUpFragment"
             android:label="sign_up_fragment" tools:layout="@layout/fragment_sign_up"/>
 
     <fragment android:id="@+id/rememberPasswordFragment"
-            android:name="com.example.fitfactory.presentation.fragments.rememberPassword.RememberPasswordFragment"
+            android:name="com.example.fitfactory.presentation.pages.rememberPassword.RememberPasswordFragment"
             android:label="remember_password_fragment" tools:layout="@layout/fragment_remember_password"/>
 
     <fragment android:id="@+id/mapFragment"
-              android:name="com.example.fitfactory.presentation.fragments.map.MapFragment"
+              android:name="com.example.fitfactory.presentation.pages.map.MapFragment"
               android:label="map_fragment" tools:layout="@layout/fragment_map"/>
     <fragment android:id="@+id/buyPassFragment"
-              android:name="com.example.fitfactory.presentation.fragments.buyPass.BuyPassFragment"
+              android:name="com.example.fitfactory.presentation.pages.buyPass.BuyPassFragment"
               android:label="buy_pass_fragment" tools:layout="@layout/fragment_buy_pass">
     </fragment>
     <fragment
             android:id="@+id/passFragment"
-            android:name="com.example.fitfactory.presentation.fragments.pass.PassFragment"
+            android:name="com.example.fitfactory.presentation.pages.yoursActivity.PassFragment"
             android:label="PassFragment" />
     <fragment
             android:id="@+id/paymentFragment"
-            android:name="com.example.fitfactory.presentation.fragments.payment.PaymentFragment"
+            android:name="com.example.fitfactory.presentation.pages.payment.PaymentFragment"
             android:label="PaymentFragment" />
     <fragment
             android:id="@+id/exercisesInfo"
-            android:name="com.example.fitfactory.presentation.fragments.exercises.info.ExercisesInfoFragment"
+            android:name="com.example.fitfactory.presentation.pages.exercises.info.ExercisesInfoFragment"
             android:label="fragment_exercises_info"
             tools:layout="@layout/fragment_exercises_info" />
     <fragment
             android:id="@+id/scanner"
-            android:name="com.example.fitfactory.presentation.fragments.exercises.scannerView.ScannerFragment"
+            android:name="com.example.fitfactory.presentation.pages.exercises.scannerView.ScannerFragment"
             android:label="fragment_scanner"
             tools:layout="@layout/fragment_scanner" />
     <fragment
             android:id="@+id/exerciseFragment"
-            android:name="com.example.fitfactory.presentation.fragments.exercises.exercise.ExerciseFragment"
-            android:label="ExerciseFragment" />
+            android:name="com.example.fitfactory.presentation.pages.exercises.exercise.ExerciseFragment"
+            android:label="ExerciseFragment" >
+        <argument
+                android:name="qrcode"
+                app:argType="string" />
+    </fragment>
+    
+    <action android:id="@+id/toExerciseFragment"
+            app:destination="@id/exerciseFragment"/>
 
 </navigation>
