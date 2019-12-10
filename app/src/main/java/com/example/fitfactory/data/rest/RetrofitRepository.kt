@@ -17,44 +17,51 @@ class RetrofitRepository @Inject constructor(private val retrofitService: Retrof
         Injector.component.inject(this)
     }
 
+    // User
 
-    fun signUp(signUpRequest: SignUpRequest): Single<BaseResponse>{
+    fun signUp(signUpRequest: SignUpRequest): Single<BaseResponse> {
         return retrofitService.signUp(signUpRequest)
             .subscribeOn(Schedulers.io())
             .delay(300, TimeUnit.MILLISECONDS)
             .observeOn(AndroidSchedulers.mainThread())
     }
 
-    fun signIn(signInRequest: SignInRequest) : Single<AuthResponse>{
+    fun signIn(signInRequest: SignInRequest): Single<AuthResponse> {
         return retrofitService.signIn(signInRequest).subscribeOn(Schedulers.io())
             .delay(300, TimeUnit.MILLISECONDS)
+            .observeOn(AndroidSchedulers.mainThread())
+    }
+
+    fun getUserEntries(userId: Long): Single<EntriesResponse> {
+        return retrofitService.getUserEntries(userId)
+            .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
     }
 
     // PassType
 
     fun getAllPassType(): Single<PassesResponse> {
-        return  retrofitService.getAllPassType().subscribeOn(Schedulers.io())
+        return retrofitService.getAllPassType().subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
     }
 
     // FitnessClub
 
-    fun getAllFitnessClub(): Observable<FitnessClubsResponse>{
-        return  retrofitService.getAllFitnessClub().subscribeOn(Schedulers.io())
+    fun getAllFitnessClub(): Observable<FitnessClubsResponse> {
+        return retrofitService.getAllFitnessClub().subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
     }
 
     // Exercises
 
-    fun getAllExercises(): Single<ExercisesResponse>{
-        return  retrofitService.getAllExercises().subscribeOn(Schedulers.io())
+    fun getAllExercises(): Single<ExercisesResponse> {
+        return retrofitService.getAllExercises().subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
     }
 
     // FitnessLesson
-    fun getAllFitnessLesson(): Single<FitnessLessonResponse>{
-        return  retrofitService.getAllFitnessLesson().subscribeOn(Schedulers.io())
+    fun getAllFitnessLesson(): Single<FitnessLessonResponse> {
+        return retrofitService.getAllFitnessLesson().subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
     }
 

@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.widget.addTextChangedListener
 import com.example.fitfactory.R
 import com.example.fitfactory.presentation.base.BaseFragment
 import com.example.fitfactory.utils.addMaskAndTextWatcher
@@ -22,15 +23,12 @@ class PaymentFragment : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-//        topBar?.setTitle(getString(R.string.payment))
-//        flexibleLayout?.isViewEnable = false
-//        setPaddingTop(view)
 
-        paymentFragment_cardNo.addMaskAndTextWatcher("#### #### #### ####")
-        paymentFragment_cardExpiry.addMaskAndTextWatcher("##/##")
-        paymentFragment_userBirthDate.addMaskAndTextWatcher("##/##/####")
-        paymentFragment_userPhoneNo.addMaskAndTextWatcher("### ### ###")
-        paymentFragment_userZipCode.addMaskAndTextWatcher("##-###")
+        cardNo.addMaskAndTextWatcher("#### #### #### ####")
+        cardExpiry.addMaskAndTextWatcher("##/##")
+        userBirthDate.addMaskAndTextWatcher("##/##/####")
+        userPhoneNo.addMaskAndTextWatcher("### ### ###")
+        userZipCode.addMaskAndTextWatcher("##-###")
 
         paymentFragment_payButton.setButtonClickListener {isClickable ->
             if (isClickable){

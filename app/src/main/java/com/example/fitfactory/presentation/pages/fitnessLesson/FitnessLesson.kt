@@ -4,17 +4,30 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.afollestad.materialdialogs.MaterialDialog
+import com.afollestad.materialdialogs.customview.customView
 import com.example.fitfactory.R
+import com.example.fitfactory.di.Injector
 import com.example.fitfactory.presentation.base.BaseFragment
+import com.example.fitfactory.presentation.customViews.singleChoiceDialog.SingleChoiceDialog
 import kotlinx.android.synthetic.main.fragment_fitness_lesson.*
+import javax.inject.Inject
 
 class FitnessLesson : BaseFragment() {
 
     private val viewModel by lazy { FitnessLessonViewModel() }
     private val adapter by lazy { FitnessLessonAdapter() }
+
+    @Inject
+    lateinit var activity: AppCompatActivity
+
+    init {
+        Injector.component.inject(this)
+    }
 
     override fun flexibleViewEnabled() = false
     override fun paddingTopEnabled() = true
@@ -48,8 +61,25 @@ class FitnessLesson : BaseFragment() {
 
         viewModel.fetchAllFitnessLesson()
 
+        tabLayout.rightIconClickListener = ::filterData
+
+        viewModel.fetchFitnessClub(viewLifecycleOwner)
     }
 
+    private fun filterData() {
+        val dialog = SingleChoiceDialog(activity)
+        dialog.setData(viewModel.fitnessClubs)
+        MaterialDialog(activity).show{
+            title(text = "Filtruj zajęcia fitness")
+            message(text = "Wybierz fitness klub, dla którego chcesz znaleźć zajęcia fitness")
+            customView(view = dialog, scrollable = true)
+            positiveButton(text = "Filtruj") {
+                val selectedId = dialog.getSelectedItemId()
+                adapter.filterData(if (selectedId > 0) selectedId.toLong() else null)
+                dismiss()
+            }
+        }
+    }
 
 
 }

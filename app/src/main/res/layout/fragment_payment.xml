@@ -163,7 +163,7 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
             <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/paymentFragment_cardNoLabel"
+                    android:id="@+id/cardNoLabel"
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -175,7 +175,7 @@
                     app:layout_constraintTop_toBottomOf="@id/cardInfo">
 
                 <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/paymentFragment_cardNo"
+                        android:id="@+id/cardNo"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:digits="0123456789 "
@@ -184,7 +184,7 @@
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/paymentFragment_cardExpiryLabel"
+                    android:id="@+id/cardExpiryLabel"
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -194,12 +194,12 @@
                     android:theme="@style/TextInputLayoutAppearance"
                     app:helperText="MM/YY"
                     app:helperTextTextAppearance="@style/HelperText"
-                    app:layout_constraintEnd_toStartOf="@id/paymentFragment_cardCvcLabel"
+                    app:layout_constraintEnd_toStartOf="@id/cardCvcLabel"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/paymentFragment_cardNoLabel">
+                    app:layout_constraintTop_toBottomOf="@id/cardNoLabel">
 
                 <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/paymentFragment_cardExpiry"
+                        android:id="@+id/cardExpiry"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:digits="0123456789/"
@@ -208,7 +208,7 @@
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/paymentFragment_cardCvcLabel"
+                    android:id="@+id/cardCvcLabel"
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -217,11 +217,11 @@
                     android:hint="CVC"
                     android:theme="@style/TextInputLayoutAppearance"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@id/paymentFragment_cardExpiryLabel"
-                    app:layout_constraintTop_toBottomOf="@id/paymentFragment_cardNoLabel">
+                    app:layout_constraintStart_toEndOf="@id/cardExpiryLabel"
+                    app:layout_constraintTop_toBottomOf="@id/cardNoLabel">
 
                 <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/paymentFragment_cardCvc"
+                        android:id="@+id/cardCvc"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:inputType="number"
@@ -237,10 +237,10 @@
                     android:text="Dane użytkownika"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/paymentFragment_cardExpiryLabel" />
+                    app:layout_constraintTop_toBottomOf="@id/cardExpiryLabel" />
 
             <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/paymentFragment_userFirstNameLabel"
+                    android:id="@+id/fistNameLabel"
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -253,7 +253,7 @@
                     app:layout_constraintTop_toBottomOf="@id/userInfo">
 
                 <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/paymentFragment_userFirstName"
+                        android:id="@+id/firstName"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:inputType="textPersonName"
@@ -261,7 +261,7 @@
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/paymentFragment_userLastNameLabel"
+                    android:id="@+id/lastNameLabel"
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -274,7 +274,7 @@
                     app:layout_constraintTop_toBottomOf="@id/userInfo">
 
                 <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/paymentFragment_userLastName"
+                        android:id="@+id/astName"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:inputType="textPersonName"
@@ -282,7 +282,7 @@
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/paymentFragment_userEmailLabel"
+                    android:id="@+id/emailLabel"
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -291,17 +291,17 @@
                     android:theme="@style/TextInputLayoutAppearance"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/paymentFragment_userFirstNameLabel">
+                    app:layout_constraintTop_toBottomOf="@id/fistNameLabel">
 
                 <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/paymentFragment_userEmail"
+                        android:id="@+id/userEmail"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:inputType="textEmailAddress" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/paymentFragment_userPersonalIdentityLabel"
+                    android:id="@+id/personalIdentityLabel"
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -310,10 +310,10 @@
                     android:theme="@style/TextInputLayoutAppearance"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/paymentFragment_userEmailLabel">
+                    app:layout_constraintTop_toBottomOf="@id/emailLabel">
 
                 <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/paymentFragment_userPersonalIdentity"
+                        android:id="@+id/userPersonalIdentity"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:inputType="number"
@@ -321,7 +321,7 @@
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/paymentFragment_userBirthDateLabel"
+                    android:id="@+id/userBirthDateLabel"
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -331,12 +331,12 @@
                     android:theme="@style/TextInputLayoutAppearance"
                     app:helperText="DD/MM/YYYY"
                     app:helperTextTextAppearance="@style/HelperText"
-                    app:layout_constraintEnd_toStartOf="@id/paymentFragment_userPhoneNoLabel"
+                    app:layout_constraintEnd_toStartOf="@id/userPhoneNoLabel"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/paymentFragment_userPersonalIdentityLabel">
+                    app:layout_constraintTop_toBottomOf="@id/personalIdentityLabel">
 
                 <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/paymentFragment_userBirthDate"
+                        android:id="@+id/userBirthDate"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:digits="0123456789/"
@@ -345,7 +345,7 @@
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/paymentFragment_userPhoneNoLabel"
+                    android:id="@+id/userPhoneNoLabel"
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -354,11 +354,11 @@
                     android:hint="Numer telefonu"
                     android:theme="@style/TextInputLayoutAppearance"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@id/paymentFragment_userBirthDateLabel"
-                    app:layout_constraintTop_toBottomOf="@id/paymentFragment_userPersonalIdentityLabel">
+                    app:layout_constraintStart_toEndOf="@id/userBirthDateLabel"
+                    app:layout_constraintTop_toBottomOf="@id/personalIdentityLabel">
 
                 <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/paymentFragment_userPhoneNo"
+                        android:id="@+id/userPhoneNo"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:digits="0123456789 "
@@ -368,7 +368,7 @@
 
 
             <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/paymentFragment_userAddressStreetLabel"
+                    android:id="@+id/userAddressStreetLabel"
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -378,10 +378,10 @@
                     android:theme="@style/TextInputLayoutAppearance"
                     app:layout_constraintEnd_toEndOf="@id/guide2"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/paymentFragment_userBirthDateLabel">
+                    app:layout_constraintTop_toBottomOf="@id/userBirthDateLabel">
 
                 <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/paymentFragment_userAddressStreet"
+                        android:id="@+id/userAddressStreet"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:inputType="text"
@@ -389,7 +389,7 @@
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/paymentFragment_userAddressCityLabel"
+                    android:id="@+id/userAddressCityLabel"
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -399,10 +399,10 @@
                     android:theme="@style/TextInputLayoutAppearance"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="@id/guide2"
-                    app:layout_constraintTop_toBottomOf="@id/paymentFragment_userBirthDateLabel">
+                    app:layout_constraintTop_toBottomOf="@id/userBirthDateLabel">
 
                 <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/paymentFragment_userAddressCity"
+                        android:id="@+id/userAddressCity"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:inputType="text"
@@ -410,7 +410,7 @@
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/paymentFragment_userZipCodeLabel"
+                    android:id="@+id/userZipCodeLabel"
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -420,10 +420,10 @@
                     android:theme="@style/TextInputLayoutAppearance"
                     app:layout_constraintEnd_toEndOf="@id/guide1"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/paymentFragment_userAddressStreetLabel">
+                    app:layout_constraintTop_toBottomOf="@id/userAddressStreetLabel">
 
                 <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/paymentFragment_userZipCode"
+                        android:id="@+id/userZipCode"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:digits="0123456789-"
@@ -432,7 +432,7 @@
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/paymentFragment_userZipCodeCityLabel"
+                    android:id="@+id/userZipCodeCityLabel"
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -442,10 +442,10 @@
                     android:theme="@style/TextInputLayoutAppearance"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="@id/guide1"
-                    app:layout_constraintTop_toBottomOf="@id/paymentFragment_userAddressStreetLabel">
+                    app:layout_constraintTop_toBottomOf="@id/userAddressStreetLabel">
 
                 <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/paymentFragment_userZipCodeCity"
+                        android:id="@+id/userZipCodeCity"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:inputType="text"
@@ -459,7 +459,7 @@
                     style="@style/FontH6_LIGHT"
                     android:textColor="@color/silverVeryDark"
                     android:text="* przy karnecie dłuższym niż jeden miesiąc, opłaty będą pobierane automatycznie"
-                    app:layout_constraintTop_toBottomOf="@id/paymentFragment_userZipCodeLabel"
+                    app:layout_constraintTop_toBottomOf="@id/userZipCodeLabel"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"/>
 

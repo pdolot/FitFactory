@@ -1,7 +1,11 @@
 package com.example.fitfactory.presentation.pages.fitnessLesson
 
 import android.util.Log
+import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.Observer
+import com.example.fitfactory.data.database.fitnessClub.FitnessClubRepository
+import com.example.fitfactory.data.models.app.FitnessClub
 import com.example.fitfactory.data.models.app.FitnessLesson
 import com.example.fitfactory.data.rest.RetrofitRepository
 import com.example.fitfactory.di.Injector
@@ -18,11 +22,17 @@ class FitnessLessonViewModel : BaseViewModel() {
     @Inject
     lateinit var retrofitRepository: RetrofitRepository
 
+    @Inject
+    lateinit var fitnessClubRepository: FitnessClubRepository
+
     init {
         Injector.component.inject(this)
     }
 
     val callResult = MutableLiveData<List<FitnessLesson>>()
+
+    var fitnessClubs: List<Pair<Long, String>>? = null
+
 
     fun fetchAllFitnessLesson(){
         rxDisposer.add(retrofitRepository.getAllFitnessLesson()
@@ -37,6 +47,13 @@ class FitnessLessonViewModel : BaseViewModel() {
                 }
             )
         )
+    }
+
+    fun fetchFitnessClub(owner: LifecycleOwner){
+        fitnessClubRepository.getAll().observe(owner, Observer {
+            fitnessClubs = it.map { fitnessClub ->
+                Pair(fitnessClub.id!!, fitnessClub.name!!) }
+        })
     }
 
 }

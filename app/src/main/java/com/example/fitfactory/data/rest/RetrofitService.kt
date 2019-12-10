@@ -8,13 +8,19 @@ import io.reactivex.Single
 import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.POST
+import retrofit2.http.Query
 
 interface RetrofitService{
+
+    // User
     @POST("user/signUp")
     fun signUp(@Body signUpRequest: SignUpRequest): Single<BaseResponse>
 
     @POST("user/signIn")
     fun signIn(@Body signInRequest: SignInRequest): Single<AuthResponse>
+
+    @GET("user/getEntries")
+    fun getUserEntries(@Query("id") userId: Long): Single<EntriesResponse>
 
 
     // PassType
@@ -32,4 +38,5 @@ interface RetrofitService{
     // FitnessLesson
     @GET ("/fitnessLesson/getAll")
     fun getAllFitnessLesson(): Single<FitnessLessonResponse>
+
 }

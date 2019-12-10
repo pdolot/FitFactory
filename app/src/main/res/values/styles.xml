@@ -17,6 +17,7 @@
         <item name="md_color_button_text">@color/secondaryMedium</item>
     </style>
 
+
     <style name="FontH1_BOLD">
         <item name="android:fontFamily">@font/fira_sans_condensed_bold</item>
         <item name="android:textSize">25sp</item>
@@ -144,7 +145,7 @@
     </style>
 
     <style name="HelperText">
-        <item name="android:textColor">@color/transparent95</item>
+        <item name="android:textColor">@color/black70</item>
         <item name="android:textSize">12sp</item>
     </style>
 
@@ -152,7 +153,7 @@
         <!-- reference our hint & error styles -->
         <item name="android:fontFamily">@font/fira_sans_condensed_medium</item>
         <item name="android:textColor">@color/primaryMedium</item>
-        <item name="android:textColorHint">@color/black65</item>
+        <item name="android:textColorHint">@color/black20</item>
         <item name="android:textColorPrimary">@color/primaryLight</item>
         <item name="colorControlNormal">@color/transparent95</item>
         <item name="colorControlActivated">@color/black40</item>

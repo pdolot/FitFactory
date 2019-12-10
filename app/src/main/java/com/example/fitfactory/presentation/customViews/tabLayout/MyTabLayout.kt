@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.PagerSnapHelper
 import androidx.recyclerview.widget.RecyclerView
 import com.example.fitfactory.R
 import com.example.fitfactory.presentation.base.BaseAdapter
+import kotlinx.android.synthetic.main.fragment_fitness_lesson.view.*
 import kotlinx.android.synthetic.main.tab_layout.view.*
 
 class MyTabLayout @JvmOverloads constructor(
@@ -86,8 +87,9 @@ class MyTabLayout @JvmOverloads constructor(
 
         this.recyclerView = recyclerView
         snapHelper = PagerSnapHelper()
-        snapHelper?.attachToRecyclerView(this.recyclerView)
-
+        if (recyclerView.onFlingListener == null){
+            snapHelper?.attachToRecyclerView(this.recyclerView)
+        }
         (recyclerView.adapter as BaseAdapter).apply {
             onDataSetChanged = {
                 recyclerView.removeOnScrollListener(scrollListener)
@@ -101,6 +103,7 @@ class MyTabLayout @JvmOverloads constructor(
                     recyclerView.scrollToPosition(0)
                     setCurrentItem(0)
                     tab_title.text = getTitle(0)
+                    tab_indicator.activeItem = 0
                 }
             }
         }

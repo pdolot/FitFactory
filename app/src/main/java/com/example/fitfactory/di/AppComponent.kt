@@ -24,9 +24,12 @@ import com.example.fitfactory.presentation.pages.signUp.SignUpViewModel
 import com.example.fitfactory.presentation.navigationDrawer.NavigationDrawer
 import com.example.fitfactory.presentation.navigationDrawer.NavigationRecyclerViewAdapter
 import com.example.fitfactory.presentation.pages.buyPass.BuyPassViewModel
+import com.example.fitfactory.presentation.pages.entriesHistory.EntriesHistoryViewModel
 import com.example.fitfactory.presentation.pages.exercises.exercise.ExerciseViewModel
+import com.example.fitfactory.presentation.pages.fitnessLesson.FitnessLesson
 import com.example.fitfactory.presentation.pages.fitnessLesson.FitnessLessonAdapter
 import com.example.fitfactory.presentation.pages.fitnessLesson.FitnessLessonViewModel
+import com.example.fitfactory.presentation.pages.settings.editProfile.EditProfileViewModel
 import com.example.fitfactory.utils.BitmapHelper
 import com.example.fitfactory.utils.Validator
 import dagger.Component
@@ -78,5 +81,8 @@ interface AppComponent {
     fun inject(into: TopBar)
     fun inject(into: FitnessLessonViewModel)
     fun inject(into: FitnessLessonAdapter)
+    fun inject(into: FitnessLesson)
+    fun inject(into: EntriesHistoryViewModel)
+    fun inject(into: EditProfileViewModel)
 
 }
