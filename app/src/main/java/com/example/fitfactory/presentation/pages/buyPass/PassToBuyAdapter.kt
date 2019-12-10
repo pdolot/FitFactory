@@ -62,7 +62,7 @@ class PassToBuyAdapter : BaseAdapter<PassToBuyAdapter.ViewHolder>() {
             passDuration.text = item.durationInDays?.let {
                 resources.getQuantityString(R.plurals.months_plural,(it / 31.0).roundToInt(),(it / 31.0).roundToInt())
             } ?: context.getString(R.string.data_not_given)
-            passFullPrice.text = context.getString(R.string.price, item.periodPrice)
+            passFullPrice.text = context.getString(R.string.pricePerMonth, item.periodPrice)
             passDescription.text = item.description
             passBenefits.text = item.benefits?.joinToString(separator = "\n- ", prefix = "- ")
         }

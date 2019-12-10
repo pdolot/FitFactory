@@ -1,21 +1,26 @@
 package com.example.fitfactory.presentation.pages.fitnessLesson
 
-import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-
+import androidx.lifecycle.Observer
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.fitfactory.R
+import com.example.fitfactory.presentation.base.BaseFragment
+import kotlinx.android.synthetic.main.fragment_fitness_lesson.*
 
-class FitnessLesson : Fragment() {
+class FitnessLesson : BaseFragment() {
 
-    companion object {
-        fun newInstance() = FitnessLesson()
-    }
+    private val viewModel by lazy { FitnessLessonViewModel() }
+    private val adapter by lazy { FitnessLessonAdapter() }
 
-    private lateinit var viewModel: FitnessLessonViewModel
+    override fun flexibleViewEnabled() = false
+    override fun paddingTopEnabled() = true
+    override fun topBarTitle() = getString(R.string.fitness_lessons)
+    override fun topBarEnabled() = true
+    override fun backButtonEnabled() = false
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -24,10 +29,27 @@ class FitnessLesson : Fragment() {
         return inflater.inflate(R.layout.fragment_fitness_lesson, container, false)
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProviders.of(this).get(FitnessLessonViewModel::class.java)
-        // TODO: Use the ViewModel
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        signUpToLesson.isEnabled = viewModel.localStorage.isLogged()
+
+        recyclerView.apply {
+            layoutManager = LinearLayoutManager(context, RecyclerView.HORIZONTAL, false)
+            adapter = this@FitnessLesson.adapter
+        }
+
+        tabLayout.setupWithRecyclerView(recyclerView)
+
+        viewModel.callResult.observe(viewLifecycleOwner, Observer {
+            adapter.setData(it)
+            adapter.filterData(null)
+        })
+
+        viewModel.fetchAllFitnessLesson()
+
     }
+
+
 
 }

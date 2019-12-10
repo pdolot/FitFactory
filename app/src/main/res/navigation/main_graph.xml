@@ -53,5 +53,20 @@
     
     <action android:id="@+id/toExerciseFragment"
             app:destination="@id/exerciseFragment"/>
+    <fragment
+            android:id="@+id/entriesHistory"
+            android:name="com.example.fitfactory.presentation.pages.entriesHistory.EntriesHistory"
+            android:label="fragment_entries_history"
+            tools:layout="@layout/fragment_entries_history" />
+    <fragment
+            android:id="@+id/fitnessLesson"
+            android:name="com.example.fitfactory.presentation.pages.fitnessLesson.FitnessLesson"
+            android:label="fragment_fitness_lesson"
+            tools:layout="@layout/fragment_fitness_lesson" />
+    <fragment
+            android:id="@+id/editProfile"
+            android:name="com.example.fitfactory.presentation.pages.settings.editProfile.EditProfile"
+            android:label="fragment_edit_profile"
+            tools:layout="@layout/fragment_edit_profile" />
 
 </navigation>

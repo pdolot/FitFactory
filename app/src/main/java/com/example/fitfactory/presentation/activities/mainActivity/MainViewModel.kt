@@ -45,17 +45,17 @@ class MainViewModel : ViewModel() {
             NavigationItem(
                 context.getString(R.string.fitness_lessons),
                 R.drawable.ic_fitness_lesson,
-                R.id.mapFragment
+                R.id.fitnessLesson
             )
         val history = NavigationItem(
             context.getString(R.string.history),
             R.drawable.ic_history,
-            R.id.mapFragment
+            R.id.entriesHistory
         )
         val settings = NavigationItem(
             context.getString(R.string.settings),
             R.drawable.ic_settings,
-            R.id.mapFragment
+            R.id.editProfile
         )
         val signOut = NavigationItem(
             context.getString(R.string.sign_out),

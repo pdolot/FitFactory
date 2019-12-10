@@ -72,6 +72,24 @@ class TabIndicator @JvmOverloads constructor(
         style = Paint.Style.FILL
     }
 
+    private var activeIndicatorPaint: Paint = Paint().apply {
+        isAntiAlias = true
+        style = Paint.Style.FILL
+    }
+
+    var activeIndicatorColor: Int? = null
+        set(value) {
+            field = value
+            activeIndicatorPaint.color = value ?: ContextCompat.getColor(context, R.color.colorPrimary)
+            invalidate()
+        }
+
+    var activeItem: Int = 0
+        set(value) {
+            field = value
+            invalidate()
+        }
+
     init {
         setListener()
     }
@@ -176,7 +194,7 @@ class TabIndicator @JvmOverloads constructor(
                     indicatorPosition.top.toFloat(),
                     indicatorPosition.right.toFloat(),
                     indicatorPosition.bottom.toFloat(),
-                    indicatorPaint
+                    if (i == activeItem) activeIndicatorPaint else indicatorPaint
                 )
 
                 val d = indicatorBackground

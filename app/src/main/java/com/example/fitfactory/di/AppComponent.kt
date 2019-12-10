@@ -25,6 +25,8 @@ import com.example.fitfactory.presentation.navigationDrawer.NavigationDrawer
 import com.example.fitfactory.presentation.navigationDrawer.NavigationRecyclerViewAdapter
 import com.example.fitfactory.presentation.pages.buyPass.BuyPassViewModel
 import com.example.fitfactory.presentation.pages.exercises.exercise.ExerciseViewModel
+import com.example.fitfactory.presentation.pages.fitnessLesson.FitnessLessonAdapter
+import com.example.fitfactory.presentation.pages.fitnessLesson.FitnessLessonViewModel
 import com.example.fitfactory.utils.BitmapHelper
 import com.example.fitfactory.utils.Validator
 import dagger.Component
@@ -74,5 +76,7 @@ interface AppComponent {
     // Views
     fun inject(into: FlexibleView)
     fun inject(into: TopBar)
+    fun inject(into: FitnessLessonViewModel)
+    fun inject(into: FitnessLessonAdapter)
 
 }

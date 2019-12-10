@@ -1,0 +1,442 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/pass_cardView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:cardBackgroundColor="@color/black85"
+        app:cardCornerRadius="@dimen/card_corner_radius"
+        app:cardElevation="0dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        <ImageView
+                android:id="@+id/fitnessLesson_promoImage"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:src="@drawable/fitnesslesson_placeholder"
+                android:scaleType="centerCrop"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="@id/guideline35"/>
+
+        <ImageView
+                android:id="@+id/promoImageShadow"
+                android:layout_width="0dp"
+                android:layout_height="96dp"
+                android:src="@drawable/shadow_background2"
+                android:tint="@color/black85"
+                android:rotation="180"
+                app:layout_constraintBottom_toBottomOf="@id/fitnessLesson_promoImage"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"/>
+
+        <ImageView
+                android:id="@+id/placeIcon"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintDimensionRatio="1:1"
+                android:src="@drawable/ic_map"
+                android:tint="@color/silverMedium"
+                android:layout_marginStart="@dimen/medium_margin"
+                android:layout_marginBottom="@dimen/small_margin"
+                app:layout_constraintBottom_toBottomOf="@id/promoImageShadow"
+                app:layout_constraintStart_toStartOf="parent"/>
+
+        <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/fitnessClub_name"
+                style="@style/FontH3_BOLD"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.25"
+                android:layout_marginStart="@dimen/small_margin"
+                android:layout_marginEnd="@dimen/medium_margin"
+                android:maxLines="1"
+                app:layout_constraintBottom_toBottomOf="@id/placeIcon"
+                app:layout_constraintTop_toTopOf="@id/placeIcon"
+                app:layout_constraintStart_toEndOf="@id/placeIcon"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:autoSizeMaxTextSize="26sp"
+                app:autoSizeMinTextSize="10sp"
+                app:autoSizeStepGranularity="1sp"
+                app:autoSizeTextType="uniform"
+                tools:text="FitFactory" />
+
+        <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline35"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintGuide_percent="0.35" />
+
+
+        <ScrollView
+                android:id="@+id/scrollView"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:overScrollMode="never"
+                android:scrollbars="none"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/guideline35">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/coachInfo"
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        app:layout_constraintDimensionRatio="5:3"
+                        android:padding="@dimen/medium_margin"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.0"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintVertical_bias="0.0">
+
+                    <androidx.cardview.widget.CardView
+                            android:id="@+id/profile_image_content"
+                            android:layout_width="0dp"
+                            android:layout_height="0dp"
+                            app:cardBackgroundColor="@color/transparent50"
+                            app:cardCornerRadius="4dp"
+                            app:cardElevation="0dp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintDimensionRatio="3:4"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent">
+
+                        <ImageView
+                                android:id="@+id/coach_profileImage"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:src="@drawable/coach_placeholder" />
+                    </androidx.cardview.widget.CardView>
+
+                    <LinearLayout
+                            android:id="@+id/coachNameContent"
+                            android:layout_width="0dp"
+                            android:layout_height="0dp"
+                            android:orientation="vertical"
+                            app:layout_constraintBottom_toBottomOf="@id/profile_image_content"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toEndOf="@id/profile_image_content"
+                            app:layout_constraintTop_toTopOf="@id/profile_image_content"
+                            android:weightSum="1">
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                                android:id="@+id/coach_firstName_lastName_label"
+                                style="@style/FontH6_MEDIUM"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="0.1"
+                                android:layout_marginStart="@dimen/medium_margin"
+                                android:maxLines="1"
+                                android:text="@string/coach"
+                                android:textColor="@color/primaryLight"
+                                android:textSize="15sp"
+                                app:autoSizeMaxTextSize="15sp"
+                                app:autoSizeMinTextSize="10sp"
+                                app:autoSizeStepGranularity="1sp"
+                                app:autoSizeTextType="uniform" />
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                                android:id="@+id/coach_firstName_lastName"
+                                style="@style/FontH3_BOLD"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="0.25"
+                                android:layout_marginStart="@dimen/medium_margin"
+                                android:maxLines="1"
+                                app:autoSizeMaxTextSize="26sp"
+                                app:autoSizeMinTextSize="10sp"
+                                app:autoSizeStepGranularity="1sp"
+                                app:autoSizeTextType="uniform"
+                                tools:text="Jan Kowalski" />
+
+
+                        <ImageView
+                                android:id="@+id/separator"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="0.05"
+                                android:scaleType="centerCrop"
+                                android:layout_marginStart="@dimen/medium_margin"
+                                android:paddingTop="@dimen/small_margin"
+                                android:paddingBottom="@dimen/small_margin"
+                                android:src="@drawable/separator" />
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                                android:id="@+id/coach_emailLabel"
+                                style="@style/FontH6_MEDIUM"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="@dimen/medium_margin"
+                                android:layout_weight="0.1"
+                                android:maxLines="1"
+                                android:text="@string/email_address"
+                                android:textColor="@color/primaryLight"
+                                android:textSize="15sp"
+                                app:autoSizeMaxTextSize="15sp"
+                                app:autoSizeMinTextSize="10sp"
+                                app:autoSizeStepGranularity="1sp"
+                                app:autoSizeTextType="uniform" />
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                                android:id="@+id/coach_email"
+                                style="@style/FontH5_LIGHT"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="@dimen/medium_margin"
+                                android:layout_weight="0.2"
+                                android:maxLines="1"
+                                android:textSize="17sp"
+                                app:autoSizeMaxTextSize="17sp"
+                                app:autoSizeMinTextSize="10sp"
+                                app:autoSizeStepGranularity="1sp"
+                                app:autoSizeTextType="uniform"
+                                tools:text="jkowalski@fitfactory.pl" />
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                                android:id="@+id/coach_phoneLabel"
+                                style="@style/FontH6_MEDIUM"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="@dimen/medium_margin"
+                                android:layout_weight="0.1"
+                                android:maxLines="1"
+                                android:text="@string/phoneNumber"
+                                android:textColor="@color/primaryLight"
+                                android:textSize="15sp"
+                                app:autoSizeMaxTextSize="15sp"
+                                app:autoSizeMinTextSize="10sp"
+                                app:autoSizeStepGranularity="1sp"
+                                app:autoSizeTextType="uniform" />
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                                android:id="@+id/coach_phone"
+                                style="@style/FontH5_LIGHT"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="16dp"
+                                android:layout_weight="0.2"
+                                android:maxLines="1"
+                                android:textSize="17sp"
+                                app:autoSizeMaxTextSize="17sp"
+                                app:autoSizeMinTextSize="10sp"
+                                app:autoSizeStepGranularity="1sp"
+                                app:autoSizeTextType="uniform"
+                                app:layout_constraintVertical_chainStyle="packed"
+                                tools:text="234 295 123" />
+
+                    </LinearLayout>
+
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                        app:layout_constraintTop_toBottomOf="@id/coachInfo"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:padding="@dimen/medium_margin">
+
+                    <androidx.constraintlayout.widget.Guideline
+                            android:id="@+id/vertical_guide"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            app:layout_constraintGuide_percent="0.65" />
+
+                    <androidx.constraintlayout.widget.Guideline
+                            android:id="@+id/vertical_guide30"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            app:layout_constraintGuide_percent="0.325" />
+
+                    <TextView
+                            android:id="@+id/dateLabel"
+                            style="@style/FontH6_MEDIUM"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="@dimen/small_margin"
+                            android:text="Data i godzina"
+                            android:textColor="@color/primaryLight"
+                            app:layout_constraintEnd_toEndOf="@id/vertical_guide"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                            android:id="@+id/date"
+                            style="@style/FontH5_LIGHT"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:paddingStart="4dp"
+                            android:paddingTop="2dp"
+                            android:textColor="@color/silverLight"
+                            android:layout_marginEnd="@dimen/small_margin"
+                            app:layout_constraintEnd_toEndOf="@id/vertical_guide"
+                            app:layout_constraintStart_toStartOf="@id/dateLabel"
+                            app:layout_constraintTop_toBottomOf="@id/dateLabel"
+                            tools:text="16/12/2019 16:00" />
+
+                    <TextView
+                            android:id="@+id/priceLabel"
+                            style="@style/FontH6_MEDIUM"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/small_margin"
+                            android:text="@string/passFragment_passPrice"
+                            android:textColor="@color/primaryLight"
+                            android:layout_marginEnd="@dimen/small_margin"
+                            app:layout_constraintEnd_toEndOf="@id/vertical_guide"
+                            app:layout_constraintStart_toStartOf="@id/vertical_guide30"
+                            app:layout_constraintTop_toTopOf="@id/peopleLimitLabel" />
+
+                    <TextView
+                            android:id="@+id/price"
+                            style="@style/FontH5_LIGHT"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:paddingStart="4dp"
+                            android:paddingTop="2dp"
+                            tools:text="9,99 zł"
+                            android:textColor="@color/silverLight"
+                            android:layout_marginEnd="@dimen/small_margin"
+                            android:layout_marginStart="@dimen/small_margin"
+                            app:layout_constraintEnd_toEndOf="@id/vertical_guide"
+                            app:layout_constraintStart_toStartOf="@id/vertical_guide30"
+                            app:layout_constraintTop_toTopOf="@id/peopleLimit" />
+
+                    <TextView
+                            android:id="@+id/peopleLimitLabel"
+                            style="@style/FontH6_MEDIUM"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:text="Limit miejsc"
+                            android:textColor="@color/primaryLight"
+                            android:layout_marginEnd="@dimen/small_margin"
+                            android:layout_marginTop="@dimen/medium_margin"
+                            app:layout_constraintEnd_toEndOf="@id/vertical_guide30"
+                            app:layout_constraintStart_toStartOf="@id/date"
+                            app:layout_constraintTop_toBottomOf="@id/date" />
+
+                    <TextView
+                            android:id="@+id/peopleLimit"
+                            style="@style/FontH5_LIGHT"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:paddingStart="4dp"
+                            android:paddingTop="2dp"
+                            android:textColor="@color/silverLight"
+                            tools:text="24"
+                            android:layout_marginEnd="@dimen/small_margin"
+                            app:layout_constraintEnd_toEndOf="@id/vertical_guide30"
+                            app:layout_constraintStart_toStartOf="@id/peopleLimitLabel"
+                            app:layout_constraintTop_toBottomOf="@id/peopleLimitLabel" />
+
+                    <TextView
+                            android:id="@+id/descriptionLabel"
+                            style="@style/FontH6_MEDIUM"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/medium_margin"
+                            android:text="@string/description"
+                            android:textColor="@color/primaryLight"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/peopleLimit"
+                            app:layout_constraintStart_toStartOf="@id/date" />
+
+                    <TextView
+                            android:id="@+id/description"
+                            style="@style/FontH5_LIGHT"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:paddingStart="4dp"
+                            android:paddingTop="2dp"
+                            android:textColor="@color/silverLight"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="@id/descriptionLabel"
+                            app:layout_constraintTop_toBottomOf="@id/descriptionLabel" />
+
+                    <com.example.fitfactory.presentation.customViews.CircleProgressBar
+                            android:id="@+id/signedUpPeopleCountProgressBar"
+                            android:layout_width="0dp"
+                            android:layout_height="0dp"
+                            android:layout_marginStart="@dimen/small_margin"
+                            android:padding="@dimen/small_margin"
+                            android:rotation="-90"
+                            app:backgroundColor="@color/black80"
+                            app:color="@color/primaryLight"
+                            app:layout_constraintDimensionRatio="1:1"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="0.0"
+                            app:layout_constraintStart_toStartOf="@id/vertical_guide"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:pieceCount="10"
+                            app:progress="0.3"
+                            app:spacePercent="16"
+                            app:strokeWidth="4dp" />
+
+                    <TextView
+                            android:id="@+id/signedUpPeopleCount"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            app:layout_constraintTop_toTopOf="@id/signedUpPeopleCountProgressBar"
+                            app:layout_constraintStart_toStartOf="@id/signedUpPeopleCountProgressBar"
+                            app:layout_constraintEnd_toEndOf="@id/signedUpPeopleCountProgressBar"
+                            app:layout_constraintBottom_toBottomOf="@id/signedUpPeopleCountProgressBar"
+                            app:layout_constraintHorizontal_chainStyle="packed"
+                            style="@style/FontH3_BOLD"
+                            android:textColor="@color/silverMedium"
+                            tools:text="0"/>
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        </ScrollView>
+
+        <ImageView
+                android:layout_width="0dp"
+                android:layout_height="@dimen/medium_margin"
+                android:src="@drawable/shadow_background2"
+                android:tint="@color/black85"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@id/scrollView" />
+
+        <ImageView
+                android:layout_width="0dp"
+                android:layout_height="@dimen/medium_margin"
+                android:rotation="180"
+                android:src="@drawable/shadow_background2_rounded"
+                android:tint="@color/black85"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+
+        <View
+                android:id="@+id/shadow"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:background="@color/transparentDark50"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:visibility="gone" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.cardview.widget.CardView>
