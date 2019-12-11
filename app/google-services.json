@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "980600382193-jl57e4at833hv07ep4njv482nuq2svg9.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.fitfactory",
+            "certificate_hash": "f4f90fb998e42ccb6518718d1cd42d08fdbd989c"
+          }
+        },
+        {
           "client_id": "980600382193-01l77tu8os9mju26q8cvsrm037eaavee.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
@@ -29,7 +37,7 @@
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyAE1sLHFuU7loKeLh0VzCfCYgWyC_6tlMU"
+          "current_key": "AIzaSyCOvGz7UyGrTHxXwyo4HYT-kb3EFI7krLA"
         }
       ],
       "services": {

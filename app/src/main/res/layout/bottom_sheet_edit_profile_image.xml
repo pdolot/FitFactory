@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:background="@drawable/rounded_top_bg"
+        android:elevation="8dp">
+
+    <ImageView
+            android:id="@+id/fromGallery"
+            android:layout_width="64dp"
+            android:layout_height="64dp"
+            android:src="@drawable/ic_gallery"
+            android:tint="@color/secondaryMedium"
+            android:layout_marginStart="@dimen/big_margin"
+            android:layout_marginEnd="@dimen/big_margin"
+            android:layout_marginTop="@dimen/medium_margin"
+            app:layout_constraintDimensionRatio="1:1"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/fromCamera"
+            app:layout_constraintBottom_toTopOf="@id/fromGalleryTitle"/>
+
+    <ImageView
+            android:id="@+id/fromCamera"
+            android:layout_width="64dp"
+            android:layout_height="64dp"
+            android:src="@drawable/ic_camera"
+            android:tint="@color/secondaryMedium"
+            android:layout_marginStart="@dimen/big_margin"
+            android:layout_marginEnd="@dimen/big_margin"
+            android:layout_marginTop="@dimen/medium_margin"
+            app:layout_constraintDimensionRatio="1:1"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toEndOf="@id/fromGallery"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/fromCameraTitle"/>
+
+    <TextView
+            android:id="@+id/fromGalleryTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/FontH5_MEDIUM"
+            app:layout_constraintStart_toStartOf="@id/fromGallery"
+            app:layout_constraintEnd_toEndOf="@id/fromGallery"
+            app:layout_constraintTop_toBottomOf="@id/fromGallery"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginBottom="@dimen/medium_margin"
+            android:layout_marginTop="@dimen/medium_margin"
+            android:text="Z GALERII"/>
+
+    <TextView
+            android:id="@+id/fromCameraTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/FontH5_MEDIUM"
+            app:layout_constraintStart_toStartOf="@id/fromCamera"
+            app:layout_constraintEnd_toEndOf="@id/fromCamera"
+            app:layout_constraintTop_toBottomOf="@id/fromCamera"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginBottom="@dimen/medium_margin"
+            android:layout_marginTop="@dimen/medium_margin"
+            android:text="Z APARATU"/>
+</androidx.constraintlayout.widget.ConstraintLayout>

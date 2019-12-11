@@ -29,6 +29,7 @@ import com.example.fitfactory.presentation.pages.exercises.exercise.ExerciseView
 import com.example.fitfactory.presentation.pages.fitnessLesson.FitnessLesson
 import com.example.fitfactory.presentation.pages.fitnessLesson.FitnessLessonAdapter
 import com.example.fitfactory.presentation.pages.fitnessLesson.FitnessLessonViewModel
+import com.example.fitfactory.presentation.pages.settings.editProfile.EditProfile
 import com.example.fitfactory.presentation.pages.settings.editProfile.EditProfileViewModel
 import com.example.fitfactory.utils.BitmapHelper
 import com.example.fitfactory.utils.Validator
@@ -84,5 +85,6 @@ interface AppComponent {
     fun inject(into: FitnessLesson)
     fun inject(into: EntriesHistoryViewModel)
     fun inject(into: EditProfileViewModel)
+    fun inject(into: EditProfile)
 
 }

@@ -7,6 +7,8 @@ class RequestCode {
         const val REQUEST_CHECK_SETTINGS: Int = 89
         const val LOCATION_REQUEST_CODE: Int = 99
         const val CAMERA_REQUEST_CODE: Int = 101
+        const val GALLERY_REQUEST_CODE: Int = 111
+        const val READ_EXTERNAL_STORAGE_REQUEST_CODE: Int = 121
     }
 }
 

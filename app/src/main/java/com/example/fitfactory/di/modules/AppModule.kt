@@ -6,6 +6,8 @@ import androidx.fragment.app.FragmentManager
 import com.example.fitfactory.app.App
 import com.example.fitfactory.functional.localStorage.LocalStorage
 import com.example.fitfactory.functional.localStorage.SharedPrefLocalStorage
+import com.google.firebase.storage.FirebaseStorage
+import com.google.firebase.storage.StorageReference
 import dagger.Module
 import dagger.Provides
 import javax.inject.Singleton
@@ -35,6 +37,12 @@ class AppModule(private val application: App) {
     @Singleton
     fun provideLocalStorage(): LocalStorage{
         return SharedPrefLocalStorage(application.applicationContext)
+    }
+
+    @Provides
+    @Singleton
+    fun provideFirebaseStorageReference(): StorageReference{
+        return FirebaseStorage.getInstance().reference
     }
 
 }
