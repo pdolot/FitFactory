@@ -4,13 +4,17 @@ import android.Manifest
 import android.app.Activity
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.net.Uri
 import android.os.Bundle
+import android.provider.MediaStore
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.FileProvider
 import androidx.fragment.app.FragmentManager
 import com.bumptech.glide.Glide
 import com.example.fitfactory.R
+import com.example.fitfactory.constants.PhotoServiceRequestCode
 import com.example.fitfactory.constants.RequestCode
 import com.example.fitfactory.di.Injector
 import com.example.fitfactory.presentation.base.BaseFragment
@@ -28,6 +32,7 @@ class EditProfile : BaseFragment() {
     }
 
     private val viewModel by lazy { EditProfileViewModel() }
+    private lateinit var photoService: TakePhotoService
 
     override fun flexibleViewEnabled() = false
     override fun paddingTopEnabled() = true
@@ -48,10 +53,16 @@ class EditProfile : BaseFragment() {
         editProfileImage.setOnClickListener {
             EditProfileImageBottomSheet.newInstance().apply {
                 onGallerySelect = {
-                    requestPermissions(arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE), RequestCode.READ_EXTERNAL_STORAGE_REQUEST_CODE)
+                    requestPermissions(
+                        arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE),
+                        RequestCode.READ_EXTERNAL_STORAGE_REQUEST_CODE
+                    )
                 }
                 onCameraSelect = {
-                    requestPermissions(arrayOf(Manifest.permission.CAMERA), RequestCode.CAMERA_REQUEST_CODE)
+                    requestPermissions(
+                        arrayOf(Manifest.permission.CAMERA),
+                        RequestCode.CAMERA_REQUEST_CODE
+                    )
                 }
             }.show(fm)
         }
@@ -80,16 +91,17 @@ class EditProfile : BaseFragment() {
         }
     }
 
-    private fun pickImageFromGallery(){
+    private fun pickImageFromGallery() {
         startActivityForResult(
             Intent(Intent.ACTION_PICK).apply {
                 type = "image/*"
-                val mimeTypes = arrayListOf("image/jpeg","image/png")
+                val mimeTypes = arrayListOf("image/jpeg", "image/png")
                 putExtra(Intent.EXTRA_MIME_TYPES, mimeTypes)
             },
             RequestCode.GALLERY_REQUEST_CODE
         )
     }
+
 
     override fun onRequestPermissionsResult(
         requestCode: Int,
@@ -97,18 +109,35 @@ class EditProfile : BaseFragment() {
         grantResults: IntArray
     ) {
 
-        when(requestCode){
+        when (requestCode) {
             RequestCode.READ_EXTERNAL_STORAGE_REQUEST_CODE -> {
-                if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED){
+                if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                     pickImageFromGallery()
+                }
+            }
+            RequestCode.CAMERA_REQUEST_CODE -> {
+                if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    photoService = TakePhotoService(this)
+                    photoService.startCameraIntent()
+                    photoService.photoServiceResult = {
+                        getCameraResult(it)
+                    }
                 }
             }
         }
     }
 
+    private fun getCameraResult(filePath: Uri){
+        Glide.with(context ?: return)
+            .load(filePath)
+            .placeholder(R.drawable.user_image)
+            .fitCenter()
+            .into(profileImage)
+    }
+
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        if (resultCode == Activity.RESULT_OK){
-            when(requestCode){
+        if (resultCode == Activity.RESULT_OK) {
+            when (requestCode) {
                 RequestCode.GALLERY_REQUEST_CODE -> {
                     data?.data?.let {
                         val path = FileHelper.getFileAbsolutePath(context, it)
@@ -120,6 +149,10 @@ class EditProfile : BaseFragment() {
                             .into(profileImage)
                     }
 
+                }
+
+                PhotoServiceRequestCode.REQUEST_TAKE_PHOTO -> {
+                    photoService.onActivityResult(requestCode, resultCode, data)
                 }
             }
         }

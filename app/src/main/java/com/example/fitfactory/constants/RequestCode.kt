@@ -12,6 +12,13 @@ class RequestCode {
     }
 }
 
+class PhotoServiceRequestCode{
+    companion object{
+        const val FILE_PROVIDER = "com.example.fitfactory.fileprovider"
+        const val REQUEST_TAKE_PHOTO = 131
+    }
+}
+
 class RestConstant{
     companion object{
         const val BEARER: String = "Bearer"
