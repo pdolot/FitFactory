@@ -1,24 +1,18 @@
 package com.example.fitfactory.presentation.pages.settings.editProfile
 
 import android.Manifest
-import android.app.Activity
 import android.content.Intent
-import android.content.pm.PackageManager
-import android.net.Uri
 import android.os.Bundle
-import android.provider.MediaStore
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.content.FileProvider
 import androidx.fragment.app.FragmentManager
+import androidx.lifecycle.Observer
 import com.bumptech.glide.Glide
 import com.example.fitfactory.R
-import com.example.fitfactory.constants.PhotoServiceRequestCode
 import com.example.fitfactory.constants.RequestCode
 import com.example.fitfactory.di.Injector
 import com.example.fitfactory.presentation.base.BaseFragment
-import com.example.fitfactory.utils.FileHelper
 import kotlinx.android.synthetic.main.fragment_edit_profile.*
 import javax.inject.Inject
 
@@ -32,7 +26,6 @@ class EditProfile : BaseFragment() {
     }
 
     private val viewModel by lazy { EditProfileViewModel() }
-    private lateinit var photoService: TakePhotoService
 
     override fun flexibleViewEnabled() = false
     override fun paddingTopEnabled() = true
@@ -49,22 +42,23 @@ class EditProfile : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        viewModel.setOwner(this)
         bindData()
         editProfileImage.setOnClickListener {
             EditProfileImageBottomSheet.newInstance().apply {
-                onGallerySelect = {
-                    requestPermissions(
-                        arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE),
-                        RequestCode.READ_EXTERNAL_STORAGE_REQUEST_CODE
-                    )
-                }
-                onCameraSelect = {
-                    requestPermissions(
-                        arrayOf(Manifest.permission.CAMERA),
-                        RequestCode.CAMERA_REQUEST_CODE
-                    )
-                }
+                onGallerySelect = ::checkReadExternalStoragePermission
+                onCameraSelect = ::checkCameraPermission
             }.show(fm)
+        }
+
+        viewModel.photoServiceResult.observe(viewLifecycleOwner, Observer {
+            deleteImage.visibility = if (it != null) View.VISIBLE else View.GONE
+
+            setProfileImage(it ?: viewModel.localStorage.getUser()?.profileImage)
+        })
+
+        deleteImage.setOnClickListener {
+            viewModel.takePhotoService.removePhoto()
         }
     }
 
@@ -82,80 +76,42 @@ class EditProfile : BaseFragment() {
             userAddressCity.setText(user.address?.city)
             userZipCode.setText(user.address?.zipCode)
             userZipCodeCity.setText(user.address?.zipCodeCity)
-
-            Glide.with(context ?: return)
-                .load(it.profileImage)
-                .placeholder(R.drawable.user_image)
-                .fitCenter()
-                .into(profileImage)
+            setProfileImage(it.profileImage)
         }
     }
 
-    private fun pickImageFromGallery() {
-        startActivityForResult(
-            Intent(Intent.ACTION_PICK).apply {
-                type = "image/*"
-                val mimeTypes = arrayListOf("image/jpeg", "image/png")
-                putExtra(Intent.EXTRA_MIME_TYPES, mimeTypes)
-            },
-            RequestCode.GALLERY_REQUEST_CODE
+    private fun checkReadExternalStoragePermission() {
+        requestPermissions(
+            arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE),
+            RequestCode.READ_EXTERNAL_STORAGE_REQUEST_CODE
         )
     }
 
+    private fun checkCameraPermission() {
+        requestPermissions(
+            arrayOf(Manifest.permission.CAMERA),
+            RequestCode.CAMERA_REQUEST_CODE
+        )
+    }
+
+    private fun setProfileImage(source: String?) {
+        Glide.with(context ?: return)
+            .load(source)
+            .placeholder(R.drawable.user_image)
+            .fitCenter()
+            .into(profileImage)
+    }
 
     override fun onRequestPermissionsResult(
         requestCode: Int,
         permissions: Array<out String>,
         grantResults: IntArray
     ) {
-
-        when (requestCode) {
-            RequestCode.READ_EXTERNAL_STORAGE_REQUEST_CODE -> {
-                if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    pickImageFromGallery()
-                }
-            }
-            RequestCode.CAMERA_REQUEST_CODE -> {
-                if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    photoService = TakePhotoService(this)
-                    photoService.startCameraIntent()
-                    photoService.photoServiceResult = {
-                        getCameraResult(it)
-                    }
-                }
-            }
-        }
-    }
-
-    private fun getCameraResult(filePath: Uri){
-        Glide.with(context ?: return)
-            .load(filePath)
-            .placeholder(R.drawable.user_image)
-            .fitCenter()
-            .into(profileImage)
+        viewModel.onRequestPermissionsResult(requestCode, grantResults)
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        if (resultCode == Activity.RESULT_OK) {
-            when (requestCode) {
-                RequestCode.GALLERY_REQUEST_CODE -> {
-                    data?.data?.let {
-                        val path = FileHelper.getFileAbsolutePath(context, it)
-                        path?.let { viewModel.putFileToFirebase(path) }
-                        Glide.with(context ?: return)
-                            .load(it)
-                            .placeholder(R.drawable.user_image)
-                            .fitCenter()
-                            .into(profileImage)
-                    }
-
-                }
-
-                PhotoServiceRequestCode.REQUEST_TAKE_PHOTO -> {
-                    photoService.onActivityResult(requestCode, resultCode, data)
-                }
-            }
-        }
+        viewModel.takePhotoService.onActivityResult(requestCode, resultCode, data)
     }
 
 }

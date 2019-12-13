@@ -36,7 +36,7 @@
                         app:layout_constraintEnd_toEndOf="parent"
                         app:backgroundColor="@color/black85"
                         app:bias="0.5"
-                        app:buttonRadius="64dp"
+                        app:buttonRadius="78dp"
                         app:disableColor="@color/black70"
                         app:isEnable="false"
                         app:roundRadius="32dp"
@@ -46,8 +46,8 @@
 
                 <de.hdodenhof.circleimageview.CircleImageView
                         android:id="@+id/profileImage"
-                        android:layout_width="129dp"
-                        android:layout_height="129dp"
+                        android:layout_width="156dp"
+                        android:layout_height="156dp"
                         android:src="@drawable/user_image"
                         app:layout_constraintDimensionRatio="1:1"
                         app:layout_constraintStart_toStartOf="parent"
@@ -69,6 +69,22 @@
                         app:layout_constraintBottom_toBottomOf="@id/profileImage"
                         app:layout_constraintStart_toEndOf="@id/profileImage"
                         app:layout_constraintEnd_toEndOf="parent"/>
+
+                <ImageView
+                        android:id="@+id/deleteImage"
+                        android:layout_width="48dp"
+                        android:layout_height="48dp"
+                        android:padding="8dp"
+                        android:src="@drawable/ic_remove"
+                        android:tint="@color/negativeDark"
+                        android:background="@drawable/dark_circle_negative"
+                        android:visibility="gone"
+                        tools:visibility="visible"
+                        android:layout_marginEnd="28dp"
+                        app:layout_constraintTop_toTopOf="@id/profileImage"
+                        app:layout_constraintBottom_toBottomOf="@id/profileImage"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toStartOf="@id/profileImage"/>
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
