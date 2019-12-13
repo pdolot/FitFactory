@@ -5,7 +5,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".presentation.pages.signIn.SignInFragment"
-        android:background="@color/black90">
+        android:background="@color/primaryBgColor">
 
     <ImageView
             android:layout_width="0dp"

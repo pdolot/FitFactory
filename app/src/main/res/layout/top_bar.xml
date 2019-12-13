@@ -5,7 +5,7 @@
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="@dimen/topBarHeight"
-        android:background="@color/black90"
+        android:background="@color/primaryBgColor"
         android:clickable="true">
 
     <ImageView

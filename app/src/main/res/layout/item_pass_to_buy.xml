@@ -5,7 +5,7 @@
         android:id="@+id/pass_cardView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:cardBackgroundColor="@color/black85"
+        app:cardBackgroundColor="@color/primaryBgColor2"
         app:cardCornerRadius="@dimen/card_corner_radius"
         app:cardElevation="0dp">
 
@@ -28,7 +28,7 @@
                 android:layout_width="0dp"
                 android:layout_height="@dimen/medium_margin"
                 android:src="@drawable/shadow_background2"
-                android:tint="@color/black85"
+                android:tint="@color/primaryBgColor2"
                 android:rotation="180"
                 app:layout_constraintBottom_toBottomOf="@id/pass_image"
                 app:layout_constraintStart_toStartOf="parent"
@@ -168,7 +168,7 @@
                 android:layout_width="0dp"
                 android:layout_height="@dimen/medium_margin"
                 android:src="@drawable/shadow_background2"
-                android:tint="@color/black85"
+                android:tint="@color/primaryBgColor2"
                 app:layout_constraintTop_toTopOf="@id/scrollView"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"/>
@@ -178,7 +178,7 @@
                 android:layout_height="@dimen/medium_margin"
                 android:src="@drawable/shadow_background2_rounded"
                 android:rotation="180"
-                android:tint="@color/black85"
+                android:tint="@color/primaryBgColor2"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"/>

@@ -4,7 +4,7 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/black90"
+        android:background="@color/primaryBgColor"
         tools:context=".presentation.pages.settings.editProfile.EditProfile">
 
     <ScrollView
@@ -34,7 +34,7 @@
                         app:layout_constraintTop_toTopOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:backgroundColor="@color/black85"
+                        app:backgroundColor="@color/primaryBgColor2"
                         app:bias="0.5"
                         app:buttonRadius="78dp"
                         app:disableColor="@color/black70"

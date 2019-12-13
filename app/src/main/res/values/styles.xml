@@ -5,13 +5,13 @@
         <item name="colorPrimary">@color/primaryMedium</item>
         <item name="colorPrimaryDark">@color/primaryDark</item>
         <item name="colorAccent">@color/secondaryMedium</item>
-        <item name="android:statusBarColor">@color/black90</item>
-        <item name="android:navigationBarColor">@color/black90</item>
+        <item name="android:statusBarColor">@color/primaryBgColor</item>
+        <item name="android:navigationBarColor">@color/primaryBgColor</item>
         <item name="md_font_title">@font/fira_sans_condensed_extra_bold</item>
         <item name="md_font_body">@font/fira_sans_condensed_medium</item>
         <item name="md_font_button">@font/fira_sans_condensed_bold</item>
         <item name="md_corner_radius">@dimen/corner_radius</item>
-        <item name="md_background_color">@color/black85</item>
+        <item name="md_background_color">@color/primaryBgColor2</item>
         <item name="md_color_title">@color/primaryLight</item>
         <item name="md_color_content">@color/silverMedium</item>
         <item name="md_color_button_text">@color/secondaryMedium</item>
@@ -168,7 +168,7 @@
         <item name="hintColor">@color/black70</item>
         <item name="iconColor">@color/primaryDark</item>
         <item name="outlineColor">@color/black70</item>
-        <item name="backgroundColor">@color/black90</item>
+        <item name="backgroundColor">@color/primaryBgColor</item>
         <item name="android:maxLines">1</item>
         <item name="android:ellipsize">end</item>
     </style>

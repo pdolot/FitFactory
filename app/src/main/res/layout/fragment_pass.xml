@@ -4,13 +4,13 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         xmlns:tools="http://schemas.android.com/tools"
-        android:background="@color/black90">
+        android:background="@color/primaryBgColor">
 
     <View
             android:id="@+id/header"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:background="@color/black85"
+            android:background="@color/primaryBgColor2"
             app:layout_constraintBottom_toBottomOf="@id/passFragment_switchPass"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

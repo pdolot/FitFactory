@@ -5,7 +5,7 @@
         android:id="@+id/pass_cardView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:cardBackgroundColor="@color/black85"
+        app:cardBackgroundColor="@color/primaryBgColor2"
         app:cardCornerRadius="@dimen/card_corner_radius"
         app:cardElevation="0dp">
 
@@ -29,7 +29,7 @@
                 android:layout_width="0dp"
                 android:layout_height="96dp"
                 android:src="@drawable/shadow_background2"
-                android:tint="@color/black85"
+                android:tint="@color/primaryBgColor2"
                 android:rotation="180"
                 app:layout_constraintBottom_toBottomOf="@id/fitnessLesson_promoImage"
                 app:layout_constraintStart_toStartOf="parent"
@@ -377,7 +377,7 @@
                             android:layout_marginStart="@dimen/small_margin"
                             android:padding="@dimen/small_margin"
                             android:rotation="-90"
-                            app:backgroundColor="@color/black80"
+                            app:backgroundColor="@color/primaryBgColor3"
                             app:color="@color/primaryLight"
                             app:layout_constraintDimensionRatio="1:1"
                             app:layout_constraintEnd_toEndOf="parent"
@@ -413,7 +413,7 @@
                 android:layout_width="0dp"
                 android:layout_height="@dimen/medium_margin"
                 android:src="@drawable/shadow_background2"
-                android:tint="@color/black85"
+                android:tint="@color/primaryBgColor2"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="@id/scrollView" />
@@ -423,7 +423,7 @@
                 android:layout_height="@dimen/medium_margin"
                 android:rotation="180"
                 android:src="@drawable/shadow_background2_rounded"
-                android:tint="@color/black85"
+                android:tint="@color/primaryBgColor2"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent" />
