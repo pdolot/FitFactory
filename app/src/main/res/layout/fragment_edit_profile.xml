@@ -37,7 +37,7 @@
                         app:backgroundColor="@color/primaryBgColor2"
                         app:bias="0.5"
                         app:buttonRadius="78dp"
-                        app:disableColor="@color/black70"
+                        app:disableColor="@color/primaryBgColor4"
                         app:isEnable="false"
                         app:roundRadius="32dp"
                         app:spaceWidth="12dp"
@@ -53,7 +53,7 @@
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintBottom_toBottomOf="parent"
-                        app:civ_border_color="@color/black65"
+                        app:civ_border_color="@color/primaryMedium"
                         app:civ_border_width="2dp"/>
 
                 <ImageView

@@ -6,6 +6,7 @@
     <color name="primaryLight">#4B9FFF</color>
     <color name="primaryMedium">#1d8bf8</color>
     <color name="primaryDark">#3358f4</color>
+    <color name="primaryVeyDark">#2439A8</color>
     <color name="secondaryLight">#FFEE58</color>
     <color name="secondaryMedium">#FDD835</color>
     <color name="secondaryDark">#F9A825</color>
@@ -23,9 +24,9 @@
     <color name="primaryBgColor">#1e1e2f</color>
     <color name="black87">#23233A</color>
     <color name="primaryBgColor2">#27293d</color>
-    <color name="primaryBgColor3">#323355</color>
-    <color name="black70">#343568</color>
-    <color name="black65">#373881</color>
+    <color name="primaryBgColor3">#404153</color>
+    <color name="primaryBgColor4">#4D4D5A</color>
+    <color name="primaryBgColor5">#63647A</color>
     <color name="black40">#999999</color>
     <color name="black20">#CCCCCC</color>
     <color name="transparent">#00000000</color>

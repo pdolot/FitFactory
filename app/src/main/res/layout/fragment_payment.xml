@@ -116,7 +116,7 @@
             app:bias="0.9"
             app:buttonRadius="26dp"
             app:disableColor="@color/primaryBgColor2"
-            app:disabledIconColor="@color/black65"
+            app:disabledIconColor="@color/primaryBgColor5"
             app:icon="@drawable/ic_pay"
             app:iconColor="@color/primaryDark"
             app:isEnable="false"

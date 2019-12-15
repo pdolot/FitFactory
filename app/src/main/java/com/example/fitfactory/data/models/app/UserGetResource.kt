@@ -22,5 +22,7 @@ data class UserGetResource(
 
     val birthDate: String? = null,
 
-    val profileImage: String? = null
+    val profileImage: String? = null,
+
+    val entriesCount: Int = 0
 )

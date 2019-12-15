@@ -28,6 +28,8 @@ class NavigationRecyclerViewAdapter :
 
     var onItemClick: (destinationId: Int?) -> Unit = {}
 
+    private var activeItem: Int = 0
+
     init {
         Injector.component.inject(this)
     }
@@ -37,10 +39,19 @@ class NavigationRecyclerViewAdapter :
         notifyDataSetChanged()
     }
 
+    fun setActiveItem(title: String){
+        activeItem = this.itemList?.indexOfFirst { it.topBarTitle == title } ?: 0
+        notifyDataSetChanged()
+    }
+
     override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int): NavigationViewHolder {
         val itemView = LayoutInflater.from(viewGroup.context)
-            .inflate(R.layout.item_navigation, viewGroup, false)
+            .inflate(if (viewType == 0) R.layout.item_navigation else R.layout.item_navigation_active, viewGroup, false)
         return NavigationViewHolder(itemView)
+    }
+
+    override fun getItemViewType(position: Int): Int {
+        return if (position == activeItem) 1 else 0
     }
 
     override fun getItemCount(): Int {
@@ -49,11 +60,8 @@ class NavigationRecyclerViewAdapter :
 
     override fun onBindViewHolder(viewHolder: NavigationViewHolder, position: Int) {
 
-
-//        if (position == itemCount - 1) viewHolder.itemView.navigationItem_separator.visibility =
-//            View.INVISIBLE
-
         val item = itemList?.get(position)
+
         item?.let {
             viewHolder.itemView.navigationItem_name.text = it.name
             it.iconId?.let { iconId ->
@@ -73,4 +81,5 @@ class NavigationRecyclerViewAdapter :
 
     inner class NavigationViewHolder internal constructor(view: View) :
         RecyclerView.ViewHolder(view)
+
 }

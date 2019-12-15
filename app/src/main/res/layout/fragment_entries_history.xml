@@ -19,4 +19,22 @@
             tools:listitem="@layout/item_entry"
             tools:itemCount="4"/>
 
+    <ImageView
+            android:layout_width="0dp"
+            android:layout_height="16dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:src="@drawable/shadow_background2"/>
+
+    <ImageView
+            android:layout_width="0dp"
+            android:layout_height="16dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:src="@drawable/shadow_background2"
+            android:rotation="180"/>
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>

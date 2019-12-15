@@ -9,7 +9,7 @@
         <path
             android:name="secondBack"
             android:pathData="M 109 95 C 99 106 87 116 75 127"
-            android:strokeColor="#999999"
+            android:strokeColor="#B1B1B1"
             android:strokeWidth="16"
             android:strokeLineCap="round"
             android:strokeLineJoin="round"
@@ -17,7 +17,7 @@
         <path
             android:name="firstBack"
             android:pathData="M 75 42 C 82 29 90 23 104 23 C 120 23 133 34 133 49 C 133 64 123 79 109 95"
-            android:strokeColor="#808080"
+            android:strokeColor="#CCCCCC"
             android:strokeWidth="16"
             android:strokeLineCap="round"
             android:strokeLineJoin="round"
@@ -25,7 +25,7 @@
         <path
             android:name="fourthBack"
             android:pathData="M 41 95 C 27 79 17 64 17 49 C 17 34 30 23 46 23 C 60 23 68 29 75 42"
-            android:strokeColor="#b3b3b3"
+            android:strokeColor="#E2E2E2"
             android:strokeWidth="16"
             android:strokeLineCap="round"
             android:strokeLineJoin="round"
@@ -33,7 +33,7 @@
         <path
             android:name="thirdBack"
             android:pathData="M 75 127 C 63 116 51 106 41 95"
-            android:strokeColor="#999999"
+            android:strokeColor="#B1B1B1"
             android:strokeWidth="16"
             android:strokeLineCap="round"
             android:strokeLineJoin="round"

@@ -65,20 +65,18 @@ class NavigationDrawer @JvmOverloads constructor(
                 .placeholder(R.drawable.user_image)
                 .fitCenter()
                 .into(profile_image)
-
-            val entriesCount = 12
+            
             if (it.firstName != null && it.lastName != null) {
                 navigation_userName.text = "${it.firstName} ${it.lastName}"
             } else {
                 navigation_userName.text = "${it.username}"
             }
 
-//            navigation_userEmail.text = it.email
-            navigation_entries.text = entriesCount.toString()
+            navigation_entries.text = it.entriesCount.toString()
             LevelUtil.Companion.Builder()
                 .setView(navigation_profileLevel)
                 .build()
-                .setLevel(entriesCount)
+                .setLevel(it.entriesCount)
         }
     }
 

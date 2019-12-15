@@ -80,6 +80,10 @@ class MainActivity : AppCompatActivity(), MainInterface {
                 mainFragment_navigationDrawer.resetScroll()
             }
         })
+
+        mainFragment_topBar.topBarTitleChangeListener = {
+            adapter.setActiveItem(it)
+        }
     }
 
     private fun closeDrawer(destinationId: Int) {
