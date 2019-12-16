@@ -1,13 +1,13 @@
 package com.example.fitfactory.functional.localStorage
 
 import android.content.Context
+import com.example.fitfactory.data.models.app.CreditCard
 import com.example.fitfactory.data.models.app.SharedPrefUser
 import com.example.fitfactory.data.models.app.UserGetResource
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 
 class SharedPrefLocalStorage(context: Context) : LocalStorage {
-
     private var sharedPref = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
     private val liveSharedPreferences = LiveSharedPreferences(sharedPref)
 
@@ -95,6 +95,19 @@ class SharedPrefLocalStorage(context: Context) : LocalStorage {
         return Gson().fromJson(users, type) as ArrayList<SharedPrefUser>
     }
 
+    override fun saveCreditCard(creditCard: CreditCard?) {
+        sharedPref.edit().apply {
+            putString(CREDIT_CARD, Gson().toJson(creditCard))
+            apply()
+        }
+    }
+
+    override fun getCreditCard(): CreditCard? {
+        val creditCard = sharedPref.getString(CREDIT_CARD, null) ?: return null
+        val type = object : TypeToken<CreditCard>() {}.type
+        return Gson().fromJson(creditCard, type)
+    }
+
     companion object {
         const val PREFS_NAME = "fitfactory"
         const val IS_LOGGED = "isLoggedLive"
@@ -102,6 +115,7 @@ class SharedPrefLocalStorage(context: Context) : LocalStorage {
         const val USER = "user"
         const val FF_GOOGLE_ACCOUNTS = "fitFactoryGoogleAccounts"
         const val FF_FACEBOOK_ACCOUNT = "fitFactoryFacebookAccounts"
+        const val CREDIT_CARD = "creditCard"
     }
 
 }

@@ -49,6 +49,11 @@
     <string name="phoneNumber">Numer telefonu</string>
     <string name="questionToCoach">Masz pytanie? Skontakuj się ze mną!</string>
     <string name="coach">Trener</string>
+    <string name="credit_card">CREDIT CARD</string>
+    <string name="edit">Edytuj</string>
+    <string name="delete">Usuń</string>
+    <string name="add">Dodaj</string>
+    <string name="change_password">Zmień hasło</string>
     <plurals name="months_plural">
         <item quantity="one">%d miesiąc</item>
         <item quantity="few">%d miesiące</item>

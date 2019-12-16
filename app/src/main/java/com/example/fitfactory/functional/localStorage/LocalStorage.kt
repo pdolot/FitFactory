@@ -1,5 +1,6 @@
 package com.example.fitfactory.functional.localStorage
 
+import com.example.fitfactory.data.models.app.CreditCard
 import com.example.fitfactory.data.models.app.SharedPrefUser
 import com.example.fitfactory.data.models.app.UserGetResource
 
@@ -14,4 +15,6 @@ interface LocalStorage {
     fun getFacebookAccount(): SharedPrefUser?
     fun saveGoogleAccount(username: String, password: String, email: String)
     fun getGoogleAccount(email: String): SharedPrefUser?
+    fun saveCreditCard(creditCard: CreditCard?)
+    fun getCreditCard(): CreditCard?
 }
