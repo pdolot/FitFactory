@@ -4,7 +4,7 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/black90"
+        android:background="@color/primaryBgColor"
         android:padding="@dimen/medium_margin"
         tools:context=".presentation.pages.exercises.info.ExercisesInfoFragment">
 
@@ -15,7 +15,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:cardBackgroundColor="@color/black85"
+            app:cardBackgroundColor="@color/primaryBgColor2"
             app:cardCornerRadius="@dimen/card_corner_radius"
             app:cardElevation="0dp">
 

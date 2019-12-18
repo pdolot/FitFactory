@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <plurals name="characterLength">
+        <item quantity="one">Pole musi zawierać %d znak</item>
+        <item quantity="other">Pole musi zawierać %d znaków</item>
+    </plurals>
+</resources>

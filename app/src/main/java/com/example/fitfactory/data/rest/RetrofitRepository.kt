@@ -1,5 +1,7 @@
 package com.example.fitfactory.data.rest
 
+import com.example.fitfactory.data.models.app.UserGetResource
+import com.example.fitfactory.data.models.request.ChangePasswordRequest
 import com.example.fitfactory.data.models.request.SignInRequest
 import com.example.fitfactory.data.models.request.SignUpRequest
 import com.example.fitfactory.data.models.response.*
@@ -32,6 +34,16 @@ class RetrofitRepository @Inject constructor(private val retrofitService: Retrof
             .observeOn(AndroidSchedulers.mainThread())
     }
 
+    fun changePassword(changePasswordRequest: ChangePasswordRequest): Single<BaseResponse> {
+        return retrofitService.changePassword(changePasswordRequest).subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+    }
+
+    fun editUser(user: UserGetResource) : Single<UserResponse>{
+        return retrofitService.editUser(user)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+    }
     fun getUserEntries(userId: Long): Single<EntriesResponse> {
         return retrofitService.getUserEntries(userId)
             .subscribeOn(Schedulers.io())

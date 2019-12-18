@@ -45,7 +45,7 @@ class ExerciseFragment : BaseFragment() {
         tab_layout.rightIconClickListener = {
             TransitionManager.beginDelayedTransition(bodyParts_content)
             bodyParts_content.visibility = if (bodyParts_content.visibility != View.GONE) View.GONE else View.VISIBLE
-            tab_layout.iconColor = ContextCompat.getColor(context!!, if (bodyParts_content.visibility == View.VISIBLE) R.color.primaryLight else R.color.black65)
+            tab_layout.iconColor = ContextCompat.getColor(context!!, if (bodyParts_content.visibility == View.VISIBLE) R.color.primaryLight else R.color.primaryBgColor5)
         }
     }
 

@@ -2,25 +2,27 @@ package com.example.fitfactory.data.models.app
 
 data class UserGetResource(
 
-    val id: Long? = null,
+    var id: Long? = null,
 
-    val username: String? = null,
+    var username: String? = null,
 
-    val email: String? = null,
+    var email: String? = null,
 
-    val firstName: String? = null,
+    var firstName: String? = null,
 
-    val secondName: String? = null,
+    var secondName: String? = null,
 
-    val lastName: String? = null,
+    var lastName: String? = null,
 
-    val identityNumber: String? = null,
+    var identityNumber: String? = null,
 
-    val phoneNumber: String? = null,
+    var phoneNumber: String? = null,
 
-    val address: Address? = null,
+    var address: Address? = null,
 
-    val birthDate: String? = null,
+    var birthDate: String? = null,
 
-    val profileImage: String? = null
+    var profileImage: String? = null,
+
+    var entriesCount: Int = 0
 )

@@ -15,6 +15,4 @@ interface LocalStorage {
     fun getFacebookAccount(): SharedPrefUser?
     fun saveGoogleAccount(username: String, password: String, email: String)
     fun getGoogleAccount(email: String): SharedPrefUser?
-    fun saveCreditCard(creditCard: CreditCard?)
-    fun getCreditCard(): CreditCard?
 }

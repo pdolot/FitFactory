@@ -13,6 +13,7 @@ import com.example.fitfactory.di.Injector
 import com.example.fitfactory.presentation.customViews.CustomDrawerLayout
 import com.example.fitfactory.presentation.customViews.TopBar
 import com.example.fitfactory.presentation.customViews.flexibleLayout.FlexibleView
+import com.example.fitfactory.presentation.navigationDrawer.NavigationDrawer
 import com.example.fitfactory.presentation.navigationDrawer.NavigationRecyclerViewAdapter
 import kotlinx.android.synthetic.main.activity_main.*
 
@@ -80,6 +81,10 @@ class MainActivity : AppCompatActivity(), MainInterface {
                 mainFragment_navigationDrawer.resetScroll()
             }
         })
+
+        mainFragment_topBar.topBarTitleChangeListener = {
+            adapter.setActiveItem(it)
+        }
     }
 
     private fun closeDrawer(destinationId: Int) {
@@ -109,6 +114,10 @@ class MainActivity : AppCompatActivity(), MainInterface {
 
     override fun getFlexibleLayout(): FlexibleView {
         return mainFragment_flexibleLayout
+    }
+
+    override fun getNavigationDrawer(): NavigationDrawer {
+        return mainFragment_navigationDrawer
     }
 
     override fun onBackPressed() {

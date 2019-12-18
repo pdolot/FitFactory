@@ -9,12 +9,14 @@ import com.example.fitfactory.presentation.activities.mainActivity.MainFragmentI
 import com.example.fitfactory.presentation.customViews.CustomDrawerLayout
 import com.example.fitfactory.presentation.customViews.TopBar
 import com.example.fitfactory.presentation.customViews.flexibleLayout.FlexibleView
+import com.example.fitfactory.presentation.navigationDrawer.NavigationDrawer
 
 abstract class BaseFragment : Fragment() {
 
     var actions: MainFragmentInterface? = null
     var topBar: TopBar? = null
     var drawerLayout: CustomDrawerLayout? = null
+    var navigationDrawer: NavigationDrawer? = null
     var flexibleLayout: FlexibleView? = null
     var softMode: Int? = null
 
@@ -27,6 +29,7 @@ abstract class BaseFragment : Fragment() {
         }
         topBar = actions?.getTopBar()
         drawerLayout = actions?.getDrawer()
+        navigationDrawer = actions?.getNavigationDrawer()
         flexibleLayout = actions?.getFlexibleLayout()
     }
 
@@ -36,6 +39,7 @@ abstract class BaseFragment : Fragment() {
         topBar = null
         drawerLayout = null
         flexibleLayout = null
+        navigationDrawer = null
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

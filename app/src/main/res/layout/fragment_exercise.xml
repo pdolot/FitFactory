@@ -4,7 +4,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         xmlns:tools="http://schemas.android.com/tools"
-        android:background="@color/black90">
+        android:background="@color/primaryBgColor">
 
     <androidx.constraintlayout.widget.ConstraintLayout
             android:visibility="gone"
@@ -18,7 +18,7 @@
                 android:id="@+id/body_parts"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
-                android:background="@color/black85"
+                android:background="@color/primaryBgColor2"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -31,13 +31,13 @@
             android:id="@+id/tab_layout"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            app:backgroundColor="@color/black85"
+            app:backgroundColor="@color/primaryBgColor2"
             app:activeIndicatorColor="@color/primaryLight"
-            app:indicatorColor="@color/black65"
+            app:indicatorColor="@color/primaryBgColor5"
             app:indicatorRadius="6dp"
             app:rightIconDrawable="@drawable/body_icon"
             app:iconPadding="4dp"
-            app:iconColor="@color/black65"
+            app:iconColor="@color/primaryBgColor5"
             app:itemCount="0"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

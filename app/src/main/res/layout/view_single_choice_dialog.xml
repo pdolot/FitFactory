@@ -7,7 +7,7 @@
         android:layout_height="match_parent"
         android:paddingEnd="@dimen/medium_margin"
         android:paddingStart="@dimen/medium_margin"
-        tools:background="@color/black65">
+        tools:background="@color/primaryBgColor5">
 
     <RadioGroup
             android:id="@+id/radioGroup"

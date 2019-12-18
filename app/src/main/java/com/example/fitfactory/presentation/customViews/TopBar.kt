@@ -17,6 +17,7 @@ class TopBar @JvmOverloads constructor(
 ) : ConstraintLayout(context, attrs, defStyleAttr) {
 
     private lateinit var topBarListener: TopBarListener
+    var topBarTitleChangeListener: (String) -> Unit = {}
 
     init {
         init(context)
@@ -29,6 +30,7 @@ class TopBar @JvmOverloads constructor(
 
     fun setTitle(title: String) {
         topBar_title.text = title.toUpperCase()
+        topBarTitleChangeListener(title)
     }
 
     fun setProfileImage(profileImage : String?){

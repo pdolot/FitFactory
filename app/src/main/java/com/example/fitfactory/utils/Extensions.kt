@@ -25,8 +25,8 @@ fun Time.isBetween(start: String, end: String): Boolean {
     return this in Time.valueOf(start)..Time.valueOf(end)
 }
 
-fun TextInputEditText.addMaskAndTextWatcher(mask: String) {
-    this.addTextChangedListener(object : TextWatcher {
+fun TextInputEditText.addMaskAndTextWatcher(mask: String): TextWatcher {
+    val textWatcher = object : TextWatcher {
         private var isRunning = false
         private var isDeleting = false
 
@@ -56,16 +56,19 @@ fun TextInputEditText.addMaskAndTextWatcher(mask: String) {
 
         override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
         }
-    })
+    }
+
+    this.addTextChangedListener(textWatcher)
+    return textWatcher
 }
 
-fun Drawable.animateDrawable(){
+fun Drawable.animateDrawable() {
     (this as? AnimatedVectorDrawable)?.let {
         it.start()
     }
 }
 
-fun Drawable.resetAnimation(){
+fun Drawable.resetAnimation() {
     (this as? AnimatedVectorDrawable)?.let {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             it.reset()

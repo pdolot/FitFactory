@@ -1,5 +1,7 @@
 package com.example.fitfactory.data.rest
 
+import com.example.fitfactory.data.models.app.UserGetResource
+import com.example.fitfactory.data.models.request.ChangePasswordRequest
 import com.example.fitfactory.data.models.request.SignInRequest
 import com.example.fitfactory.data.models.request.SignUpRequest
 import com.example.fitfactory.data.models.response.*
@@ -19,9 +21,14 @@ interface RetrofitService{
     @POST("user/signIn")
     fun signIn(@Body signInRequest: SignInRequest): Single<AuthResponse>
 
+    @POST("user/changePassword")
+    fun changePassword(@Body changePasswordRequest: ChangePasswordRequest): Single<BaseResponse>
+
     @GET("user/getEntries")
     fun getUserEntries(@Query("id") userId: Long): Single<EntriesResponse>
 
+    @POST("user/edit")
+    fun editUser(@Body user: UserGetResource): Single<UserResponse>
 
     // PassType
     @GET("passType/getAll")

@@ -3,6 +3,7 @@ package com.example.fitfactory.di.modules
 import androidx.room.Room
 import com.example.fitfactory.app.App
 import com.example.fitfactory.data.database.FitFactoryDatabase
+import com.example.fitfactory.data.database.creditCard.CreditCardDao
 import com.example.fitfactory.data.database.exercise.ExerciseDao
 import com.example.fitfactory.data.database.exercise.ExerciseRepository
 import com.example.fitfactory.data.database.fitnessClub.FitnessClubDao
@@ -45,5 +46,11 @@ class DbModule(private val application: App) {
     @Provides
     fun provideExercisesRepository(exerciseDao: ExerciseDao): ExerciseRepository{
         return ExerciseRepository(exerciseDao)
+    }
+
+    @Singleton
+    @Provides
+    fun provideCreditCardDao(database: FitFactoryDatabase): CreditCardDao{
+        return database.creditCardDao()
     }
 }

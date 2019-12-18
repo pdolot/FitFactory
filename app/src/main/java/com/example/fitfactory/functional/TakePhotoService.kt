@@ -18,7 +18,7 @@ import java.util.*
 
 class TakePhotoService(private val owner: Fragment) {
 
-    var photoServiceResult: (Uri?) -> Unit = {}
+    var photoServiceResult: (String?) -> Unit = {}
     private var photoUri: Uri? = null
     private var fileName: String? = null
 
@@ -58,12 +58,12 @@ class TakePhotoService(private val owner: Fragment) {
         if (resultCode == Activity.RESULT_OK){
             when(requestCode){
                 PhotoServiceRequestCode.REQUEST_TAKE_PHOTO -> {
-                    photoServiceResult(photoUri)
+                    photoServiceResult(fileName)
                 }
                 RequestCode.GALLERY_REQUEST_CODE -> {
                     data?.data?.let {
                         val path = FileHelper.getFileAbsolutePath(owner.context, it) ?: return
-                        photoServiceResult(Uri.parse(path))
+                        photoServiceResult(path)
 
                     }
                 }
@@ -79,6 +79,7 @@ class TakePhotoService(private val owner: Fragment) {
                 photoServiceResult(null)
             }
         }
+        fileName = null
     }
 
     private fun createImageFile(context: Context): File? {
