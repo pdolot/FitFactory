@@ -9,6 +9,10 @@ import androidx.core.content.ContextCompat
 import com.example.fitfactory.di.Injector
 import com.google.android.gms.maps.model.BitmapDescriptor
 import com.google.android.gms.maps.model.BitmapDescriptorFactory
+import com.google.zxing.BarcodeFormat
+import com.google.zxing.MultiFormatWriter
+import com.google.zxing.WriterException
+import com.journeyapps.barcodescanner.BarcodeEncoder
 import javax.inject.Inject
 
 
@@ -30,4 +34,5 @@ class BitmapHelper {
         vectorDrawable.draw(canvas)
         return BitmapDescriptorFactory.fromBitmap(bitmap)
     }
+
 }

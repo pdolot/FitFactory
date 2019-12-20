@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -11,6 +12,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.afollestad.materialdialogs.MaterialDialog
 import com.afollestad.materialdialogs.customview.customView
 import com.example.fitfactory.R
+import com.example.fitfactory.data.models.app.StateComplete
+import com.example.fitfactory.data.models.app.StateError
+import com.example.fitfactory.data.models.app.StateInProgress
 import com.example.fitfactory.di.Injector
 import com.example.fitfactory.presentation.base.BaseFragment
 import com.example.fitfactory.presentation.customViews.singleChoiceDialog.SingleChoiceDialog
@@ -59,17 +63,39 @@ class FitnessLesson : BaseFragment() {
             adapter.filterData(null)
         })
 
+        viewModel.signUpResult.observe(viewLifecycleOwner, Observer {
+            when (it) {
+                is StateInProgress -> {
+                    signUpToLesson.isEnabled = false
+                }
+                is StateError -> {
+                    signUpToLesson.isEnabled = true
+                    Toast.makeText(context, it.message, Toast.LENGTH_SHORT).show()
+                }
+                is StateComplete -> {
+                    signUpToLesson.isEnabled = true
+                    Toast.makeText(context, it.message, Toast.LENGTH_SHORT).show()
+                }
+            }
+        })
+
         viewModel.fetchAllFitnessLesson()
 
         tabLayout.rightIconClickListener = ::filterData
 
         viewModel.fetchFitnessClub(viewLifecycleOwner)
+
+        signUpToLesson.setOnClickListener {
+            adapter.getFitnessLessonId()?.let {
+                viewModel.signUpToLesson(it)
+            }
+        }
     }
 
     private fun filterData() {
         val dialog = SingleChoiceDialog(activity)
         dialog.setData(viewModel.fitnessClubs)
-        MaterialDialog(activity).show{
+        MaterialDialog(activity).show {
             title(text = "Filtruj zajęcia fitness")
             message(text = "Wybierz fitness klub, dla którego chcesz znaleźć zajęcia fitness")
             customView(view = dialog, scrollable = true)

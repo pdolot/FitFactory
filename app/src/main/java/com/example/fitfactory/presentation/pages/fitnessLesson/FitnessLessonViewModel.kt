@@ -5,8 +5,9 @@ import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
 import com.example.fitfactory.data.database.fitnessClub.FitnessClubRepository
-import com.example.fitfactory.data.models.app.FitnessClub
+import com.example.fitfactory.data.models.app.*
 import com.example.fitfactory.data.models.app.FitnessLesson
+import com.example.fitfactory.data.models.request.FitnessLessonSigning
 import com.example.fitfactory.data.rest.RetrofitRepository
 import com.example.fitfactory.di.Injector
 import com.example.fitfactory.functional.localStorage.LocalStorage
@@ -33,6 +34,7 @@ class FitnessLessonViewModel : BaseViewModel() {
 
     var fitnessClubs: List<Pair<Long, String>>? = null
 
+    var signUpResult = MutableLiveData<Any>()
 
     fun fetchAllFitnessLesson(){
         rxDisposer.add(retrofitRepository.getAllFitnessLesson()
@@ -54,6 +56,27 @@ class FitnessLessonViewModel : BaseViewModel() {
             fitnessClubs = it.map { fitnessClub ->
                 Pair(fitnessClub.id!!, fitnessClub.name!!) }
         })
+    }
+
+    fun signUpToLesson(lessonId: Long){
+        signUpResult.postValue(StateInProgress())
+        val userId = localStorage.getUser()?.id
+        userId?.let {
+            rxDisposer.add(retrofitRepository.signUpToLesson(FitnessLessonSigning(userId, lessonId))
+                .subscribeBy(
+                    onSuccess = {
+                        if (it.status){
+                            signUpResult.postValue(StateComplete(it.message))
+                        }else{
+                            signUpResult.postValue(StateError(it.message))
+                        }
+
+                    },
+                    onError = {
+                        signUpResult.postValue(StateError("Błąd połączenia z serwerem"))
+                    }
+                ))
+        }
     }
 
 }

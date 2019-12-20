@@ -9,7 +9,9 @@
         android:layout_marginStart="@dimen/medium_margin"
         android:background="@drawable/item_background"
         android:elevation="@dimen/layout_elevation"
-        android:padding="@dimen/small_margin">
+        android:paddingTop="@dimen/small_margin"
+        android:paddingStart="@dimen/small_margin"
+        android:paddingBottom="@dimen/small_margin">
 
     <androidx.cardview.widget.CardView
             android:id="@+id/qrCode_cardView"
@@ -17,9 +19,9 @@
             android:layout_height="0dp"
             app:cardBackgroundColor="@null"
             app:cardCornerRadius="4dp"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintDimensionRatio="1:1"
             app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="@id/passPrice"
             app:layout_constraintTop_toTopOf="parent">
 
         <ImageView
@@ -35,16 +37,17 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             tools:text="ProAge12m"
-            android:textColor="@color/primaryLight"
+            android:textColor="@color/primaryVeryLight"
             android:layout_marginStart="@dimen/small_margin"
             android:layout_marginEnd="@dimen/small_margin"
             android:maxLines="1"
             android:ellipsize="end"
+
             app:layout_constraintStart_toEndOf="@id/qrCode_cardView"
             app:layout_constraintEnd_toStartOf="@id/reBuyPass"
             app:layout_constraintTop_toTopOf="parent"/>
 
-    <TextView
+    <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/passDuration"
             style="@style/FontH7_LIGHT"
             android:layout_width="0dp"
@@ -56,9 +59,13 @@
             android:ellipsize="end"
             app:layout_constraintStart_toEndOf="@id/qrCode_cardView"
             app:layout_constraintEnd_toStartOf="@id/reBuyPass"
-            app:layout_constraintTop_toBottomOf="@id/passName"/>
+            app:layout_constraintTop_toBottomOf="@id/passName"
+            app:autoSizeTextType="uniform"
+            app:autoSizeStepGranularity="1sp"
+            app:autoSizeMaxTextSize="13sp"
+            app:autoSizeMinTextSize="8sp"/>
 
-    <TextView
+    <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/passPrice"
             style="@style/FontH7_LIGHT"
             android:layout_width="0dp"
@@ -70,16 +77,21 @@
             android:ellipsize="end"
             app:layout_constraintStart_toEndOf="@id/qrCode_cardView"
             app:layout_constraintEnd_toStartOf="@id/reBuyPass"
-            app:layout_constraintTop_toBottomOf="@id/passDuration"/>
+            app:layout_constraintTop_toBottomOf="@id/passDuration"
+            app:autoSizeTextType="uniform"
+            app:autoSizeStepGranularity="1sp"
+            app:autoSizeMaxTextSize="13sp"
+            app:autoSizeMinTextSize="8sp"/>
 
     <ImageView
+            android:layout_marginEnd="@dimen/small_margin"
             android:id="@+id/contract_termination"
             android:layout_width="42dp"
             android:layout_height="42dp"
             android:src="@drawable/contract_termination"
-            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintBottom_toBottomOf="@id/qrCode_cardView"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="@id/qrCode_cardView" />
 
     <ImageView
             android:id="@+id/reBuyPass"
@@ -87,8 +99,32 @@
             android:layout_height="42dp"
             android:layout_marginEnd="@dimen/small_margin"
             android:src="@drawable/rebuy_pass"
-            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintBottom_toBottomOf="@id/qrCode_cardView"
             app:layout_constraintEnd_toStartOf="@id/contract_termination"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="@id/qrCode_cardView" />
+
+    <TextView
+            android:id="@+id/user"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/FontH7_LIGHT"
+            android:fontFamily="@font/fira_sans_condensed_regular"
+            android:layout_marginTop="@dimen/small_margin"
+            app:layout_constraintTop_toBottomOf="@id/qrCode_cardView"
+            app:layout_constraintStart_toStartOf="parent"
+            android:text="Użytkownik karnetu:"/>
+
+    <TextView
+            android:id="@+id/userName"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            style="@style/FontH7_LIGHT"
+            android:layout_marginTop="@dimen/small_margin"
+            app:layout_constraintTop_toBottomOf="@id/qrCode_cardView"
+            app:layout_constraintStart_toEndOf="@id/user"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginEnd="@dimen/small_margin"
+            android:layout_marginStart="@dimen/small_margin"
+            android:text="Jan Kowalski"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

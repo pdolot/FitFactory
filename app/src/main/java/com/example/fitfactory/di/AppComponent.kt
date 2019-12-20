@@ -14,7 +14,7 @@ import com.example.fitfactory.presentation.customViews.flexibleLayout.FlexibleVi
 import com.example.fitfactory.presentation.pages.buyPass.PassToBuyAdapter
 import com.example.fitfactory.presentation.pages.map.MapFragment
 import com.example.fitfactory.presentation.pages.map.MapViewModel
-import com.example.fitfactory.presentation.pages.yoursActivity.PassAdapter
+import com.example.fitfactory.presentation.pages.yoursActivity.passes.PassAdapter
 import com.example.fitfactory.presentation.pages.rememberPassword.RememberPasswordFragment
 import com.example.fitfactory.presentation.pages.rememberPassword.RememberPasswordViewModel
 import com.example.fitfactory.presentation.pages.signIn.SignInFragment
@@ -31,6 +31,8 @@ import com.example.fitfactory.presentation.pages.fitnessLesson.FitnessLessonAdap
 import com.example.fitfactory.presentation.pages.fitnessLesson.FitnessLessonViewModel
 import com.example.fitfactory.presentation.pages.settings.editProfile.EditProfile
 import com.example.fitfactory.presentation.pages.settings.editProfile.EditProfileViewModel
+import com.example.fitfactory.presentation.pages.yoursActivity.YourActivityViewModel
+import com.example.fitfactory.presentation.pages.yoursActivity.fitnessLesson.FitnessLessonSimpleAdapter
 import com.example.fitfactory.utils.BitmapHelper
 import com.example.fitfactory.utils.Validator
 import dagger.Component
@@ -86,5 +88,7 @@ interface AppComponent {
     fun inject(into: EntriesHistoryViewModel)
     fun inject(into: EditProfileViewModel)
     fun inject(into: EditProfile)
+    fun inject(into: YourActivityViewModel)
+    fun inject(into: FitnessLessonSimpleAdapter)
 
 }

@@ -2,6 +2,7 @@ package com.example.fitfactory.data.rest
 
 import com.example.fitfactory.data.models.app.UserGetResource
 import com.example.fitfactory.data.models.request.ChangePasswordRequest
+import com.example.fitfactory.data.models.request.FitnessLessonSigning
 import com.example.fitfactory.data.models.request.SignInRequest
 import com.example.fitfactory.data.models.request.SignUpRequest
 import com.example.fitfactory.data.models.response.*
@@ -27,12 +28,18 @@ interface RetrofitService{
     @GET("user/getEntries")
     fun getUserEntries(@Query("id") userId: Long): Single<EntriesResponse>
 
+    @GET("user/getLessons")
+    fun getUserFitnessLesson(@Query("id") userId: Long): Single<LessonEntriesResponse>
+
+    @GET("user/getPasses")
+    fun getUserPasses(@Query("id") userId: Long): Single<PassesResponse>
+
     @POST("user/edit")
     fun editUser(@Body user: UserGetResource): Single<UserResponse>
 
     // PassType
     @GET("passType/getAll")
-    fun getAllPassType(): Single<PassesResponse>
+    fun getAllPassType(): Single<PassesTypeResponse>
 
     // FitnessClub
     @GET("fitnessClub/getFitnessClubs")
@@ -45,5 +52,11 @@ interface RetrofitService{
     // FitnessLesson
     @GET ("/fitnessLesson/getAll")
     fun getAllFitnessLesson(): Single<FitnessLessonResponse>
+
+    @POST ("/lessonEntry/signUp")
+    fun signUpToLesson(@Body fitnessLessonSigning: FitnessLessonSigning): Single<BaseResponse>
+
+    @POST ("/lessonEntry/signOut")
+    fun signOutFromLesson(@Body fitnessLessonSigning: FitnessLessonSigning): Single<BaseResponse>
 
 }

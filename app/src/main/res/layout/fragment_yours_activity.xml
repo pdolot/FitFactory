@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/primaryBgColor">
+
+    <com.example.fitfactory.presentation.customViews.tabLayout.MyTabLayout
+            android:id="@+id/tabLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:backgroundColor="@color/primaryBgColor2"
+            app:activeIndicatorColor="@color/primaryLight"
+            app:indicatorColor="@color/primaryBgColor5"
+            app:indicatorRadius="6dp"
+            app:rightIconDrawable="@drawable/ic_refresh"
+            app:iconColor="@color/secondaryMedium"
+            app:iconPadding="12dp"
+            app:itemCount="0"
+            />
+
+    <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerView"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:overScrollMode="never"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tabLayout" />
+
+
+<!--    <CheckBox-->
+<!--            android:id="@+id/passFragment_switchPass"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:button="@drawable/active_selector"-->
+<!--            android:checked="true"-->
+<!--            android:padding="@dimen/medium_margin"-->
+<!--            app:layout_constraintBottom_toBottomOf="@id/header"-->
+<!--            app:layout_constraintEnd_toEndOf="parent"-->
+<!--            app:layout_constraintHorizontal_bias="1.0"-->
+<!--            app:layout_constraintStart_toStartOf="parent"-->
+<!--            app:layout_constraintTop_toTopOf="parent" />-->
+
+
+    <ImageView
+            android:layout_width="0dp"
+            android:layout_height="16dp"
+            app:layout_constraintTop_toTopOf="@id/recyclerView"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:src="@drawable/shadow_background2"/>
+
+    <ImageView
+            android:layout_width="0dp"
+            android:layout_height="16dp"
+            app:layout_constraintBottom_toBottomOf="@id/recyclerView"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:src="@drawable/shadow_background2"
+            android:rotation="180"/>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

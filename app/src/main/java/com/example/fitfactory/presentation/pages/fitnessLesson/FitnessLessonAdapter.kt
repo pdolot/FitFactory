@@ -47,6 +47,8 @@ class FitnessLessonAdapter : BaseAdapter<FitnessLessonAdapter.ViewHolder>() {
 
     override fun getItemCount(): Int = filteredData?.size ?: 0
 
+    fun getFitnessLessonId() = filteredData?.get(currentItem)?.id
+
     override fun getTitle(position: Int): String? {
         return filteredData?.get(position)?.name ?: ""
     }

@@ -7,14 +7,11 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
-import androidx.navigation.findNavController
 import com.afollestad.materialdialogs.MaterialDialog
 import com.afollestad.materialdialogs.customview.getCustomView
-import com.example.fitfactory.R
 import com.example.fitfactory.constants.RequestCode
 import com.example.fitfactory.data.database.creditCard.CreditCardDao
-import com.example.fitfactory.data.models.app.CreditCard
-import com.example.fitfactory.data.models.app.UserGetResource
+import com.example.fitfactory.data.models.app.*
 import com.example.fitfactory.data.models.request.ChangePasswordRequest
 import com.example.fitfactory.data.rest.RetrofitRepository
 import com.example.fitfactory.di.Injector
@@ -24,9 +21,7 @@ import com.example.fitfactory.presentation.base.BaseViewModel
 import com.example.fitfactory.presentation.customViews.changePasswordDialog.ChangePasswordDialog
 import com.google.firebase.storage.StorageReference
 import io.reactivex.rxkotlin.subscribeBy
-import kotlinx.android.synthetic.main.view_change_password.view.*
 import kotlinx.coroutines.launch
-import org.json.JSONObject
 import java.io.File
 import java.util.*
 import javax.inject.Inject
@@ -113,7 +108,7 @@ class EditProfileViewModel : BaseViewModel() {
                 onSuccess = {
                     if (it.status) {
                         localStorage.setUser(it.data)
-                        updateState.postValue(StateEdited())
+                        updateState.postValue(StateComplete())
                     } else {
                         updateState.postValue(StateError(it.message))
                     }
@@ -174,8 +169,4 @@ class EditProfileViewModel : BaseViewModel() {
     fun deleteCreditCard() = viewModelScope.launch {
         creditCardDao.deleteCreditCard(user?.id ?: return@launch)
     }
-
-    class StateEdited
-    class StateInProgress
-    class StateError(var message: String)
 }

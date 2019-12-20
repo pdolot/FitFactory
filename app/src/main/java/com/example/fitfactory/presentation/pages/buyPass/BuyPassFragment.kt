@@ -29,13 +29,17 @@ class BuyPassFragment : BaseFragment() {
         super.onViewCreated(view, savedInstanceState)
         setAdapter()
         setListeners()
+        buyPassFragment_tabLayout.setupWithRecyclerView(buyPassFragment_recyclerView)
 
         viewModel.getPassesType()
+
         buyPassFragment_buyButton.isEnabled = viewModel.localStorage.isLogged()
+
         viewModel.passes.observe(viewLifecycleOwner, Observer {
             adapter.setData(it)
-            buyPassFragment_tabLayout.setupWithRecyclerView(buyPassFragment_recyclerView)
         })
+
+
     }
 
     private fun setListeners() {

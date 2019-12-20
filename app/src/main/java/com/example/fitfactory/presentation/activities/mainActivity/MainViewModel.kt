@@ -30,7 +30,7 @@ class MainViewModel : ViewModel() {
         val passes = NavigationItem(
             context.getString(R.string.yoursActivity),
             R.drawable.ic_pass,
-            R.id.passFragment,
+            R.id.yourActivity,
             context.getString(R.string.yoursActivity)
         )
         val buyPass = NavigationItem(
@@ -67,7 +67,7 @@ class MainViewModel : ViewModel() {
         val signOut = NavigationItem(
             context.getString(R.string.sign_out),
             R.drawable.ic_arrow_left,
-            null
+            R.id.returnToSource
         )
 
         return if (isLogged) listOf(

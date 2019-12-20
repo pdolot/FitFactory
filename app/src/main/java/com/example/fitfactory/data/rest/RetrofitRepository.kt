@@ -2,6 +2,7 @@ package com.example.fitfactory.data.rest
 
 import com.example.fitfactory.data.models.app.UserGetResource
 import com.example.fitfactory.data.models.request.ChangePasswordRequest
+import com.example.fitfactory.data.models.request.FitnessLessonSigning
 import com.example.fitfactory.data.models.request.SignInRequest
 import com.example.fitfactory.data.models.request.SignUpRequest
 import com.example.fitfactory.data.models.response.*
@@ -50,9 +51,20 @@ class RetrofitRepository @Inject constructor(private val retrofitService: Retrof
             .observeOn(AndroidSchedulers.mainThread())
     }
 
+    fun getUserFitnessLesson(userId: Long): Single<LessonEntriesResponse> {
+        return retrofitService.getUserFitnessLesson(userId)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+    }
+
+    fun getUserPasses(userId: Long): Single<PassesResponse> {
+        return retrofitService.getUserPasses(userId)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+    }
     // PassType
 
-    fun getAllPassType(): Single<PassesResponse> {
+    fun getAllPassType(): Single<PassesTypeResponse> {
         return retrofitService.getAllPassType().subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
     }
@@ -74,6 +86,16 @@ class RetrofitRepository @Inject constructor(private val retrofitService: Retrof
     // FitnessLesson
     fun getAllFitnessLesson(): Single<FitnessLessonResponse> {
         return retrofitService.getAllFitnessLesson().subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+    }
+
+    fun signUpToLesson(fitnessLessonSigning: FitnessLessonSigning): Single<BaseResponse>{
+        return retrofitService.signUpToLesson(fitnessLessonSigning).subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+    }
+
+    fun signOutFromLesson(fitnessLessonSigning: FitnessLessonSigning): Single<BaseResponse>{
+        return retrofitService.signOutFromLesson(fitnessLessonSigning).subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
     }
 

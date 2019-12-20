@@ -17,4 +17,5 @@
     <dimen name="topBarHeight">64dp</dimen>
     <dimen name="thumbSize">32dp</dimen>
     <dimen name="barWidth">2dp</dimen>
+    <dimen name="floatingLayoutRadius">24dp</dimen>
 </resources>

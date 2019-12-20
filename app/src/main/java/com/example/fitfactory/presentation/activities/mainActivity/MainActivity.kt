@@ -67,9 +67,9 @@ class MainActivity : AppCompatActivity(), MainInterface {
         })
 
         adapter.onItemClick = {
-            if (it != null) closeDrawer(it) else {
-                closeDrawer(R.id.mapFragment)
-                viewModel.localStorage.setToken(null)
+            it?.let {
+                if (it == R.id.returnToSource) viewModel.localStorage.setToken(null)
+                closeDrawer(it)
             }
         }
         mainFragment_navigationDrawer.onSignInClick = { closeDrawer(R.id.signInFragment) }

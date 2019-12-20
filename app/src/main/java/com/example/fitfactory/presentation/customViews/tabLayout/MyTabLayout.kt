@@ -11,7 +11,6 @@ import androidx.recyclerview.widget.PagerSnapHelper
 import androidx.recyclerview.widget.RecyclerView
 import com.example.fitfactory.R
 import com.example.fitfactory.presentation.base.BaseAdapter
-import kotlinx.android.synthetic.main.fragment_fitness_lesson.view.*
 import kotlinx.android.synthetic.main.tab_layout.view.*
 
 class MyTabLayout @JvmOverloads constructor(

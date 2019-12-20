@@ -1,11 +1,18 @@
 package com.example.fitfactory.utils
 
+import android.graphics.Bitmap
 import android.graphics.drawable.AnimatedVectorDrawable
 import android.graphics.drawable.Drawable
 import android.os.Build
 import android.text.Editable
 import android.text.TextWatcher
+import android.view.ViewTreeObserver
+import android.widget.ImageView
 import com.google.android.material.textfield.TextInputEditText
+import com.google.zxing.BarcodeFormat
+import com.google.zxing.MultiFormatWriter
+import com.google.zxing.WriterException
+import com.journeyapps.barcodescanner.BarcodeEncoder
 import java.sql.Time
 import kotlin.math.floor
 
@@ -61,6 +68,23 @@ fun TextInputEditText.addMaskAndTextWatcher(mask: String): TextWatcher {
     this.addTextChangedListener(textWatcher)
     return textWatcher
 }
+
+fun ImageView.generateQrCode(text: String?){
+    if (text == null) return
+    val multiFormatWriter = MultiFormatWriter()
+    viewTreeObserver.addOnGlobalLayoutListener(object: ViewTreeObserver.OnGlobalLayoutListener{
+        override fun onGlobalLayout() {
+            viewTreeObserver.removeOnGlobalLayoutListener(this)
+            try {
+                val bitMatrix = multiFormatWriter.encode(text, BarcodeFormat.QR_CODE, this@generateQrCode.width, this@generateQrCode.height)
+                setImageBitmap(BarcodeEncoder().createBitmap(bitMatrix))
+            }catch (e: WriterException){
+                e.printStackTrace()
+            }
+        }
+    })
+}
+
 
 fun Drawable.animateDrawable() {
     (this as? AnimatedVectorDrawable)?.let {

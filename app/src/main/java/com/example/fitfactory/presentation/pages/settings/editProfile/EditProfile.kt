@@ -18,9 +18,7 @@ import com.afollestad.materialdialogs.customview.customView
 import com.bumptech.glide.Glide
 import com.example.fitfactory.R
 import com.example.fitfactory.constants.RequestCode
-import com.example.fitfactory.data.models.app.Address
-import com.example.fitfactory.data.models.app.CreditCard
-import com.example.fitfactory.data.models.app.UserGetResource
+import com.example.fitfactory.data.models.app.*
 import com.example.fitfactory.di.Injector
 import com.example.fitfactory.presentation.base.BaseFragment
 import com.example.fitfactory.presentation.customViews.changePasswordDialog.ChangePasswordDialog
@@ -91,14 +89,14 @@ class EditProfile : BaseFragment() {
 
         viewModel.updateState.observe(viewLifecycleOwner, Observer {
             when (it) {
-                is EditProfileViewModel.StateInProgress -> {
+                is StateInProgress -> {
                     editUserButton.isEnabled = false
                 }
-                is EditProfileViewModel.StateError -> {
+                is StateError -> {
                     editUserButton.isEnabled = true
                     Toast.makeText(context, it.message, Toast.LENGTH_SHORT).show()
                 }
-                is EditProfileViewModel.StateEdited -> {
+                is StateComplete -> {
                     editUserButton.isEnabled = true
                     Toast.makeText(context, "Pomyślnie zedytowano", Toast.LENGTH_SHORT).show()
                     topBar?.setProfileImage(viewModel.localStorage.getUser()?.profileImage)

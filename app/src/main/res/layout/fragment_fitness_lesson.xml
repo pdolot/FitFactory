@@ -20,7 +20,7 @@
             app:indicatorRadius="6dp"
             app:rightIconDrawable="@drawable/ic_filter"
             app:iconColor="@color/secondaryMedium"
-            app:iconPadding="20dp"
+            app:iconPadding="16dp"
             app:itemCount="0"
             />
 
