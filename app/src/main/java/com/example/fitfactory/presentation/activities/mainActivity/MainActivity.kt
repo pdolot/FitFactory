@@ -10,16 +10,21 @@ import androidx.navigation.findNavController
 import com.example.fitfactory.R
 import com.example.fitfactory.app.App
 import com.example.fitfactory.di.Injector
+import com.example.fitfactory.functional.localStorage.LocalStorage
 import com.example.fitfactory.presentation.customViews.CustomDrawerLayout
 import com.example.fitfactory.presentation.customViews.TopBar
 import com.example.fitfactory.presentation.customViews.flexibleLayout.FlexibleView
 import com.example.fitfactory.presentation.navigationDrawer.NavigationDrawer
+import com.example.fitfactory.presentation.navigationDrawer.NavigationItem
 import com.example.fitfactory.presentation.navigationDrawer.NavigationRecyclerViewAdapter
 import kotlinx.android.synthetic.main.activity_main.*
+import javax.inject.Inject
 
 class MainActivity : AppCompatActivity(), MainInterface {
 
-    private val viewModel by lazy { MainViewModel() }
+    @Inject
+    lateinit var localStorage: LocalStorage
+
     private val adapter by lazy { NavigationRecyclerViewAdapter() }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -30,9 +35,9 @@ class MainActivity : AppCompatActivity(), MainInterface {
         setListeners()
         setTopBarProfileImage()
         setNavigationDrawer()
-        viewModel.localStorage.isLoggedLive().observe(this, Observer {
+        localStorage.isLoggedLive().observe(this, Observer {
             mainFragment_navigationDrawer.setHeader(it)
-            adapter.setData(viewModel.getMenuList(it))
+            adapter.setData(getMenuList(it))
             if (it){
                 mainFragment_navigationDrawer.setProfileView()
                 setTopBarProfileImage()
@@ -48,7 +53,7 @@ class MainActivity : AppCompatActivity(), MainInterface {
     }
 
     private fun setTopBarProfileImage() {
-        viewModel.localStorage.getUser()?.profileImage?.let {
+        localStorage.getUser()?.profileImage?.let {
             mainFragment_topBar.setProfileImage(it)
         }
 
@@ -68,7 +73,7 @@ class MainActivity : AppCompatActivity(), MainInterface {
 
         adapter.onItemClick = {
             it?.let {
-                if (it == R.id.returnToSource) viewModel.localStorage.setToken(null)
+                if (it == R.id.returnToSource) localStorage.setToken(null)
                 closeDrawer(it)
             }
         }
@@ -128,4 +133,67 @@ class MainActivity : AppCompatActivity(), MainInterface {
             super.onBackPressed()
         }
     }
+
+    private fun getMenuList(isLogged: Boolean): List<NavigationItem> {
+        val map = NavigationItem(
+            getString(R.string.map),
+            R.drawable.ic_map,
+            R.id.mapFragment,
+            getString(R.string.app_name)
+        )
+        val passes = NavigationItem(
+            getString(R.string.yoursActivity),
+            R.drawable.ic_pass,
+            R.id.yourActivity,
+            getString(R.string.yoursActivity)
+        )
+        val buyPass = NavigationItem(
+            getString(R.string.buy_pass),
+            R.drawable.ic_shop,
+            R.id.buyPassFragment,
+            getString(R.string.buy_pass)
+        )
+        val exercises = NavigationItem(
+            getString(R.string.exercises),
+            R.drawable.ic_fit_exercises,
+            R.id.exercisesInfo,
+            getString(R.string.exercises)
+        )
+        val fitnessLessons =
+            NavigationItem(
+                getString(R.string.fitness_lessons),
+                R.drawable.ic_fitness_lesson,
+                R.id.fitnessLesson,
+                getString(R.string.fitness_lessons)
+            )
+        val history = NavigationItem(
+            getString(R.string.history),
+            R.drawable.ic_history,
+            R.id.entriesHistory,
+            getString(R.string.history)
+        )
+        val settings = NavigationItem(
+            getString(R.string.settings),
+            R.drawable.ic_settings,
+            R.id.editProfile,
+            getString(R.string.editProfile)
+        )
+        val signOut = NavigationItem(
+            getString(R.string.sign_out),
+            R.drawable.ic_arrow_left,
+            R.id.returnToSource
+        )
+
+        return if (isLogged) listOf(
+            map,
+            passes,
+            buyPass,
+            exercises,
+            fitnessLessons,
+            history,
+            settings,
+            signOut
+        ) else listOf(map, buyPass, exercises, fitnessLessons)
+    }
+
 }

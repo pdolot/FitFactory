@@ -17,6 +17,12 @@
         <item name="md_color_button_text">@color/secondaryMedium</item>
     </style>
 
+    <style name="PayTheme" parent="AppTheme">
+        <item name="md_background_color">@color/silverLight</item>
+        <item name="colorAccent">@color/primaryDark</item>
+        <item name="md_color_button_text">@color/primaryMedium</item>
+    </style>
+
 
     <style name="FontH1_BOLD">
         <item name="android:fontFamily">@font/fira_sans_condensed_bold</item>

@@ -14,7 +14,7 @@ data class FitnessLesson(
 
     val date: String? = null,
 
-    val signedUpPeopleCount: Int? = null,
+    var signedUpPeopleCount: Int? = null,
 
     val price: Double? = null,
 

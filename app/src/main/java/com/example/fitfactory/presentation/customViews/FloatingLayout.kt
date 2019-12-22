@@ -7,6 +7,7 @@ import android.os.Parcelable
 import android.util.AttributeSet
 import android.view.View
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.content.ContextCompat
 import com.example.fitfactory.R
 import com.example.fitfactory.data.models.app.FitnessClub
 import com.example.fitfactory.data.models.app.OpenHours
@@ -23,11 +24,7 @@ class FloatingLayout @JvmOverloads constructor(
     var isExpand: Boolean = false
     var isAnimated: Boolean = false
     private lateinit var floatingLayoutListener: FloatingLayoutListener
-    private var animatorSet: AnimatorSet? = null
-    private var gradientDrawable: GradientDrawable = GradientDrawable()
-    private lateinit var cornerAnimation: ObjectAnimator
-    private lateinit var widthAnimation: ValueAnimator
-    private lateinit var biasAnimation: ValueAnimator
+    private val gradientDrawable = ContextCompat.getDrawable(context, R.drawable.club_bar_rounded) as GradientDrawable
 
     var fitnessClub: FitnessClub? = null
         set(value) {
@@ -38,7 +35,6 @@ class FloatingLayout @JvmOverloads constructor(
     init {
         View.inflate(context, R.layout.club_bar, this)
         setListeners()
-        gradientDrawable = clubBar_bottomBar.background as GradientDrawable
     }
 
     private fun setListeners() {
@@ -56,7 +52,6 @@ class FloatingLayout @JvmOverloads constructor(
                 it.address?.zipCode,
                 it.address?.zipCodeCity
             )
-
             val openHours = getTodayOpenHours(it.openHours)
             clubBar_openHours.text = resources.getString(R.string.openHours, openHours, checkIfIsOpen(openHours))
             SpanTextUtil(context).setSpanOnTextView(clubBar_openHours, "Otwarte", R.color.positiveLight)
@@ -141,10 +136,15 @@ class FloatingLayout @JvmOverloads constructor(
         return super.onSaveInstanceState()
     }
 
+    override fun onRestoreInstanceState(state: Parcelable?) {
+        super.onRestoreInstanceState(state)
+        clubBar_bottomBar.background = gradientDrawable.apply { cornerRadius = 1000f }
+    }
+
     fun forceClose() {
         clubBar_topBar.collapse(false)
-        cornerAnimation =
-            ObjectAnimator.ofFloat(gradientDrawable, "cornerRadius", 0f, 1000f).apply { start() }
+        clubBar_bottomBar.setBackgroundResource(R.drawable.circle)
+//        ObjectAnimator.ofFloat(gradientDrawable, "cornerRadius", 0f, 1000f).start()
         val params = clubBar_bottomBar.layoutParams as LayoutParams
         params.width = clubBar_bottomBar.height
         params.horizontalBias = 1f
@@ -158,11 +158,12 @@ class FloatingLayout @JvmOverloads constructor(
         val params = layoutParams
         params.width = LayoutParams.MATCH_PARENT
         layoutParams = params
+        clubBar_bottomBar.background = gradientDrawable
 
         clubBar_bottomBar.post {
-            cornerAnimation = ObjectAnimator.ofFloat(gradientDrawable, "cornerRadius", 1000f, 0f)
-            widthAnimation = ValueAnimator.ofInt(clubBar_bottomBar.height, measuredWidth)
-            biasAnimation = ValueAnimator.ofFloat(1f, 0.5f)
+            val cornerAnimation = ObjectAnimator.ofFloat(clubBar_bottomBar.background as GradientDrawable, "cornerRadius", 1000f, 0f)
+            val widthAnimation = ValueAnimator.ofInt(clubBar_bottomBar.height, measuredWidth)
+            val biasAnimation = ValueAnimator.ofFloat(1f, 0.5f)
 
             biasAnimation.apply {
                 duration = 1000
@@ -189,7 +190,7 @@ class FloatingLayout @JvmOverloads constructor(
             }
 
 
-            animatorSet = AnimatorSet().apply {
+            AnimatorSet().apply {
                 duration = 2000
                 startDelay = 1000
                 playTogether(cornerAnimation, widthAnimation)
@@ -227,9 +228,9 @@ class FloatingLayout @JvmOverloads constructor(
     }
 
     private fun startExitAnimation() {
-        cornerAnimation = ObjectAnimator.ofFloat(gradientDrawable, "cornerRadius", 0f, 1000f)
-        widthAnimation = ValueAnimator.ofInt(measuredWidth, clubBar_bottomBar.height)
-        biasAnimation = ValueAnimator.ofFloat(0.5f, 1f)
+        val cornerAnimation = ObjectAnimator.ofFloat(clubBar_bottomBar.background as GradientDrawable, "cornerRadius", 0f, 1000f)
+        val widthAnimation = ValueAnimator.ofInt(measuredWidth, clubBar_bottomBar.height)
+        val biasAnimation = ValueAnimator.ofFloat(0.5f, 1f)
 
         widthAnimation.addUpdateListener { va ->
             val params = clubBar_bottomBar.layoutParams
@@ -237,7 +238,7 @@ class FloatingLayout @JvmOverloads constructor(
             clubBar_bottomBar.layoutParams = params
         }
 
-        animatorSet = AnimatorSet().apply {
+        AnimatorSet().apply {
             duration = 2000
             startDelay = 1000
             playTogether(cornerAnimation, widthAnimation)

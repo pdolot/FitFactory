@@ -1,10 +1,7 @@
 package com.example.fitfactory.data.rest
 
 import com.example.fitfactory.data.models.app.UserGetResource
-import com.example.fitfactory.data.models.request.ChangePasswordRequest
-import com.example.fitfactory.data.models.request.FitnessLessonSigning
-import com.example.fitfactory.data.models.request.SignInRequest
-import com.example.fitfactory.data.models.request.SignUpRequest
+import com.example.fitfactory.data.models.request.*
 import com.example.fitfactory.data.models.response.*
 import com.example.fitfactory.di.Injector
 import io.reactivex.Observable
@@ -66,6 +63,20 @@ class RetrofitRepository @Inject constructor(private val retrofitService: Retrof
 
     fun getAllPassType(): Single<PassesTypeResponse> {
         return retrofitService.getAllPassType().subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+    }
+
+    fun getPassTypeById(passId: Long): Single<PassTypeResponse>{
+        return retrofitService.getPassTypeById(passId)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+    }
+
+    // Pass
+
+    fun buyPass(buyPassRequest: BuyPassRequest): Single<BaseResponse>{
+        return retrofitService.buyPass(buyPassRequest)
+            .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
     }
 

@@ -3,6 +3,7 @@ package com.example.fitfactory.utils
 import org.joda.time.DateTime
 import org.joda.time.format.DateTimeFormat
 import org.joda.time.format.DateTimeFormatter
+import java.util.*
 
 object TimeUtil {
 
@@ -19,5 +20,10 @@ object TimeUtil {
 
         val date = if (dateToCompare == null) DateTime.now() else formatter.parseDateTime(dateToCompare)
         return (date.isAfter(sD) && date.isBefore(eD))
+    }
+
+    fun getDateAsString(date: DateTime, dateFormat: String): String{
+        val formatter = DateTimeFormat.forPattern(dateFormat) as DateTimeFormatter
+        return  formatter.print(date)
     }
 }

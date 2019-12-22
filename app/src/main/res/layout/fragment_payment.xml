@@ -3,6 +3,7 @@
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        xmlns:tools="http://schemas.android.com/tools"
         android:background="@color/primaryBgColor"
         android:clickable="true"
         android:focusable="true"
@@ -36,7 +37,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 style="@style/FontH1_BOLD"
-                android:text="ProAge 12M"
+                tools:text="ProAge 12M"
                 android:textColor="@color/silverLight"
                 app:layout_constraintHorizontal_chainStyle="packed"
                 app:layout_constraintTop_toTopOf="@id/passIcon"
@@ -74,7 +75,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/small_margin"
                 android:layout_marginEnd="@dimen/small_margin"
-                android:text="12.05.2019 - 12.05.2020"
+                tools:text="12.05.2019 - 12.05.2020"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toStartOf="@id/paymentFragment_editExpiryDate"
                 app:layout_constraintTop_toBottomOf="@id/paymentFragment_passExpiryLabel" />
@@ -132,7 +133,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             style="@style/FontH4_LIGHT"
-            android:text="89,99 zł/msc *"
+            tools:text="89,99 zł/msc *"
             android:layout_marginStart="24dp"
             app:layout_constraintTop_toTopOf="@id/paymentFragment_payButton"
             app:layout_constraintStart_toStartOf="parent" />
@@ -274,7 +275,7 @@
                     app:layout_constraintTop_toBottomOf="@id/userInfo">
 
                 <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/astName"
+                        android:id="@+id/lastName"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:inputType="textPersonName"

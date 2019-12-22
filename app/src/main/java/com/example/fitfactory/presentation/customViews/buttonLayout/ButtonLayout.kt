@@ -15,6 +15,13 @@ class ButtonLayout @JvmOverloads constructor(
     private var bias = 0.5f
     private var bgColor = 0
 
+    var isEnable: Boolean? = null
+        set(value) {
+            field = value
+            field?.let { overlappingButton.clickEnable = it }
+
+        }
+
     init {
         View.inflate(context, R.layout.view_button_layout, this)
         val a = context.theme.obtainStyledAttributes(attrs, R.styleable.style, defStyleAttr, 0)

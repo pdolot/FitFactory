@@ -1,10 +1,7 @@
 package com.example.fitfactory.data.rest
 
 import com.example.fitfactory.data.models.app.UserGetResource
-import com.example.fitfactory.data.models.request.ChangePasswordRequest
-import com.example.fitfactory.data.models.request.FitnessLessonSigning
-import com.example.fitfactory.data.models.request.SignInRequest
-import com.example.fitfactory.data.models.request.SignUpRequest
+import com.example.fitfactory.data.models.request.*
 import com.example.fitfactory.data.models.response.*
 import io.reactivex.Observable
 import io.reactivex.Single
@@ -40,6 +37,13 @@ interface RetrofitService{
     // PassType
     @GET("passType/getAll")
     fun getAllPassType(): Single<PassesTypeResponse>
+
+    @GET("passType/getPass")
+    fun getPassTypeById(@Query("id") passId: Long): Single<PassTypeResponse>
+
+    // Pass
+    @POST("pass/buy")
+    fun buyPass(@Body buyPassRequest: BuyPassRequest): Single<BaseResponse>
 
     // FitnessClub
     @GET("fitnessClub/getFitnessClubs")

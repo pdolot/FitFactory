@@ -7,8 +7,7 @@ import com.example.fitfactory.di.modules.DbModule
 import com.example.fitfactory.di.modules.RestModule
 import com.example.fitfactory.di.modules.UserModule
 import com.example.fitfactory.presentation.activities.mainActivity.MainActivity
-import com.example.fitfactory.presentation.activities.mainActivity.MainViewModel
-import com.example.fitfactory.presentation.activities.splashActivity.SplashViewModel
+import com.example.fitfactory.presentation.activities.splashActivity.SplashActivity
 import com.example.fitfactory.presentation.customViews.TopBar
 import com.example.fitfactory.presentation.customViews.flexibleLayout.FlexibleView
 import com.example.fitfactory.presentation.pages.buyPass.PassToBuyAdapter
@@ -29,6 +28,7 @@ import com.example.fitfactory.presentation.pages.exercises.exercise.ExerciseView
 import com.example.fitfactory.presentation.pages.fitnessLesson.FitnessLesson
 import com.example.fitfactory.presentation.pages.fitnessLesson.FitnessLessonAdapter
 import com.example.fitfactory.presentation.pages.fitnessLesson.FitnessLessonViewModel
+import com.example.fitfactory.presentation.pages.payment.PaymentViewModel
 import com.example.fitfactory.presentation.pages.settings.editProfile.EditProfile
 import com.example.fitfactory.presentation.pages.settings.editProfile.EditProfileViewModel
 import com.example.fitfactory.presentation.pages.yoursActivity.YourActivityViewModel
@@ -50,8 +50,6 @@ import javax.inject.Singleton
 interface AppComponent {
     // Activities
     fun inject(into: MainActivity)
-    fun inject(into: MainViewModel)
-    fun inject(into: SplashViewModel)
 
     // Fragments
     fun inject(into: SignInFragment)
@@ -90,5 +88,7 @@ interface AppComponent {
     fun inject(into: EditProfile)
     fun inject(into: YourActivityViewModel)
     fun inject(into: FitnessLessonSimpleAdapter)
+    fun inject(into: PaymentViewModel)
+    fun inject(into: SplashActivity)
 
 }

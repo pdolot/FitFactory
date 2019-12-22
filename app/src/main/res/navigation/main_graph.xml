@@ -41,7 +41,16 @@
     <fragment
             android:id="@+id/paymentFragment"
             android:name="com.example.fitfactory.presentation.pages.payment.PaymentFragment"
-            android:label="PaymentFragment" />
+            android:label="PaymentFragment">
+
+        <argument
+                android:name="passId"
+                app:argType="long"
+                android:defaultValue="0L" />
+    </fragment>
+    <action
+            android:id="@+id/toPaymentFragment"
+            app:destination="@id/paymentFragment" />
     <fragment
             android:id="@+id/exercisesInfo"
             android:name="com.example.fitfactory.presentation.pages.exercises.info.ExercisesInfoFragment"
@@ -83,5 +92,4 @@
             android:id="@+id/yourActivity"
             android:name="com.example.fitfactory.presentation.pages.yoursActivity.YourActivity"
             android:label="YourActivity" />
-
 </navigation>

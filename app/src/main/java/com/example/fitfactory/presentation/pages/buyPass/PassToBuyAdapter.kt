@@ -49,6 +49,10 @@ class PassToBuyAdapter : BaseAdapter<PassToBuyAdapter.ViewHolder>() {
         return ""
     }
 
+    fun getPassTypeId(): Long?{
+        return (items?.get(currentItem) as PassType).id
+    }
+
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item =  items?.get(position) as PassType
         holder.itemView.apply {

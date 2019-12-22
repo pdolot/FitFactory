@@ -3,12 +3,14 @@ package com.example.fitfactory.presentation.pages.map
 import android.annotation.SuppressLint
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.fitfactory.data.database.fitnessClub.FitnessClubRepository
 import com.example.fitfactory.data.models.app.FitnessClub
 import com.example.fitfactory.data.rest.RetrofitRepository
 import com.example.fitfactory.di.Injector
 import com.example.fitfactory.presentation.base.BaseViewModel
+import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.rxkotlin.subscribeBy
 import kotlinx.coroutines.launch
 import java.util.concurrent.TimeUnit
@@ -29,13 +31,17 @@ class MapViewModel : BaseViewModel() {
     @SuppressLint("CheckResult")
     fun fetchFitnessClubs() {
         rxDisposer.add(retrofitRepository.getAllFitnessClub()
-            .repeatWhen { completed -> completed.delay(1, TimeUnit.MINUTES) }
+            .repeatWhen { completed ->
+                    completed.delay(1, TimeUnit.SECONDS)
+            }
             .subscribeBy(
                 onNext = {
                     deleteAll()
                     if (it.status) {
                         insert(it.data)
                     }
+
+//                    println("WORKING")
                 },
                 onError = {
                     Log.e("MapFragment", it.message)
@@ -50,5 +56,4 @@ class MapViewModel : BaseViewModel() {
     private fun deleteAll() = viewModelScope.launch {
         fitnessClubRepository.deleteAll()
     }
-
 }

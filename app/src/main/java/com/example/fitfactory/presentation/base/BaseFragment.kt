@@ -45,10 +45,10 @@ abstract class BaseFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         softMode = activity?.window?.attributes?.softInputMode
-        if(topBarEnabled()){
+        if (topBarEnabled()) {
             topBar?.visibility = View.VISIBLE
             topBar?.setTitle(topBarTitle() ?: "FitFactory")
-        }else{
+        } else {
             topBar?.visibility = View.GONE
         }
         flexibleLayout?.isViewEnable = flexibleViewEnabled()

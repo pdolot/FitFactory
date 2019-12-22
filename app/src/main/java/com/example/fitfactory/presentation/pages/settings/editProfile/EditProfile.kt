@@ -9,7 +9,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
 import android.widget.Toast
-import androidx.core.view.get
 import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
@@ -26,14 +25,6 @@ import com.example.fitfactory.presentation.customViews.creditCard.CreditCardDial
 import com.example.fitfactory.utils.SuperValidator
 import com.example.fitfactory.utils.addMaskAndTextWatcher
 import kotlinx.android.synthetic.main.fragment_edit_profile.*
-import kotlinx.android.synthetic.main.fragment_edit_profile.firstName
-import kotlinx.android.synthetic.main.fragment_edit_profile.userAddressCity
-import kotlinx.android.synthetic.main.fragment_edit_profile.userAddressStreet
-import kotlinx.android.synthetic.main.fragment_edit_profile.userBirthDate
-import kotlinx.android.synthetic.main.fragment_edit_profile.userPhoneNo
-import kotlinx.android.synthetic.main.fragment_edit_profile.userZipCode
-import kotlinx.android.synthetic.main.fragment_edit_profile.userZipCodeCity
-import kotlinx.android.synthetic.main.fragment_payment.*
 import javax.inject.Inject
 
 class EditProfile : BaseFragment() {

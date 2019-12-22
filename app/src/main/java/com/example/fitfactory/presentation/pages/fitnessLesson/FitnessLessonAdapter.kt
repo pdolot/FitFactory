@@ -20,15 +20,19 @@ class FitnessLessonAdapter : BaseAdapter<FitnessLessonAdapter.ViewHolder>() {
     @Inject
     lateinit var activity: AppCompatActivity
 
-    private var currentItem: Int = 0
+    var currentPosition: Int = 0
 
     private var filteredData: List<FitnessLesson>? = null
+
+    var filterClubId: Long? = null
 
     init {
         Injector.component.inject(this)
     }
 
     fun filterData(fitnessClubId: Long?){
+        filterClubId = fitnessClubId
+
         filteredData = if (fitnessClubId == null) {
             items?.map { it as FitnessLesson }
         }else{
@@ -47,7 +51,7 @@ class FitnessLessonAdapter : BaseAdapter<FitnessLessonAdapter.ViewHolder>() {
 
     override fun getItemCount(): Int = filteredData?.size ?: 0
 
-    fun getFitnessLessonId() = filteredData?.get(currentItem)?.id
+    fun getFitnessLessonId() = filteredData?.get(currentPosition)?.id
 
     override fun getTitle(position: Int): String? {
         return filteredData?.get(position)?.name ?: ""
@@ -59,7 +63,7 @@ class FitnessLessonAdapter : BaseAdapter<FitnessLessonAdapter.ViewHolder>() {
             holder.itemView.apply {
                 val dataNotGive = context.getString(R.string.data_not_given).toLowerCase()
 
-                shadow.visibility = if (position == currentItem) View.INVISIBLE else View.VISIBLE
+                shadow.visibility = if (position == currentPosition) View.INVISIBLE else View.VISIBLE
                 Glide.with(context)
                     .load(it.coach?.profileImage)
                     .placeholder(R.drawable.coach_placeholder)
@@ -90,8 +94,23 @@ class FitnessLessonAdapter : BaseAdapter<FitnessLessonAdapter.ViewHolder>() {
         }
     }
 
+    override fun onBindViewHolder(holder: ViewHolder, position: Int, payloads: MutableList<Any>) {
+        if (payloads.isNotEmpty()){
+            val item = filteredData?.get(position)
+            item?.let {
+                holder.itemView.apply {
+                    it.signedUpPeopleCount = it.signedUpPeopleCount?.plus(1)
+                    signedUpPeopleCount.text = it.signedUpPeopleCount.toString()
+                    signedUpPeopleCountProgressBar.progress = (it.signedUpPeopleCount?.toFloat() ?: 0.0f) / (it.peopleLimit?.toFloat() ?: 1.0f)
+                }
+            }
+        }else{
+            super.onBindViewHolder(holder, position, payloads)
+        }
+    }
+
     override fun setCurrentItem(position: Int) {
-        this.currentItem = position
+        this.currentPosition = position
         notifyDataSetChanged()
     }
 

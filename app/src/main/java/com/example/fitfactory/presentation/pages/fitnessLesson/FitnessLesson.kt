@@ -60,7 +60,7 @@ class FitnessLesson : BaseFragment() {
 
         viewModel.callResult.observe(viewLifecycleOwner, Observer {
             adapter.setData(it)
-            adapter.filterData(null)
+            adapter.filterData(adapter.filterClubId)
         })
 
         viewModel.signUpResult.observe(viewLifecycleOwner, Observer {
@@ -75,6 +75,7 @@ class FitnessLesson : BaseFragment() {
                 is StateComplete -> {
                     signUpToLesson.isEnabled = true
                     Toast.makeText(context, it.message, Toast.LENGTH_SHORT).show()
+                    adapter.notifyItemChanged(adapter.currentPosition, true)
                 }
             }
         })
