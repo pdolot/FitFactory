@@ -40,7 +40,7 @@
             tools:layout="@layout/fragment_buy_pass"/>
     <fragment
             android:id="@+id/paymentFragment"
-            android:name="com.example.fitfactory.presentation.pages.payment.PaymentFragment"
+            android:name="com.example.fitfactory.presentation.pages.payment.passPayment.PaymentFragment"
             android:label="PaymentFragment">
 
         <argument
@@ -92,4 +92,52 @@
             android:id="@+id/yourActivity"
             android:name="com.example.fitfactory.presentation.pages.yoursActivity.YourActivity"
             android:label="YourActivity" />
+    <fragment
+            android:id="@+id/contractTermination"
+            android:name="com.example.fitfactory.presentation.pages.payment.contractTerminationPayment.ContractTermination"
+            android:label="ContractTermination" >
+        <argument
+                android:name="passId"
+                app:argType="long"
+                android:defaultValue="0L" />
+
+        <argument
+                android:name="passName"
+                app:argType="string"
+                />
+        <argument
+                android:name="penalty"
+                app:argType="float" />
+    </fragment>
+
+    <action
+            android:id="@+id/toContractTermination"
+            app:destination="@id/contractTermination" />
+
+    <fragment
+            android:id="@+id/fitnessLessonPayment"
+            android:name="com.example.fitfactory.presentation.pages.payment.fitnessLessonPayment.FitnessLessonPayment"
+            android:label="FitnessLessonPayment" >
+        <argument
+                android:name="entryId"
+                app:argType="long"
+                android:defaultValue="0L" />
+
+        <argument
+                android:name="fitnessLessonName"
+                app:argType="string"
+                />
+
+        <argument
+                android:name="date"
+                app:argType="string"
+                />
+        <argument
+                android:name="price"
+                app:argType="float" />
+    </fragment>
+
+    <action
+            android:id="@+id/toFitnessLessonPayment"
+            app:destination="@id/fitnessLessonPayment" />
 </navigation>

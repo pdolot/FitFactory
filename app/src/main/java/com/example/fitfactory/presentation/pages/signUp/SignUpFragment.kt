@@ -1,14 +1,9 @@
 package com.example.fitfactory.presentation.pages.signUp
 
-import android.graphics.drawable.AnimatedVectorDrawable
-import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.Toast
-import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
 import com.example.fitfactory.R
 import com.example.fitfactory.data.models.request.SignUpRequest
@@ -20,7 +15,6 @@ import kotlinx.android.synthetic.main.fragment_sign_up.*
 class SignUpFragment : BaseFragment() {
 
     private val viewModel by lazy { SignUpViewModel() }
-    private var animationList = ArrayList<AnimatedVectorDrawable>()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -33,23 +27,19 @@ class SignUpFragment : BaseFragment() {
         super.onViewCreated(view, savedInstanceState)
         setListeners()
         viewModel.callResult.observe(viewLifecycleOwner, Observer {
-            resetAnimations()
             when (it) {
                 is BaseResponse -> {
-                    Toast.makeText(context, it.message, Toast.LENGTH_SHORT).show()
-                    signUpFragment_signUp.setImageDrawable(
-                        ContextCompat.getDrawable(
-                            context!!,
-                            if (it.status) R.drawable.load_button_endanim_positive else R.drawable.load_button_endanim_negative
-                        )
-                    )
+                    if (it.status) {
+                        signUpFragment_signUp.onSuccess("ZAREJESTROWANO")
+                    } else {
+                        signUpFragment_signUp.onError("UŻYTKOWNIK ISTNIEJE")
+                    }
                 }
                 is ErrorSignIn -> {
-                    signUpFragment_signUp.setImageDrawable(ContextCompat.getDrawable(context!!, R.drawable.load_button_endanim_negative))
-                    Toast.makeText(context, it.message ?: "Błąd", Toast.LENGTH_SHORT).show()
+                    signUpFragment_signUp.onError("Błąd połączenia")
                 }
             }
-//            animateView(signUpFragment_signUp.drawable)
+            signUpFragment_signUp.stop()
         })
     }
 
@@ -60,9 +50,9 @@ class SignUpFragment : BaseFragment() {
                     signUpFragment_userEmail,
                     signUpFragment_userPassword,
                     signUpFragment_userConfirmPassword
-                )){
-                animateView((v as ImageView).drawable)
-                signUpFragment_label.visibility = View.INVISIBLE
+                ) && signUpFragment_regulationsCheckbox.isChecked
+            ) {
+                signUpFragment_signUp.startAnim()
                 viewModel.signUp(
                     SignUpRequest(
                         username = signUpFragment_userName.text.toString().trim(),
@@ -73,25 +63,12 @@ class SignUpFragment : BaseFragment() {
                 )
             }
         }
-    }
 
-    private fun resetAnimations() {
-        animationList.forEach { drawable ->
-            drawable.stop()
+        listOf(signUpFragment_userName, signUpFragment_userEmail, signUpFragment_userPassword, signUpFragment_userConfirmPassword).forEach {
+            it.setOnFocusChangeListener { _, hasFocus ->
+                if (hasFocus) signUpFragment_signUp.reset()
+            }
         }
-        animationList.clear()
-    }
-
-    private fun animateView(drawable: Drawable) {
-        (drawable as? AnimatedVectorDrawable)?.let {
-            it.start()
-            animationList.add(it)
-        }
-    }
-
-    override fun onDestroyView() {
-        resetAnimations()
-        super.onDestroyView()
     }
 
     override fun flexibleViewEnabled() = false

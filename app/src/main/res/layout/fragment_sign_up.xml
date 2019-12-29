@@ -30,83 +30,83 @@
             android:layout_margin="@dimen/screen_padding">
 
         <androidx.constraintlayout.widget.ConstraintLayout
-                android:padding="@dimen/screen_padding"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"
-                android:elevation="@dimen/layout_elevation"
                 android:clickable="true"
+                android:elevation="@dimen/layout_elevation"
+                android:focusable="true"
                 android:focusableInTouchMode="true"
-                android:focusable="true">
+                android:padding="@dimen/screen_padding"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
 
             <ImageView
                     android:id="@+id/signUpFragment_logo"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/logo_anim"
                     android:layout_marginTop="@dimen/big_margin"
-                    app:layout_constraintTop_toTopOf="parent"
+                    android:src="@drawable/logo_anim"
+                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent" />
+                    app:layout_constraintTop_toTopOf="parent" />
 
             <com.example.fitfactory.presentation.customViews.FancyEditText
                     android:id="@+id/signUpFragment_userEmail"
+                    style="@style/FancyEditText_Text"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/big_margin"
                     android:hint="@string/email_address"
                     android:inputType="textEmailAddress"
                     android:theme="@style/FancyEditText"
-                    style="@style/FancyEditText_Text"
-                    android:layout_marginTop="@dimen/big_margin"
-                    app:layout_constraintTop_toBottomOf="@+id/signUpFragment_logo"
-                    app:layout_constraintStart_toStartOf="parent"
+                    app:iconLeft="@drawable/ic_mail"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:iconLeft="@drawable/ic_mail" />
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/signUpFragment_logo" />
 
             <com.example.fitfactory.presentation.customViews.FancyEditText
                     android:id="@+id/signUpFragment_userName"
+                    style="@style/FancyEditText_Text"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="@string/user_name"
                     android:layout_marginTop="@dimen/medium_margin"
-                    style="@style/FancyEditText_Text"
+                    android:hint="@string/user_name"
                     android:inputType="text"
                     android:theme="@style/FancyEditText"
-                    app:layout_constraintTop_toBottomOf="@+id/signUpFragment_userEmail"
-                    app:layout_constraintStart_toStartOf="parent"
+                    app:iconLeft="@drawable/ic_user"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:iconLeft="@drawable/ic_user"/>
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/signUpFragment_userEmail" />
 
             <com.example.fitfactory.presentation.customViews.FancyEditText
                     android:id="@+id/signUpFragment_userPassword"
+                    style="@style/FancyEditText_Text"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/medium_margin"
                     android:hint="@string/password"
                     android:inputType="textPassword"
-                    android:layout_marginTop="@dimen/medium_margin"
-                    style="@style/FancyEditText_Text"
                     android:theme="@style/FancyEditText"
-                    app:layout_constraintTop_toBottomOf="@+id/signUpFragment_userName"
-                    app:layout_constraintStart_toStartOf="parent"
+                    app:iconLeft="@drawable/ic_password"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:iconLeft="@drawable/ic_password" />
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/signUpFragment_userName" />
 
             <com.example.fitfactory.presentation.customViews.FancyEditText
                     android:id="@+id/signUpFragment_userConfirmPassword"
+                    style="@style/FancyEditText_Text"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/medium_margin"
                     android:hint="@string/confirm_password"
                     android:inputType="textPassword"
-                    android:layout_marginTop="@dimen/medium_margin"
-                    style="@style/FancyEditText_Text"
                     android:theme="@style/FancyEditText"
-                    app:layout_constraintTop_toBottomOf="@+id/signUpFragment_userPassword"
-                    app:layout_constraintStart_toStartOf="parent"
+                    app:iconLeft="@drawable/ic_confirmpassword"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:iconLeft="@drawable/ic_confirmpassword"/>
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/signUpFragment_userPassword" />
 
             <CheckBox
                     android:id="@+id/signUpFragment_regulationsCheckbox"
@@ -114,72 +114,52 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/small_margin"
                     android:button="@drawable/checkbox_selector"
-                    app:layout_constraintTop_toTopOf="@id/signUpFragment_regulations"
-                    app:layout_constraintTop_toBottomOf="@id/signUpFragment_userConfirmPassword"
+                    app:layout_constraintEnd_toStartOf="@id/signUpFragment_regulations"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintEnd_toStartOf="@id/signUpFragment_regulations"/>
+                    app:layout_constraintTop_toBottomOf="@id/signUpFragment_userConfirmPassword"
+                    app:layout_constraintTop_toTopOf="@id/signUpFragment_regulations" />
 
             <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/signUpFragment_regulations"
+                    style="@style/FontH6_MEDIUM"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/small_margin"
+                    android:layout_marginTop="@dimen/medium_margin"
+                    android:layout_marginEnd="@dimen/small_margin"
                     android:text="@string/regulations"
-                    style="@style/FontH6_MEDIUM"
-                    app:autoSizeTextType="uniform"
+                    app:autoSizeMaxTextSize="20sp"
                     app:autoSizeMinTextSize="6sp"
                     app:autoSizeStepGranularity="1sp"
-                    app:autoSizeMaxTextSize="20sp"
-                    android:layout_marginTop="@dimen/medium_margin"
-                    android:layout_marginStart="@dimen/small_margin"
-                    android:layout_marginEnd="@dimen/small_margin"
-                    app:layout_constraintTop_toBottomOf="@id/signUpFragment_userConfirmPassword"
+                    app:autoSizeTextType="uniform"
+                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/signUpFragment_regulationsCheckbox"
-                    app:layout_constraintEnd_toEndOf="parent"/>
-
-            <ImageView
-                    android:id="@+id/signUpFragment_signUp"
-                    android:layout_width="0dp"
-                    android:layout_height="48dp"
-                    android:src="@drawable/load_button_anim2v2"
-                    android:scaleType="centerInside"
-                    app:layout_constraintTop_toTopOf="@id/signUpFragment_label"
-                    app:layout_constraintStart_toStartOf="@+id/signUpFragment_label"
-                    app:layout_constraintEnd_toEndOf="@+id/signUpFragment_label"
-                    app:layout_constraintBottom_toBottomOf="@id/signUpFragment_label"/>
+                    app:layout_constraintTop_toBottomOf="@id/signUpFragment_userConfirmPassword" />
 
             <com.example.fitfactory.presentation.customViews.ProgressLayout
-                    app:layout_constraintTop_toTopOf="parent"
+                    android:id="@+id/signUpFragment_signUp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/big_margin"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"/>
-
-            <TextView
-                    android:id="@+id/signUpFragment_label"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="ZAREJESTRUJ"
-                    style="@style/ButtonLabel"
-                    android:fontFamily="@font/fira_sans_condensed_black"
-                    android:paddingEnd="78dp"
-                    android:paddingStart="78dp"
-                    android:layout_marginTop="@dimen/big_margin"
                     app:layout_constraintTop_toBottomOf="@id/signUpFragment_regulations"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"/>
-
+                    app:negativeTint="@color/negativeLight"
+                    app:positiveTint="@color/positiveLight"
+                    app:text="ZAREJESTRUJ"
+                    app:tint="@color/secondaryMedium" />
 
             <ImageView
                     android:id="@+id/signUpFragment_logotype"
                     android:layout_width="wrap_content"
                     android:layout_height="14dp"
-                    android:src="@drawable/logotype"
                     android:layout_marginTop="@dimen/big_margin"
                     android:layout_marginBottom="@dimen/big_margin"
-                    app:layout_constraintStart_toStartOf="parent"
+                    android:src="@drawable/logotype"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/signUpFragment_signUp"/>
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/signUpFragment_signUp" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>

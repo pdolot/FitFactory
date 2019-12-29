@@ -51,4 +51,11 @@
         <attr name="iconPadding" format="dimension"/>
     </declare-styleable>
 
+    <declare-styleable name="ProgressButton">
+        <attr name="tint" format="color"/>
+        <attr name="positiveTint" format="color"/>
+        <attr name="negativeTint" format="color"/>
+        <attr name="text" format="string"/>
+    </declare-styleable>
+
 </resources>

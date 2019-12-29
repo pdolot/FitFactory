@@ -28,6 +28,10 @@ class ExercisesAdapter : BaseAdapter<ExercisesAdapter.ViewHolder>() {
         return items?.size ?: 0
     }
 
+    fun getBodyPartsAtPosition(position: Int): List<String>{
+        return (items?.get(position) as Exercise).bodyParts
+    }
+
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = items?.get(position) as Exercise
         val adapter by lazy { ImageAdapter() }

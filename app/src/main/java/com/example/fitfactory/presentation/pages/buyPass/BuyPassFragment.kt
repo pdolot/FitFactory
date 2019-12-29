@@ -4,21 +4,19 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.os.bundleOf
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.afollestad.materialdialogs.MaterialDialog
 import com.example.fitfactory.R
 import com.example.fitfactory.presentation.base.BaseFragment
-import com.example.fitfactory.presentation.pages.payment.PaymentFragmentDirections
+import com.example.fitfactory.presentation.pages.payment.passPayment.PaymentFragmentDirections
 import kotlinx.android.synthetic.main.fragment_buy_pass.*
 
 class BuyPassFragment : BaseFragment() {
 
-    private val viewModel by lazy {BuyPassViewModel()  }
+    private val viewModel by lazy { BuyPassViewModel() }
     private val adapter by lazy { PassToBuyAdapter() }
 
     override fun onCreateView(
@@ -47,17 +45,19 @@ class BuyPassFragment : BaseFragment() {
 
     private fun setListeners() {
         buyPassFragment_buyButton.setOnClickListener {
-            if (viewModel.localStorage.getUser()?.identityNumber.isNullOrBlank()){
+            if (viewModel.localStorage.getUser()?.identityNumber.isNullOrBlank()) {
                 MaterialDialog(activity ?: return@setOnClickListener).show {
                     title(text = "Uzupełnij profil")
                     message(text = "Aby kupić bilet musisz uzpełnić swoje dane. Czy chcesz uzupełnić profil?")
-                    positiveButton(text = "Uzupełnij"){
+                    positiveButton(text = "Uzupełnij") {
                         findNavController().navigate(R.id.editProfile)
                     }
                     negativeButton(text = "Anuluj")
                 }
-            }else{
-                findNavController().navigate(PaymentFragmentDirections.toPaymentFragment(adapter.getPassTypeId() ?: 0L))
+            } else {
+                adapter.getPassTypeId()?.let {
+                    findNavController().navigate(PaymentFragmentDirections.toPaymentFragment(it))
+                }
             }
 
         }

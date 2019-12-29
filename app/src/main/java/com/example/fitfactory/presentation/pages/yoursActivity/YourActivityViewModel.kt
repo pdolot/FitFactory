@@ -2,6 +2,7 @@ package com.example.fitfactory.presentation.pages.yoursActivity
 
 import androidx.lifecycle.MutableLiveData
 import com.example.fitfactory.data.models.app.EmptyData
+import com.example.fitfactory.data.models.app.StateError
 import com.example.fitfactory.data.models.request.FitnessLessonSigning
 import com.example.fitfactory.data.rest.RetrofitRepository
 import com.example.fitfactory.di.Injector
@@ -26,6 +27,7 @@ class YourActivityViewModel : BaseViewModel() {
         Injector.component.inject(this)
     }
 
+    var penaltyMeasureStatus = MutableLiveData<Any?>()
 
     fun fetchLessonEntries() {
         rxDisposer.add(retrofitRepository.getUserFitnessLesson(localStorage.getUser()?.id ?: return)
@@ -71,6 +73,26 @@ class YourActivityViewModel : BaseViewModel() {
         ))
     }
 
+
+    fun measurePenalty(id: Long, name: String){
+        rxDisposer.add(
+            retrofitRepository.measurePenalty(id)
+                .subscribeBy(
+                    onSuccess = {
+                        if (it.status){
+                            penaltyMeasureStatus.postValue(SelectedPass(id, name, it.data ?: 0.0))
+                        }else{
+                            penaltyMeasureStatus.postValue(StateError(it.message))
+                        }
+                    },
+                    onError = {
+                        penaltyMeasureStatus.postValue(StateError("Błąd połączenia z serwerem"))
+                    }
+                )
+        )
+    }
+
+    data class SelectedPass(var id: Long, var name: String, var penalty: Double)
 
 }
 

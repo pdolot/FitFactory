@@ -28,7 +28,9 @@ import com.example.fitfactory.presentation.pages.exercises.exercise.ExerciseView
 import com.example.fitfactory.presentation.pages.fitnessLesson.FitnessLesson
 import com.example.fitfactory.presentation.pages.fitnessLesson.FitnessLessonAdapter
 import com.example.fitfactory.presentation.pages.fitnessLesson.FitnessLessonViewModel
-import com.example.fitfactory.presentation.pages.payment.PaymentViewModel
+import com.example.fitfactory.presentation.pages.payment.contractTerminationPayment.ContractTerminationViewModel
+import com.example.fitfactory.presentation.pages.payment.fitnessLessonPayment.FitnessLessonPaymentViewModel
+import com.example.fitfactory.presentation.pages.payment.passPayment.PaymentViewModel
 import com.example.fitfactory.presentation.pages.settings.editProfile.EditProfile
 import com.example.fitfactory.presentation.pages.settings.editProfile.EditProfileViewModel
 import com.example.fitfactory.presentation.pages.yoursActivity.YourActivityViewModel
@@ -90,5 +92,7 @@ interface AppComponent {
     fun inject(into: FitnessLessonSimpleAdapter)
     fun inject(into: PaymentViewModel)
     fun inject(into: SplashActivity)
+    fun inject(into: ContractTerminationViewModel)
+    fun inject(into: FitnessLessonPaymentViewModel)
 
 }

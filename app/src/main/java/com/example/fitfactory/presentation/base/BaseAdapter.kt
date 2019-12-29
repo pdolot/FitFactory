@@ -14,6 +14,5 @@ abstract class BaseAdapter<VH : RecyclerView.ViewHolder> : RecyclerView.Adapter<
     }
 
     abstract fun getTitle(position: Int): String?
-
     abstract fun setCurrentItem(position: Int)
 }

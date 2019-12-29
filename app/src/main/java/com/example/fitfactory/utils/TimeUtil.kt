@@ -26,4 +26,13 @@ object TimeUtil {
         val formatter = DateTimeFormat.forPattern(dateFormat) as DateTimeFormatter
         return  formatter.print(date)
     }
+
+    fun isBeforeNow(date: String?, dateFormat: String): Boolean{
+        if (date == null) return false
+        val formatter = DateTimeFormat.forPattern(dateFormat) as DateTimeFormatter
+        val d = formatter.parseDateTime(date)
+        val now = DateTime.now()
+
+        return now.isBefore(d)
+    }
 }

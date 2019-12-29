@@ -30,10 +30,10 @@
                 android:layout_marginEnd="@dimen/medium_margin"
                 app:layout_constraintHorizontal_chainStyle="packed"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintEnd_toStartOf="@id/paymentFragment_passName"/>
+                app:layout_constraintEnd_toStartOf="@id/passName"/>
 
         <TextView
-                android:id="@+id/paymentFragment_passName"
+                android:id="@+id/passName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 style="@style/FontH1_BOLD"
@@ -119,14 +119,14 @@
             app:disableColor="@color/primaryBgColor2"
             app:disabledIconColor="@color/primaryBgColor5"
             app:icon="@drawable/ic_pay"
-            app:iconColor="@color/primaryDark"
+            app:iconColor="@color/positiveDark"
             app:isEnable="false"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/paymentFragment_payInfo"
             app:roundRadius="16dp"
             app:spaceWidth="8dp"
-            app:thumbColor="@color/primaryLight" />
+            app:thumbColor="@color/positiveLight" />
 
     <TextView
             android:id="@+id/paymentFragment_passPrice"
@@ -454,6 +454,7 @@
             </com.google.android.material.textfield.TextInputLayout>
 
             <TextView
+                    android:id="@+id/attention"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/medium_margin"

@@ -1,10 +1,10 @@
 package com.example.fitfactory.data.models.request
 
-import com.example.fitfactory.data.models.app.UserGetResource
+import com.example.fitfactory.data.models.app.PassUser
 
 data class BuyPassRequest(
     var passTypeId: Long,
     var startDate: String,
-    var passUser: UserGetResource,
+    var passUser: PassUser,
     var ownerId: Long
 )

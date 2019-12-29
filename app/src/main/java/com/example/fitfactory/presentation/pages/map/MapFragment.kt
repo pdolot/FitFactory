@@ -11,13 +11,12 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
 import com.example.fitfactory.R
+import com.example.fitfactory.constants.RequestCode
 import com.example.fitfactory.di.Injector
 import com.example.fitfactory.presentation.base.BaseFragment
 import com.example.fitfactory.presentation.customViews.FloatingLayout
 import com.example.fitfactory.utils.BitmapHelper
-import com.example.fitfactory.constants.RequestCode
 import com.example.fitfactory.utils.PermissionManager
 import com.google.android.gms.common.api.ResolvableApiException
 import com.google.android.gms.location.*
@@ -112,6 +111,11 @@ class MapFragment : BaseFragment(), OnMapReadyCallback {
                 mapFragment_floatingLayout.toggle()
             }
         })
+    }
+
+    override fun onDestroyView() {
+        viewModel.rxDisposer.dispose()
+        super.onDestroyView()
     }
 
     override fun onResume() {
@@ -213,7 +217,11 @@ class MapFragment : BaseFragment(), OnMapReadyCallback {
             map?.clear()
             it.forEach {
                 clusterManager.addItem(
-                    MyClusterItem(it, BitmapHelper().bitmapDescriptorFromVector(R.drawable.marker), it.id)
+                    MyClusterItem(
+                        it,
+                        BitmapHelper().bitmapDescriptorFromVector(R.drawable.marker),
+                        it.id
+                    )
                 )
             }
             clusterManager.cluster()

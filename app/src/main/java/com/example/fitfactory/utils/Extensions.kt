@@ -101,3 +101,7 @@ fun Drawable.resetAnimation() {
         }
     }
 }
+
+fun Drawable.asAnimatedVectorDrawable(): AnimatedVectorDrawable?{
+    return this as? AnimatedVectorDrawable
+}

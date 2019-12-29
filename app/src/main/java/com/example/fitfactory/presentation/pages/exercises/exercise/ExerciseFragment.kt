@@ -1,5 +1,6 @@
 package com.example.fitfactory.presentation.pages.exercises.exercise
 
+import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -37,9 +38,10 @@ class ExerciseFragment : BaseFragment() {
             adapter = this@ExerciseFragment.adapter
         }
 
+        tab_layout.setupWithRecyclerView(exercisesRv)
+
         viewModel.exercises.observe(viewLifecycleOwner, Observer {
             adapter.setData(it)
-            tab_layout.setupWithRecyclerView(exercisesRv)
         })
 
         tab_layout.rightIconClickListener = {
@@ -47,6 +49,26 @@ class ExerciseFragment : BaseFragment() {
             bodyParts_content.visibility = if (bodyParts_content.visibility != View.GONE) View.GONE else View.VISIBLE
             tab_layout.iconColor = ContextCompat.getColor(context!!, if (bodyParts_content.visibility == View.VISIBLE) R.color.primaryLight else R.color.primaryBgColor5)
         }
+
+        tab_layout.addPositionChangeListener = {
+            highlightBodyParts(adapter.getBodyPartsAtPosition(it))
+        }
+    }
+
+    private fun highlightBodyParts(bodyParts: List<String>){
+        val bodyPartsPaths = body_parts.getGroupModelByName("body_parts").pathModels
+
+        bodyPartsPaths.forEach {
+            if ( it.name != "outline"){
+                if (bodyParts.contains(it.name.toUpperCase()) ){
+                    it.fillColor = Color.parseColor("#1d8bf8")
+                }else{
+                    it.fillColor = Color.parseColor("#999999")
+                }
+            }
+        }
+
+        body_parts.update()
     }
 
     override fun flexibleViewEnabled() = false

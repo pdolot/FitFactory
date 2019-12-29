@@ -1,4 +1,4 @@
-package com.example.fitfactory.presentation.pages.payment
+package com.example.fitfactory.presentation.pages.payment.passPayment
 
 import android.os.Bundle
 import android.text.TextWatcher
@@ -12,6 +12,7 @@ import androidx.navigation.fragment.navArgs
 import com.afollestad.materialdialogs.MaterialDialog
 import com.afollestad.materialdialogs.datetime.datePicker
 import com.example.fitfactory.R
+import com.example.fitfactory.data.models.app.*
 import com.example.fitfactory.presentation.base.BaseFragment
 import com.example.fitfactory.utils.TimeUtil
 import com.example.fitfactory.utils.addMaskAndTextWatcher
@@ -45,9 +46,53 @@ class PaymentFragment : BaseFragment() {
             paymentFragment_payButton.isEnable = it
         })
 
+        viewModel.creditCardDao.getCreditCard(viewModel.localStorage.getUser()?.id ?: return)
+            .observe(viewLifecycleOwner, Observer {
+                bindCreditCard(it)
+            })
+
+        viewModel.callState.observe(viewLifecycleOwner, Observer {
+            when (it) {
+                is StateInProgress -> {
+                    paymentFragment_payButton.isEnable = false
+                    viewModel.isJobPaused = true
+                }
+                is StateError -> {
+                    paymentFragment_payButton.isEnable = true
+                    viewModel.isJobPaused = false
+                    Toast.makeText(context, it.message, Toast.LENGTH_SHORT).show()
+                }
+                is StateComplete -> {
+                    paymentFragment_payButton.isEnable = true
+                    viewModel.isJobPaused = false
+                    Toast.makeText(context, "Pomyślnie kupiono", Toast.LENGTH_SHORT).show()
+                }
+            }
+        })
+
         paymentFragment_payButton.setButtonClickListener { isClickable ->
-            if (isClickable) {
-                Toast.makeText(context, "PAY", Toast.LENGTH_SHORT).show()
+            if (isClickable && viewModel.validate()) {
+                viewModel.buyPass(
+                    PassUser(
+                        email = userEmail.text.toString(),
+                        firstName = firstName.text.toString(),
+                        lastName = lastName.text.toString(),
+                        identityNumber = userPersonalIdentity.text.toString(),
+                        birthDate = userBirthDate.text.toString(),
+                        phoneNumber = userPhoneNo.text.toString(),
+                        address = Address(
+                            street = userAddressStreet.text.toString(),
+                            city = userAddressCity.text.toString(),
+                            zipCode = userZipCode.text.toString(),
+                            zipCodeCity = userZipCodeCity.text.toString()
+                        ),
+                        creditCard = CreditCard(
+                            cardNumber = cardNo.text.toString(),
+                            expiryDate = cardExpiry.text.toString(),
+                            cvcCvv = cardCvc.text.toString()
+                        )
+                    )
+                )
             } else {
                 Toast.makeText(context, "Sprawdź poprawność danych", Toast.LENGTH_SHORT).show()
             }
@@ -59,12 +104,14 @@ class PaymentFragment : BaseFragment() {
 
         viewModel.passType.observe(viewLifecycleOwner, Observer {
             it?.let {
-                paymentFragment_passName.text = it.shortName
+                passName.text = it.shortName
                 if (it.durationInDays ?: 0 > 30) {
                     paymentFragment_passPrice.text =
                         getString(R.string.pricePerMonth, it.periodPrice) + "*"
+                    attention.visibility = View.VISIBLE
                 } else {
                     paymentFragment_passPrice.text = it.periodPrice.toString() + " zł"
+                    attention.visibility = View.GONE
                 }
                 setExpiryDate(DateTime.now())
             }
@@ -83,22 +130,31 @@ class PaymentFragment : BaseFragment() {
 
     private fun showDatePickerDialog() {
         MaterialDialog(activity ?: return).show {
-            datePicker(requireFutureDate = true, currentDate = viewModel.date.toGregorianCalendar()) { dialog, datetime ->
+            datePicker(
+                requireFutureDate = true,
+                currentDate = viewModel.date.toGregorianCalendar()
+            ) { dialog, datetime ->
                 setExpiryDate(DateTime(datetime.time))
             }
         }
     }
 
-    fun setExpiryDate(date: DateTime){
+    fun setExpiryDate(date: DateTime) {
         viewModel.date = date
+        val endDate = viewModel.measureEndDate()
         paymentFragment_passExpiry.text = getString(
             R.string.duration,
             TimeUtil.getDateAsString(date, "dd/MM/yyyy"),
-            TimeUtil.getDateAsString(
-                date.plusDays(viewModel.passType.value?.durationInDays ?: 0),
-                "dd/MM/yyyy"
-            )
+            TimeUtil.getDateAsString(endDate, "dd/MM/yyyy")
         )
+    }
+
+    private fun bindCreditCard(creditCard: CreditCard?) {
+        creditCard?.let {
+            cardNo.setText(it.cardNumber)
+            cardExpiry.setText(it.expiryDate)
+            cardCvc.setText(it.cvcCvv)
+        }
     }
 
     private fun bindData() {

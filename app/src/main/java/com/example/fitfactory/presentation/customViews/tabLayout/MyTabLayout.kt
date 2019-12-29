@@ -2,11 +2,13 @@ package com.example.fitfactory.presentation.customViews.tabLayout
 
 import android.content.Context
 import android.graphics.drawable.Drawable
+import android.os.Parcelable
 import android.util.AttributeSet
 import android.view.View
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
 import androidx.core.view.setPadding
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.PagerSnapHelper
 import androidx.recyclerview.widget.RecyclerView
 import com.example.fitfactory.R
@@ -17,7 +19,11 @@ class MyTabLayout @JvmOverloads constructor(
     context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
 ) : ConstraintLayout(context, attrs, defStyleAttr) {
 
-
+    private var title: String? = null
+        set(value) {
+            field = value
+            tab_title.text = field
+        }
     private var recyclerView: RecyclerView? = null
     private var leftIconDrawable: Drawable? = null
     private var rightIconDrawable: Drawable? = null
@@ -44,6 +50,7 @@ class MyTabLayout @JvmOverloads constructor(
 
     var rightIconClickListener: () -> Unit = {}
     var leftIconClickListener: () -> Unit = {}
+    var addPositionChangeListener: (Int) -> Unit = {}
 
     private var scrollListener: RecyclerView.OnScrollListener =
         object : RecyclerView.OnScrollListener() {
@@ -54,6 +61,7 @@ class MyTabLayout @JvmOverloads constructor(
                 val snapView = snapHelper?.findSnapView(lm)
                 snapView?.let {
                     position = lm?.getPosition(it) ?: 0
+                    addPositionChangeListener(position)
                     page = position / tab_indicator.maxItemCountInRow
                     tab_indicator.activeItem = position % tab_indicator.maxItemCountInRow
                 }
@@ -62,7 +70,7 @@ class MyTabLayout @JvmOverloads constructor(
             override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
                 if (newState == RecyclerView.SCROLL_STATE_IDLE) {
                     (recyclerView.adapter as BaseAdapter).apply {
-                        tab_title.text = getTitle(position)
+                        title = getTitle(position)
                         setCurrentItem(position)
                     }
                 }
@@ -81,9 +89,7 @@ class MyTabLayout @JvmOverloads constructor(
         leftIcon.setOnClickListener { leftIconClickListener() }
     }
 
-
     fun setupWithRecyclerView(recyclerView: RecyclerView) {
-
         this.recyclerView = recyclerView
         snapHelper = PagerSnapHelper()
         if (recyclerView.onFlingListener == null){
@@ -92,7 +98,6 @@ class MyTabLayout @JvmOverloads constructor(
         (recyclerView.adapter as BaseAdapter).apply {
             onDataSetChanged = {
                 recyclerView.removeOnScrollListener(scrollListener)
-
                 val itemCount = recyclerView.adapter?.itemCount ?: 0
                 tab_indicator.itemCount = itemCount
                 if (itemCount == 0) {
@@ -101,7 +106,8 @@ class MyTabLayout @JvmOverloads constructor(
                     recyclerView.addOnScrollListener(scrollListener)
                     recyclerView.scrollToPosition(0)
                     setCurrentItem(0)
-                    tab_title.text = getTitle(0)
+                    title = getTitle(0)
+                    addPositionChangeListener(0)
                     tab_indicator.activeItem = 0
                 }
             }

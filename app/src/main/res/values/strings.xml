@@ -54,6 +54,7 @@
     <string name="delete">Usuń</string>
     <string name="add">Dodaj</string>
     <string name="change_password">Zmień hasło</string>
+    <string name="contractTerminationInfo">Karnet %s zostanie skrócony do ostatniego dnia tego miesiąca. Opłata za zerwanie umowy jest jednorazowa.</string>
     <plurals name="months_plural">
         <item quantity="one">%d miesiąc</item>
         <item quantity="few">%d miesiące</item>

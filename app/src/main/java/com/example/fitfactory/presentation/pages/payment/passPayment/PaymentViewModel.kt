@@ -1,8 +1,10 @@
-package com.example.fitfactory.presentation.pages.payment
+package com.example.fitfactory.presentation.pages.payment.passPayment
 
 import android.util.Log
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.MutableLiveData
+import com.example.fitfactory.constants.RegularExpression
+import com.example.fitfactory.data.database.creditCard.CreditCardDao
 import com.example.fitfactory.data.models.app.*
 import com.example.fitfactory.data.models.request.BuyPassRequest
 import com.example.fitfactory.data.rest.RetrofitRepository
@@ -10,16 +12,21 @@ import com.example.fitfactory.di.Injector
 import com.example.fitfactory.functional.localStorage.LocalStorage
 import com.example.fitfactory.presentation.base.BaseViewModel
 import com.example.fitfactory.utils.SuperValidator
+import com.example.fitfactory.utils.TimeUtil
 import io.reactivex.rxkotlin.subscribeBy
 import kotlinx.android.synthetic.main.fragment_payment.*
 import kotlinx.coroutines.*
 import org.joda.time.DateTime
 import javax.inject.Inject
+import kotlin.math.roundToInt
 
 class PaymentViewModel : BaseViewModel() {
 
     @Inject
     lateinit var retrofitRepository: RetrofitRepository
+
+    @Inject
+    lateinit var creditCardDao: CreditCardDao
 
     @Inject
     lateinit var localStorage: LocalStorage
@@ -44,6 +51,7 @@ class PaymentViewModel : BaseViewModel() {
 
     val job = Job()
     private val scope = CoroutineScope(Dispatchers.Main + job)
+    var isJobPaused = false
 
     private fun fetchPassTypeById() {
         rxDisposer.add(retrofitRepository.getPassTypeById(passId ?: return)
@@ -59,10 +67,10 @@ class PaymentViewModel : BaseViewModel() {
             ))
     }
 
-    fun buyPass(user: UserGetResource, date: String) {
+    fun buyPass(user: PassUser) {
         callState.postValue(StateInProgress())
         val buyPassRequest =
-            BuyPassRequest(passId ?: return, date, user, localStorage.getUser()?.id ?: return)
+            BuyPassRequest(passId ?: return, TimeUtil.getDateAsString(date, "dd/MM/yyyy"), user, localStorage.getUser()?.id ?: return)
         rxDisposer.add(
             retrofitRepository.buyPass(buyPassRequest).subscribeBy(
                 onSuccess = {
@@ -82,13 +90,15 @@ class PaymentViewModel : BaseViewModel() {
     private fun startValidation(){
         scope.launch {
             while (isActive){
-                validateResult.postValue(validate())
+                if(!isJobPaused) {
+                    validateResult.postValue(validate())
+                }
                 delay(1000)
             }
         }
     }
 
-    private fun validate(): Boolean{
+    fun validate(): Boolean{
         validators.forEach {
             if (!it.validate()){
                 return false
@@ -129,6 +139,13 @@ class PaymentViewModel : BaseViewModel() {
                 .build()
         )
 
+        validators.add(
+            SuperValidator.Builder()
+                .on(owner.userEmail)
+                .canBeEmpty(false)
+                .withRegex(RegularExpression.EMAIL.toRegex())
+                .build()
+        )
 
         validators.add(
             SuperValidator.Builder()
@@ -191,5 +208,15 @@ class PaymentViewModel : BaseViewModel() {
         )
 
         startValidation()
+    }
+
+    fun measureEndDate(): DateTime {
+        val duration = passType.value?.durationInDays ?: 0
+        return if (duration < 30){
+            date.plusDays(duration)
+        }else{
+            val months = (duration / 30f).roundToInt() - 1
+            date.plusMonths(months).dayOfMonth().withMaximumValue()
+        }
     }
 }

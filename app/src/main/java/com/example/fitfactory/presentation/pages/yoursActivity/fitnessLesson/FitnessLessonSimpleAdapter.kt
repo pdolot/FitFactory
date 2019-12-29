@@ -5,6 +5,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.afollestad.materialdialogs.MaterialDialog
 import com.bumptech.glide.Glide
@@ -12,6 +13,8 @@ import com.example.fitfactory.R
 import com.example.fitfactory.data.models.app.LessonEntry
 import com.example.fitfactory.data.rest.RetrofitRepository
 import com.example.fitfactory.di.Injector
+import com.example.fitfactory.presentation.pages.payment.fitnessLessonPayment.FitnessLessonPaymentDirections
+import com.example.fitfactory.utils.TimeUtil
 import kotlinx.android.synthetic.main.item_simply_fitness_lesson.view.*
 import javax.inject.Inject
 
@@ -57,8 +60,8 @@ class FitnessLessonSimpleAdapter : RecyclerView.Adapter<FitnessLessonSimpleAdapt
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
 
-        when(holder.itemViewType){
-            1->{
+        when (holder.itemViewType) {
+            1 -> {
                 val item = items?.get(position) as LessonEntry
                 holder.itemView.apply {
                     Glide.with(context)
@@ -69,14 +72,50 @@ class FitnessLessonSimpleAdapter : RecyclerView.Adapter<FitnessLessonSimpleAdapt
 
                     fitnessLesson_name.text = item.fitnessLesson?.name
                     fitnessLesson_date.text = item.fitnessLesson?.date
-                    wasPresent.drawable.setTint(if (item.wasPresent) ContextCompat.getColor(context,R.color.positiveLight) else ContextCompat.getColor(context,R.color.primaryBgColor5))
-                    isPaid.drawable.setTint(if (item.isPaid) ContextCompat.getColor(context,R.color.positiveLight) else ContextCompat.getColor(context,R.color.primaryBgColor5))
+                    wasPresent.drawable.setTint(
+                        if (item.wasPresent) ContextCompat.getColor(
+                            context,
+                            R.color.positiveLight
+                        ) else ContextCompat.getColor(context, R.color.primaryBgColor5)
+                    )
+                    isPaid.drawable.setTint(
+                        if (item.isPaid) ContextCompat.getColor(
+                            context,
+                            R.color.positiveLight
+                        ) else ContextCompat.getColor(context, R.color.primaryBgColor5)
+                    )
 
+                    signOutFromLesson.visibility =
+                        if (TimeUtil.isBeforeNow(
+                                item.fitnessLesson?.date,
+                                "dd/MM/yyyy HH:mm"
+                            )
+                        ) View.VISIBLE else View.GONE
+
+                    isPaid.setOnClickListener {
+                        if (!item.isPaid) {
+                            MaterialDialog(activity).show {
+                                title(text = "Zajęcia fitness")
+                                message(text = "Czy chcesz zapłacić za zajęcia?")
+                                positiveButton(text = "Tak") {
+                                    findNavController().navigate(
+                                        FitnessLessonPaymentDirections.toFitnessLessonPayment(
+                                            item.id,
+                                            item.fitnessLesson?.name ?: return@positiveButton,
+                                            item.fitnessLesson.date ?: return@positiveButton,
+                                            item.fitnessLesson.price?.toFloat() ?: return@positiveButton
+                                        )
+                                    )
+                                }
+                                negativeButton(text = "Nie")
+                            }
+                        }
+                    }
                     signOutFromLesson.setOnClickListener {
                         MaterialDialog(activity).show {
                             title(text = "Zajęcia fitness")
                             message(text = "Czy na pewno chcesz się wypisać z zajęć?")
-                            positiveButton(text = "Tak"){
+                            positiveButton(text = "Tak") {
                                 onSignOutListener(item.id)
                             }
                             negativeButton(text = "Nie")

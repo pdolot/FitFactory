@@ -49,17 +49,17 @@
             </set>
         </aapt:attr>
     </target>
-    <target android:name="circle">
-        <aapt:attr name="android:animation">
-            <objectAnimator
-                    android:duration="4650"
-                    android:interpolator="@android:anim/linear_interpolator"
-                    android:propertyName="rotation"
-                    android:repeatCount="infinite"
-                    android:startOffset="350"
-                    android:valueFrom="0"
-                    android:valueTo="360"
-                    android:valueType="floatType" />
-        </aapt:attr>
-    </target>
+<!--    <target android:name="circle">-->
+<!--        <aapt:attr name="android:animation">-->
+<!--            <objectAnimator-->
+<!--                    android:duration="4650"-->
+<!--                    android:interpolator="@android:anim/linear_interpolator"-->
+<!--                    android:propertyName="rotation"-->
+<!--                    android:repeatCount="infinite"-->
+<!--                    android:startOffset="350"-->
+<!--                    android:valueFrom="0"-->
+<!--                    android:valueTo="360"-->
+<!--                    android:valueType="floatType" />-->
+<!--        </aapt:attr>-->
+<!--    </target>-->
 </animated-vector>

@@ -80,6 +80,18 @@ class RetrofitRepository @Inject constructor(private val retrofitService: Retrof
             .observeOn(AndroidSchedulers.mainThread())
     }
 
+    fun measurePenalty(passId: Long): Single<PenaltyResponse>{
+        return retrofitService.measurePenalty(passId)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+    }
+
+    fun contractTermination(passId: Long): Single<BaseResponse>{
+        return retrofitService.contractTermination(passId)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+    }
+
     // FitnessClub
 
     fun getAllFitnessClub(): Observable<FitnessClubsResponse> {
@@ -107,6 +119,12 @@ class RetrofitRepository @Inject constructor(private val retrofitService: Retrof
 
     fun signOutFromLesson(fitnessLessonSigning: FitnessLessonSigning): Single<BaseResponse>{
         return retrofitService.signOutFromLesson(fitnessLessonSigning).subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+    }
+
+    fun payForLesson(entryId: Long): Single<BaseResponse>{
+        return retrofitService.payForLesson(entryId)
+            .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
     }
 

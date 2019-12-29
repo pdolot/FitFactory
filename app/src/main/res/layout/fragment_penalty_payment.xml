@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:background="@color/primaryBgColor"
+        android:clickable="true"
+        android:focusable="true"
+        android:focusableInTouchMode="true">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/paymentFragment_payInfo"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:background="@color/negativeMedium"
+            android:paddingTop="@dimen/medium_margin"
+            android:paddingStart="@dimen/medium_margin"
+            android:paddingEnd="@dimen/medium_margin"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+                android:id="@+id/passIcon"
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:src="@drawable/contract_termination"
+                android:tint="@color/silverLight"
+                android:layout_marginEnd="@dimen/medium_margin"
+                app:layout_constraintHorizontal_chainStyle="packed"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/title"/>
+
+        <TextView
+                android:id="@+id/title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/FontH1_BOLD"
+                android:text="Zerwanie umowy"
+                android:textColor="@color/silverLight"
+                app:layout_constraintHorizontal_chainStyle="packed"
+                app:layout_constraintTop_toTopOf="@id/passIcon"
+                app:layout_constraintBottom_toBottomOf="@id/passIcon"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                />
+
+        <View
+                android:id="@+id/separator"
+                android:layout_width="0dp"
+                android:layout_height="2dp"
+                app:layout_constraintTop_toBottomOf="@id/info"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginTop="@dimen/small_margin"
+                android:background="@drawable/dot_line"/>
+
+        <TextView
+                android:id="@+id/info"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                style="@style/FontH4_LIGHT"
+                android:layout_marginTop="@dimen/medium_margin"
+                tools:text="@string/contractTerminationInfo"
+                android:textColor="@color/silverLight"
+                app:layout_constraintTop_toBottomOf="@id/title"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                />
+
+        <TextView
+                android:id="@+id/paymentFragment_passPriceLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/small_margin"
+                style="@style/FontH5_MEDIUM"
+                android:textColor="@color/silverDark"
+                android:text="Do zapłaty"
+                app:layout_constraintTop_toBottomOf="@id/separator"
+                app:layout_constraintStart_toStartOf="parent"
+                />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <com.example.fitfactory.presentation.customViews.buttonLayout.ButtonLayout
+            android:id="@+id/payButton"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:focusable="true"
+            app:backgroundColor="@color/negativeMedium"
+            app:bias="0.9"
+            app:buttonRadius="26dp"
+            app:disableColor="@color/primaryBgColor2"
+            app:disabledIconColor="@color/primaryBgColor5"
+            app:icon="@drawable/ic_pay"
+            app:iconColor="@color/secondaryVeryDark"
+            app:isEnable="false"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/paymentFragment_payInfo"
+            app:roundRadius="16dp"
+            app:spaceWidth="8dp"
+            app:thumbColor="@color/secondaryLight" />
+
+    <TextView
+            android:id="@+id/price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/FontH4_LIGHT"
+            tools:text="89,99 zł"
+            android:layout_marginStart="24dp"
+            app:layout_constraintTop_toTopOf="@id/payButton"
+            app:layout_constraintStart_toStartOf="parent" />
+
+    <ScrollView
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:overScrollMode="never"
+            android:scrollbars="none"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/payButton">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/medium_margin">
+
+            <TextView
+                    android:id="@+id/cardInfo"
+                    style="@style/FontH5_MEDIUM"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Dane karty"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/cardNoLabel"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/medium_margin"
+                    android:hint="@string/card_number"
+                    android:theme="@style/TextInputLayoutAppearance"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/cardInfo">
+
+                <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/cardNo"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:digits="0123456789 "
+                        android:inputType="number"
+                        android:maxLength="19" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/cardExpiryLabel"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/medium_margin"
+                    android:layout_marginEnd="@dimen/small_margin"
+                    android:hint="@string/card_expiry"
+                    android:theme="@style/TextInputLayoutAppearance"
+                    app:helperText="MM/YY"
+                    app:helperTextTextAppearance="@style/HelperText"
+                    app:layout_constraintEnd_toStartOf="@id/cardCvcLabel"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/cardNoLabel">
+
+                <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/cardExpiry"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:digits="0123456789/"
+                        android:inputType="number"
+                        android:maxLength="5" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/cardCvcLabel"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/small_margin"
+                    android:layout_marginTop="@dimen/medium_margin"
+                    android:hint="CVC"
+                    android:theme="@style/TextInputLayoutAppearance"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/cardExpiryLabel"
+                    app:layout_constraintTop_toBottomOf="@id/cardNoLabel">
+
+                <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/cardCvc"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="number"
+                        android:maxLength="3" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+
+    <ImageView
+            android:layout_width="0dp"
+            android:layout_height="16dp"
+            android:src="@drawable/shadow_background2"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/payButton" />
+
+    <ImageView
+            android:layout_width="0dp"
+            android:layout_height="16dp"
+            android:rotation="180"
+            android:src="@drawable/shadow_background2"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -45,6 +45,12 @@ interface RetrofitService{
     @POST("pass/buy")
     fun buyPass(@Body buyPassRequest: BuyPassRequest): Single<BaseResponse>
 
+    @POST("pass/measurePenalty")
+    fun measurePenalty(@Query("id") passId: Long): Single<PenaltyResponse>
+
+    @POST("pass/contractTermination")
+    fun contractTermination(@Query("id") passId: Long): Single<BaseResponse>
+
     // FitnessClub
     @GET("fitnessClub/getFitnessClubs")
     fun getAllFitnessClub(): Observable<FitnessClubsResponse>
@@ -63,4 +69,8 @@ interface RetrofitService{
     @POST ("/lessonEntry/signOut")
     fun signOutFromLesson(@Body fitnessLessonSigning: FitnessLessonSigning): Single<BaseResponse>
 
+
+    //Lesson entry
+    @POST("/lessonEntry/payForLesson")
+    fun payForLesson(@Query("id") entryId: Long): Single<BaseResponse>
 }

@@ -27,7 +27,7 @@ class RestConstant{
 
 class RegularExpression{
     companion object{
-        const val EMAIL: String = "^[a-zA-Z\\d\\.]+?@[a-zA-Z\\d]+?\\..{2,}[^\\.\$&+,:;=?@#|'<>.^*()%!-]\$"
+        const val EMAIL: String = "^[a-zA-Z\\d\\.]+?@[a-zA-Z\\d]+?\\..{1,}[^\\.\$&+,:;=?@#|'<>.^*()%!-]\$"
         const val TEXT: String = "^[a-zA-z]+\$"
     }
 }
