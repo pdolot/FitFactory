@@ -61,6 +61,7 @@
                     android:hint="@string/email_address"
                     android:inputType="textEmailAddress"
                     android:theme="@style/FancyEditText"
+                    android:text="admin@admin.pl"
                     app:iconLeft="@drawable/ic_mail"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -73,6 +74,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/medium_margin"
                     android:hint="@string/user_name"
+                    android:text="admin"
                     android:inputType="text"
                     android:theme="@style/FancyEditText"
                     app:iconLeft="@drawable/ic_user"
@@ -88,6 +90,7 @@
                     android:layout_marginTop="@dimen/medium_margin"
                     android:hint="@string/password"
                     android:inputType="textPassword"
+                    android:text="qwerty"
                     android:theme="@style/FancyEditText"
                     app:iconLeft="@drawable/ic_password"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -102,6 +105,7 @@
                     android:layout_marginTop="@dimen/medium_margin"
                     android:hint="@string/confirm_password"
                     android:inputType="textPassword"
+                    android:text="qwerty"
                     android:theme="@style/FancyEditText"
                     app:iconLeft="@drawable/ic_confirmpassword"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -114,6 +118,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/small_margin"
                     android:button="@drawable/checkbox_selector"
+                    android:checked="true"
                     app:layout_constraintEnd_toStartOf="@id/signUpFragment_regulations"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/signUpFragment_userConfirmPassword"
@@ -147,7 +152,8 @@
                     app:negativeTint="@color/negativeLight"
                     app:positiveTint="@color/positiveLight"
                     app:text="ZAREJESTRUJ"
-                    app:tint="@color/secondaryMedium" />
+                    app:tint="@color/secondaryMedium"
+                    app:secondAnimType="send"/>
 
             <ImageView
                     android:id="@+id/signUpFragment_logotype"

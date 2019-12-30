@@ -56,6 +56,10 @@
         <attr name="positiveTint" format="color"/>
         <attr name="negativeTint" format="color"/>
         <attr name="text" format="string"/>
+        <attr name="secondAnimType" format="enum">
+            <enum name="none" value="0"/>
+            <enum name="send" value="1"/>
+        </attr>
     </declare-styleable>
 
 </resources>

@@ -24,11 +24,13 @@ class ProgressLayout @JvmOverloads constructor(
     context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
 ) : ConstraintLayout(context, attrs, defStyleAttr) {
 
-    var viewWidth = 0
-    var tint = 0
-    var negativeTint = 0
-    var positiveTint = 0
-    var text: String? = null
+    private var viewWidth = 0
+    private var tint = 0
+    private var negativeTint = 0
+    private var positiveTint = 0
+    private var text: String? = null
+    private var secondAnimType: SecondAnimType? = null
+    private var isResult: Boolean = false
 
     init {
         View.inflate(context, R.layout.progress_layout, this)
@@ -47,6 +49,8 @@ class ProgressLayout @JvmOverloads constructor(
             ContextCompat.getColor(context, R.color.colorPrimary)
         )
         text = a.getString(R.styleable.ProgressButton_text)
+
+        secondAnimType = SecondAnimType.values()[a.getInt(R.styleable.ProgressButton_secondAnimType, 0)]
 
         title.text = text
         setTintColor(tint)
@@ -74,6 +78,7 @@ class ProgressLayout @JvmOverloads constructor(
                     viewBackground.visibility = View.GONE
                     anim.drawable.animateDrawable()
                     startRotate()
+                    startSecondAnimation()
                 }
             })
             start()
@@ -93,6 +98,62 @@ class ProgressLayout @JvmOverloads constructor(
         setTintColor(tint)
     }
 
+    private fun startSecondAnimation(){
+        when(secondAnimType){
+            SecondAnimType.SEND -> sendAnimationEntry()
+        }
+    }
+
+    private fun endSecondAnimation(){
+        when(secondAnimType){
+            SecondAnimType.SEND -> sendAnimationExit()
+        }
+    }
+
+    private fun sendAnimationEntry(){
+        secondAnim.visibility = View.VISIBLE
+        secondAnim.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.send_entry))
+        secondAnim.drawable.asAnimatedVectorDrawable()?.setTint(tint)
+        secondAnim.drawable.animateDrawable()
+        secondAnim.animation = RotateAnimation(
+            0f,
+            360f,
+            Animation.RELATIVE_TO_SELF,
+            0.5f,
+            Animation.RELATIVE_TO_SELF,
+            0.5f
+        ).apply {
+            duration = 1000
+            interpolator = LinearInterpolator()
+            repeatCount = Animation.INFINITE
+            start()
+        }
+    }
+
+
+    private fun sendAnimationExit(){
+        secondAnim.animation?.cancel()
+        secondAnim.animation = RotateAnimation(
+            0f,
+            180f,
+            Animation.RELATIVE_TO_SELF,
+            0.5f,
+            Animation.RELATIVE_TO_SELF,
+            0.5f
+        ).apply {
+            duration = 1000
+            interpolator = LinearInterpolator()
+            fillAfter = true
+            start()
+        }
+
+        secondAnim.drawable.resetAnimation()
+        secondAnim.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.send_exit))
+        secondAnim.drawable.animateDrawable()
+
+
+    }
+
     private fun startRotate() {
         anim.animation = RotateAnimation(
             0f,
@@ -110,6 +171,7 @@ class ProgressLayout @JvmOverloads constructor(
     }
 
     fun onError(message: String) {
+        isResult = true
         anim.drawable.resetAnimation()
         anim.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.exit_anim))
         anim.drawable.animateDrawable()
@@ -118,6 +180,7 @@ class ProgressLayout @JvmOverloads constructor(
     }
 
     fun onSuccess(message: String) {
+        isResult = true
         anim.drawable.resetAnimation()
         anim.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.exit_anim))
         anim.drawable.animateDrawable()
@@ -133,23 +196,27 @@ class ProgressLayout @JvmOverloads constructor(
             params.width = va.animatedValue as Int
             viewBackground.layoutParams = params
         }
-
+        endSecondAnimation()
         widthAnimation.apply {
-            startDelay = 950
+            startDelay = 2950
             duration = 1000
             addListener(object : AnimatorListenerAdapter() {
                 override fun onAnimationStart(p0: Animator?) {
-                    anim.animation.cancel()
+                    anim.animation?.cancel()
                     anim.visibility = View.GONE
+                    secondAnim.drawable.resetAnimation()
+                    secondAnim.visibility = View.GONE
                     viewBackground.visibility = View.VISIBLE
                 }
 
                 override fun onAnimationEnd(animation: Animator?) {
                     super.onAnimationEnd(animation)
                     anim.drawable.resetAnimation()
+
                     anim.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.enter_anim))
                     fadeTitle(255f)
                     changeClickableState(true)
+                    isResult = false
                 }
             })
 
@@ -159,11 +226,17 @@ class ProgressLayout @JvmOverloads constructor(
 
     private fun setTintColor(color: Int) {
         anim.drawable.asAnimatedVectorDrawable()?.setTint(color)
+        secondAnim.drawable.asAnimatedVectorDrawable()?.setTint(color)
         viewBackground.drawable.setTint(color)
     }
 
     private fun changeClickableState(status: Boolean) {
         isClickable = status
         isEnabled = status
+    }
+
+    enum class SecondAnimType{
+        NONE,
+        SEND
     }
 }

@@ -1,0 +1,78 @@
+<animated-vector xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:aapt="http://schemas.android.com/aapt">
+    <aapt:attr name="android:drawable">
+        <vector
+                android:name="vector"
+                android:width="96dp"
+                android:height="96dp"
+                android:viewportWidth="96"
+                android:viewportHeight="96">
+            <group
+                    android:name="exit"
+                    android:pivotX="48"
+                    android:pivotY="48"
+                    android:rotation="90"
+                    android:scaleX="0.5"
+                    android:scaleY="0.5"
+                    android:translateY="-24">
+                <path
+                        android:name="path_1"
+                        android:fillAlpha="0.5"
+                        android:fillColor="#000000"
+                        android:pathData="M 48 30 L 66 66 L 48 57 L 30 66 Z"
+                        android:strokeWidth="1"
+                        android:strokeColor="#000000" />
+            </group>
+        </vector>
+    </aapt:attr>
+    <target android:name="path_1">
+        <aapt:attr name="android:animation">
+            <objectAnimator
+                    android:duration="1000"
+                    android:interpolator="@android:interpolator/linear"
+                    android:propertyName="strokeWidth"
+                    android:startOffset="500"
+                    android:valueFrom="1"
+                    android:valueTo="2"
+                    android:valueType="floatType" />
+        </aapt:attr>
+    </target>
+    <target android:name="exit">
+        <aapt:attr name="android:animation">
+            <set>
+                <objectAnimator
+                        android:duration="1000"
+                        android:interpolator="@android:interpolator/linear"
+                        android:propertyName="scaleX"
+                        android:startOffset="500"
+                        android:valueFrom="0.5"
+                        android:valueTo="1"
+                        android:valueType="floatType" />
+                <objectAnimator
+                        android:duration="1000"
+                        android:interpolator="@android:interpolator/linear"
+                        android:propertyName="scaleY"
+                        android:startOffset="500"
+                        android:valueFrom="0.5"
+                        android:valueTo="1"
+                        android:valueType="floatType" />
+                <objectAnimator
+                        android:duration="1000"
+                        android:interpolator="@android:interpolator/linear"
+                        android:propertyName="translateY"
+                        android:startOffset="500"
+                        android:valueFrom="-24"
+                        android:valueTo="0"
+                        android:valueType="floatType" />
+                <objectAnimator
+                        android:duration="1000"
+                        android:interpolator="@android:interpolator/linear"
+                        android:propertyName="rotation"
+                        android:startOffset="500"
+                        android:valueFrom="90"
+                        android:valueTo="180"
+                        android:valueType="floatType" />
+            </set>
+        </aapt:attr>
+    </target>
+</animated-vector>
