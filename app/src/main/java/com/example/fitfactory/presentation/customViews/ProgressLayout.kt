@@ -2,6 +2,7 @@ package com.example.fitfactory.presentation.customViews
 
 import android.animation.Animator
 import android.animation.AnimatorListenerAdapter
+import android.animation.ObjectAnimator
 import android.animation.ValueAnimator
 import android.content.Context
 import android.util.AttributeSet
@@ -19,6 +20,7 @@ import kotlinx.android.synthetic.main.progress_layout.view.*
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import kotlin.math.roundToLong
 
 class ProgressLayout @JvmOverloads constructor(
     context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
@@ -30,7 +32,8 @@ class ProgressLayout @JvmOverloads constructor(
     private var positiveTint = 0
     private var text: String? = null
     private var secondAnimType: SecondAnimType? = null
-    private var isResult: Boolean = false
+
+    private lateinit var secondAnimation: ObjectAnimator
 
     init {
         View.inflate(context, R.layout.progress_layout, this)
@@ -50,11 +53,130 @@ class ProgressLayout @JvmOverloads constructor(
         )
         text = a.getString(R.styleable.ProgressButton_text)
 
-        secondAnimType = SecondAnimType.values()[a.getInt(R.styleable.ProgressButton_secondAnimType, 0)]
+        secondAnimType =
+            SecondAnimType.values()[a.getInt(R.styleable.ProgressButton_secondAnimType, 0)]
 
         title.text = text
         setTintColor(tint)
 
+    }
+
+    fun reset() {
+        title.text = text
+        setTintColor(tint)
+    }
+
+    private fun startSecondAnimation() {
+        when (secondAnimType) {
+            SecondAnimType.SEND -> sendAnimationEntry()
+        }
+    }
+
+    private fun endSecondAnimation(): Long {
+        return when (secondAnimType) {
+            SecondAnimType.SEND -> sendAnimationExit()
+            else -> 0
+        }
+    }
+
+    private fun sendAnimationEntry() {
+        secondAnim.visibility = View.VISIBLE
+        secondAnim.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.send_entry))
+        secondAnim.drawable.asAnimatedVectorDrawable()?.setTint(tint)
+        secondAnim.drawable.animateDrawable()
+
+        secondAnimation = ObjectAnimator.ofFloat(secondAnim, "rotation", 0f, 360f).apply {
+            repeatCount = ObjectAnimator.INFINITE
+            startDelay = 1325
+            duration = 3000
+            interpolator = LinearInterpolator()
+        }
+
+        secondAnimation.start()
+    }
+
+
+    private fun sendAnimationExit(): Long {
+        val endRotation = secondAnim.rotation
+        var durationToFull = ((360f - endRotation) * 3000f / 360f).roundToLong()
+        var isRunEndAnimation = false
+
+        secondAnimation.end()
+
+        secondAnimation = ObjectAnimator.ofFloat(secondAnim, "rotation", endRotation, 360f).apply {
+            duration = durationToFull
+            interpolator = LinearInterpolator()
+            start()
+        }
+
+        secondAnimation = ObjectAnimator.ofFloat(secondAnim, "rotation", 0f, 180f).apply {
+            startDelay = durationToFull
+            duration = 1500
+            interpolator = LinearInterpolator()
+            addUpdateListener {
+                if (it.animatedValue as Float > 90f) {
+                    if (!isRunEndAnimation) {
+                        secondAnim.drawable.animateDrawable()
+                        isRunEndAnimation = true
+                    }
+                }
+            }
+
+            addListener(object : Animator.AnimatorListener {
+                override fun onAnimationRepeat(animation: Animator?) {}
+
+                override fun onAnimationEnd(animation: Animator?) {
+                    anim.drawable.animateDrawable()
+                }
+
+                override fun onAnimationCancel(animation: Animator?) {}
+
+                override fun onAnimationStart(animation: Animator?) {}
+
+            })
+        }
+
+        secondAnimation.start()
+
+        return durationToFull + 1500
+    }
+
+    private fun startRotate() {
+        anim.animation = RotateAnimation(
+            0f,
+            360f,
+            Animation.RELATIVE_TO_SELF,
+            0.5f,
+            Animation.RELATIVE_TO_SELF,
+            0.5f
+        ).apply {
+            duration = 2000
+            interpolator = LinearInterpolator()
+            repeatCount = Animation.INFINITE
+            start()
+        }
+    }
+
+    fun onError(message: String) {
+        anim.drawable.resetAnimation()
+        anim.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.exit_anim))
+
+        secondAnim.drawable.resetAnimation()
+        secondAnim.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.send_exit))
+
+        setTintColor(negativeTint)
+        title.text = message
+    }
+
+    fun onSuccess(message: String) {
+        anim.drawable.resetAnimation()
+        anim.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.exit_anim))
+
+        secondAnim.drawable.resetAnimation()
+        secondAnim.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.send_exit))
+
+        setTintColor(positiveTint)
+        title.text = message
     }
 
     fun startAnim() {
@@ -85,109 +207,6 @@ class ProgressLayout @JvmOverloads constructor(
         }
     }
 
-    fun fadeTitle(toAlpha: Float){
-        title.animate().apply {
-            alpha(toAlpha)
-            duration = 1000
-            start()
-        }
-    }
-
-    fun reset() {
-        title.text = text
-        setTintColor(tint)
-    }
-
-    private fun startSecondAnimation(){
-        when(secondAnimType){
-            SecondAnimType.SEND -> sendAnimationEntry()
-        }
-    }
-
-    private fun endSecondAnimation(){
-        when(secondAnimType){
-            SecondAnimType.SEND -> sendAnimationExit()
-        }
-    }
-
-    private fun sendAnimationEntry(){
-        secondAnim.visibility = View.VISIBLE
-        secondAnim.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.send_entry))
-        secondAnim.drawable.asAnimatedVectorDrawable()?.setTint(tint)
-        secondAnim.drawable.animateDrawable()
-        secondAnim.animation = RotateAnimation(
-            0f,
-            360f,
-            Animation.RELATIVE_TO_SELF,
-            0.5f,
-            Animation.RELATIVE_TO_SELF,
-            0.5f
-        ).apply {
-            duration = 1000
-            interpolator = LinearInterpolator()
-            repeatCount = Animation.INFINITE
-            start()
-        }
-    }
-
-
-    private fun sendAnimationExit(){
-        secondAnim.animation?.cancel()
-        secondAnim.animation = RotateAnimation(
-            0f,
-            180f,
-            Animation.RELATIVE_TO_SELF,
-            0.5f,
-            Animation.RELATIVE_TO_SELF,
-            0.5f
-        ).apply {
-            duration = 1000
-            interpolator = LinearInterpolator()
-            fillAfter = true
-            start()
-        }
-
-        secondAnim.drawable.resetAnimation()
-        secondAnim.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.send_exit))
-        secondAnim.drawable.animateDrawable()
-
-
-    }
-
-    private fun startRotate() {
-        anim.animation = RotateAnimation(
-            0f,
-            360f,
-            Animation.RELATIVE_TO_SELF,
-            0.5f,
-            Animation.RELATIVE_TO_SELF,
-            0.5f
-        ).apply {
-            duration = 2000
-            interpolator = LinearInterpolator()
-            repeatCount = Animation.INFINITE
-            start()
-        }
-    }
-
-    fun onError(message: String) {
-        isResult = true
-        anim.drawable.resetAnimation()
-        anim.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.exit_anim))
-        anim.drawable.animateDrawable()
-        setTintColor(negativeTint)
-        title.text = message
-    }
-
-    fun onSuccess(message: String) {
-        isResult = true
-        anim.drawable.resetAnimation()
-        anim.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.exit_anim))
-        anim.drawable.animateDrawable()
-        setTintColor(positiveTint)
-        title.text = message
-    }
-
     fun stop() {
 
         val widthAnimation = ValueAnimator.ofInt(measuredHeight, viewWidth)
@@ -196,9 +215,11 @@ class ProgressLayout @JvmOverloads constructor(
             params.width = va.animatedValue as Int
             viewBackground.layoutParams = params
         }
-        endSecondAnimation()
+
+        val durationSecondEndAnimation = endSecondAnimation()
+
         widthAnimation.apply {
-            startDelay = 2950
+            startDelay = durationSecondEndAnimation + 2150
             duration = 1000
             addListener(object : AnimatorListenerAdapter() {
                 override fun onAnimationStart(p0: Animator?) {
@@ -206,20 +227,27 @@ class ProgressLayout @JvmOverloads constructor(
                     anim.visibility = View.GONE
                     secondAnim.drawable.resetAnimation()
                     secondAnim.visibility = View.GONE
+                    secondAnim.rotation = 0f
                     viewBackground.visibility = View.VISIBLE
                 }
 
                 override fun onAnimationEnd(animation: Animator?) {
                     super.onAnimationEnd(animation)
                     anim.drawable.resetAnimation()
-
                     anim.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.enter_anim))
                     fadeTitle(255f)
                     changeClickableState(true)
-                    isResult = false
                 }
             })
 
+            start()
+        }
+    }
+
+    fun fadeTitle(toAlpha: Float) {
+        title.animate().apply {
+            alpha(toAlpha)
+            duration = 1000
             start()
         }
     }
@@ -235,7 +263,7 @@ class ProgressLayout @JvmOverloads constructor(
         isEnabled = status
     }
 
-    enum class SecondAnimType{
+    enum class SecondAnimType {
         NONE,
         SEND
     }

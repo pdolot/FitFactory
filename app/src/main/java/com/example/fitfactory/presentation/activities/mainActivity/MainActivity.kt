@@ -9,6 +9,7 @@ import androidx.lifecycle.Observer
 import androidx.navigation.findNavController
 import com.example.fitfactory.R
 import com.example.fitfactory.app.App
+import com.example.fitfactory.data.rest.RetrofitRepository
 import com.example.fitfactory.di.Injector
 import com.example.fitfactory.functional.localStorage.LocalStorage
 import com.example.fitfactory.presentation.customViews.CustomDrawerLayout
@@ -17,6 +18,8 @@ import com.example.fitfactory.presentation.customViews.flexibleLayout.FlexibleVi
 import com.example.fitfactory.presentation.navigationDrawer.NavigationDrawer
 import com.example.fitfactory.presentation.navigationDrawer.NavigationItem
 import com.example.fitfactory.presentation.navigationDrawer.NavigationRecyclerViewAdapter
+import io.reactivex.disposables.CompositeDisposable
+import io.reactivex.rxkotlin.subscribeBy
 import kotlinx.android.synthetic.main.activity_main.*
 import javax.inject.Inject
 
@@ -25,13 +28,19 @@ class MainActivity : AppCompatActivity(), MainInterface {
     @Inject
     lateinit var localStorage: LocalStorage
 
+    @Inject
+    lateinit var retrofitRepository: RetrofitRepository
+
     private val adapter by lazy { NavigationRecyclerViewAdapter() }
+
+    private val compositeDisposable = CompositeDisposable()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         (application as App).setCurrentActivity(this)
         Injector.component.inject(this)
+        mainFragment_flexibleLayout.activity = this
         setListeners()
         setTopBarProfileImage()
         setNavigationDrawer()
@@ -41,12 +50,34 @@ class MainActivity : AppCompatActivity(), MainInterface {
             if (it){
                 mainFragment_navigationDrawer.setProfileView()
                 setTopBarProfileImage()
+                fetchActivePass()
             }else{
                 mainFragment_topBar.setProfileImage(null)
             }
+            mainFragment_flexibleLayout.bindView(it)
         })
     }
 
+    override fun onDestroy() {
+        compositeDisposable.dispose()
+        super.onDestroy()
+    }
+
+    fun fetchActivePass(){
+        compositeDisposable.add(retrofitRepository.getActivePass(localStorage.getUser()?.id ?: return)
+            .subscribeBy(
+                onSuccess = {
+                    if (it.status){
+                        mainFragment_flexibleLayout.setQrCode(it.data)
+                    }else{
+                        mainFragment_flexibleLayout.setQrCode(null)
+                    }
+                },
+                onError = {
+                    mainFragment_flexibleLayout.setQrCode(null)
+                }
+            ))
+    }
 
     private fun setNavigationDrawer() {
         mainFragment_navigationDrawer.setAdapter(adapter)

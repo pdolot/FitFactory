@@ -1,6 +1,5 @@
 package com.example.fitfactory.utils
 
-import android.graphics.Bitmap
 import android.graphics.drawable.AnimatedVectorDrawable
 import android.graphics.drawable.Drawable
 import android.os.Build
@@ -69,16 +68,21 @@ fun TextInputEditText.addMaskAndTextWatcher(mask: String): TextWatcher {
     return textWatcher
 }
 
-fun ImageView.generateQrCode(text: String?){
+fun ImageView.generateQrCode(text: String?) {
     if (text == null) return
     val multiFormatWriter = MultiFormatWriter()
-    viewTreeObserver.addOnGlobalLayoutListener(object: ViewTreeObserver.OnGlobalLayoutListener{
+    viewTreeObserver.addOnGlobalLayoutListener(object : ViewTreeObserver.OnGlobalLayoutListener {
         override fun onGlobalLayout() {
             viewTreeObserver.removeOnGlobalLayoutListener(this)
             try {
-                val bitMatrix = multiFormatWriter.encode(text, BarcodeFormat.QR_CODE, this@generateQrCode.width, this@generateQrCode.height)
+                val bitMatrix = multiFormatWriter.encode(
+                    text,
+                    BarcodeFormat.QR_CODE,
+                    this@generateQrCode.width,
+                    this@generateQrCode.height
+                )
                 setImageBitmap(BarcodeEncoder().createBitmap(bitMatrix))
-            }catch (e: WriterException){
+            } catch (e: WriterException) {
                 e.printStackTrace()
             }
         }
@@ -102,6 +106,6 @@ fun Drawable.resetAnimation() {
     }
 }
 
-fun Drawable.asAnimatedVectorDrawable(): AnimatedVectorDrawable?{
+fun Drawable.asAnimatedVectorDrawable(): AnimatedVectorDrawable? {
     return this as? AnimatedVectorDrawable
 }

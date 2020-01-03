@@ -1,21 +1,20 @@
 package com.example.fitfactory.presentation.pages.rememberPassword
 
-import android.graphics.drawable.AnimatedVectorDrawable
-import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.example.fitfactory.R
+import com.example.fitfactory.data.models.app.StateComplete
+import com.example.fitfactory.data.models.app.StateError
 import com.example.fitfactory.presentation.base.BaseFragment
 import kotlinx.android.synthetic.main.fragment_remember_password.*
 
 class RememberPasswordFragment : BaseFragment() {
 
     private lateinit var viewModel: RememberPasswordViewModel
-    private var animationList = ArrayList<AnimatedVectorDrawable>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,32 +31,24 @@ class RememberPasswordFragment : BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setListeners()
+        viewModel.addValidators(this)
+        viewModel.callResult.observe(viewLifecycleOwner, Observer {
+            when (it) {
+                is StateError -> rememberPassword.onError(it.message)
+                is StateComplete -> rememberPassword.onSuccess(it.message ?: "")
+            }
+            rememberPassword.stop()
+        }
+        )
     }
 
     private fun setListeners() {
-        rememberPasswordFragment_rememberPassword.setOnClickListener { v ->
-            animateView((v as ImageView).drawable)
-            rememberPasswordFragment_label.visibility = View.INVISIBLE
+        rememberPassword.setOnClickListener {
+            if (viewModel.validate()){
+                viewModel.rememberPassword(rememberPasswordFragment_userEmail.text.toString().trim())
+                rememberPassword.startAnim()
+            }
         }
-    }
-
-    private fun resetAnimations() {
-        animationList.forEach { drawable ->
-            drawable.stop()
-        }
-        animationList.clear()
-    }
-
-    private fun animateView(drawable: Drawable) {
-        (drawable as? AnimatedVectorDrawable)?.let {
-            it.start()
-            animationList.add(it)
-        }
-    }
-
-    override fun onDestroyView() {
-        resetAnimations()
-        super.onDestroyView()
     }
 
     override fun flexibleViewEnabled() = false

@@ -50,7 +50,10 @@ class PassToBuyAdapter : BaseAdapter<PassToBuyAdapter.ViewHolder>() {
     }
 
     fun getPassTypeId(): Long?{
-        return (items?.get(currentItem) as PassType).id
+        if (items?.get(currentItem) is PassType){
+            return (items?.get(currentItem) as PassType).id
+        }
+        return null
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {

@@ -22,8 +22,16 @@ class RetrofitRepository @Inject constructor(private val retrofitService: Retrof
     fun signUp(signUpRequest: SignUpRequest): Single<BaseResponse> {
         return retrofitService.signUp(signUpRequest)
             .subscribeOn(Schedulers.io())
-            .delay(300, TimeUnit.MILLISECONDS)
             .observeOn(AndroidSchedulers.mainThread())
+
+    }
+
+    fun rememberPassword(email: String): Single<BaseResponse> {
+        return retrofitService.rememberPassword(email)
+            .delaySubscription(2500, TimeUnit.MILLISECONDS)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+
     }
 
     fun signIn(signInRequest: SignInRequest): Single<AuthResponse> {
@@ -34,6 +42,11 @@ class RetrofitRepository @Inject constructor(private val retrofitService: Retrof
 
     fun changePassword(changePasswordRequest: ChangePasswordRequest): Single<BaseResponse> {
         return retrofitService.changePassword(changePasswordRequest).subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+    }
+
+    fun getActivePass(userId: Long): Single<CurrentPassResponse> {
+        return retrofitService.getActivePass(userId).subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
     }
 

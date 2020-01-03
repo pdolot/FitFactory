@@ -2,20 +2,29 @@ package com.example.fitfactory.presentation.customViews.flexibleLayout
 
 import android.content.Context
 import android.graphics.Rect
+import android.text.style.ClickableSpan
 import android.util.AttributeSet
 import android.view.MotionEvent
 import android.view.View
 import android.view.ViewTreeObserver
 import android.view.animation.LinearInterpolator
+import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.navigation.findNavController
 import com.bumptech.glide.Glide
 import com.example.fitfactory.R
+import com.example.fitfactory.di.Injector
+import com.example.fitfactory.utils.SpanTextUtil
+import com.example.fitfactory.utils.generateQrCode
+import com.google.zxing.qrcode.encoder.QRCode
 import kotlinx.android.synthetic.main.flexible_layout.view.*
+import javax.inject.Inject
 
 class FlexibleView @JvmOverloads constructor(
     context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
 ) : ConstraintLayout(context, attrs, defStyleAttr) {
 
+    lateinit var activity: AppCompatActivity
     private var oldScreenBrightness = 0
     private var minTranslation: Float = 0f
     private var thumbRect = Rect()
@@ -48,14 +57,32 @@ class FlexibleView @JvmOverloads constructor(
             }
         })
         setListeners()
-        setQrCode()
     }
 
-    private fun setQrCode() {
-        Glide.with(context)
-            .load("https://pl.qr-code-generator.com/wp-content/themes/qr/new_structure/markets/core_market/generator/dist/generator/assets/images/websiteQRCode_noFrame.png")
-            .fitCenter()
-            .into(flexibleLayout_qrCode)
+    fun bindView(isLogged: Boolean){
+        if (isLogged){
+            notLoggedContent.visibility = View.GONE
+        }else{
+            notLoggedContent.visibility = View.VISIBLE
+            qrCodeContent.visibility = View.GONE
+            loggedWithoutPassContent.visibility = View.GONE
+        }
+    }
+
+    fun setQrCode(qrCode: String?) {
+        if (qrCode != null){
+            qrCodeContent.visibility = View.VISIBLE
+            loggedWithoutPassContent.visibility = View.GONE
+            flexibleLayout_qrCode.generateQrCode(qrCode)
+        }else{
+            qrCodeContent.visibility = View.GONE
+            loggedWithoutPassContent.visibility = View.VISIBLE
+        }
+
+//        Glide.with(context)
+//            .load("https://pl.qr-code-generator.com/wp-content/themes/qr/new_structure/markets/core_market/generator/dist/generator/assets/images/websiteQRCode_noFrame.png")
+//            .fitCenter()
+//            .into(flexibleLayout_qrCode)
     }
 
     private fun setListeners() {
@@ -84,6 +111,30 @@ class FlexibleView @JvmOverloads constructor(
             true
         }
 
+
+        SpanTextUtil(context).setClickableSpanOnTextView(
+            userNotLogged, "Zaloguj się", object : ClickableSpan(){
+                override fun onClick(widget: View) {
+                    navigate(R.id.signInFragment)
+                }
+
+            }, R.color.silverLight
+        )
+
+        SpanTextUtil(context).setClickableSpanOnTextView(
+            passEmpty, "Kup karnet", object : ClickableSpan(){
+                override fun onClick(widget: View) {
+                    navigate(R.id.buyPassFragment)
+                }
+
+            }, R.color.silverLight
+        )
+
+    }
+
+    private fun navigate(id: Int){
+        activity.findNavController(R.id.main_host_fragment).navigate(id)
+        forceClose()
     }
 
     fun getThumbHeight(): Int {

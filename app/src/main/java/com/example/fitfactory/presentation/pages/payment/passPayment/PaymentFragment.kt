@@ -13,6 +13,7 @@ import com.afollestad.materialdialogs.MaterialDialog
 import com.afollestad.materialdialogs.datetime.datePicker
 import com.example.fitfactory.R
 import com.example.fitfactory.data.models.app.*
+import com.example.fitfactory.presentation.activities.mainActivity.MainActivity
 import com.example.fitfactory.presentation.base.BaseFragment
 import com.example.fitfactory.utils.TimeUtil
 import com.example.fitfactory.utils.addMaskAndTextWatcher
@@ -65,6 +66,9 @@ class PaymentFragment : BaseFragment() {
                 is StateComplete -> {
                     paymentFragment_payButton.isEnable = true
                     viewModel.isJobPaused = false
+                    if (activity is MainActivity){
+                        (activity as MainActivity).fetchActivePass()
+                    }
                     Toast.makeText(context, "Pomyślnie kupiono", Toast.LENGTH_SHORT).show()
                 }
             }

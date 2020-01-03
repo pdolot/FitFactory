@@ -21,7 +21,7 @@ class ScannerViewModel : ViewModel() {
             setTorch()
         }
 
-    private val analyzer = BarcodeAnalyzer({
+    val analyzer = BarcodeAnalyzer({
         it.firstOrNull()?.rawValue?.let {
             barcode.postValue(it)
         }

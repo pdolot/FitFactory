@@ -22,6 +22,9 @@ interface RetrofitService{
     @POST("user/changePassword")
     fun changePassword(@Body changePasswordRequest: ChangePasswordRequest): Single<BaseResponse>
 
+    @POST("rememberPassword")
+    fun rememberPassword(@Body email: String): Single<BaseResponse>
+
     @GET("user/getEntries")
     fun getUserEntries(@Query("id") userId: Long): Single<EntriesResponse>
 
@@ -30,6 +33,9 @@ interface RetrofitService{
 
     @GET("user/getPasses")
     fun getUserPasses(@Query("id") userId: Long): Single<PassesResponse>
+
+    @GET("user/getActivePass")
+    fun getActivePass(@Query("id") userId: Long): Single<CurrentPassResponse>
 
     @POST("user/edit")
     fun editUser(@Body user: UserGetResource): Single<UserResponse>

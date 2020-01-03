@@ -31,12 +31,16 @@ class SignUpFragment : BaseFragment() {
                 is BaseResponse -> {
                     if (it.status) {
                         signUpFragment_signUp.onSuccess("ZAREJESTROWANO")
-                    } else {
-                        signUpFragment_signUp.onError("UŻYTKOWNIK ISTNIEJE")
                     }
                 }
                 is ErrorSignIn -> {
-                    signUpFragment_signUp.onError("Błąd połączenia")
+                    it.message?.let {
+                        if (it.equals("User already exist")){
+                            signUpFragment_signUp.onError("UŻYTKOWNIK ISTNIEJE")
+                        }else{
+                            signUpFragment_signUp.onError("Błąd połączenia")
+                        }
+                    } ?: signUpFragment_signUp.onError("Błąd połączenia")
                 }
             }
             signUpFragment_signUp.stop()

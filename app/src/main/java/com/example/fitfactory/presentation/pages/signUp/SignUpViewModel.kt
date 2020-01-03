@@ -12,6 +12,7 @@ import com.example.fitfactory.di.Injector
 import com.example.fitfactory.presentation.pages.signIn.ErrorSignIn
 import com.example.fitfactory.utils.Validator
 import io.reactivex.rxkotlin.subscribeBy
+import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
 class SignUpViewModel : ViewModel() {
@@ -30,6 +31,7 @@ class SignUpViewModel : ViewModel() {
     @SuppressLint("CheckResult")
     fun signUp(user: SignUpRequest){
         retrofitRepository.signUp(user)
+            .delaySubscription(2500, TimeUnit.MILLISECONDS)
             .subscribeBy(
                 onSuccess = {
                     if (it.status){
