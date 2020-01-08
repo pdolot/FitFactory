@@ -93,14 +93,20 @@ class RetrofitRepository @Inject constructor(private val retrofitService: Retrof
             .observeOn(AndroidSchedulers.mainThread())
     }
 
+    fun checkIfCanBuy(buyPassRequest: BuyPassRequest): Single<BaseResponse>{
+        return retrofitService.checkIfCanBuy(buyPassRequest)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+    }
+
     fun measurePenalty(passId: Long): Single<PenaltyResponse>{
         return retrofitService.measurePenalty(passId)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
     }
 
-    fun contractTermination(passId: Long): Single<BaseResponse>{
-        return retrofitService.contractTermination(passId)
+    fun contractTermination(contractTerminationRequest: ContractTerminationRequest): Single<BaseResponse>{
+        return retrofitService.contractTermination(contractTerminationRequest)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
     }
@@ -135,8 +141,8 @@ class RetrofitRepository @Inject constructor(private val retrofitService: Retrof
             .observeOn(AndroidSchedulers.mainThread())
     }
 
-    fun payForLesson(entryId: Long): Single<BaseResponse>{
-        return retrofitService.payForLesson(entryId)
+    fun payForLesson(paymentForLesson: PaymentForLesson): Single<BaseResponse>{
+        return retrofitService.payForLesson(paymentForLesson)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
     }

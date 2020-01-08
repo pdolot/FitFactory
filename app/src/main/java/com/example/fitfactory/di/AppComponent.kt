@@ -25,6 +25,7 @@ import com.example.fitfactory.presentation.navigationDrawer.NavigationRecyclerVi
 import com.example.fitfactory.presentation.pages.buyPass.BuyPassViewModel
 import com.example.fitfactory.presentation.pages.entriesHistory.EntriesHistoryViewModel
 import com.example.fitfactory.presentation.pages.exercises.exercise.ExerciseViewModel
+import com.example.fitfactory.presentation.pages.exercises.scannerView.CameraViewViewModel
 import com.example.fitfactory.presentation.pages.fitnessLesson.FitnessLesson
 import com.example.fitfactory.presentation.pages.fitnessLesson.FitnessLessonAdapter
 import com.example.fitfactory.presentation.pages.fitnessLesson.FitnessLessonViewModel
@@ -94,5 +95,6 @@ interface AppComponent {
     fun inject(into: SplashActivity)
     fun inject(into: ContractTerminationViewModel)
     fun inject(into: FitnessLessonPaymentViewModel)
+    fun inject(into: CameraViewViewModel)
 
 }

@@ -6,5 +6,6 @@ data class BuyPassRequest(
     var passTypeId: Long,
     var startDate: String,
     var passUser: PassUser,
-    var ownerId: Long
+    var ownerId: Long,
+    var token: String? = null
 )

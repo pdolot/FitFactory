@@ -17,9 +17,6 @@ import com.example.fitfactory.utils.animateDrawable
 import com.example.fitfactory.utils.asAnimatedVectorDrawable
 import com.example.fitfactory.utils.resetAnimation
 import kotlinx.android.synthetic.main.progress_layout.view.*
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
 import kotlin.math.roundToLong
 
 class ProgressLayout @JvmOverloads constructor(

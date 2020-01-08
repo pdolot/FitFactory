@@ -62,4 +62,17 @@
         </attr>
     </declare-styleable>
 
+
+    <declare-styleable name="FrameView">
+        <attr name="color"/>
+        <attr name="strokeWidth"/>
+    </declare-styleable>
+
+    <declare-styleable name="MeshView">
+        <attr name="color"/>
+        <attr name="strokeWidth"/>
+        <attr name="rows" format="integer"/>
+        <attr name="cols" format="integer"/>
+    </declare-styleable>
+
 </resources>

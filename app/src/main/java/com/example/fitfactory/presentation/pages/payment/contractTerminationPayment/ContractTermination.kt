@@ -73,7 +73,7 @@ class ContractTermination : BaseFragment() {
 
         payButton.setButtonClickListener { isClickable ->
             if (isClickable && viewModel.validate()) {
-                viewModel.terminateContract(args.passId)
+                viewModel.createToken(cardExpiry.text.toString().trim(), cardCvc.text.toString().trim(), args.passId, args.penalty.toDouble())
             } else {
                 Toast.makeText(context, "Sprawdź poprawność danych", Toast.LENGTH_SHORT).show()
             }
@@ -84,6 +84,13 @@ class ContractTermination : BaseFragment() {
         super.onResume()
         textWatchers.add(Pair(cardNo.addMaskAndTextWatcher("#### #### #### ####"), cardNo))
         textWatchers.add(Pair(cardExpiry.addMaskAndTextWatcher("##/##"), cardExpiry))
+    }
+
+    override fun onPause() {
+        textWatchers.forEach {
+            it.second.removeTextChangedListener(it.first)
+        }
+        super.onPause()
     }
 
     private fun bindCreditCard(creditCard: CreditCard?) {

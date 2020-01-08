@@ -34,25 +34,7 @@ class ExercisesInfoFragment : BaseFragment() {
         }
 
         scanButton.setOnClickListener {
-            requestPermissions(arrayOf(Manifest.permission.CAMERA), CAMERA_REQUEST_CODE)
-        }
-    }
-
-    override fun onRequestPermissionsResult(
-        requestCode: Int,
-        permissions: Array<out String>,
-        grantResults: IntArray
-    ) {
-        when (requestCode) {
-            CAMERA_REQUEST_CODE -> {
-                grantResults.any {
-                    if (it == PackageManager.PERMISSION_GRANTED) {
-                        findNavController().navigate(R.id.scanner)
-                        true
-                    }
-                    false
-                }
-            }
+            findNavController().navigate(R.id.cameraView)
         }
     }
 

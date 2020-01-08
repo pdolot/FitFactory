@@ -18,6 +18,11 @@ import com.example.fitfactory.data.models.app.StateInProgress
 import com.example.fitfactory.presentation.base.BaseFragment
 import com.example.fitfactory.utils.addMaskAndTextWatcher
 import kotlinx.android.synthetic.main.fragment_fitness_lesson_payment.*
+import kotlinx.android.synthetic.main.fragment_fitness_lesson_payment.cardCvc
+import kotlinx.android.synthetic.main.fragment_fitness_lesson_payment.cardExpiry
+import kotlinx.android.synthetic.main.fragment_fitness_lesson_payment.cardNo
+import kotlinx.android.synthetic.main.fragment_fitness_lesson_payment.payButton
+import kotlinx.android.synthetic.main.fragment_fitness_lesson_payment.price
 
 class FitnessLessonPayment : BaseFragment() {
 
@@ -73,11 +78,18 @@ class FitnessLessonPayment : BaseFragment() {
 
         payButton.setButtonClickListener { isClickable ->
             if (isClickable && viewModel.validate()) {
-                viewModel.payForLesson(args.entryId)
+                viewModel.createToken(cardExpiry.text.toString().trim(), cardCvc.text.toString().trim(), args.entryId, args.price.toDouble())
             } else {
                 Toast.makeText(context, "Sprawdź poprawność danych", Toast.LENGTH_SHORT).show()
             }
         }
+    }
+
+    override fun onPause() {
+        textWatchers.forEach {
+            it.second.removeTextChangedListener(it.first)
+        }
+        super.onPause()
     }
 
     override fun onResume() {

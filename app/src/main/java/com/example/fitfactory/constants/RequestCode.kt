@@ -12,6 +12,10 @@ class RequestCode {
     }
 }
 
+object Payment{
+    const val CARD_NO = "4242424242424242"
+}
+
 class PhotoServiceRequestCode{
     companion object{
         const val FILE_PROVIDER = "com.example.fitfactory.fileprovider"

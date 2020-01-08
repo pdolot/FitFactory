@@ -72,7 +72,10 @@
 
     <action
             android:id="@+id/toExerciseFragment"
-            app:destination="@id/exerciseFragment" />
+            app:destination="@id/exerciseFragment"
+            app:launchSingleTop="true"
+            app:popUpTo="@id/cameraView"
+            app:popUpToInclusive="true"/>
     <fragment
             android:id="@+id/entriesHistory"
             android:name="com.example.fitfactory.presentation.pages.entriesHistory.EntriesHistory"
@@ -140,4 +143,8 @@
     <action
             android:id="@+id/toFitnessLessonPayment"
             app:destination="@id/fitnessLessonPayment" />
+    <fragment
+            android:id="@+id/cameraView"
+            android:name="com.example.fitfactory.presentation.pages.exercises.scannerView.CameraView"
+            android:label="CameraView" />
 </navigation>

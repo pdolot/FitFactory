@@ -60,8 +60,8 @@ dependencies {
     implementation 'com.google.android.gms:play-services-auth:17.0.0'
 
     // firebase
-    implementation 'com.google.firebase:firebase-core:17.2.0'
-    implementation 'com.google.firebase:firebase-ml-vision:23.0.0'
+    implementation 'com.google.firebase:firebase-core:17.2.1'
+    implementation 'com.google.firebase:firebase-ml-vision:24.0.1'
 
     // Tests
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
@@ -131,4 +131,10 @@ dependencies {
 
     // JodaTime
     implementation 'joda-time:joda-time:2.10.5'
+
+    // CameraView
+    api 'com.otaliastudios:cameraview:2.6.0'
+
+    // Stripe Android SDK
+    implementation 'com.stripe:stripe-android:12.8.2'
 }

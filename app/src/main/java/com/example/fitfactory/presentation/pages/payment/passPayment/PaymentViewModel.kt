@@ -1,8 +1,10 @@
 package com.example.fitfactory.presentation.pages.payment.passPayment
 
+import android.content.Context
 import android.util.Log
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.MutableLiveData
+import com.example.fitfactory.constants.Payment
 import com.example.fitfactory.constants.RegularExpression
 import com.example.fitfactory.data.database.creditCard.CreditCardDao
 import com.example.fitfactory.data.models.app.*
@@ -13,11 +15,18 @@ import com.example.fitfactory.functional.localStorage.LocalStorage
 import com.example.fitfactory.presentation.base.BaseViewModel
 import com.example.fitfactory.utils.SuperValidator
 import com.example.fitfactory.utils.TimeUtil
+import com.stripe.android.ApiResultCallback
+import com.stripe.android.PaymentConfiguration
+import com.stripe.android.Stripe
+import com.stripe.android.model.Card
+import com.stripe.android.model.Token
 import io.reactivex.rxkotlin.subscribeBy
 import kotlinx.android.synthetic.main.fragment_payment.*
 import kotlinx.coroutines.*
 import org.joda.time.DateTime
+import java.util.*
 import javax.inject.Inject
+import kotlin.collections.ArrayList
 import kotlin.math.roundToInt
 
 class PaymentViewModel : BaseViewModel() {
@@ -30,6 +39,9 @@ class PaymentViewModel : BaseViewModel() {
 
     @Inject
     lateinit var localStorage: LocalStorage
+
+    @Inject
+    lateinit var context: Context
 
     init {
         Injector.component.inject(this)
@@ -67,10 +79,30 @@ class PaymentViewModel : BaseViewModel() {
             ))
     }
 
-    fun buyPass(user: PassUser) {
+    fun checkIfCanBuy(user: PassUser) {
         callState.postValue(StateInProgress())
         val buyPassRequest =
             BuyPassRequest(passId ?: return, TimeUtil.getDateAsString(date, "dd/MM/yyyy"), user, localStorage.getUser()?.id ?: return)
+        rxDisposer.add(
+            retrofitRepository.checkIfCanBuy(buyPassRequest).subscribeBy(
+                onSuccess = {
+                    if (it.status) {
+                        createToken(user)
+                    } else {
+                        callState.postValue(StateError(it.message))
+                    }
+                },
+                onError = {
+                    Log.e("Payment", it.message)
+                    callState.postValue(StateError("Błąd połączenia z serwerem"))
+                }
+            )
+        )
+    }
+
+    fun buyPass(user: PassUser, token: String) {
+        val buyPassRequest =
+            BuyPassRequest(passId ?: return, TimeUtil.getDateAsString(date, "dd/MM/yyyy"), user, localStorage.getUser()?.id ?: return, token)
         rxDisposer.add(
             retrofitRepository.buyPass(buyPassRequest).subscribeBy(
                 onSuccess = {
@@ -85,6 +117,25 @@ class PaymentViewModel : BaseViewModel() {
                 }
             )
         )
+    }
+
+    private fun createToken(user: PassUser){
+        val stripe = Stripe(context, PaymentConfiguration.getInstance(context).publishableKey)
+        val expMonth = user.creditCard.expiryDate.substring(0, 2).toInt()
+        val expYear = user.creditCard.expiryDate.substring(3, 5).toInt()
+        val card = Card.create(Payment.CARD_NO, expMonth ,expYear, user.creditCard.cvcCvv)
+        stripe.createCardToken(card, UUID.randomUUID().toString(), object : ApiResultCallback<Token>{
+            override fun onError(e: Exception) {
+                callState.postValue(StateError("Błąd płatności"))
+                Log.e("PAYMENT",e.message)
+            }
+
+            override fun onSuccess(result: Token) {
+                val token = result.id
+                buyPass(user, token)
+            }
+
+        })
     }
 
     private fun startValidation(){

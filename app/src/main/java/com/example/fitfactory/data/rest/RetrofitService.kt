@@ -48,14 +48,18 @@ interface RetrofitService{
     fun getPassTypeById(@Query("id") passId: Long): Single<PassTypeResponse>
 
     // Pass
-    @POST("pass/buy")
+    @POST("/payment/buyPass")
     fun buyPass(@Body buyPassRequest: BuyPassRequest): Single<BaseResponse>
+
+    // Pass
+    @POST("/pass/checkIfCanBuy")
+    fun checkIfCanBuy(@Body buyPassRequest: BuyPassRequest): Single<BaseResponse>
 
     @POST("pass/measurePenalty")
     fun measurePenalty(@Query("id") passId: Long): Single<PenaltyResponse>
 
-    @POST("pass/contractTermination")
-    fun contractTermination(@Query("id") passId: Long): Single<BaseResponse>
+    @POST("/payment/contractTermination")
+    fun contractTermination(@Body contractTerminationRequest: ContractTerminationRequest): Single<BaseResponse>
 
     // FitnessClub
     @GET("fitnessClub/getFitnessClubs")
@@ -77,6 +81,6 @@ interface RetrofitService{
 
 
     //Lesson entry
-    @POST("/lessonEntry/payForLesson")
-    fun payForLesson(@Query("id") entryId: Long): Single<BaseResponse>
+    @POST("/payment/payForLesson")
+    fun payForLesson(@Body paymentForLesson: PaymentForLesson): Single<BaseResponse>
 }

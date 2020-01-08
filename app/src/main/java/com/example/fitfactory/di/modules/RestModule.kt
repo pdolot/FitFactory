@@ -24,7 +24,7 @@ class RestModule {
     fun provideRetrofit(okHttpClient: OkHttpClient): Retrofit {
         return Retrofit
             .Builder()
-            .baseUrl("http://192.168.1.14:8080/")
+            .baseUrl("http://192.168.1.111:8080/")
             .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
             .client(okHttpClient)
             .addConverterFactory(GsonConverterFactory.create())

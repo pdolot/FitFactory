@@ -76,7 +76,7 @@ class PaymentFragment : BaseFragment() {
 
         paymentFragment_payButton.setButtonClickListener { isClickable ->
             if (isClickable && viewModel.validate()) {
-                viewModel.buyPass(
+                viewModel.checkIfCanBuy(
                     PassUser(
                         email = userEmail.text.toString(),
                         firstName = firstName.text.toString(),
@@ -130,6 +130,13 @@ class PaymentFragment : BaseFragment() {
         textWatchers.add(Pair(userBirthDate.addMaskAndTextWatcher("##/##/####"), userBirthDate))
         textWatchers.add(Pair(userPhoneNo.addMaskAndTextWatcher("### ### ###"), userPhoneNo))
         textWatchers.add(Pair(userZipCode.addMaskAndTextWatcher("##-###"), userZipCode))
+    }
+
+    override fun onPause() {
+        textWatchers.forEach {
+            it.second.removeTextChangedListener(it.first)
+        }
+        super.onPause()
     }
 
     private fun showDatePickerDialog() {
