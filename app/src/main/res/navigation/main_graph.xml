@@ -41,7 +41,8 @@
     <fragment
             android:id="@+id/paymentFragment"
             android:name="com.example.fitfactory.presentation.pages.payment.passPayment.PaymentFragment"
-            android:label="PaymentFragment">
+            android:label="PaymentFragment"
+            tools:layout="@layout/fragment_payment">
 
         <argument
                 android:name="passId"
@@ -50,7 +51,8 @@
     </fragment>
     <action
             android:id="@+id/toPaymentFragment"
-            app:destination="@id/paymentFragment" />
+            app:destination="@id/paymentFragment"
+            />
     <fragment
             android:id="@+id/exercisesInfo"
             android:name="com.example.fitfactory.presentation.pages.exercises.info.ExercisesInfoFragment"
@@ -64,7 +66,8 @@
     <fragment
             android:id="@+id/exerciseFragment"
             android:name="com.example.fitfactory.presentation.pages.exercises.exercise.ExerciseFragment"
-            android:label="ExerciseFragment">
+            android:label="ExerciseFragment"
+            tools:layout="@layout/fragment_exercise">
         <argument
                 android:name="qrcode"
                 app:argType="string" />
@@ -94,11 +97,13 @@
     <fragment
             android:id="@+id/yourActivity"
             android:name="com.example.fitfactory.presentation.pages.yoursActivity.YourActivity"
-            android:label="YourActivity" />
+            android:label="YourActivity"
+            tools:layout="@layout/fragment_yours_activity"/>
     <fragment
             android:id="@+id/contractTermination"
             android:name="com.example.fitfactory.presentation.pages.payment.contractTerminationPayment.ContractTermination"
-            android:label="ContractTermination" >
+            android:label="ContractTermination"
+            tools:layout="@layout/fragment_penalty_payment">
         <argument
                 android:name="passId"
                 app:argType="long"
@@ -120,7 +125,8 @@
     <fragment
             android:id="@+id/fitnessLessonPayment"
             android:name="com.example.fitfactory.presentation.pages.payment.fitnessLessonPayment.FitnessLessonPayment"
-            android:label="FitnessLessonPayment" >
+            android:label="FitnessLessonPayment"
+            tools:layout="@layout/fragment_payment">
         <argument
                 android:name="entryId"
                 app:argType="long"
@@ -146,5 +152,6 @@
     <fragment
             android:id="@+id/cameraView"
             android:name="com.example.fitfactory.presentation.pages.exercises.scannerView.CameraView"
-            android:label="CameraView" />
+            android:label="CameraView"
+            tools:layout="@layout/fragment_camera_view"/>
 </navigation>

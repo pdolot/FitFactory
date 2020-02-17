@@ -29,6 +29,7 @@ class FitnessLessonSimpleAdapter : RecyclerView.Adapter<FitnessLessonSimpleAdapt
 
     init {
         Injector.component.inject(this)
+
     }
 
     fun setData(items: List<Any>?) {

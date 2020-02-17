@@ -16,6 +16,7 @@ object Payment{
     const val CARD_NO = "4242424242424242"
 }
 
+
 class PhotoServiceRequestCode{
     companion object{
         const val FILE_PROVIDER = "com.example.fitfactory.fileprovider"
@@ -24,9 +25,13 @@ class PhotoServiceRequestCode{
 }
 
 class RestConstant{
+
     companion object{
         const val BEARER: String = "Bearer"
+        const val BASE_URL: String = "http://192.168.1.106:8080"
+        const val BASE_RETROFIT_URL: String = "http://192.168.1.101:8080"
     }
+
 }
 
 class RegularExpression{

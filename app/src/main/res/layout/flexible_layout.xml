@@ -20,7 +20,7 @@
                 android:id="@+id/qrCodeContent"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
-                android:layout_margin="@dimen/large_margin"
+                android:layout_margin="@dimen/medium_margin"
                 android:visibility="gone"
                 app:cardBackgroundColor="@null"
                 app:cardCornerRadius="10dp"

@@ -52,6 +52,7 @@ class SignInViewModel : ViewModel() {
 
     init {
         Injector.component.inject(this)
+
         LoginManager.getInstance().registerCallback(callbackManager, object :
             FacebookCallback<LoginResult> {
             override fun onSuccess(result: LoginResult?) {

@@ -9,12 +9,13 @@ import com.example.fitfactory.di.modules.UserModule
 object Injector {
     lateinit var component: AppComponent
 
-    fun init(application: App) {
+    fun init(application: App, baseUrl: String) {
         component = DaggerAppComponent.builder()
             .dbModule(DbModule(application))
-            .restModule(RestModule())
+            .restModule(RestModule(baseUrl))
             .appModule(AppModule(application))
             .userModule(UserModule(application))
             .build()
     }
+
 }

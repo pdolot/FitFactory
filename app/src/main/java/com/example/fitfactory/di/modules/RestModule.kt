@@ -11,7 +11,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 import javax.inject.Singleton
 
 @Module
-class RestModule {
+class RestModule(private val baseUrl: String) {
 
     @Provides
     @Singleton
@@ -24,7 +24,7 @@ class RestModule {
     fun provideRetrofit(okHttpClient: OkHttpClient): Retrofit {
         return Retrofit
             .Builder()
-            .baseUrl("http://192.168.1.111:8080/")
+            .baseUrl(baseUrl)
             .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
             .client(okHttpClient)
             .addConverterFactory(GsonConverterFactory.create())

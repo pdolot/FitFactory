@@ -8,11 +8,16 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
 import androidx.lifecycle.viewModelScope
 import com.example.fitfactory.R
+import com.example.fitfactory.app.App
 import com.example.fitfactory.data.database.exercise.ExerciseRepository
 import com.example.fitfactory.data.models.app.Exercise
 import com.example.fitfactory.data.rest.RetrofitRepository
 import com.example.fitfactory.di.Injector
 import com.example.fitfactory.presentation.activities.mainActivity.MainActivity
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.rxkotlin.subscribeBy
 import kotlinx.coroutines.GlobalScope
@@ -35,14 +40,30 @@ class SplashActivity: AppCompatActivity() {
         exerciseRepository.insert(data)
     }
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        Injector.component.inject(this)
         setContentView(R.layout.activity_splash)
-        fetch()
+
         callResult.observe(this, Observer {
             startMainActivity()
+        })
+
+        val db = FirebaseDatabase.getInstance()
+        db.reference.child("server").addValueEventListener(object : ValueEventListener{
+            override fun onCancelled(p0: DatabaseError) {
+                val baseUrl = "http://192.168.0.1:8080/"
+                Injector.init(application as App, baseUrl)
+                Injector.component.inject(this@SplashActivity)
+                fetch()
+            }
+
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                val baseUrl = "http://" + (dataSnapshot.value as HashMap<*, *>)["host"].toString() + ":8080/"
+                Injector.init(application as App, baseUrl)
+                Injector.component.inject(this@SplashActivity)
+                fetch()
+            }
         })
     }
 
